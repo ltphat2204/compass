@@ -124,3 +124,11 @@ walkthrough.md: TASK-01 ownership tests passed; TASK-02 CSV snapshot passed; TAS
 **Checks**: Validate the Claude manifest and role files with the installed CLI; inspect actual plugin inventory for nine skills and two roles. Exercise copies into Codex, Claude, Cursor and Copilot project locations. Verify resource equality, unchanged user files, collision refusal before copying, explicit-project requirement, redirected-path refusal, and cleanup of only installer-owned copies after failure.
 
 **Boundary**: Manifest/discovery and installer checks do not prove model behavior on a host. No model calls, global installation, permission changes, external-project installation or marketplace publishing. Preserve missing-delegation fallback and mandatory review gates in the host adaptation instructions.
+
+## C10 — Public skills.sh distribution
+
+**Request**: Publish Compass through an authorized new public GitHub repository and make it discoverable on skills.sh.
+
+**Checks**: Verify the authenticated account and source scope; validate skills/plugin, publish, then install all nine skills from the remote into a temporary project with explicitly selected agents and project scope. Compare installed packages/resources to canonical source, resolve sibling links, and inspect visible skills.sh repository/skill pages.
+
+**Boundary**: No global installation, other-project modification, fabricated install counts, marketplace submission or claim of behavioral model validation. Public publication requires user authorization; tests run in an isolated project.

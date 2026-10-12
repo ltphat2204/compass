@@ -94,3 +94,13 @@ Seven unittest methods passed. They exercised all four host destinations with by
 All nine skills passed frontmatter validation after host-adaptation changes; local Markdown links/fences/newlines passed. No personal Compass skills were installed or other project configuration modified.
 
 Limitations: Cursor and Copilot CLIs were unavailable; their discovery/invocation guidance follows linked official documentation, while only project copies were exercised locally. No real implementation/review model session was executed on Claude, Cursor or Copilot; the native reviewer tool restriction and worker packets still require behavioral evaluation in those hosts. C1-C8 remain historical results, not reruns after the host update. Arbitrary concurrent installer races and Windows-specific filesystem behavior were not exercised.
+
+## Public distribution checks (C10)
+
+Published the authorized public repository `https://github.com/ltphat2204/compass` on `main`. GitHub plugin identity and GitHub CLI identity both resolved to `ltphat2204`; the plugin exposed no repository-creation action, so authenticated CLI created the repository and pushed the source. No marketplace publication, global skill installation or change to another project was performed.
+
+The skills CLI discovered all nine skills locally. A real remote installation from GitHub at initial source commit `5201bfff9a300c99e1b3572bb6921a6c732bdfb7` used `--skill '*' --agent claude-code codex cursor github-copilot --copy --yes` in an isolated temporary Git project. Installation succeeded and created a project lockfile. All nine packages and resources matched canonical source bytes in `.agents/skills` and `.claude/skills`; relative sibling/resource links resolved. Codex, Cursor and Copilot used the shared project location; Claude used its project location. No global Compass skills were created.
+
+Direct HTTP checks returned 200 for `https://skills.sh/ltphat2204/compass` and its `comp-engineer` page. Parsed visible repository content listed nine skills; the engineer page rendered the actual SKILL.md instructions. The visible install counter was still zero at inspection, so no increment or leaderboard ranking is claimed. The browser research tool could not open these newly created URLs; direct HTTP content inspection supplied the evidence.
+
+Nine skill validators, Claude strict manifest validation, Markdown references and seven installer tests passed before publication. Historical behavioral cases were not rerun; installing a host package does not verify that host's model behavior. SkCC and the selected skill-sync implementation are documented as optional distribution/compiler choices, not installed or execution-tested integrations.

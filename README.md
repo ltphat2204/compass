@@ -240,7 +240,7 @@ Intent được thống nhất xác định outcome; mandatory project instructi
 
 ## Verification của bộ skill
 
-[Evaluation cases](evals/cases.md) mô tả tám tình huống behavioral và một case integration: requirements mơ hồ, artifacts mâu thuẫn, high-risk review, conflict quy tắc repo, replan giữ lịch sử, bounded spike, delegated implementation unavailable-tool/reviewer fallback và host packaging/project isolation. [Evaluation results](evals/results.md) ghi kết quả thực tế, correction và giới hạn kiểm chứng.
+[Evaluation cases](evals/cases.md) mô tả tám tình huống behavioral và hai case integration/distribution: requirements mơ hồ, artifacts mâu thuẫn, high-risk review, conflict quy tắc repo, replan giữ lịch sử, bounded spike, delegated implementation unavailable-tool/reviewer fallback host packaging/project isolation và public skills.sh distribution. [Evaluation results](evals/results.md) ghi kết quả thực tế, correction và giới hạn kiểm chứng.
 
 Validator kiểm tra packaging/frontmatter; behavioral evaluation kiểm tra quyết định, thay đổi và evidence. C7 dùng ba implementer và một reviewer độc lập trên fixture Python nhỏ; chưa chứng minh arbitrary-repo correctness hoặc race safety khi chạy đồng thời. Đổi tên skill không đồng nghĩa đã chạy lại behavioral cases.
 
