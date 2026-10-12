@@ -1,26 +1,28 @@
 # Compass
 
+**English** | [Tiếng Việt](README.vi.md) | [简体中文](README.zh-CN.md)
+
 [![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
 
 **Clear intent. Distributed execution. Verified outcomes.**
 
-Compass là workflow Spec-Driven Development (SDD) gồm chín Agent Skills dùng trên Codex, Claude Code, Cursor và GitHub Copilot: làm rõ mục tiêu, lập kế hoạch, triển khai theo phạm vi và kiểm chứng kết quả. Workflow giữ cùng định hướng trên nhiều ngôn ngữ, framework và môi trường delivery; lựa chọn kỹ thuật dựa trên bằng chứng từ repository.
+Compass is a Spec-Driven Development (SDD) workflow built from nine Agent Skills for Codex, Claude Code, Cursor, and GitHub Copilot: clarify goals, plan the work, implement within scope, and verify outcomes. It keeps the same direction across languages, frameworks, and delivery environments, with technical choices grounded in repository evidence.
 
-Tiền tố skill là `comp-`. Bắt đầu công việc xuyên suốt bằng `$comp-engineer`, hoặc gọi từng skill để tiếp tục artifacts hiện có.
+Skills use the `comp-` prefix. Start the full workflow with `$comp-engineer`, or invoke individual skills to resume existing artifacts.
 
 ## Philosophy
 
-**Mục tiêu làm la bàn, bằng chứng quyết định bước tiếp theo.** Compass giữ trách nhiệm và quality gates ổn định; cách thực hiện thích nghi theo quy mô, rủi ro và công cụ thực tế.
+**Goals provide direction; evidence determines the next step.** Compass keeps responsibilities and quality gates consistent while adapting execution to the work's size, risk, and available tools.
 
-1. **Intent trước implementation.** Xác định vấn đề, phạm vi, ràng buộc và tiêu chí thành công quan sát được. Tra cứu repo trước; hỏi khi còn quyết định quan trọng không thể suy ra.
-2. **Evidence trước prescription.** Dùng kiến trúc, conventions, toolchain và CI đang có. Không áp đặt stack, tầng kiến trúc hoặc dependency khi nhiệm vụ không cần.
-3. **Thay đổi nhỏ nhất giải quyết đủ yêu cầu.** Tái sử dụng pattern hiện có; safeguards theo tác động đến hành vi và dữ liệu, không theo số dòng diff.
-4. **Phân tán thực thi, giữ trách nhiệm rõ ràng.** Coordinator điều phối, tích hợp và quyết định DONE. Implementer tự chủ trong scope được giao; reviewer kiểm tra độc lập.
-5. **Verification chứng minh outcome.** Mỗi tiêu chí có check và bằng chứng thực tế. Báo cáo worker, công cụ thiếu và check bị bỏ qua không tự trở thành pass.
-6. **Traceability tồn tại qua thay đổi.** Giữ liên kết intent → plan → task → evidence → delivery; giữ ID, quyết định, ghi chú và lịch sử khi resume/replan.
-7. **Autonomy theo authorization.** Tiếp tục công việc an toàn trong phạm vi đã giao. Merge, deploy, thay đổi dữ liệu phá hủy và hành động có hệ quả bên ngoài tuân theo quyền hạn và quy tắc dự án.
+1. **Intent before implementation.** Define the problem, scope, constraints, and observable success criteria. Inspect the repository first; ask when a material decision cannot be inferred.
+2. **Evidence before prescription.** Use existing architecture, conventions, toolchain, and CI. Do not impose a stack, architectural layer, or dependency the task does not need.
+3. **The smallest change that fully solves the task.** Reuse existing patterns. Scale safeguards to behavioral and data impact, rather than diff size.
+4. **Distributed execution with clear accountability.** The coordinator assigns work, integrates changes, and decides DONE. Implementers work autonomously within assigned scope; reviewers check independently.
+5. **Verification demonstrates outcomes.** Every criterion has a check and actual evidence. Worker reports, missing tools, and skipped checks do not automatically count as a pass.
+6. **Traceability survives change.** Preserve intent → plan → task → evidence → delivery links, stable IDs, decisions, notes, and history when resuming or replanning.
+7. **Autonomy follows authorization.** Continue safe work within the assigned scope. Merges, deployments, destructive data changes, and externally consequential actions follow existing authorization and project rules.
 
-## Workflow và skills
+## Workflow and skills
 
 ```mermaid
 flowchart LR
@@ -37,73 +39,73 @@ flowchart LR
     R -->|Changes required| E
 ```
 
-`comp-engineer` điều phối sáu stage `Intent → Plan → Tasks → Implement → Ship → Done`. Analyze và Review là quality gates tại các handoff; có thể gọi riêng mà không bắt đầu implementation hoặc shipping.
+`comp-engineer` coordinates six stages: `Intent → Plan → Tasks → Implement → Ship → Done`. Analyze and Review are quality gates at handoffs. They can run independently without starting implementation or shipping.
 
-| Skill | Khi dùng | Kết quả chính |
+| Skill | When to use | Main outcome |
 |---|---|---|
-| [comp-engineer](.agents/skills/comp-engineer/SKILL.md) | Lifecycle xuyên suốt hoặc resume từ artifacts | Điều phối stage, gate và handoff |
-| [comp-intent](.agents/skills/comp-intent/SKILL.md) | Ý tưởng chưa rõ, yêu cầu cần gắn với repo evidence | `intent.md`, criteria và quyết định |
-| [comp-plan](.agents/skills/comp-plan/SKILL.md) | Intent đủ rõ để chọn cách triển khai | `plan.md`, verification/review gates, task handoff |
-| [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | Chia việc hoặc cập nhật coverage mà giữ tiến độ | `tasks.md`, dependencies và write ownership |
-| [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | Kiểm tra requirements hoặc consistency | Báo cáo read-only, READY/BLOCKED và findings |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Task sẵn sàng, inline hoặc qua subagents | Thay đổi đã kiểm chứng, progress và walkthrough |
-| [comp-review](.agents/skills/comp-review/SKILL.md) | Review compliance và chất lượng thay đổi | Snapshot review, findings và gate status |
-| [comp-ship](.agents/skills/comp-ship/SKILL.md) | Kiểm tra và bàn giao công việc hoàn thành | Delivery evidence, review/CI khi áp dụng |
-| [comp-done](.agents/skills/comp-done/SKILL.md) | Delivery xác nhận hoặc hoàn thành local được chấp nhận | Archive artifacts, không ghi đè lịch sử |
+| [comp-engineer](.agents/skills/comp-engineer/SKILL.md) | Full lifecycle or resuming from artifacts | Stage, gate, and handoff coordination |
+| [comp-intent](.agents/skills/comp-intent/SKILL.md) | Unclear ideas or requirements that need repository evidence | `intent.md`, criteria, and decisions |
+| [comp-plan](.agents/skills/comp-plan/SKILL.md) | Intent is clear enough to choose an approach | `plan.md`, verification/review gates, and task handoff |
+| [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | Breaking down work or updating coverage while preserving progress | `tasks.md`, dependencies, and write ownership |
+| [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | Checking requirements or consistency | Read-only report, READY/BLOCKED, and findings |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Ready tasks, inline or through subagents | Verified changes, progress, and walkthrough |
+| [comp-review](.agents/skills/comp-review/SKILL.md) | Reviewing compliance and change quality | Snapshot review, findings, and gate status |
+| [comp-ship](.agents/skills/comp-ship/SKILL.md) | Checking and handing off completed work | Delivery evidence, review/CI where applicable |
+| [comp-done](.agents/skills/comp-done/SKILL.md) | Confirmed delivery or accepted local completion | Archived artifacts without overwriting history |
 
-## Cài qua skills.sh
+## Install through skills.sh
 
-Từ **project đích**, chọn agent và cài đủ chín skill để giữ sibling references:
+From the **target project**, choose an agent and install all nine skills to preserve sibling references:
 
 ```sh
 npx skills add ltphat2204/compass --skill '*' --agent claude-code --copy
 ```
 
-Thay `claude-code` bằng `codex`, `cursor`, `github-copilot` hoặc agent mà CLI hỗ trợ. Scope mặc định là project; không thêm `--global` khi chỉ muốn Compass ở project hiện tại. Cài qua skills CLI chỉ mang skills/resources; native Claude roles cần plugin route bên dưới.
+Replace `claude-code` with `codex`, `cursor`, `github-copilot`, or another agent supported by the CLI. The default scope is the project; omit `--global` when Compass should stay in the current project. The skills CLI installs skills/resources only; native Claude roles require the plugin route below.
 
-Xem trước danh sách mà không cài:
+Preview the list without installing:
 
 ```sh
 npx skills add ltphat2204/compass --list
 ```
 
-Repo GitHub là nguồn phân phối; skills.sh ghi nhận skill qua lượt cài có telemetry, không có bước upload package riêng. Thời điểm xuất hiện trong danh mục phụ thuộc hệ thống indexing. [skills CLI](https://github.com/vercel-labs/skills), [skills.sh FAQ](https://www.skills.sh/docs/faq).
+The GitHub repository is the distribution source. skills.sh discovers skills through installations with telemetry; there is no separate package upload. Directory listing timing depends on the indexing system. [skills CLI](https://github.com/vercel-labs/skills), [skills.sh FAQ](https://www.skills.sh/docs/faq).
 
-## Cài đặt và tích hợp agent
+## Installation and agent integration
 
-Canonical source là `.agents/skills/`; các host dùng cùng instructions và resources. Claude Code có thêm [plugin manifest](.claude-plugin/plugin.json) và hai native role trong [agents/](agents/comp-implementer.md). Mở rộng host không thay lifecycle hoặc quyền hạn của workflow.
+The canonical source is `.agents/skills/`; hosts share the same instructions and resources. Claude Code also has a [plugin manifest](.claude-plugin/plugin.json) and two native roles in [agents/](agents/comp-implementer.md). Adding hosts does not change the workflow's lifecycle or authority.
 
-### Chuẩn bị checkout
+### Prepare a checkout
 
-Dùng checkout hiện có hoặc clone repository public:
+Use an existing checkout or clone the public repository:
 
 ```sh
 git clone https://github.com/ltphat2204/compass.git
 cd compass
 ```
 
-### Claude Code: chạy plugin theo session
+### Claude Code: load the plugin for a session
 
-Chạy từ project bạn muốn làm việc, truyền đường dẫn tuyệt đối tới checkout Compass:
+Run from the project you want to work on, passing the absolute path to the Compass checkout:
 
 ```sh
 claude --plugin-dir /absolute/path/to/compass
 ```
 
-Trong session đó:
+In that session:
 
 ```text
-/compass:comp-engineer Làm rõ intent, lập plan/tasks, triển khai và kiểm chứng.
-Cho phép scoped implementers và reviewer độc lập; bàn giao local.
+/compass:comp-engineer Clarify intent, create plan/tasks, implement, and verify.
+Allow scoped implementers and an independent reviewer; hand off locally.
 ```
 
-Claude có thể dùng `compass:comp-implementer` và `compass:comp-reviewer` cho packet tương ứng. Reviewer chỉ có Read/Glob/Grep; coordinator chạy checks rồi cung cấp evidence cho review. Các role không tự cấp quyền commit/push/deploy hoặc vượt write scope. Plugin load bằng flag chỉ áp dụng cho session; không cài global hoặc đăng ký marketplace. [Claude plugin loading](https://code.claude.com/docs/en/plugins/create), [subagent tools](https://code.claude.com/docs/en/sub-agents).
+Claude can use `compass:comp-implementer` and `compass:comp-reviewer` for the corresponding packets. The reviewer has Read/Glob/Grep only; the coordinator runs checks and supplies review evidence. Roles do not grant themselves permission to commit/push/deploy or exceed write scope. Loading with the flag applies only to that session; it does not install globally or register a marketplace. [Claude plugin loading](https://code.claude.com/docs/en/plugins/create), [subagent tools](https://code.claude.com/docs/en/sub-agents).
 
-Manifest trỏ thẳng tới canonical skill directory; không duy trì bản sao instructions riêng. Dùng layout `agents/` mặc định để Claude khám phá native roles. [Manifest paths](https://code.claude.com/docs/en/plugins-reference).
+The manifest points directly to the canonical skill directory, avoiding separate instruction copies. The default `agents/` layout lets Claude discover native roles. [Manifest paths](https://code.claude.com/docs/en/plugins-reference).
 
-### Cài skill vào một project cụ thể
+### Install skills into a specific project
 
-Từ checkout Compass, dùng Python 3.9+ và chọn host cùng project đích đã tồn tại:
+From the Compass checkout, use Python 3.9+ and choose a host and an existing target project:
 
 ```sh
 python3 scripts/install.py --agent codex --project /absolute/path/to/project
@@ -112,101 +114,101 @@ python3 scripts/install.py --agent cursor --project /absolute/path/to/project
 python3 scripts/install.py --agent copilot --project /absolute/path/to/project
 ```
 
-Chọn một dòng cho host cần dùng. Script copy đủ chín skill và resources, kiểm tra trùng tên trước khi ghi, từ chối đích redirect ra ngoài project và dọn những skill nó vừa tạo nếu copy lỗi. Script yêu cầu `--project`, không có chế độ global và không sửa cấu hình host. Nếu đã có skill cùng tên, so sánh/sao lưu bản tùy chỉnh trước khi tự thay thế; không có `--force`.
+Choose one line for your host. The script copies all nine skills and resources, checks name collisions before writing, rejects destinations redirected outside the project, and cleans up skills it just created if copying fails. It requires `--project`, has no global mode, and does not change host configuration. If a skill with the same name exists, compare/back up customizations before replacing it yourself; there is no `--force`.
 
-| Host | Đường dẫn project do installer tạo | Gọi workflow |
+| Host | Project path created by the installer | Invoke the workflow |
 |---|---|---|
 | Codex | `.agents/skills/` | Skill selector; CLI/IDE: `$comp-engineer` |
-| Claude Code, skill copy | `.claude/skills/` | `/comp-engineer` |
-| Claude Code, plugin session | Không copy; dùng `--plugin-dir` | `/compass:comp-engineer` |
-| Cursor | `.cursor/skills/` | `/comp-engineer` hoặc chọn skill bằng `@` |
-| GitHub Copilot | `.github/skills/` | Yêu cầu dùng `comp-engineer`; CLI: `/comp-engineer` |
+| Claude Code, copied skills | `.claude/skills/` | `/comp-engineer` |
+| Claude Code, plugin session | No copying; use `--plugin-dir` | `/compass:comp-engineer` |
+| Cursor | `.cursor/skills/` | `/comp-engineer` or select a skill with `@` |
+| GitHub Copilot | `.github/skills/` | Ask for `comp-engineer`; CLI: `/comp-engineer` |
 
-Codex dùng project `.agents/skills`. Cursor cũng khám phá `.agents/skills`; Copilot hỗ trợ thư mục này trên các surface được tài liệu mô tả. Khi làm việc ngay trong checkout Compass, các host đó có thể dùng canonical source mà không copy. Kiểm tra skill selector trên host đang dùng. [Codex discovery](https://learn.chatgpt.com/docs/build-skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Copilot CLI invocation](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
+Codex uses project `.agents/skills`. Cursor also discovers `.agents/skills`; Copilot supports that directory on the surfaces described in its documentation. When working directly in the Compass checkout, these hosts can use the canonical source without copying. Check the skill selector in your host. [Codex discovery](https://learn.chatgpt.com/docs/build-skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Copilot CLI invocation](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
 
-Cài bằng script chỉ copy skills, không copy native Claude roles. Muốn hai role đó, dùng plugin session. Tránh vừa load plugin vừa copy cùng bộ skill cho một session để giữ cách gọi rõ ràng.
+The script copies skills only, not native Claude roles. Use a plugin session for those two roles. Avoid loading the plugin and copying the same skill set in one session so invocation stays clear.
 
-### SkCC và skill-sync (tùy chọn)
+### SkCC and skill-sync (optional)
 
-Giữ `.agents/skills/` làm canonical source. [SkCC](https://github.com/Nexa-Language/Skill-Compiler) là compiler cho Claude/Codex/Gemini/Kimi; chỉ dùng khi cần output riêng cho host. Nó có bước tối ưu/inject constraints, nên output phải được review về semantics, sibling links và resources trước khi thay instructions của Compass. Không mặc định coi compile thành công là workflow tương đương.
+Keep `.agents/skills/` as the canonical source. [SkCC](https://github.com/Nexa-Language/Skill-Compiler) is a compiler for Claude/Codex/Gemini/Kimi; use it only when a host needs a separate output. Its optimization/constraint injection steps mean output must be reviewed for semantics, sibling links, and resources before replacing Compass instructions. Successful compilation alone does not establish equivalent workflow behavior.
 
-Có nhiều dự án tên `skill-sync`. Bản [joeharris76/skill-sync](https://github.com/joeharris76/skill-sync) phù hợp với phân phối theo project: chọn local Git catalog, skill và revision, preview trước apply, rồi review diff và verify payload đã commit. Sync toàn bộ chín sibling packages, pin commit cụ thể, chỉ khai báo target của project được chọn. Bản catalog phải có commit chứa skills; file chưa commit không được Git archive phân phối.
+Several projects are named `skill-sync`. [joeharris76/skill-sync](https://github.com/joeharris76/skill-sync) fits project distribution: select a local Git catalog, skills, and revision, preview before applying, then review the diff and verify the committed payload. Sync all nine sibling packages, pin a specific commit, and declare targets only for the selected project. The catalog must have a commit containing the skills; Git archive does not distribute uncommitted files.
 
-[Profile mẫu](integrations/skill-sync.conf.example) dành riêng cho bản `joeharris76/skill-sync`, pin revision source đã được kiểm chứng. Chạy preview từ checkout Compass trước khi apply:
+The [example profile](integrations/skill-sync.conf.example) is specifically for `joeharris76/skill-sync` and pins a verified source revision. Preview from the Compass checkout before applying:
 
 ```sh
 skill-sync preview -C . -f integrations/skill-sync.conf.example
 ```
 
-Nếu dùng trong project khác, sửa `source` thành đường dẫn checkout Compass và xác nhận ba target phù hợp project đó. Profile chưa được chạy bằng tool upstream; không tự bật sync hoặc thay thế cấu hình đang có.
+For another project, change `source` to the Compass checkout path and confirm that all three targets fit that project. The profile has not been executed with the upstream tool; it does not enable syncing or replace existing configuration automatically.
 
-Một số bản cùng tên tập trung vào user-level roots hoặc chọn winner theo version/mtime trong mesh. Chúng không phải lựa chọn mặc định cho Compass. Hai tool trên chưa được cài/chạy trong project này; installer local và skills CLI vẫn là đường phân phối đã kiểm chứng. Không thêm dependency hoặc watcher global để bật tích hợp tùy chọn.
+Some similarly named tools focus on user-level roots or select a winner by version/mtime across a mesh. They are not Compass defaults. Neither of the two tools above has been installed/run in this project; the local installer and skills CLI remain the verified distribution paths. Do not add dependencies or global watchers merely to enable optional integration.
 
-### Các agent khác
+### Other agents
 
-Agent hỗ trợ Agent Skills có thể nhận toàn bộ chín thư mục từ `.agents/skills/` vào đường dẫn discovery mà host đó quy định. Nếu không có discovery, yêu cầu agent đọc `comp-engineer/SKILL.md` từ checkout rồi chỉ tải skill/reference liên quan theo nhu cầu. Đây là cách sử dụng instructions thủ công, không phải tuyên bố plugin native đã được kiểm thử trên host đó.
+Agents that support Agent Skills can receive all nine directories from `.agents/skills/` in their documented discovery path. Without discovery, ask the agent to read `comp-engineer/SKILL.md` from the checkout, then load relevant skills/references on demand. This is manual instruction use, not a claim that a native plugin was tested on that host.
 
-Mỗi host dùng API/tools, repository instructions và permission model của nó. Không giả định tên tool Codex, cú pháp `$`, subagent API hoặc workspace isolation giống nhau. Thiếu delegation thì chạy inline/serial; thiếu reviewer bắt buộc vẫn PENDING. Hướng dẫn mapping nằm trong [Host Integration](.agents/skills/comp-engineer/references/hosts.md).
+Each host uses its own APIs/tools, repository instructions, and permission model. Do not assume Codex tool names, `$` syntax, subagent APIs, or workspace isolation are identical. Without delegation, run inline/serially; without a required reviewer, the gate remains PENDING. See [Host Integration](.agents/skills/comp-engineer/references/hosts.md) for mappings.
 
-### Cập nhật và giới hạn
+### Updates and limits
 
-Cập nhật prompt/shortcut đang trỏ tới tiền tố cũ; artifacts `dev/`, task ID và lịch sử vẫn dùng tiếp. Plugin session đọc canonical source; khi sửa plugin trong Claude, dùng `/reload-plugins`. Bản skill copy được nâng cấp có chủ ý sau khi so sánh tùy chỉnh, không tự đồng bộ giữa project. [Claude reload](https://code.claude.com/docs/en/plugins/create).
+Update prompts/shortcuts that still use the old prefix; keep existing `dev/` artifacts, task IDs, and history. Plugin sessions read the canonical source; use `/reload-plugins` after changing the plugin in Claude. Upgrade copied skills deliberately after comparing customizations; they do not sync automatically between projects. [Claude reload](https://code.claude.com/docs/en/plugins/create).
 
-Compass không yêu cầu MCP server, hooks hoặc runtime ứng dụng mới. Python chỉ dùng cho installer/checks; RTK, CodeGraph, Ponytail, subagents và review/CI tooling là tùy chọn theo host và repository. Không bật experimental agent teams hay nới permissions chỉ để chạy workflow.
+Compass does not require an MCP server, hooks, or a new application runtime. Python is only for the installer/checks; RTK, CodeGraph, Ponytail, subagents, and review/CI tooling are optional according to the host and repository. Do not enable experimental agent teams or relax permissions just to run the workflow.
 
-## Sử dụng
+## Usage
 
-Các ví dụ `$comp-*` dưới đây dùng cú pháp Codex. Với Claude plugin dùng `/compass:comp-*`; với Claude skill copy hoặc Cursor dùng `/comp-*`. Với host khác chọn skill qua selector hoặc yêu cầu đọc skill tương ứng.
+The `$comp-*` examples below use Codex syntax. With the Claude plugin, use `/compass:comp-*`; with copied Claude skills or Cursor, use `/comp-*`. On other hosts, use the skill selector or ask the agent to read the corresponding skill.
 
-### Giao công việc xuyên suốt
-
-```text
-$comp-engineer Thêm khả năng export dữ liệu cho CLI này. Làm rõ intent từ repo,
-chọn mode theo rủi ro, lập plan/tasks rồi triển khai và kiểm chứng.
-Cho phép scoped subagents và reviewer độc lập; bàn giao local sau khi xong.
-```
-
-Coordinator tìm context thực tế, hỏi quyết định còn thiếu và chọn bước tiếp theo theo artifacts. Ship có thể là bàn giao local; prompt này không cấp quyền deploy hoặc merge remote.
-
-### Gọi từng stage hoặc resume
+### Assign the full workflow
 
 ```text
-$comp-intent Làm rõ yêu cầu retry cho CLI; ghi intent vào dev/cli-retry/.
-$comp-plan Lập kế hoạch từ dev/cli-retry/intent.md trong cùng folder.
-$comp-tasks Cập nhật task từ intent/plan của dev/cli-retry/; giữ ID và tiến độ.
-$comp-analyze Kiểm tra consistency của dev/cli-retry/ trước implementation; chỉ báo cáo.
-$comp-implement Thực hiện các task sẵn sàng trong dev/cli-retry/.
-$comp-review Review thay đổi theo dev/cli-retry/ trên snapshot hiện tại; chỉ báo cáo.
-$comp-ship Kiểm tra và bàn giao local dev/cli-retry/ với bằng chứng hiện có.
+$comp-engineer Add data export to this CLI. Clarify intent from the repository,
+choose a mode based on risk, create plan/tasks, then implement and verify.
+Allow scoped subagents and an independent reviewer; hand off locally when done.
 ```
 
-Gọi `$comp-done` sau delivery đã xác nhận hoặc hoàn thành local được chấp nhận. Chọn stage phù hợp với yêu cầu; một yêu cầu review không tự chạy toàn lifecycle.
+The coordinator gathers actual context, asks about missing decisions, and chooses the next step from artifacts. Ship can mean a local handoff; this prompt does not authorize deployment or remote merging.
+
+### Invoke individual stages or resume
+
+```text
+$comp-intent Clarify CLI retry requirements; write intent in dev/cli-retry/.
+$comp-plan Plan from dev/cli-retry/intent.md in the same folder.
+$comp-tasks Update tasks from dev/cli-retry/ intent/plan; preserve IDs and progress.
+$comp-analyze Check dev/cli-retry/ consistency before implementation; report only.
+$comp-implement Execute ready tasks in dev/cli-retry/.
+$comp-review Review changes against dev/cli-retry/ on the current snapshot; report only.
+$comp-ship Check and hand off dev/cli-retry/ locally with existing evidence.
+```
+
+Invoke `$comp-done` after confirmed delivery or accepted local completion. Choose the stage that matches the request; a review request does not automatically run the entire lifecycle.
 
 ## Use cases
 
-| Tình huống | Cách dùng | Kết quả mong đợi |
+| Situation | Approach | Expected outcome |
 |---|---|---|
-| Feature nhiều thành phần | `comp-engineer`, standard; cho phép subagents | Task theo dependencies, ownership rõ, combined verification và review độc lập |
-| Bug nhỏ có reproduction rõ | `comp-engineer`, light; hoặc `comp-implement` khi đã có task | Thay đổi nhỏ, kiểm chứng reproduction và phạm vi bị ảnh hưởng |
-| Ý tưởng còn mơ hồ | `comp-intent`, `comp-analyze` requirements | Criteria quan sát được; hỏi quyết định quan trọng trước planning |
-| Đánh giá khả thi | `comp-engineer`, spike với timebox | Learning plan/checklist trong intent, bằng chứng và stop/go; không mặc định production code |
-| Refactor library hoặc CLI | Plan → Tasks → Implement → Review | Giữ contract, kiểm tra callers và hành vi trước/sau bằng toolchain đang có |
-| Đổi bảo mật hoặc dữ liệu | Standard với gates theo tác động | Failure/recovery evidence, task review và reviewer theo policy; thiếu review giữ PENDING |
-| Chỉ review code/artifacts | `comp-review` hoặc `comp-analyze` | Findings có nguồn, read-only, không sửa tracker hay ship |
-| Resume khi đổi scope | `comp-plan`, `comp-tasks` trên artifacts hiện có | Giữ DONE còn hợp lệ; reopen phần bị ảnh hưởng và checks phụ thuộc, giữ lịch sử |
-| Tài liệu hoặc repo không CI/remote | Mode theo quy mô, checks phù hợp, local handoff | Content/link validation hoặc manual evidence; không dựng thêm stack |
+| Feature spanning multiple components | `comp-engineer`, standard; authorize subagents | Dependency-aware tasks, clear ownership, combined verification, and independent review |
+| Small bug with a clear reproduction | `comp-engineer`, light; or `comp-implement` when tasks exist | Small change, verified reproduction, and checks of affected scope |
+| Vague idea | `comp-intent`, `comp-analyze` requirements | Observable criteria; material decisions clarified before planning |
+| Feasibility assessment | `comp-engineer`, timeboxed spike | Learning plan/checklist in intent, evidence, and stop/go; production code is not assumed |
+| Library or CLI refactor | Plan → Tasks → Implement → Review | Preserved contracts, caller checks, and before/after behavior verified with the existing toolchain |
+| Security or data changes | Standard with impact-based gates | Failure/recovery evidence, task review, and policy-required reviewers; missing review remains PENDING |
+| Code/artifact review only | `comp-review` or `comp-analyze` | Sourced findings, read-only; no tracker edits or shipping |
+| Resume after scope changes | `comp-plan`, `comp-tasks` on existing artifacts | Preserve valid DONE work; reopen affected work and dependent checks while keeping history |
+| Documentation or repositories without CI/remotes | Mode based on size, appropriate checks, local handoff | Content/link validation or manual evidence; no extra stack |
 
-Ví dụ spike:
+Spike example:
 
 ```text
-$comp-engineer Dùng spike mode trong 30 phút để đánh giá parser có xử lý
-được input mục tiêu hay không. Chỉ cần bằng chứng và khuyến nghị stop/go;
-ghi rõ giới hạn đo và không triển khai production.
+$comp-engineer Use a 30-minute spike to assess whether the parser can handle
+the target input. Provide evidence and a stop/go recommendation only;
+state measurement limits and do not implement for production.
 ```
 
-## Artifacts và modes
+## Artifacts and modes
 
-Folder mặc định là `dev/{feature-slug}/`; root có sẵn hoặc do người dùng chọn được giữ xuyên suốt workflow.
+The default folder is `dev/{feature-slug}/`; an existing or user-selected root is preserved throughout the workflow.
 
 ```text
 dev/{feature-slug}/
@@ -216,43 +218,43 @@ dev/{feature-slug}/
 └── walkthrough.md  # Actual changes, attempts, checks, review, limitations
 ```
 
-| Mode | Artifacts | Phù hợp với |
+| Mode | Artifacts | Suitable for |
 |---|---|---|
-| Standard | Intent, plan năm phần nội dung chính, tasks, walkthrough | Công việc đáng kể hoặc có rủi ro |
-| Light | Intent/plan/tasks/walkthrough gọn; gộp phần phù hợp, bỏ phase rỗng | Thay đổi bounded với cùng mandatory gates |
-| Spike | Intent chứa learning plan/checklist; walkthrough chứa kết quả | Học có giới hạn; scope mới trước production implementation |
+| Standard | Intent, plan with five substantive sections, tasks, walkthrough | Substantial or risky work |
+| Light | Compact intent/plan/tasks/walkthrough; combine appropriate sections and omit empty phases | Bounded changes with the same mandatory gates |
+| Spike | Intent contains the learning plan/checklist; walkthrough records results | Bounded learning; a new scope is required before production implementation |
 
-Mode điều chỉnh lượng tài liệu; risk quyết định verification và reviewer. Diff nhỏ vẫn có thể high risk. `comp-done` archive vào `_archived/YYYYMMDD/{feature-slug}/`, tránh ghi đè công việc đã có.
+Mode adjusts documentation volume; risk determines verification and reviewers. A small diff can still be high risk. `comp-done` archives to `_archived/YYYYMMDD/{feature-slug}/`, avoiding overwrites of existing work.
 
-## Subagents và reviewer
+## Subagents and reviewers
 
-Coordinator giữ assignments, integration, `tasks.md`, `walkthrough.md`, progress và quyền DONE. Standard work dùng scoped implementers khi có công cụ và được phép; việc gắn chặt hoặc không đáng chia chạy inline/serial.
+The coordinator owns assignments, integration, `tasks.md`, `walkthrough.md`, progress, and DONE decisions. Standard work uses scoped implementers when tools and authorization allow; tightly coupled work or work too small to split runs inline/serially.
 
-Worker nhận packet tối thiểu: criteria, baseline, context cần đọc, write scope, dependencies, deliverable, lệnh kiểm chứng và điều kiện báo blocker. Worker trả diff và kết quả thực tế; không tự sửa artifacts chung, khởi động lại lifecycle hoặc commit/push ngoài assignment được phép.
+Workers receive a minimal packet: criteria, baseline, required reading context, write scope, dependencies, deliverable, verification commands, and blocker conditions. They return actual diffs and results; they do not edit shared artifacts, restart the lifecycle, or commit/push outside an authorized assignment.
 
-Chỉ chạy đồng thời task đủ dependencies, contract ổn định và write scope/tài nguyên độc lập, kể cả tests, config và generated outputs. Mỗi file/tài nguyên có một writer hoạt động. Số worker theo concurrency của môi trường, tính cả coordinator.
+Run tasks concurrently only when dependencies are ready, contracts are settled, and write scopes/resources are independent, including tests, configuration, and generated outputs. Each file/resource has one active writer. Worker count follows the environment's concurrency limit, including the coordinator.
 
-Coordinator đối chiếu thay đổi thực tế và chạy combined integration checks. Task bảo mật/dữ liệu/public contract/prerequisite cần review trước DONE hoặc mở dependencies; các task khác có thể review theo milestone.
+The coordinator inspects actual changes and runs combined integration checks. Security/data/public-contract/prerequisite tasks need review before DONE or unlocking dependencies; other tasks can be reviewed at milestones.
 
-Trước Ship, dùng reviewer độc lập với context mới khi có và được phép. Reviewer kiểm tra compliance và change quality trên snapshot ổn định. Input thay đổi vô hiệu hóa approval liên quan. Self-review fallback chỉ khi risk và policy cho phép; subagent không thay reviewer con người được chỉ định bắt buộc. Xem [delegation protocol](.agents/skills/comp-implement/references/delegation.md).
+Before Ship, use an independent reviewer with fresh context when available and authorized. Reviewers check compliance and change quality against a stable snapshot. Changed inputs invalidate related approvals. Self-review fallback is allowed only by risk and policy; a subagent does not replace a specifically required human reviewer. See the [delegation protocol](.agents/skills/comp-implement/references/delegation.md).
 
-## Quality gates và xung đột
+## Quality gates and conflicts
 
-- **Trước Plan:** requirements rõ, observable outcomes, scope/failure expectations và assumptions minh bạch.
-- **Trước Implement:** criteria → plan → tasks → verification có coverage; scope, constraints và dependencies nhất quán.
-- **Trước Ship:** evidence hiện hành, compliance/change quality được review; mandatory gates đã đạt.
+- **Before Plan:** clear requirements, observable outcomes, scope/failure expectations, and explicit assumptions.
+- **Before Implement:** criteria → plan → tasks → verification coverage; consistent scope, constraints, and dependencies.
+- **Before Ship:** current evidence, reviewed compliance/change quality, and passed mandatory gates.
 
-Standalone analysis/review/readiness là read-only. Khi thực thi stage đã giao, coordinator ghi scope, findings và gate status vào artifacts. BLOCKER, thiếu evidence hoặc reviewer bắt buộc ngăn stage tương ứng; không được ghi thành pass. Low risk cho phép labeled self-review; medium risk cần caller/integration checks và reviewer theo policy; high risk cần independent hoặc human review.
+Standalone analysis/review/readiness is read-only. When executing an assigned stage, the coordinator records scope, findings, and gate status in artifacts. BLOCKERs, missing evidence, or missing required reviewers block the corresponding stage; they cannot be recorded as a pass. Low risk permits labeled self-review; medium risk needs caller/integration checks and policy-required reviewers; high risk needs independent or human review.
 
-Intent được thống nhất xác định outcome; mandatory project instructions/constitution ràng buộc giải pháp; plan/tasks thực hiện intent; code hiện có cung cấp evidence. Xung đột quan trọng cần quyết định của người có thẩm quyền với rationale và scoped exception, không âm thầm bỏ quy tắc. Platform instructions và authorization vẫn có ưu tiên cao hơn.
+Agreed intent defines outcomes; mandatory project instructions/constitution constrain the solution; plans/tasks implement intent; existing code provides evidence. Material conflicts require an authorized owner's decision with rationale and a scoped exception, rather than silently dropping a rule. Platform instructions and authorization retain higher priority.
 
-## Verification của bộ skill
+## Skill verification
 
-[Evaluation cases](evals/cases.md) mô tả tám tình huống behavioral và hai case integration/distribution: requirements mơ hồ, artifacts mâu thuẫn, high-risk review, conflict quy tắc repo, replan giữ lịch sử, bounded spike, delegated implementation unavailable-tool/reviewer fallback host packaging/project isolation và public skills.sh distribution. [Evaluation results](evals/results.md) ghi kết quả thực tế, correction và giới hạn kiểm chứng.
+[Evaluation cases](evals/cases.md) describe eight behavioral scenarios and two integration/distribution cases: ambiguous requirements, conflicting artifacts, high-risk review, repository-rule conflicts, replanning with history preservation, bounded spikes, delegated implementation, unavailable-tool/reviewer fallback, host packaging/project isolation, and public skills.sh distribution. [Evaluation results](evals/results.md) record actual outcomes, corrections, and verification limits.
 
-Validator kiểm tra packaging/frontmatter; behavioral evaluation kiểm tra quyết định, thay đổi và evidence. C7 dùng ba implementer và một reviewer độc lập trên fixture Python nhỏ; chưa chứng minh arbitrary-repo correctness hoặc race safety khi chạy đồng thời. Đổi tên skill không đồng nghĩa đã chạy lại behavioral cases.
+Validators check packaging/frontmatter; behavioral evaluations check decisions, changes, and evidence. C7 used three implementers and one independent reviewer on a small Python fixture; this does not establish correctness on arbitrary repositories or race safety during concurrent execution. Renaming skills does not mean the behavioral cases were rerun.
 
-Kiểm tra integration local:
+Local integration checks:
 
 ```sh
 claude plugin validate --strict .
@@ -261,4 +263,4 @@ claude --plugin-dir . plugin details compass
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s evals -p 'test_*.py' -v
 ```
 
-Claude CLI checks không gọi model. Xem [integration results](evals/results.md) để phân biệt manifest/discovery đã kiểm tra với behavioral host execution chưa chạy.
+Claude CLI checks do not call a model. See [integration results](evals/results.md) to distinguish verified manifest/discovery behavior from host behavioral execution that has not been run.
