@@ -1,0 +1,10 @@
+{
+  "name": "compass",
+  "version": "0.1.0",
+  "description": "Spec-driven development with scoped implementation, independent review, and verified outcomes.",
+  "author": {
+    "name": "ltphat2204"
+  },
+  "skills": "./.agents/skills/",
+  "repository": "https://github.com/ltphat2204/compass"
+}
