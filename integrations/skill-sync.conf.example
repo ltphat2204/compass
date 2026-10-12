@@ -1,0 +1,18 @@
+# For joeharris76/skill-sync. Run against the selected project only.
+# If this file is copied to another project, set source to the Compass checkout.
+target = .claude/skills
+target = .cursor/skills
+target = .github/skills
+
+source = .
+rev = 5201bfff9a300c99e1b3572bb6921a6c732bdfb7
+dir = .agents/skills
+skill = comp-analyze
+skill = comp-done
+skill = comp-engineer
+skill = comp-implement
+skill = comp-intent
+skill = comp-plan
+skill = comp-review
+skill = comp-ship
+skill = comp-tasks

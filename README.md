@@ -132,6 +132,14 @@ Giữ `.agents/skills/` làm canonical source. [SkCC](https://github.com/Nexa-La
 
 Có nhiều dự án tên `skill-sync`. Bản [joeharris76/skill-sync](https://github.com/joeharris76/skill-sync) phù hợp với phân phối theo project: chọn local Git catalog, skill và revision, preview trước apply, rồi review diff và verify payload đã commit. Sync toàn bộ chín sibling packages, pin commit cụ thể, chỉ khai báo target của project được chọn. Bản catalog phải có commit chứa skills; file chưa commit không được Git archive phân phối.
 
+[Profile mẫu](integrations/skill-sync.conf.example) dành riêng cho bản `joeharris76/skill-sync`, pin revision source đã được kiểm chứng. Chạy preview từ checkout Compass trước khi apply:
+
+```sh
+skill-sync preview -C . -f integrations/skill-sync.conf.example
+```
+
+Nếu dùng trong project khác, sửa `source` thành đường dẫn checkout Compass và xác nhận ba target phù hợp project đó. Profile chưa được chạy bằng tool upstream; không tự bật sync hoặc thay thế cấu hình đang có.
+
 Một số bản cùng tên tập trung vào user-level roots hoặc chọn winner theo version/mtime trong mesh. Chúng không phải lựa chọn mặc định cho Compass. Hai tool trên chưa được cài/chạy trong project này; installer local và skills CLI vẫn là đường phân phối đã kiểm chứng. Không thêm dependency hoặc watcher global để bật tích hợp tùy chọn.
 
 ### Các agent khác
