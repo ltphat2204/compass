@@ -22,6 +22,16 @@ Skills use the `comp-` prefix. Start the full workflow with `$comp-engineer`, or
 6. **Traceability survives change.** Preserve intent → plan → task → evidence → delivery links, stable IDs, decisions, notes, and history when resuming or replanning.
 7. **Autonomy follows authorization.** Continue safe work within the assigned scope. Merges, deployments, destructive data changes, and externally consequential actions follow existing authorization and project rules.
 
+## Testing philosophy
+
+Before freeze, a mandatory fresh independent test reviewer derives expected results from the complete agreed intent/plan, maps rules to actual assertions in both directions, and inspects coordinator-run harness checks plus correct/defective controls for changed non-trivial business rules. Only `Test validation: PASS` for the exact source/suite snapshot permits freeze. Test author self-approval, hashes, or green runs alone are insufficient; missing reviewer or evidence blocks the gate.
+
+Compass uses acceptance criteria and business rules to decide what to test. After Intent → Plan → Tasks, a separate test-author subagent writes tests from a minimal agreed spec/contract packet. Tests are reviewed and frozen before a fresh implementation subagent starts. No percentage coverage target is added; existing repository gates still apply.
+
+The implementer cannot read tests, fixtures, assertions, test history, or reports exposing private cases, and cannot change/run the frozen suite. Coordinator verifies host-enforced read isolation, freezes suite inventory/hashes against intent/plan versions, runs checks privately, and returns criterion-level feedback. Shared folders/worktrees or prompt instructions alone do not enforce secrecy; missing delegation/isolation blocks behavior implementation, including light mode. Any frozen-test or expectation-affecting resource change requires complete intent and plan revision, task/evidence reconciliation, and a newly reviewed/frozen suite; preserve the old version and history.
+
+Test business logic at the lowest useful layer, integration boundaries when changed, and critical journeys when needed. Visual/subjective outcomes can use justified manual checks. After implementation closes, walkthrough explains representative test evidence to newcomers; experienced developers use AI to challenge domain assumptions and relevant failure cases. Keep private test evidence out of resumed implementer context. The pre-implementation test gate uses existing artifacts, not an extra skill or test-plan document. See [strict testing guidance and research sources](.agents/skills/comp-implement/references/testing.md).
+
 ## Workflow and skills
 
 ```mermaid
@@ -30,13 +40,23 @@ flowchart LR
     G1 -->|READY| P[Plan]
     P --> T[Tasks]
     T --> G2{Artifacts consistent?}
-    G2 -->|READY| E[Implement and integrate]
+    G2 -->|READY| B{Behavior change?}
+    B -->|Yes| A[Separate test author]
+    A --> V{Independent test validation}
+    V -->|PASS| F[Freeze validated suite]
+    F --> H{Read isolation verified?}
+    H -->|Yes| E[Implement and integrate]
+    H -->|No| X[BLOCKED until isolation available]
+    B -->|No| E
+    V -->|Test correction before freeze| A
+    V -->|Agreed spec unclear| I
     E --> R[Review current snapshot]
     R -->|Accepted| S[Ship]
     S -->|Delivered or accepted locally| D[Done and archive]
     G1 -->|BLOCKED| I
     G2 -->|BLOCKED| P
-    R -->|Changes required| E
+    R -->|Code changes required| E
+    R -->|Frozen test change: revise full intent and plan| I
 ```
 
 `comp-engineer` coordinates six stages: `Intent → Plan → Tasks → Implement → Ship → Done`. Analyze and Review are quality gates at handoffs. They can run independently without starting implementation or shipping.
@@ -48,7 +68,7 @@ flowchart LR
 | [comp-plan](.agents/skills/comp-plan/SKILL.md) | Intent is clear enough to choose an approach | `plan.md`, verification/review gates, and task handoff |
 | [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | Breaking down work or updating coverage while preserving progress | `tasks.md`, dependencies, and write ownership |
 | [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | Checking requirements or consistency | Read-only report, READY/BLOCKED, and findings |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Ready tasks, inline or through subagents | Verified changes, progress, and walkthrough |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Behavior: validated frozen tests and enforced isolation; other work: ready tasks | Verified changes, progress, and walkthrough |
 | [comp-review](.agents/skills/comp-review/SKILL.md) | Reviewing compliance and change quality | Snapshot review, findings, and gate status |
 | [comp-ship](.agents/skills/comp-ship/SKILL.md) | Checking and handing off completed work | Delivery evidence, review/CI where applicable |
 | [comp-done](.agents/skills/comp-done/SKILL.md) | Confirmed delivery or accepted local completion | Archived artifacts without overwriting history |
@@ -73,7 +93,7 @@ The GitHub repository is the distribution source. skills.sh discovers skills thr
 
 ## Installation and agent integration
 
-The canonical source is `.agents/skills/`; hosts share the same instructions and resources. Claude Code also has a [plugin manifest](.claude-plugin/plugin.json) and two native roles in [agents/](agents/comp-implementer.md). Adding hosts does not change the workflow's lifecycle or authority.
+The canonical source is `.agents/skills/`; hosts share the same instructions and resources. Claude Code also has a [plugin manifest](.claude-plugin/plugin.json) and three native roles in [agents/](agents/comp-implementer.md). Adding hosts does not change the workflow's lifecycle or authority.
 
 ### Prepare a checkout
 
@@ -99,7 +119,7 @@ In that session:
 Allow scoped implementers and an independent reviewer; hand off locally.
 ```
 
-Claude can use `compass:comp-implementer` and `compass:comp-reviewer` for the corresponding packets. The reviewer has Read/Glob/Grep only; the coordinator runs checks and supplies review evidence. Roles do not grant themselves permission to commit/push/deploy or exceed write scope. Loading with the flag applies only to that session; it does not install globally or register a marketplace. [Claude plugin loading](https://code.claude.com/docs/en/plugins/create), [subagent tools](https://code.claude.com/docs/en/sub-agents).
+Claude can use `compass:comp-test-author`, `compass:comp-implementer`, and `compass:comp-reviewer` for the corresponding packets. The reviewer has Read/Glob/Grep only; the coordinator runs checks and supplies review evidence. Roles do not grant themselves permission to commit/push/deploy or exceed write scope. Loading with the flag applies only to that session; it does not install globally or register a marketplace. [Claude plugin loading](https://code.claude.com/docs/en/plugins/create), [subagent tools](https://code.claude.com/docs/en/sub-agents).
 
 The manifest points directly to the canonical skill directory, avoiding separate instruction copies. The default `agents/` layout lets Claude discover native roles. [Manifest paths](https://code.claude.com/docs/en/plugins-reference).
 
@@ -126,7 +146,7 @@ Choose one line for your host. The script copies all nine skills and resources, 
 
 Codex uses project `.agents/skills`. Cursor also discovers `.agents/skills`; Copilot supports that directory on the surfaces described in its documentation. When working directly in the Compass checkout, these hosts can use the canonical source without copying. Check the skill selector in your host. [Codex discovery](https://learn.chatgpt.com/docs/build-skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Copilot CLI invocation](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
 
-The script copies skills only, not native Claude roles. Use a plugin session for those two roles. Avoid loading the plugin and copying the same skill set in one session so invocation stays clear.
+The script copies skills only, not native Claude roles. Use a plugin session for those three roles. Avoid loading the plugin and copying the same skill set in one session so invocation stays clear.
 
 ### SkCC and skill-sync (optional)
 
@@ -148,13 +168,13 @@ Some similarly named tools focus on user-level roots or select a winner by versi
 
 Agents that support Agent Skills can receive all nine directories from `.agents/skills/` in their documented discovery path. Without discovery, ask the agent to read `comp-engineer/SKILL.md` from the checkout, then load relevant skills/references on demand. This is manual instruction use, not a claim that a native plugin was tested on that host.
 
-Each host uses its own APIs/tools, repository instructions, and permission model. Do not assume Codex tool names, `$` syntax, subagent APIs, or workspace isolation are identical. Without delegation, run inline/serially; without a required reviewer, the gate remains PENDING. See [Host Integration](.agents/skills/comp-engineer/references/hosts.md) for mappings.
+Each host uses its own APIs/tools, repository instructions, and permission model. Do not assume Codex tool names, `$` syntax, subagent APIs, or workspace isolation are identical. For behavior work, missing delegation or enforced test isolation blocks implementation; inline/serial fallback applies only to non-behavior work; without a required reviewer, the gate remains PENDING. See [Host Integration](.agents/skills/comp-engineer/references/hosts.md) for mappings.
 
 ### Updates and limits
 
 Update prompts/shortcuts that still use the old prefix; keep existing `dev/` artifacts, task IDs, and history. Plugin sessions read the canonical source; use `/reload-plugins` after changing the plugin in Claude. Upgrade copied skills deliberately after comparing customizations; they do not sync automatically between projects. [Claude reload](https://code.claude.com/docs/en/plugins/create).
 
-Compass does not require an MCP server, hooks, or a new application runtime. Python is only for the installer/checks; RTK, CodeGraph, Ponytail, subagents, and review/CI tooling are optional according to the host and repository. Do not enable experimental agent teams or relax permissions just to run the workflow.
+Compass does not require an MCP server, hooks, or a new application runtime. Python is only for the installer/checks; RTK, CodeGraph, Ponytail, and specific review/CI tools are optional. Behavior implementation requires fresh test-author, independent test-review, and implementation subagents plus enforceable test read isolation; a host lacking these capabilities can still plan/review or perform non-behavior work, but must block behavior implementation. Do not enable experimental agent teams or relax permissions to bypass the gate.
 
 ## Usage
 
@@ -228,6 +248,8 @@ Mode adjusts documentation volume; risk determines verification and reviewers. A
 
 ## Subagents and reviewers
 
+Behavior work follows the strict test-author → independent validation → freeze/isolation → implementer sequence above, overriding inline fallback. Native role prompts do not themselves create an access-restricted execution environment; verify actual host capabilities before dispatch.
+
 The coordinator owns assignments, integration, `tasks.md`, `walkthrough.md`, progress, and DONE decisions. Standard work uses scoped implementers when tools and authorization allow; tightly coupled work or work too small to split runs inline/serially.
 
 Workers receive a minimal packet: criteria, baseline, required reading context, write scope, dependencies, deliverable, verification commands, and blocker conditions. They return actual diffs and results; they do not edit shared artifacts, restart the lifecycle, or commit/push outside an authorized assignment.
@@ -242,6 +264,7 @@ Before Ship, use an independent reviewer with fresh context when available and a
 
 - **Before Plan:** clear requirements, observable outcomes, scope/failure expectations, and explicit assumptions.
 - **Before Implement:** criteria → plan → tasks → verification coverage; consistent scope, constraints, and dependencies.
+- **Before behavior implementation:** independent test validation PASS for the agreed source/suite snapshot, frozen inventory/hashes, and verified implementer read isolation.
 - **Before Ship:** current evidence, reviewed compliance/change quality, and passed mandatory gates.
 
 Standalone analysis/review/readiness is read-only. When executing an assigned stage, the coordinator records scope, findings, and gate status in artifacts. BLOCKERs, missing evidence, or missing required reviewers block the corresponding stage; they cannot be recorded as a pass. Low risk permits labeled self-review; medium risk needs caller/integration checks and policy-required reviewers; high risk needs independent or human review.
@@ -249,6 +272,8 @@ Standalone analysis/review/readiness is read-only. When executing an assigned st
 Agreed intent defines outcomes; mandatory project instructions/constitution constrain the solution; plans/tasks implement intent; existing code provides evidence. Material conflicts require an authorized owner's decision with rationale and a scoped exception, rather than silently dropping a rule. Platform instructions and authorization retain higher priority.
 
 ## Skill verification
+
+C11-C15 in [evaluation cases](evals/cases.md) cover acceptance/business-rule test generation, self-confirming tests, frozen-suite changes, enforced isolation, and independent validation against agreed rules. [Results](evals/results.md) distinguish isolated fixture checks from independent model evaluation.
 
 [Evaluation cases](evals/cases.md) describe eight behavioral scenarios and two integration/distribution cases: ambiguous requirements, conflicting artifacts, high-risk review, repository-rule conflicts, replanning with history preservation, bounded spikes, delegated implementation, unavailable-tool/reviewer fallback, host packaging/project isolation, and public skills.sh distribution. [Evaluation results](evals/results.md) record actual outcomes, corrections, and verification limits.
 

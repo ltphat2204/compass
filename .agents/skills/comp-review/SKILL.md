@@ -44,12 +44,18 @@ A single reviewer may cover both dimensions; split reviewers only when expertise
 
 ## Two Review Dimensions
 
+For a pre-freeze test-validation assignment, use the [required independent test gate](../comp-implement/references/testing.md#independent-test-validation--required-before-freeze) instead of waiting for implementation. A fresh reviewer that authored neither suite/resources nor proposed implementation must compare agreed intent/plan to assertions in both directions, inspect coordinator-run harness and spec-derived correct/defective controls, and return `Test validation: PASS/BLOCKED` bound to input/suite identities. Low-risk self-review fallback does not apply to this gate; missing reviewer/evidence blocks freeze. Ordinary implementation review still follows the dimensions below.
+
 1. **Spec compliance**: Does behavior meet each applicable criterion, scope boundary, failure expectation, and mandatory project rule? Identify missing behavior and extra features even when tests pass. Use the coverage mapping from artifact analysis.
 2. **Implementation/artifact quality**: Inspect the actual diff and affected callers for correctness, error handling, data/security risks, compatibility, accessibility where applicable, maintainability, and needless complexity. Check that verification exercises the claimed behavior. For documentation or spikes, review content/evidence instead of inventing application tests.
 
 For bug fixes, confirm a reproduction or equivalent evidence of the original failure, root-cause rationale, and verification of the corrected behavior. If reproduction is unavailable, state the limitation; do not claim the original issue is proven fixed.
 
+For behavior changes, apply [acceptance and business logic testing](../comp-implement/references/testing.md). Compare test expectations directly with intent; inspect meaningful assertions, relevant boundaries/failures, and changed integration paths. Check negative-control evidence or its stated limitation. Flag tests that merely reproduce the implementation or mocks that bypass the rule. Missing required behavioral tests/evidence blocks DONE and delivery even when lint/build or other tests pass; do not demand tests for unchanged trivial code or a new coverage percentage.
+
 ## Findings & Closure
+
+For behavior changes, also verify separate test authorship before implementation, freeze identities/inventory/hashes, enforced implementer read isolation, sanitized feedback, and coordinator-run evidence. Missing separation/isolation or a frozen-test edit without complete intent/plan revision and a newly reviewed/frozen suite blocks DONE/delivery. Review is not permission to repair frozen tests in place, including harness errors.
 
 - Each finding contains severity, actual path/line or artifact section, evidence, impact, and suggested correction. Avoid speculative issues with no plausible affected scenario.
 - **BLOCKER**: correctness/security/data-loss issue, mandatory-rule violation, missing core behavior, or missing required verification/reviewer. Blocks DONE for the affected task and blocks delivery.

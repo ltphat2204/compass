@@ -1,7 +1,7 @@
 {
   "name": "compass",
-  "version": "0.1.0",
-  "description": "Spec-driven development with scoped implementation, independent review, and verified outcomes.",
+  "version": "0.2.0",
+  "description": "Spec-driven development with independently validated frozen tests, isolated implementation, and verified outcomes.",
   "author": {
     "name": "ltphat2204"
   },

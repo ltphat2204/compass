@@ -1,5 +1,38 @@
 # Compass Behavioral Evaluation Results
 
+## Mandatory independent test validation update — 2026-10-14
+
+Pre-freeze validation now requires a fresh independent test-review subagent, bidirectional agreed-rule/actual-assertion mapping, actual runner evidence and spec-derived positive/negative controls for changed non-trivial business rules. Only PASS bound to the exact agreed source/suite/resource identities permits freeze; self-review and missing reviewer/evidence cannot pass this gate.
+
+- Local C15 control fixture: executed six cases in temporary Python stdlib unittest workspaces. Candidate A's wrong expectation at 100/eligible rejected the correct reference and accepted the strict-threshold defect. Candidate B accepted the correct reference and rejected strict-threshold and missing-region defects via relevant assertions. All six candidate/control combinations matched those expectations; no import failures were counted as rule failures. Temporary fixtures were removed.
+- Fresh independent evaluator, without cases/results or rubric, assessed the supplied Candidate A rules/assertions and control observations. Returned `Test validation: BLOCKED`, mapped the exact AC-01 threshold mismatch, required pre-freeze test-author correction and independent re-review, flagged missing executable evidence for AC-02, and refused to invent unavailable source/suite hashes. It confirmed self-review cannot approve freeze and post-freeze repair still requires complete intent/plan revision. A minor review-stage ambiguity was clarified to distinguish post-freeze from pre-freeze review.
+- Verification: nine skills validated, 94 local Markdown references resolved, all seven installer tests passed, plugin/role strict validation passed, and Git whitespace checks passed.
+
+Limits: control fixtures were authored/executed by the coordinator. Independent evaluation used supplied facts, not actual identifiable suite files; Candidate B's PASS path was not evaluated by a model. No end-to-end isolated implementation or automatic semantic-proof validator was built. This gate provides traceable independent validation, not a guarantee that an agreed spec itself has no errors. Historical results below remain unchanged.
+
+## Strict independent tests update — 2026-10-14
+
+Current policy supersedes the optional test-first/alongside implementation approach described in the earlier update below. Tests precede implementation, use separate minimal-context authorship, are reviewed/frozen, and require enforced implementer read isolation. Historical runs remain historical, not evidence of this stronger gate.
+
+- Independent instruction review: a fresh read-only reviewer inspected the testing/delegation references, Plan, Tasks, Implement, Engineer, and test-author/implementer roles. No actionable findings; reviewer correctly identified that unrestricted shared-filesystem workers cannot satisfy the strict isolation gate. No implementation or test authorship was performed by this reviewer.
+- C13 readiness evaluation: a separate fresh evaluator received the current skills and raw scenario, without cases/results or rubric. It returned BLOCKED for an in-place frozen-fixture import repair, required complete intent/plan review/revision, preserved IDs/history/notes/valid progress, and required replacement test authorship/review/freeze before resuming. No files changed.
+- C14 readiness evaluation: the same fresh evaluator returned BLOCKED for unrestricted filesystem/shell/Git access and a packet leaking assertion output/inputs; rejected worktrees/prompts as enforcement and required sanitized packets, actual access controls, and fresh context after a leak. No files changed.
+- Packaging checks: all nine skills validated, 91 local Markdown references resolved, all seven installer tests passed, and `claude plugin validate --strict .` plus `claude plugin validate --strict agents` passed with the new test-author role.
+
+Limits: C13/C14 evaluated policy decisions using supplied facts, not real isolation controls or file integrity. No successful isolated implementation run, C7/C11 rerun, or real frozen-test lifecycle was executed. This host's unrestricted shared-filesystem subagents cannot enforce the required boundary; behavior work must remain blocked until an appropriate host access mechanism is available. No isolation runtime, host permission change, publication, or deployment was added.
+
+## Acceptance/business-rule testing update — 2026-10-14
+
+Scope: local instruction self-review and isolated executable fixtures for the new C11/C12 cases, not an independent model evaluation. Historical results below are unchanged.
+
+- C11 fixture: six explicit expected results for subtotals 99/100/101 in eligible/ineligible regions. Python stdlib unittest checks rejected the stub, strict-threshold defect, missing-region defect, and C12's combined defect; all six cases passed for the correct rules. Each variant ran in a fresh Python process with bytecode disabled in a temporary workspace, removed afterward.
+- C12 fixture: the self-confirming assertion at subtotal 101 passed the defective implementation, while the criterion-derived checks rejected it. Manual instruction review found the current review/testing guidance requires comparisons with intent, executable checks for changed business rules, a visible blocked gate for missing required evidence, and suitable manual checks for documentation. No artifacts were modified by executing this fixture.
+- Packaging: all nine skills passed `skill-creator/scripts/quick_validate.py`; local Markdown references resolved. All seven installer tests passed, including resource copying to the four supported host layouts.
+
+Limitations: the coordinator authored and executed these fixtures and reviewed the instructions; this is not independent review or proof that a model follows the new workflow. C11/C12 have not been run by a fresh evaluator, and historical behavioral cases and host model sessions were not rerun. No coverage threshold, new runner dependency, production action, or distribution publication was added.
+
+## Historical evaluations
+
 Date: 2026-10-12 (Asia/Ho_Chi_Minh).
 
 Naming note: skill references in these cases/results now use Compass's `comp-` prefix. Historical behavioral runs below preceded the rename; their observed outcomes, failures and response hashes are preserved, not new runs under renamed skills.

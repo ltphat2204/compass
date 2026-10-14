@@ -100,6 +100,7 @@ Resolve the applicable parts of this intent checklist:
 - In-scope work and explicit exclusions.
 - Constraints, compatibility needs, data/security implications, and relevant dependencies.
 - Observable acceptance criteria and how success will be verified.
+- Concrete examples for changed business rules: inputs/action/expected result, including relevant boundaries or rejection cases. Separate agreed rules from AI-proposed assumptions; ask only when an unresolved expectation materially changes behavior.
 - Remaining decisions, each marked as resolved, intentionally deferred, or blocking.
 
 Stop when every material item is resolved or explicitly deferred with its impact understood. If a blocking decision remains, keep interviewing instead of writing a falsely complete intent. Do not ask every checklist item mechanically when it does not apply or is already known.

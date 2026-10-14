@@ -57,13 +57,17 @@ The standard layout has metadata followed by five sections:
 
 Include a verification matrix in the roadmap (or embedded spike plan):
 
-| Criterion/reference | Affected component | Command or manual procedure | Working directory | Required gate |
+| Criterion/reference | Example / expected result | Test path/name + existing/extend/new, or justified manual check | Command / working directory | Required gate |
 |---|---|---|---|---|
-| Existing ID or new AC-XX | Actual component | Actual procedure | Actual path | Acceptance/review/delivery |
+| Existing ID or new AC-XX | Agreed observable outcome | Actual or planned check | Actual procedure / path | Acceptance/review/delivery |
+
+For behavior changes, read [acceptance and business logic testing](../comp-implement/references/testing.md). Order separate test-author work, test review/freeze, access-isolation verification, then fresh implementation subagents. Plan executable tests for changed rules and relevant boundary/failure/integration cases; retain adequate existing tests. Record test workspace/ownership, frozen-suite manifest and intent/plan identities, coordinator execution, and sanitized implementation packets. Light mode keeps these gates. Any frozen-test change requires complete intent and plan revision before a replacement suite is authored/frozen. No new coverage percentage is imposed; mandatory repository gates remain required. This strict behavior gate overrides ordinary inline/delegation fallbacks.
 
 Keep user/business outcomes separate from implementation choices. Confirm commands from the repo; manual checks are valid when suitable, unavailable checks are not passes. For bugs, include original-failure reproduction or equivalent evidence and a regression check proportional to risk. For spikes, map checks to the learning question and stop/go criterion.
 
 ## 4. Update Plan & Companion Tasks Safely
+
+The pre-freeze test review is mandatory independent validation, including light mode: allocate a fresh test reviewer (not test author or implementation author), criterion/source-to-assertion mapping, runner validation and spec-derived positive/negative controls for changed non-trivial business rules. Require current `Test validation: PASS` before freeze; record validated source/suite identities and report reference. See [testing gate](../comp-implement/references/testing.md); generic risk-based self-review cannot replace it.
 
 Create the plan only when absent; otherwise update the affected sections, preserving user edits and prior decisions. Record material scope changes and the checks/reviews they invalidate in walkthrough.
 

@@ -46,7 +46,7 @@ Every active task has:
   - **Criteria**: AC-XX or stable intent reference; supporting tasks explain necessity
   - **Description / Deliverable**: Specific work and actual output path
   - **Depends on**: Task IDs, or none
-  - **Verification**: Criterion + command/procedure + working directory
+  - **Verification**: Criterion + example/expected result + test path/name (existing/extend/new) or justified manual check + command/procedure + working directory
   - **Review**: Required reviewer/gate from plan, if applicable
   - **Assignee / Write scope**: Coordinator or implementer; owned files/resources
   - **Execution**: Serial or parallel-safe group, with dependency/resource rationale
@@ -55,12 +55,15 @@ Every active task has:
 
 - For delegated implementation, the coordinator is the sole writer of tasks/walkthrough/progress. Record disjoint write/resource scopes and settled dependencies before scheduling in parallel; shared config/fixtures/generated outputs also count. Workers return evidence, not DONE status.
 - New trackers start with TODO; existing trackers keep matching IDs, status, user notes, and completion evidence.
+- For behavior changes, apply [acceptance and business logic testing](../comp-implement/references/testing.md). Allocate a separate test-author task and review/freeze/isolation gate before implementation; behavior tasks depend on that gate. Test authors and implementers have disjoint scopes and fresh sanitized packets. Only coordinator/reviewer artifacts include test details; implementers receive production work and public criteria only. Existing sufficient tests may be retained but still need review/freeze. Frozen-test changes require complete intent/plan revision, tracker reconciliation, and a new frozen suite before resuming.
 - Match tasks by intended behavior/deliverable, not line position. Allocate unused IDs for new work; never recycle old IDs.
 - If a change invalidates a DONE task, reopen only affected work and add the reason and invalidated evidence/review reference to walkthrough. Changed dependencies also invalidate affected downstream checks.
 - Retain removed work as SUPERSEDED with rationale/history. Exclude it from active progress; do not silently delete it or count it DONE.
 - Preserve valid independent work. Do not overwrite the tracker or erase walkthrough when updating a plan. If matching existing work is materially ambiguous, report the ambiguity rather than guessing away history.
 
 ## 3. Tracker & Definition of Done
+
+For behavior work, the test-validation task depends on test authorship and assigns a fresh independent reviewer, source-to-assertion evidence and coordinator-run controls. Freeze depends on current `Test validation: PASS` for the exact suite and agreed intent/plan; implementation depends on that freeze and verified isolation. Missing evidence/reviewer stays BLOCKED; test author self-approval is not completion.
 
 Standard/light work writes or updates `tasks.md`; spikes update the embedded checklist in intent. Retain any existing artifact layout on resume.
 

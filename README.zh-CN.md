@@ -22,6 +22,16 @@ Compass 是一个规范驱动开发（Spec-Driven Development，SDD）工作流�
 6. **变更后仍可追溯。** 保留 intent → plan → task → evidence → delivery 的关联；继续任务或重新规划时，保留稳定 ID、决策、备注和历史。
 7. **自主行动以授权为界。** 在已分配的范围内持续推进安全的工作。合并、部署、破坏性数据变更以及对外部产生后果的操作，遵循已有授权和项目规则。
 
+## 测试理念
+
+冻结前必须由全新上下文的独立测试审查子代理，从完整且已确定的 intent/plan 推导预期结果，双向关联规则与实际断言，并检查运行器证据及变更业务规则的正确/错误控制。仅针对确切源文档/测试快照的 `Test validation: PASS` 可允许冻结。测试作者自审、哈希或绿色运行结果都不足够；缺少审查者或必要证据时须 BLOCKED。
+
+Compass 按验收标准和业务规则选择测试。Intent → Plan → Tasks 就绪后，独立测试子代理仅根据已确定的规范/契约最小上下文编写测试。测试审查并冻结后，实施子代理才以全新上下文开始工作。不增加覆盖率百分比目标；仓库已有质量关卡仍须满足。
+
+实施者不得读取测试、断言、样例、测试历史或暴露私有案例的报告，不得修改或运行冻结测试。协调者验证宿主实际强制的读取隔离，记录绑定 intent/plan 版本的文件清单和哈希，私下运行测试并仅反馈标准层面的偏差。独立目录/worktree 或提示词不能保证隔离；缺少委派/隔离时，包括 light 模式在内的行为实施都 BLOCKED。冻结后任何测试或影响预期结果的资源变更，都必须全面修订并重新确认 intent/plan，协调任务及证据，创建新测试版本后重新审查冻结；保留旧版本和历史。
+
+业务逻辑在足以证明规则的最低层测试，变更边界用集成检查，关键旅程按需使用 E2E；视觉/主观结果可使用有理由的手动检查。实施结束后，walkthrough 向新手解释代表性证据；经验开发者用 AI 挑战领域假设和失败场景。恢复实施者时不暴露私有测试证据。实施前测试关卡沿用现有文档，不增加技能或独立测试计划。参见[严格测试指南和研究来源](.agents/skills/comp-implement/references/testing.md)。
+
 ## 工作流与技能
 
 ```mermaid
@@ -30,13 +40,23 @@ flowchart LR
     G1 -->|READY| P[Plan]
     P --> T[Tasks]
     T --> G2{Artifacts consistent?}
-    G2 -->|READY| E[Implement and integrate]
+    G2 -->|READY| B{Behavior change?}
+    B -->|Yes| A[Separate test author]
+    A --> V{Independent test validation}
+    V -->|PASS| F[Freeze validated suite]
+    F --> H{Read isolation verified?}
+    H -->|Yes| E[Implement and integrate]
+    H -->|No| X[BLOCKED until isolation available]
+    B -->|No| E
+    V -->|Test correction before freeze| A
+    V -->|Agreed spec unclear| I
     E --> R[Review current snapshot]
     R -->|Accepted| S[Ship]
     S -->|Delivered or accepted locally| D[Done and archive]
     G1 -->|BLOCKED| I
     G2 -->|BLOCKED| P
-    R -->|Changes required| E
+    R -->|Code changes required| E
+    R -->|Frozen test change: revise full intent and plan| I
 ```
 
 `comp-engineer` 协调六个阶段：`Intent → Plan → Tasks → Implement → Ship → Done`。Analyze 和 Review 是交接时的质量关卡，可以单独运行，无须启动实施或交付。
@@ -48,7 +68,7 @@ flowchart LR
 | [comp-plan](.agents/skills/comp-plan/SKILL.md) | 意图已足够明确，可以选择实施方案 | `plan.md`、验证/审查关卡与任务交接 |
 | [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | 拆分工作，或在保留进度的同时更新覆盖范围 | `tasks.md`、依赖与写入归属 |
 | [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | 检查需求或一致性 | 只读报告、READY/BLOCKED 与发现的问题 |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | 任务已就绪，可直接执行或交给子代理 | 已验证的改动、进度与实施记录 |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | 行为：测试已验证/冻结且读取隔离已确认；其他工作：任务就绪 | 已验证的改动、进度与实施记录 |
 | [comp-review](.agents/skills/comp-review/SKILL.md) | 审查合规性和改动质量 | 针对快照的审查、问题与关卡状态 |
 | [comp-ship](.agents/skills/comp-ship/SKILL.md) | 检查并交接已完成的工作 | 交付证据，以及适用时的审查/CI |
 | [comp-done](.agents/skills/comp-done/SKILL.md) | 交付已确认，或本地完成已被接受 | 归档工作文档，不覆盖历史 |
@@ -73,7 +93,7 @@ GitHub 仓库是分发来源。skills.sh 通过带遥测的安装记录发现技
 
 ## 安装与代理集成
 
-唯一源目录是 `.agents/skills/`；各宿主使用同一套指令和资源。Claude Code 另有[插件清单](.claude-plugin/plugin.json)，以及 [agents/](agents/comp-implementer.md) 中的两个原生角色。扩展宿主支持不会改变工作流的生命周期或权限。
+唯一源目录是 `.agents/skills/`；各宿主使用同一套指令和资源。Claude Code 另有[插件清单](.claude-plugin/plugin.json)，以及 [agents/](agents/comp-implementer.md) 中的三个原生角色。扩展宿主支持不会改变工作流的生命周期或权限。
 
 ### 准备仓库副本
 
@@ -99,7 +119,7 @@ claude --plugin-dir /absolute/path/to/compass
 允许限定范围的实施者和独立审查者；在本地交接。
 ```
 
-Claude 可以为对应的任务包使用 `compass:comp-implementer` 和 `compass:comp-reviewer`。审查者只有 Read/Glob/Grep；协调者执行检查并提供审查证据。这些角色不能自行获得 commit/push/deploy 权限，也不能超出写入范围。通过参数加载只作用于当前会话，不会全局安装或注册插件市场。[Claude 插件加载](https://code.claude.com/docs/en/plugins/create)、[子代理工具](https://code.claude.com/docs/en/sub-agents)。
+Claude 可以为对应的任务包使用 `compass:comp-test-author`、`compass:comp-implementer` 和 `compass:comp-reviewer`。审查者只有 Read/Glob/Grep；协调者执行检查并提供审查证据。这些角色不能自行获得 commit/push/deploy 权限，也不能超出写入范围。通过参数加载只作用于当前会话，不会全局安装或注册插件市场。[Claude 插件加载](https://code.claude.com/docs/en/plugins/create)、[子代理工具](https://code.claude.com/docs/en/sub-agents)。
 
 清单直接指向唯一技能源目录，无须维护另一套指令副本。默认的 `agents/` 布局供 Claude 发现原生角色。[清单路径](https://code.claude.com/docs/en/plugins-reference)。
 
@@ -126,7 +146,7 @@ python3 scripts/install.py --agent copilot --project /absolute/path/to/project
 
 Codex 使用项目中的 `.agents/skills`。Cursor 也会发现 `.agents/skills`；Copilot 在其文档说明的使用环境中支持该目录。直接在 Compass 仓库副本中工作时，这些宿主可以使用唯一源目录，无须复制。请检查当前宿主中的技能选择器。[Codex 技能发现](https://learn.chatgpt.com/docs/build-skills)、[Cursor 技能](https://prod.cursor.com/help/customization/skills)、[Copilot 技能](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)、[Copilot CLI 调用](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)。
 
-脚本只复制技能，不复制 Claude 原生角色。需要这两个角色时，使用插件会话。避免在同一会话中既加载插件又复制同一套技能，以保持调用方式明确。
+脚本只复制技能，不复制 Claude 原生角色。需要这三个角色时，使用插件会话。避免在同一会话中既加载插件又复制同一套技能，以保持调用方式明确。
 
 ### SkCC 与 skill-sync（可选）
 
@@ -148,13 +168,13 @@ skill-sync preview -C . -f integrations/skill-sync.conf.example
 
 支持 Agent Skills 的代理，可以将 `.agents/skills/` 中全部九个目录放入其文档规定的技能发现路径。如果没有发现机制，可要求代理从仓库副本读取 `comp-engineer/SKILL.md`，再按需加载相关技能和参考资料。这是手动使用指令的方式，并不表示该宿主上的原生插件已经测试。
 
-各宿主使用自己的 API/工具、仓库指令和权限模型。不要假设 Codex 工具名、`$` 语法、子代理 API 或工作区隔离机制完全相同。无法委派时，直接或串行执行；缺少必须的审查者时，关卡仍保持 PENDING。映射说明见[宿主集成](.agents/skills/comp-engineer/references/hosts.md)。
+各宿主使用自己的 API/工具、仓库指令和权限模型。不要假设 Codex 工具名、`$` 语法、子代理 API 或工作区隔离机制完全相同。行为变更缺少委派或测试读取隔离时须 BLOCKED；仅非行为工作可直接或串行执行；缺少必须的审查者时，关卡仍保持 PENDING。映射说明见[宿主集成](.agents/skills/comp-engineer/references/hosts.md)。
 
 ### 更新与限制
 
 更新仍使用旧前缀的提示词或快捷方式；已有 `dev/` 工作文档、任务 ID 和历史继续保留。插件会话读取唯一源目录；在 Claude 中修改插件后，使用 `/reload-plugins`。复制的技能应在比较自定义内容后主动升级，不会在项目间自动同步。[Claude 重新加载](https://code.claude.com/docs/en/plugins/create)。
 
-Compass 不要求 MCP server、hooks 或新的应用运行时。Python 仅用于安装器和检查；RTK、CodeGraph、Ponytail、子代理以及审查/CI 工具，按宿主和仓库情况选用。不要仅为运行工作流而启用实验性 agent teams 或放宽权限。
+Compass 不要求 MCP server、hooks 或新的应用运行时。Python 仅用于安装器和检查；RTK、CodeGraph、Ponytail 及具体审查/CI 工具可选。行为实施必须具备全新测试作者、独立测试审查和实施子代理，以及实际强制的测试读取隔离。缺少这些能力的宿主仍可规划/审查或执行非行为工作，但必须阻止行为实施。不要通过实验性 agent teams 或放宽权限绕过关卡。
 
 ## 使用方法
 
@@ -228,6 +248,8 @@ dev/{feature-slug}/
 
 ## 子代理与审查者
 
+行为工作必须按测试作者 → 独立验证 → 冻结/隔离 → 实施者顺序执行，优先于 inline 回退。原生角色提示词本身不会建立访问受限的环境；分派前必须验证宿主实际能力。
+
 协调者负责分配、整合、`tasks.md`、`walkthrough.md`、进度和 DONE 决策。Standard 工作在工具可用且已获授权时使用限定范围的实施者；紧密耦合或不值得拆分的工作直接或串行执行。
 
 执行者收到最小任务包：标准、基线、必读上下文、写入范围、依赖、交付物、验证命令和报告阻塞的条件。执行者返回实际 diff 和结果；不得自行修改共享工作文档、重新启动生命周期，或在授权任务之外 commit/push。
@@ -242,6 +264,7 @@ Ship 前，在可用且已获授权时，使用具有全新上下文的独立审
 
 - **Plan 前：** 需求明确，结果可观察，范围/失败预期和假设清楚。
 - **Implement 前：** criteria → plan → tasks → verification 有覆盖关系；范围、约束和依赖一致。
+- **行为实施前：** 已定源文档/测试快照的独立验证 PASS，清单/哈希已冻结，实施者测试读取隔离已实际确认。
 - **Ship 前：** 证据仍有效，合规性/改动质量已审查，必需关卡已通过。
 
 独立的分析、审查和就绪检查均为只读。执行已分配阶段时，协调者在工作文档中记录范围、发现和关卡状态。BLOCKER、缺少证据或缺少必需审查者，会阻止对应阶段，不能记为通过。低风险允许明确标注的自审；中风险需要调用方/集成检查和策略要求的审查者；高风险需要独立或人工审查。
@@ -249,6 +272,8 @@ Ship 前，在可用且已获授权时，使用具有全新上下文的独立审
 已确认的意图定义结果；项目必需指令或章程约束方案；计划和任务落实意图；现有代码提供证据。重要冲突需要有权限的负责人作出决策，并记录理由和限定范围的例外，不能暗中丢弃规则。平台指令和授权仍具有更高优先级。
 
 ## 技能验证
+
+[评估案例](evals/cases.md) 的 C11-C15 覆盖验收/业务规则测试生成、自证式测试、冻结测试变更、实际读取隔离和对照已定规则的独立验证。[结果](evals/results.md) 区分隔离样例检查和独立模型行为评估。
 
 [评估案例](evals/cases.md) 描述八个行为场景和两个集成/分发案例：模糊需求、工作文档冲突、高风险审查、仓库规则冲突、保留历史的重新规划、有边界的 spike、委派实施、工具/审查者不可用时的回退、宿主打包/项目隔离，以及公开 skills.sh 分发。[评估结果](evals/results.md) 记录实际结果、修正和验证限制。
 
