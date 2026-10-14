@@ -1,0 +1,33 @@
+.workspace { width: min(840px, 100%); margin: 0 auto; padding: 64px 24px 32px; }
+header { margin-bottom: 32px; }
+.eyebrow { color: #78628c; font-size: 11px; font-weight: 750; letter-spacing: 2px; margin-bottom: 10px; }
+h1 { font-size: clamp(30px, 5vw, 42px); letter-spacing: -1.4px; line-height: 1.2; }
+.intro { color: #78717e; margin-top: 12px; }
+.panel { background: #fff; border: 1px solid #e6e1e8; border-radius: 16px; padding: 24px; margin-top: 18px; box-shadow: 0 4px 20px #34254b04; }
+h2 { font-size: 17px; font-weight: 650; }
+.add-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-top: 18px; }
+.field { flex: 1; min-width: 0; }
+label { display: block; font-size: 12px; color: #746a7d; margin-bottom: 6px; }
+.primary { background: #7250b8; border-color: #7250b8; color: white; padding: 11px 20px; }
+.primary:hover:not(:disabled) { background: #60409f; }
+.list-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.count { color: #817687; font-size: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 12px; }
+.filters button { font-size: 12px; border-color: transparent; background: #f6f4f8; }
+.filters button[aria-pressed="true"] { color: #6641a7; background: #eee7fa; }
+.tasks { list-style: none; margin: 0; padding: 0; }
+.tasks li { display: flex; gap: 14px; align-items: center; padding: 20px 0; border-top: 1px solid #eeeaf1; }
+.tasks input[type="checkbox"] { flex: 0 0 auto; width: 19px; height: 19px; accent-color: #7250b8; margin: 0; }
+.task-title { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 15px; }
+.completed .task-title { text-decoration: line-through; color: #918995; }
+.actions { display: flex; gap: 6px; flex-shrink: 0; }
+.actions button { font-size: 12px; padding: 6px 10px; }
+.delete { color: #a94750; }
+.edit-form { flex: 1; min-width: 0; }
+.edit-form .actions { margin-top: 10px; }
+.error { background: #fff0f0; border-radius: 8px; color: #9f303e; padding: 12px; font-size: 13px; margin: 12px 0; }
+.field-error { width: 100%; margin: 0; }
+.empty { text-align: center; color: #82758e; padding: 40px 10px; font-size: 14px; }
+footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 20px; font-size: 11px; color: #8a8090; }
+footer button { background: transparent; border: 0; font-size: 11px; text-decoration: underline; padding: 6px 0; }
+@media (max-width: 540px) { .workspace { padding: 32px 16px 24px; } .panel { padding: 18px; } .list-header { align-items: flex-start; flex-direction: column; gap: 4px; } .add-form .field { flex-basis: 100%; } .add-form > button { width: 100%; } .tasks li { flex-wrap: wrap; gap: 10px; } .task-title { flex-basis: calc(100% - 30px); } .tasks li > .actions { margin-left: 29px; } footer { align-items: flex-start; flex-direction: column; } }

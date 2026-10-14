@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "gate": "FROZEN",
+  "author": "/root/test_author",
+  "reviewer": "/root/test_review_v2",
+  "validation": "PASS",
+  "controls": "Coordinator pnpm test:controls 7/7 PASS; pnpm test:browser --list 12 collected",
+  "isolation": "User-approved project-only instruction/scope exception; no host-enforced read isolation",
+  "sha256": {
+    "PRD.md": "03f50d896b6709518f5657f176b8ea0499fea1d2b33e35f1c73ff3cff468b09f",
+    "plan.md": "f66e3e7a7920d0775f5d2449d2b957b30fd6fe53d88b7e809c0ae1c68f2dcdc8",
+    "package.json": "514f1be78736457bede2d7e10ffe8cada591e7f9c5176e8cc05646b9666ba506",
+    "pnpm-lock.yaml": "e470fe5a840655fcc31fa1aa44ea4fe4f4c5169f6faf2492a9ac587c1e045b6f",
+    "vite.config.ts": "e1eefd0ed1639c88d1213884ef760516884db9e168190e223fee6b063ad3e088",
+    "tsconfig.app.json": "8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0",
+    "tsconfig.json": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+    "tsconfig.node.json": "d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8",
+    "tests/browser.spec.ts": "6b5fce14ece6296d6e227a29c7bc77bad616616329bfe7b8ff9867751bd9f943",
+    "tests/controls.test.ts": "6ebe4a475cb9675eb2bbd628cd12908f786fac84c4eec37ae40e4c083877c965",
+    "tests/domain-cases.ts": "1d8218591ba8166ab3f0aa73b2f341e973aa6c742fddc15b139aa6222466742b",
+    "tests/domain.test.ts": "54ba34be42098db80a8b52e84fcdb8927e00a119c51e227ed77d23ce4c62d9e5",
+    "tests/playwright.config.ts": "d6aae34f4c8f442f116ce6a8ba8cbd78ec87c9d2d5fd80f45d36f18df6b81874"
+  }
+}
