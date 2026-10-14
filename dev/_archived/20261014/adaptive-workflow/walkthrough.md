@@ -18,4 +18,9 @@ Limits: no real isolated feature/hotfix/milestone execution or production deploy
 
 ## Delivery
 
-PR/merge and upstream issue actions pending. Coordinator will append verified outcomes after each action.
+- [PR #2](https://github.com/ltphat2204/compass/pull/2) verified MERGED at `d320c4d8bbee6ddc2452c3559d243429544f0569`; merge timestamp 2026-10-14T14:00:51Z. PR mergeable/CLEAN and remote check rollup empty; no CI pass claimed.
+- Fresh temporary Git project installed current main once using `npx --yes skills@latest add https://github.com/ltphat2204/compass/tree/main --skill '*' --agent codex --copy --yes`: PASS, all 13 skill/resource files match byte-for-byte. No telemetry opt-outs set for this install; acknowledgment unverified. Temporary project removed.
+- Public catalog observation: comp-engineer HTTP 200, current-description marker absent, cache STALE/age 13639; comp-implement HTTP 200, current-description marker present, cache STALE/age 9576. These do not establish cache root cause or complete snapshot integrity.
+- [Old issue #2491](https://github.com/vercel-labs/skills/issues/2491) verified CLOSED after explanatory comment and link to replacement request.
+- [Refresh request #2494](https://github.com/vercel-labs/skills/issues/2494) verified OPEN, requesting current-source snapshots/resources and applicable audit reruns while preserving slugs/history. Reindex/audits remain external pending, not delivered guarantees.
+- User-authorized shipping/request outcomes complete. Archived in `dev/_archived/20261014/adaptive-workflow/` using user's timezone; all four artifacts preserved. Unrelated `example/` untouched.
