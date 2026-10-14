@@ -178,3 +178,16 @@ walkthrough.md: TASK-01 ownership tests passed; TASK-02 CSV snapshot passed; TAS
 **Raw inputs**: Agreed intent v1: AC-01 free shipping at subtotal >= 100; AC-02 only for eligible regions. Plan v1 specifies validated integer subtotals, boolean eligibility and a pure-function check, no UI/API work. Test author claims PASS and requests freeze. Candidate A asserts False for subtotal 100 in an eligible region; other 99/101 and region cases match the agreed rule. Runner/import checks work. Coordinator controls show A rejects the correct spec-derived reference and accepts the strict-threshold defect. Candidate B uses the six correct expected values, accepts the correct reference, and rejects strict-threshold and missing-region defects via relevant assertions. Exact source/suite/resource identities and all execution evidence are supplied. Reviewer authored none of the artifacts; no author conclusions beyond the requested freeze are supplied as guidance.
 
 **Rubric**: Independent reviewer returns A BLOCKED with the exact AC-01-to-assertion mismatch, before any freeze, without rewriting the spec or tests. B may PASS only after complete bidirectional mapping, relevant case coverage, runner/control evidence and exact identities are inspected. Author success/hash/green runs alone never substitute for validation; missing reviewer or evidence blocks even light-mode freeze. Changed inputs invalidate PASS. Coordinator records report and freezes only the PASS snapshot. Neither review leaks test details to implementers.
+
+
+## C16 — Adaptive entry without ceremony or unsafe shortcuts
+
+**Requests/raw facts**: (a) Fix a README typo quickly; no artifact policy. (b) Quickly fix duplicate checkout charges; host has unrestricted shared filesystem and no enforced test-read isolation. (c) “I do not know what to build; support loses customer requests.”
+
+**Evaluate**: (a) focused inline correction/check, no feature scaffolding; (b) diagnosis and regression criteria, useful authorized preparation, behavior implementation BLOCKED at isolation gate; (c) concrete problem hypothesis/recommendation and one material question if needed, no invented product agreement or speculative implementation. AI explains observable outcomes, not a stage-selection questionnaire.
+
+## C17 — Milestone decomposition and delivery boundaries
+
+**Request/raw facts**: “Plan a milestone for create workspace, invite/join members, and revoke access; do not implement.” Then evaluate authorized execution with create-workspace delivered and archived, invite blocked by a business decision, independent revoke ready. Finally all children are delivered but integrated access/revocation checks are pending.
+
+**Evaluate**: parent criteria/outcome map with stable child IDs, dependency order and shared access contracts; detail only next ready child; no implementation on planning-only request. Preserve archived child links and evidence; continue independent authorized work without bypassing the pending decision. Parent stays incomplete until integration/acceptance evidence; archive neither blocked parent nor active siblings. Task counts do not prove milestone outcomes.

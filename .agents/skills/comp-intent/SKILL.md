@@ -7,7 +7,7 @@ description: Discover user intent through an adaptive interview grounded in repo
 
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
-This skill conducts an adaptive, high-signal interview with the user to discover their intent. It grounds the discussion in real code and specifications using repository evidence and available specifications, follows up on consequential gaps one question at a time, and generates `dev/{feature-slug}/intent.md` only when the intent is clear enough to plan.
+This skill discovers intent through evidence, concrete proposals, and questions only where a material decision remains. It grounds the discussion in real code and specifications using repository evidence and available specifications, follows up on consequential gaps one question at a time, and generates `dev/{feature-slug}/intent.md` only when the intent is clear enough to plan.
 
 ---
 
@@ -30,6 +30,10 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 - Read existing specs where they live. Missing tools, specs, or checks are not reasons to invent scaffolding; record the fallback, limitation, or applicable alternative.
 
 ---
+
+## Entry and Scope
+
+Apply [adaptive workflow](../comp-engineer/references/adaptive-workflow.md) before scaffolding. For a clear bounded request, infer criteria from the request and evidence; zero interview questions is valid. For uncertainty, offer a concrete scenario and recommendation before asking one consequential question; do not manufacture agreement or a feature folder. For milestones, write a parent outcome map and prepare the next ready child intent, keeping later children at outcome level. A standalone intent request stops at that handoff; the engineer orchestrator continues only within execution authority.
 
 ## The 4 Pillars of Intent Discovery
 
@@ -85,7 +89,7 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 ### Step 3: Adaptive Grill (One Question at a Time)
 
-Interview the user until the intent is clear enough to plan. There is no fixed question count: ask only about consequential gaps, and stop when the readiness check below passes.
+Investigate and propose until the intent is clear enough to plan; interview only for unresolved material choices. There is no fixed question count: ask only about consequential gaps, and stop when the readiness check below passes.
 
 - Ask one focused question, wait for the answer, then choose the next question based on it.
 - First answer anything the repository, CodeGraph, or specs can establish; ask the user only for product intent, trade-offs, or facts the code cannot reveal.
@@ -207,6 +211,6 @@ Once the readiness check passes, create `dev/{feature-slug}/intent.md` synthesiz
 ### Step 5: Hand Off to Planning
 
 1. Announce the created file path: `dev/{feature-slug}/intent.md`.
-2. For standard/light work, hand off to planning only after the requirements gate is READY. For a spike, execute its embedded learning checklist and record evidence in walkthrough; do not generate production scaffolding. Provide the planning command when applicable:
+2. For standard/light work, hand off to planning only after the requirements gate is READY. For a spike, execute its embedded learning checklist and record evidence in walkthrough; do not generate production scaffolding. When invoked standalone, provide the planning command if useful. Under `comp-engineer`, continue into authorized planning automatically rather than asking the user to invoke another skill:
    - *"File intent đã được tạo tại `dev/{feature-slug}/intent.md` dựa trên kết quả phỏng vấn và khảo sát repository."*
    - *"Bạn có thể bắt đầu lập kế hoạch bằng lệnh: `hãy dựa vào @dev/{feature-slug}/intent.md và viết plan để thực hiện trong cùng folder` (hoặc chọn skill `comp-plan` trên host đang dùng và truyền đường dẫn intent)."*

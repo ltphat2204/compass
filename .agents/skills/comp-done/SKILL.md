@@ -47,6 +47,8 @@ dev/
 
 ---
 
+For a milestone parent or child, apply [milestone completion and archive rules](../comp-engineer/references/adaptive-workflow.md). Verify child delivery plus parent integration/acceptance before archiving a parent. After a child move, update the parent link and preserve pending siblings; a completed child never implies a completed milestone.
+
 ## Workflow Steps
 
 ### Step 1: Identify Target Feature Directory

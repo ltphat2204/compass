@@ -29,6 +29,8 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 Maintain a checkable tracker from current intent and plan in the same feature folder. Preserve existing work on every invocation.
 
+For milestone work, this tracker belongs to one ready child intent. Keep parent criterion references and cross-child prerequisites explicit; a sibling dependency is not DONE without delivery evidence. The parent outcome map follows [decomposition rules](../comp-engineer/references/adaptive-workflow.md), not a flattened tracker of every future child.
+
 ## 1. Read Before Writing
 
 Read current intent, plan, tasks, walkthrough, and applicable repository constraints. For a spike, read the embedded learning plan/checklist in intent; no separate plan/tasks is required. If standard/light work has no ready intent or plan, report the missing prerequisite rather than inventing decisions.

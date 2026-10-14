@@ -10,6 +10,16 @@ Compass là workflow Spec-Driven Development (SDD) gồm chín Agent Skills dùn
 
 Tiền tố skill là `comp-`. Bắt đầu công việc xuyên suốt bằng `$comp-engineer`, hoặc gọi từng skill để tiếp tục artifacts hiện có.
 
+## Vì sao có Compass
+
+AI có thể sinh code nhanh hơn tốc độ người dùng hiểu thứ vừa được tạo ra hoặc kiểm chứng nó có giải quyết đúng vấn đề hay không. Fresher có thể nhận được một kết quả chạy được nhưng chưa hiểu hành vi và giới hạn của nó. Experienced dev lại có thể vẫn phải tự phân tích, chia việc, nghĩ edge case và chỉ cho AI từng bước. Compass được tạo ra để giải quyết cả hai khoảng trống này.
+
+**Kim chỉ nam: giúp fresher hiểu mình đang vibe gì, và giúp experienced dev tận dụng hết khả năng suy nghĩ của AI.**
+
+Với fresher, Compass nối ý tưởng với hành vi cụ thể, giải thích những quyết định đáng hiểu và cho thấy kết quả được kiểm chứng ra sao. Với experienced dev, AI chủ động khảo sát codebase, phản biện giả định, so sánh phương án, đưa ra đề xuất và thực hiện công việc đã được giao đến bước kiểm chứng. Người dùng giữ quyền quyết định mục tiêu và những lựa chọn sản phẩm quan trọng; AI đảm nhận việc phân tích kỹ thuật và thực thi trong phạm vi đó.
+
+Workflow cần dùng được cả khi người dùng chỉ có một triệu chứng lỗi, một ý tưởng chưa rõ hoặc một mục tiêu lớn cỡ milestone. Mức độ trao đổi và tài liệu phải thích nghi với tình huống, giúp người dùng hiểu bước tiếp theo và dùng bằng chứng để xác định công việc đã hoàn tất hay chưa.
+
 ## Philosophy
 
 **Mục tiêu làm la bàn, bằng chứng quyết định bước tiếp theo.** Compass giữ trách nhiệm và quality gates ổn định; cách thực hiện thích nghi theo quy mô, rủi ro và công cụ thực tế.
@@ -22,7 +32,24 @@ Tiền tố skill là `comp-`. Bắt đầu công việc xuyên suốt bằng `$
 6. **Traceability tồn tại qua thay đổi.** Giữ liên kết intent → plan → task → evidence → delivery; giữ ID, quyết định, ghi chú và lịch sử khi resume/replan.
 7. **Autonomy theo authorization.** Tiếp tục công việc an toàn trong phạm vi đã giao. Merge, deploy, thay đổi dữ liệu phá hủy và hành động có hệ quả bên ngoài tuân theo quyền hạn và quy tắc dự án.
 
+## Bắt đầu từ tình huống thực tế
+
+Nói mục tiêu hoặc vấn đề với `$comp-engineer`, không cần chọn stage. AI khảo sát, đề xuất bước tiếp theo bằng ví dụ trước/sau và chỉ hỏi những lựa chọn quan trọng không thể suy ra. Fresher hiểu mình đang xây gì và kiểm chứng bằng cách nào; experienced dev nhận đề xuất có bằng chứng và phản biện giả định, thay vì phải tự dẫn từng bước.
+
+| Yêu cầu | Cách xử lý |
+|---|---|
+| Bắt đầu nhanh | Chọn lát cắt nhỏ nhất có ích, dùng mặc định của repo, artifacts light ngắn gọn; đủ rõ thì không phỏng vấn |
+| Sửa một lỗi | Chẩn đoán/tái hiện, xác định hành vi đúng, sửa nguyên nhân chung và kiểm chứng regression |
+| Chưa biết mình muốn gì | Làm rõ vấn đề bằng ví dụ và đề xuất cụ thể; khám phá có giới hạn trước khi chốt sản phẩm |
+| Làm một milestone | Bản đồ outcome cha → intent con theo dependency → delivery từng con → kiểm chứng tích hợp milestone |
+| Tiếp tục hoặc đổi hướng | Giữ ID và bằng chứng còn hiệu lực; mở lại quyết định và gate bị ảnh hưởng |
+| Chỉ review hoặc lập kế hoạch | Dừng đúng ở đầu ra được yêu cầu |
+
+Sửa nhỏ ít rủi ro, không đổi hành vi có thể làm trực tiếp, không cần feature folder. Thay đổi hành vi vẫn giữ gate test/cô lập bên dưới, kể cả fix nhanh; thiếu isolation thì implementation bị chặn. Milestone chỉ lập kế hoạch chi tiết cho intent con sẵn sàng tiếp theo. Hoàn tất từng con chưa đủ: outcome cha còn cần kiểm chứng tích hợp và nghiệm thu. Xem [định tuyến và chia nhỏ công việc](.agents/skills/comp-engineer/references/adaptive-workflow.md).
+
 ## Triết lý kiểm thử
+
+**Hotfix vẫn phải có test.** Việc gấp cho phép thu hẹp phạm vi và thủ tục, không cho phép fix mù. Hotfix thay đổi hành vi phải xác định hành vi mong đợi và có regression test phát hiện lỗi, với bằng chứng fail trước khi sửa nếu tái hiện được và pass sau khi sửa. Nếu chưa tái hiện được, ghi rõ giới hạn cùng bằng chứng đang dùng; không tuyên bố đã tái hiện lỗi gốc. Test phải kiểm tra hành vi đã thống nhất, không chỉ sao chép logic của bản vá. Các gate review độc lập, freeze và cô lập bên dưới vẫn áp dụng; thiếu điều kiện thì chặn implementation thay đổi hành vi, thiếu kiểm chứng thì chưa được coi là sửa xong.
 
 Trước freeze, bắt buộc có subagent reviewer độc lập với context mới: tự suy ra expected result từ toàn bộ intent/plan đã chốt, nối quy tắc với assertion theo cả hai chiều, kiểm tra runner và evidence từ control đúng/sai cho business rule thay đổi có logic đáng kể. Chỉ `Test validation: PASS` gắn với đúng snapshot nguồn/test mới cho phép freeze. Test author tự duyệt, hash hoặc test xanh không đủ; thiếu reviewer/evidence thì BLOCKED.
 
