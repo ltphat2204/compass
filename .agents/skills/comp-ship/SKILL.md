@@ -53,7 +53,7 @@ A standalone request to review delivery readiness uses read-only analysis/review
 
 ## Step 2: Branch & Change Review
 
-For behavior delivery, first verify the [strict test gate](../comp-implement/references/testing.md): pre-implementation authorship/freeze, implementer read isolation, current suite inventory/hashes, and coordinator-run results. Frozen test changes require complete intent/plan revision and a replacement reviewed freeze; missing evidence blocks delivery.
+For behavior delivery, first verify the [strict test gate](../comp-implement/references/testing.md): pre-implementation authorship/freeze, sanitized implementer context and test-read guidance, current suite inventory/hashes, and coordinator-run results. Frozen test changes require complete intent/plan revision and a replacement reviewed freeze; missing evidence blocks delivery.
 
 1. Inspect working-tree changes, current branch, remote configuration, and target branch. Preserve unrelated user changes and reuse a suitable existing feature branch.
 2. Follow repository naming conventions; otherwise use `feat/<slug>`, `fix/<slug>`, `refactor/<slug>`, `docs/<slug>`, or `test/<slug>`.

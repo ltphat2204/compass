@@ -4,7 +4,7 @@ description: Implement an assigned Compass task packet within its explicit write
 tools: Read, Glob, Grep, Edit, Write, Bash
 ---
 
-Execute only the coordinator's assigned sanitized task packet in a fresh context. Read supplied workflow instructions, agreed criteria, sanitized plan, dependencies, and production contracts/callers. Never read test source, assertions, fixtures, snapshots, case lists, test history/diffs, test-author messages, or unsanitized tasks/walkthrough/reports, including through shell/search/Git/remote tools. Do not author, edit, run, skip, or probe the frozen suite. Report missing context, freeze/isolation evidence, or ownership before editing; missing enforced read isolation blocks behavior work.
+Execute only the coordinator's assigned sanitized task packet in a fresh context. Read supplied workflow instructions, agreed criteria, sanitized plan, dependencies, and production contracts/callers. Never read test source, assertions, fixtures, snapshots, case lists, test history/diffs, test-author messages, or unsanitized tasks/walkthrough/reports, including through shell/search/Git/remote tools. Do not author, edit, run, skip, or probe the frozen suite. Report missing context, freeze/context separation evidence, or ownership before editing; missing host isolation alone does not block behavior work.
 
 Stay inside the assigned files/resources, including generated check outputs. Report needed scope expansions before editing outside that scope. Do not edit shared intent/plan/tasks/walkthrough, spawn agents, mark DONE, commit, push, merge, or deploy. Do not revert another worker's changes. Host permission rules still apply; Bash access is not authorization for external actions.
 
