@@ -5,12 +5,15 @@ Read when coordinating subagent implementation or executing an assigned task pac
 ## Roles and selection
 
 - **Coordinator** owns task selection, assignments, integration, `tasks.md`, `walkthrough.md`, progress, and completion decisions. Worker success is a report to inspect, not automatic DONE.
+- **Test author** receives a fresh minimal spec/contract packet and owns tests before implementation. Coordinator reviews/freezes its returned suite; the author does not receive proposed implementation or change frozen tests. For behavior work, [strict testing](testing.md) overrides the ordinary shared-workspace, inline, and light-mode defaults below.
 - **Implementer** owns only the packet's write scope and reports changes/checks/blockers. It does not rewrite Compass artifacts, spawn more agents, commit, push, merge, or deploy unless the coordinator explicitly assigns and is authorized for that action. Reading this skill as an implementer does not activate the entire lifecycle.
 - **Reviewer** gets fresh context and a stable snapshot. It is read-only and reviews compliance plus change quality; it cannot approve its own implementation.
 - For standard work, delegate bounded tasks or cohesive task groups when subagents are available and delegation is authorized. Light work usually stays with the coordinator; delegate only if a separate boundary is useful. Spikes may delegate distinct learning questions within the agreed resource bound. Do not create code boundaries just to permit parallelism.
 - If delegation is unavailable, disallowed, or wasteful for tightly coupled work, execute inline/serially and record the reason. Required independent review still remains required. Obey actual concurrency limits, counting the coordinator; do not prescribe a fixed worker count.
 
 ## Before dispatch
+
+Before freezing behavior tests, dispatch a fresh independent test reviewer with complete agreed intent/plan, public contracts, actual suite/resources, source/snapshot identities and coordinator-run controls. Require the [independent validation gate](testing.md#independent-test-validation--required-before-freeze); author reports and self-review cannot earn PASS. Native reviewer tools remain read-only; coordinator executes controls and supplies evidence. Dispatch implementers only after the exact PASS snapshot is frozen and isolation verified.
 
 1. Check that dependencies have current accepted implementation and required review. Decompose tightly coupled work serially or assign it to one implementer.
 2. Inspect the complete expected write sets: implementation, tests, fixtures, config, exports, generated outputs, and shared resources touched by commands. Tasks are parallel-safe only if write sets/resources are disjoint and their contracts are settled. Separate files alone do not prove independence.
@@ -22,14 +25,19 @@ Role: implementer; return results to coordinator
 Task IDs / criterion references / goal:
 Workspace and baseline revision or relevant file hashes:
 Dependencies and settled contracts:
-Read context: intent/plan excerpts, repository instructions, relevant callers/tests
+Read context: agreed intent, sanitized plan, repository instructions, production contracts/callers; no tests/history/reports
 Write scope: exact files/resources; explicitly excluded shared artifacts
 Deliverable and relevant edge/failure behavior:
-Verification: actual command/procedure and working directory
+Agreed public examples/expected results (no private executable cases):
+Isolation: enforced read boundary, forbidden resources, evidence verified by coordinator
+Frozen-test gate: opaque version/status only, no test contents
+Verification: permitted non-test checks and working directory; coordinator runs frozen suite privately
 Required task review and stop/report conditions:
 ```
 
 ## During execution
+
+For behavior work, dispatch a test author first with only criteria/domain examples, public interfaces/input contracts, applicable instructions, runner conventions and sanitized fixture patterns. Its packet includes private test write scope, criterion-to-test deliverables, pre-freeze validation, and stop conditions; no proposed implementation/source internals. After review/freeze, verify access restrictions before dispatching an implementer with the packet above in a fresh context. Shared checkouts and inherited histories are unsuitable for this strict boundary. Only coordinator/test reviewers see test evidence; return criterion-level feedback without hidden inputs or assertions. Any frozen-suite change invokes the complete intent/plan revision procedure in [strict testing](testing.md), not a worker repair loop.
 
 - Shared workspaces expose edits immediately. Workers stay inside their write scope and do not revert others' changes. If another file/resource is needed, report the smallest scope expansion to the coordinator before editing it; the coordinator resolves ownership and updates the packet.
 - Use existing isolated checkouts only when needed for overlapping work or conflicting commands. Do not create worktrees routinely. The coordinator integrates returned changes deliberately, preserving validation and error handling.

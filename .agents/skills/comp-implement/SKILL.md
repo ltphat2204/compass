@@ -1,6 +1,6 @@
 ---
 name: comp-implement
-description: Execute SDD tasks inline or through scoped subagents, reconcile and verify combined changes, obtain independent review, and preserve coordinator-owned progress.
+description: Execute SDD tasks with separate frozen tests and isolated implementation subagents for behavior changes, inline execution for other work, verified integration and coordinator-owned progress.
 ---
 
 # Compass Implementation Skill (`comp-implement`)
@@ -35,13 +35,13 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 For a request only to assess implementation readiness, perform read-only analysis and return findings; do not start this execution workflow or write walkthrough.
 
-Read current intent, plan, tasks, and walkthrough before selecting work. For a spike, use the embedded learning checklist in intent when standalone plan/tasks do not exist. Preserve existing progress and resume the next valid unfinished task.
+The coordinator reads current intent, plan, tasks, and walkthrough before selecting work. Delegated workers read only their sanitized packet; implementation workers must not load shared artifacts or tests that the packet excludes. For a spike, use the embedded learning checklist in intent when standalone plan/tasks do not exist. Preserve existing progress and resume the next valid unfinished task.
 
 Before editing, require a current consistency gate: use [comp-analyze](../comp-analyze/SKILL.md) if available, otherwise map criteria to plan/tasks/checks and check scope, contradictions, dependencies, and mandatory rules directly. Record the reviewed scope and READY/BLOCKED result in walkthrough. Fix authorized artifact defects before implementation; ask for unresolved material decisions. A prior gate for changed inputs does not apply automatically.
 
 ## Coordinator & Delegated Roles
 
-When subagents are available and delegation is authorized, use bounded implementers for standard work and an independent final reviewer. Read [Delegated Implementation](references/delegation.md) before dispatch: it defines packets, ownership, dependency scheduling, shared-workspace safety, integration checks, and retries. Inline execution remains the fallback for unavailable tools or tightly coupled work; record the reason.
+For behavior changes, read [strict testing](references/testing.md) first: a separate test-author subagent, reviewed frozen suite, verified read isolation, and fresh implementation subagents are mandatory before behavior edits. Missing delegation/isolation blocks implementation; generic inline fallbacks do not apply. For other work, use bounded implementers for standard work when authorized and available, with inline fallback otherwise. Read [Delegated Implementation](references/delegation.md) before dispatch.
 
 If acting as a delegated implementer, execute only the assigned packet and return results. Do not run the whole lifecycle, delegate further, or update tasks/walkthrough/progress. The coordinator owns those artifacts and all DONE decisions; the logging rules below apply to the coordinator. Report missing context or needed write-scope expansion before acting outside the packet.
 
@@ -51,7 +51,7 @@ If acting as a delegated implementer, execute only the assigned packet and retur
 - **Rule**: Never edit files blind. Before touching any component, inspect it using available discovery tools to identify:
   - All dependent callers and references.
   - Existing interfaces, types, or utilities that can be reused.
-  - Existing characterization tests covering the target symbols.
+  - Existing characterization coverage (coordinator/test reviewer only); implementers inspect production contracts/callers without test access.
 
 ### 2. Ponytail Principle & Decision Making
 - **Rule**: Always select the simplest, shortest solution that works (Ponytail Ladder: stdlib/native/minimal diff).
@@ -71,7 +71,9 @@ If acting as a delegated implementer, execute only the assigned packet and retur
   3. Update the Progress Overview Table in `tasks.md`.
 
 ### 4. Project-Appropriate Verification & CLI
+- For behavior changes, apply [strict testing](references/testing.md): coordinator dispatches the independent test author before implementation, reviews/freezes the suite, verifies read isolation, then dispatches fresh implementers without test access. Coordinator alone runs the frozen checks and provides sanitized criterion-level feedback. Any frozen-test/resource change requires complete intent/plan revision and a new suite freeze; no percentage coverage target is added.
 - Run the verification procedures recorded in `plan.md` for the affected task, using their actual working directories. Start narrow and include broader required gates before delivery.
+- Log criterion-to-test references, observed results, and a brief explanation of the business rule proved and remaining limits. Passing existing checks is insufficient when they do not exercise the changed rule.
 - Prefer RTK when available and compatible with repository instructions; otherwise run the native commands.
 - Mark a task DONE only after its acceptance checks and required task review pass. Record failed, blocked, skipped, or unavailable checks honestly; do not count them as passes.
 
@@ -117,17 +119,19 @@ Every completed task must produce an entry in `walkthrough.md` matching this tem
                                │
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. Inspect affected code, callers & available specs         │
+│ 2. Behavior: author tests, review/freeze, verify isolation   │
+│    Other work: inspect affected scope and specs             │
 └──────────────────────────────┬──────────────────────────────┘
                                │
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. Implement inline or dispatch scoped implementers         │
+│ 3. Behavior: fresh implementer with no test access           │
+│    Other work: inline or scoped implementers                 │
 └──────────────────────────────┬──────────────────────────────┘
                                │
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. Reconcile changes, run checks, obtain required review     │
+│ 4. Coordinator: verify freeze, run checks, obtain review     │
 └──────────────────────────────┬──────────────────────────────┘
                                │
                                ▼

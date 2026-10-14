@@ -48,10 +48,14 @@ Build a compact coverage table:
 
 - Flag criteria without tasks/checks, tasks without a scoped requirement or necessary supporting rationale, conflicting behavior/terminology, unsupported architecture assumptions, and dependency/order errors.
 - Validate verification procedures against actual configuration when available. Unavailable checks remain unavailable; absence of CI is not a pass.
+- For behavior changes, use [acceptance and business logic testing](../comp-implement/references/testing.md) to check agreed examples/expected results, existing or planned executable tests for changed rules, relevant boundary/failure and integration checks, and test-task ownership. A command alone is not behavioral coverage. During planning, tests may be planned paths; at delivery, require actual tests and current results. Justified manual checks remain valid for suitable outcomes.
 - At delivery, compare completed tasks and walkthrough evidence with the current criteria and changed files. A checked box alone is not completion evidence. Changed requirements invalidate affected previous results.
+- For behavior implementation readiness, require separate test authorship, reviewed freeze with inventory/hashes bound to intent/plan, verified implementer read isolation, and sanitized packets. At delivery verify frozen-suite integrity and coordinator-run results. A frozen-test change without complete intent/plan revision and replacement freeze blocks readiness; generic inline fallback cannot waive this gate.
 - Compare mandatory repository rules with all artifacts. Distinguish a proposed exception from an explicitly authorized amendment; do not weaken a rule to make the report pass.
 
 ## 3. Findings & Gate Decision
+
+Pre-freeze behavior readiness requires a current independent `Test validation: PASS` with agreed source-to-assertion mapping, runner/control evidence, reviewer independence, and matching source/suite/resource identities. Planning readiness may name this future task; implementation readiness may not substitute a planned review or the test author's report for actual PASS. Missing evidence or changed inputs blocks freeze/implementation.
 
 Report each finding with ID, severity, source path/section, evidence, impact, and the smallest correction. Keep stable finding IDs when re-analyzing an earlier report.
 
