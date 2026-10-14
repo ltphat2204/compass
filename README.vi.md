@@ -45,7 +45,7 @@ Nói mục tiêu hoặc vấn đề với `$comp-engineer`, không cần chọn 
 | Tiếp tục hoặc đổi hướng | Giữ ID và bằng chứng còn hiệu lực; mở lại quyết định và gate bị ảnh hưởng |
 | Chỉ review hoặc lập kế hoạch | Dừng đúng ở đầu ra được yêu cầu |
 
-Sửa nhỏ ít rủi ro, không đổi hành vi có thể làm trực tiếp, không cần feature folder. Thay đổi hành vi vẫn giữ gate test/cô lập bên dưới, kể cả fix nhanh; thiếu isolation thì implementation bị chặn. Milestone chỉ lập kế hoạch chi tiết cho intent con sẵn sàng tiếp theo. Hoàn tất từng con chưa đủ: outcome cha còn cần kiểm chứng tích hợp và nghiệm thu. Xem [định tuyến và chia nhỏ công việc](.agents/skills/comp-engineer/references/adaptive-workflow.md).
+Sửa nhỏ ít rủi ro, không đổi hành vi có thể làm trực tiếp, không cần feature folder. Thay đổi hành vi vẫn giữ gate test/cô lập bên dưới, kể cả fix nhanh; filesystem dùng chung không chặn implementation. Milestone chỉ lập kế hoạch chi tiết cho intent con sẵn sàng tiếp theo. Hoàn tất từng con chưa đủ: outcome cha còn cần kiểm chứng tích hợp và nghiệm thu. Xem [định tuyến và chia nhỏ công việc](.agents/skills/comp-engineer/references/adaptive-workflow.md).
 
 ## Triết lý kiểm thử
 
@@ -55,7 +55,7 @@ Trước freeze, bắt buộc có subagent reviewer độc lập với context m
 
 Compass chọn test theo acceptance criteria và quy tắc nghiệp vụ. Sau Intent → Plan → Tasks, một subagent riêng viết test từ packet tối thiểu gồm spec/contract đã chốt. Test được review và freeze trước khi subagent implement bắt đầu với context mới. Không đặt thêm mục tiêu phần trăm coverage; quality gates sẵn có của repo vẫn được giữ.
 
-Implementer không được đọc test, fixture, assertion, lịch sử test hay báo cáo lộ private case; không được sửa/chạy bộ test đã freeze. Coordinator xác minh quyền đọc được host chặn thực sự, freeze inventory/hash gắn với phiên bản intent/plan, chạy test riêng và chỉ trả feedback ở mức criterion. Folder/worktree riêng hoặc lời nhắc trong prompt không đủ bảo đảm cô lập; thiếu delegation/isolation thì BLOCKED cho cả light mode. Mọi sửa đổi test hoặc tài nguyên ảnh hưởng expected result sau freeze đều phải rà soát và chốt lại toàn bộ intent, plan, reconcile tasks/evidence rồi sinh bộ test mới để review/freeze; giữ nguyên phiên bản cũ và lịch sử.
+Implementer được hướng dẫn không đọc test, fixture, assertion, lịch sử test hoặc báo cáo lộ private case; không được sửa/chạy bộ test đã freeze. Coordinator cung cấp context đã lọc và hướng dẫn tránh đọc test, freeze inventory/hash theo intent/plan, chạy test riêng và trả feedback ở mức criterion. Các subagent có thể dùng chung filesystem và quyền host; không bắt người dùng tách máy, container hay quyền truy cập. Host isolation là tùy chọn, thiếu nó không chặn implementation. Vẫn giữ delegation, validation độc lập, freeze và quy trình revision khi sửa frozen test.
 
 Test business logic ở tầng thấp nhất đủ chứng minh quy tắc, integration cho boundary thay đổi và E2E cho hành trình cần thiết. Kết quả hình ảnh/cảm nhận có thể dùng manual check có lý do. Sau khi đóng implementation, walkthrough giải thích test tiêu biểu cho fresher; experienced dev dùng AI phản biện giả định và failure case. Không đưa evidence riêng của test vào context implementer khi resume. Gate test trước implementation dùng artifacts hiện có, không thêm skill hay tài liệu test-plan riêng. Xem [hướng dẫn strict testing và nguồn nghiên cứu](.agents/skills/comp-implement/references/testing.md).
 
@@ -71,9 +71,9 @@ flowchart LR
     B -->|Yes| A[Separate test author]
     A --> V{Independent test validation}
     V -->|PASS| F[Freeze validated suite]
-    F --> H{Read isolation verified?}
+    F --> H{Sanitized packet ready?}
     H -->|Yes| E[Implement and integrate]
-    H -->|No| X[BLOCKED until isolation available]
+    H -->|No| X[Prepare sanitized packet]
     B -->|No| E
     V -->|Test correction before freeze| A
     V -->|Agreed spec unclear| I
@@ -95,7 +95,7 @@ flowchart LR
 | [comp-plan](.agents/skills/comp-plan/SKILL.md) | Intent đủ rõ để chọn cách triển khai | `plan.md`, verification/review gates, task handoff |
 | [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | Chia việc hoặc cập nhật coverage mà giữ tiến độ | `tasks.md`, dependencies và write ownership |
 | [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | Kiểm tra requirements hoặc consistency | Báo cáo read-only, READY/BLOCKED và findings |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Hành vi: test đã validation/freeze và isolation; việc khác: task sẵn sàng | Thay đổi đã kiểm chứng, progress và walkthrough |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Hành vi: test đã validation/freeze và context đã lọc; việc khác: task sẵn sàng | Thay đổi đã kiểm chứng, progress và walkthrough |
 | [comp-review](.agents/skills/comp-review/SKILL.md) | Review compliance và chất lượng thay đổi | Snapshot review, findings và gate status |
 | [comp-ship](.agents/skills/comp-ship/SKILL.md) | Kiểm tra và bàn giao công việc hoàn thành | Delivery evidence, review/CI khi áp dụng |
 | [comp-done](.agents/skills/comp-done/SKILL.md) | Delivery xác nhận hoặc hoàn thành local được chấp nhận | Archive artifacts, không ghi đè lịch sử |
@@ -195,13 +195,13 @@ Một số bản cùng tên tập trung vào user-level roots hoặc chọn winn
 
 Agent hỗ trợ Agent Skills có thể nhận toàn bộ chín thư mục từ `.agents/skills/` vào đường dẫn discovery mà host đó quy định. Nếu không có discovery, yêu cầu agent đọc `comp-engineer/SKILL.md` từ checkout rồi chỉ tải skill/reference liên quan theo nhu cầu. Đây là cách sử dụng instructions thủ công, không phải tuyên bố plugin native đã được kiểm thử trên host đó.
 
-Mỗi host dùng API/tools, repository instructions và permission model của nó. Không giả định tên tool Codex, cú pháp `$`, subagent API hoặc workspace isolation giống nhau. Thay đổi hành vi thiếu delegation hoặc cơ chế chặn đọc test thì BLOCKED; inline/serial chỉ áp dụng cho việc không đổi hành vi; thiếu reviewer bắt buộc vẫn PENDING. Hướng dẫn mapping nằm trong [Host Integration](.agents/skills/comp-engineer/references/hosts.md).
+Mỗi host dùng API/tools, repository instructions và permission model của nó. Không giả định tên tool Codex, cú pháp `$`, subagent API hoặc workspace isolation giống nhau. Thay đổi hành vi thiếu delegation thì BLOCKED; inline/serial chỉ áp dụng cho việc không đổi hành vi; thiếu reviewer bắt buộc vẫn PENDING. Hướng dẫn mapping nằm trong [Host Integration](.agents/skills/comp-engineer/references/hosts.md).
 
 ### Cập nhật và giới hạn
 
 Cập nhật prompt/shortcut đang trỏ tới tiền tố cũ; artifacts `dev/`, task ID và lịch sử vẫn dùng tiếp. Plugin session đọc canonical source; khi sửa plugin trong Claude, dùng `/reload-plugins`. Bản skill copy được nâng cấp có chủ ý sau khi so sánh tùy chỉnh, không tự đồng bộ giữa project. [Claude reload](https://code.claude.com/docs/en/plugins/create).
 
-Compass không yêu cầu MCP server, hooks hoặc runtime ứng dụng mới. Python chỉ dùng cho installer/checks; RTK, CodeGraph, Ponytail và tool review/CI cụ thể là tùy chọn. Thay đổi hành vi bắt buộc có subagent test author, reviewer test độc lập và implementer với context mới, cùng cơ chế chặn đọc test thực sự. Host thiếu khả năng này vẫn có thể plan/review hoặc làm việc không đổi hành vi, nhưng phải BLOCKED khi implement hành vi. Không bật experimental agent teams hay nới permissions để bỏ qua gate.
+Compass không yêu cầu MCP server, hooks hoặc runtime ứng dụng mới. Python chỉ dùng cho installer/checks; RTK, CodeGraph, Ponytail và tool review/CI cụ thể là tùy chọn. Thay đổi hành vi bắt buộc có subagent test author, reviewer test độc lập và implementer với context mới, cùng context đã lọc và hướng dẫn không đọc test. Host thiếu khả năng này vẫn có thể plan/review hoặc làm việc không đổi hành vi, nhưng phải BLOCKED khi implement hành vi. Không bật experimental agent teams hay nới permissions để bỏ qua gate.
 
 ## Sử dụng
 
@@ -275,7 +275,7 @@ Mode điều chỉnh lượng tài liệu; risk quyết định verification và
 
 ## Subagents và reviewer
 
-Thay đổi hành vi bắt buộc theo test-author → validation độc lập → freeze/isolation → implementer, ưu tiên hơn fallback inline. Prompt của native role không tự tạo môi trường chặn truy cập; phải xác minh khả năng thực tế của host trước khi dispatch.
+Thay đổi hành vi bắt buộc theo test-author → validation độc lập → freeze/tách context → implementer, ưu tiên hơn fallback inline. Dùng context mới đã lọc và hướng dẫn không đọc test; filesystem dùng chung được hỗ trợ, không cần chặn quyền đọc bằng host.
 
 Coordinator giữ assignments, integration, `tasks.md`, `walkthrough.md`, progress và quyền DONE. Standard work dùng scoped implementers khi có công cụ và được phép; việc gắn chặt hoặc không đáng chia chạy inline/serial.
 
@@ -291,7 +291,7 @@ Trước Ship, dùng reviewer độc lập với context mới khi có và đư�
 
 - **Trước Plan:** requirements rõ, observable outcomes, scope/failure expectations và assumptions minh bạch.
 - **Trước Implement:** criteria → plan → tasks → verification có coverage; scope, constraints và dependencies nhất quán.
-- **Trước implement hành vi:** validation test độc lập PASS cho đúng snapshot nguồn/test, inventory/hash đã freeze và quyền đọc test của implementer được chặn thực sự.
+- **Trước implement hành vi:** validation test độc lập PASS cho đúng snapshot nguồn/test, inventory/hash đã freeze và context implementer đã lọc và hướng dẫn không đọc test.
 - **Trước Ship:** evidence hiện hành, compliance/change quality được review; mandatory gates đã đạt.
 
 Standalone analysis/review/readiness là read-only. Khi thực thi stage đã giao, coordinator ghi scope, findings và gate status vào artifacts. BLOCKER, thiếu evidence hoặc reviewer bắt buộc ngăn stage tương ứng; không được ghi thành pass. Low risk cho phép labeled self-review; medium risk cần caller/integration checks và reviewer theo policy; high risk cần independent hoặc human review.
@@ -300,7 +300,7 @@ Intent được thống nhất xác định outcome; mandatory project instructi
 
 ## Verification của bộ skill
 
-C11-C15 trong [evaluation cases](evals/cases.md) kiểm tra sinh test theo acceptance/business rules, test tự xác nhận code, sửa frozen suite, isolation thực sự và validation độc lập theo quy tắc đã chốt. [Results](evals/results.md) phân biệt kiểm chứng fixture cô lập với đánh giá hành vi bằng model độc lập.
+C11-C15 trong [evaluation cases](evals/cases.md) kiểm tra sinh test theo acceptance/business rules, test tự xác nhận code, sửa frozen suite, hướng dẫn không đọc test và validation độc lập theo quy tắc đã chốt. [Results](evals/results.md) phân biệt kiểm chứng fixture cô lập với đánh giá hành vi bằng model độc lập.
 
 [Evaluation cases](evals/cases.md) mô tả tám tình huống behavioral và hai case integration/distribution: requirements mơ hồ, artifacts mâu thuẫn, high-risk review, conflict quy tắc repo, replan giữ lịch sử, bounded spike, delegated implementation, unavailable-tool/reviewer fallback, host packaging/project isolation và public skills.sh distribution. [Evaluation results](evals/results.md) ghi kết quả thực tế, correction và giới hạn kiểm chứng.
 

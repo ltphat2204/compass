@@ -45,17 +45,17 @@ Describe the outcome or problem to `$comp-engineer`; you do not need to choose s
 | Resume or change direction | Preserve valid evidence and IDs; revisit only affected decisions and gates |
 | Review or plan only | Stop at the requested handoff |
 
-Low-risk non-behavior corrections can finish inline without feature folders. Behavior changes still require the strict testing/isolation gates below, even for quick fixes; unavailable isolation blocks implementation. Milestone planning details the next ready child, not every future task. Delivering children does not complete the parent until its integration and acceptance checks pass. See [adaptive routing and decomposition](.agents/skills/comp-engineer/references/adaptive-workflow.md).
+Low-risk non-behavior corrections can finish inline without feature folders. Behavior changes still require the strict testing/context-separation gates below, even for quick fixes; a shared filesystem does not block implementation. Milestone planning details the next ready child, not every future task. Delivering children does not complete the parent until its integration and acceptance checks pass. See [adaptive routing and decomposition](.agents/skills/comp-engineer/references/adaptive-workflow.md).
 
 ## Testing philosophy
 
-**Hotfixes still need tests.** Urgency narrows the scope and ceremony; it does not justify a blind fix. A behavior-changing hotfix establishes the expected behavior and includes a regression test that detects the defect, with a failing baseline when reproducible and passing evidence after the repair. If reproduction is unavailable, record that limit and the evidence used; do not claim the original failure was reproduced. Tests must check the agreed behavior, not merely mirror the patch. The independent review, freeze, and isolation gates below still apply; missing prerequisites block behavior implementation, and missing verification prevents claiming the fix is complete.
+**Hotfixes still need tests.** Urgency narrows the scope and ceremony; it does not justify a blind fix. A behavior-changing hotfix establishes the expected behavior and includes a regression test that detects the defect, with a failing baseline when reproducible and passing evidence after the repair. If reproduction is unavailable, record that limit and the evidence used; do not claim the original failure was reproduced. Tests must check the agreed behavior, not merely mirror the patch. The independent review, freeze, and context-separation gates below still apply; missing prerequisites block behavior implementation, and missing verification prevents claiming the fix is complete.
 
 Before freeze, a mandatory fresh independent test reviewer derives expected results from the complete agreed intent/plan, maps rules to actual assertions in both directions, and inspects coordinator-run harness checks plus correct/defective controls for changed non-trivial business rules. Only `Test validation: PASS` for the exact source/suite snapshot permits freeze. Test author self-approval, hashes, or green runs alone are insufficient; missing reviewer or evidence blocks the gate.
 
 Compass uses acceptance criteria and business rules to decide what to test. After Intent → Plan → Tasks, a separate test-author subagent writes tests from a minimal agreed spec/contract packet. Tests are reviewed and frozen before a fresh implementation subagent starts. No percentage coverage target is added; existing repository gates still apply.
 
-The implementer cannot read tests, fixtures, assertions, test history, or reports exposing private cases, and cannot change/run the frozen suite. Coordinator verifies host-enforced read isolation, freezes suite inventory/hashes against intent/plan versions, runs checks privately, and returns criterion-level feedback. Shared folders/worktrees or prompt instructions alone do not enforce secrecy; missing delegation/isolation blocks behavior implementation, including light mode. Any frozen-test or expectation-affecting resource change requires complete intent and plan revision, task/evidence reconciliation, and a newly reviewed/frozen suite; preserve the old version and history.
+Implementers are instructed not to inspect tests, fixtures, assertions, test history, or reports exposing private cases, and must not change/run the frozen suite. Coordinator supplies sanitized contexts and test-read guidance, freezes inventory/hashes against intent/plan versions, runs checks privately, and returns criterion-level feedback. Subagents may share a filesystem and host permissions; host-enforced isolation is optional, and its absence does not block implementation. Required delegation, independent validation and freeze still apply, including light mode. Any frozen-test or expectation-affecting resource change requires complete intent and plan revision, task/evidence reconciliation, and a newly reviewed/frozen suite; preserve the old version and history.
 
 Test business logic at the lowest useful layer, integration boundaries when changed, and critical journeys when needed. Visual/subjective outcomes can use justified manual checks. After implementation closes, walkthrough explains representative test evidence to newcomers; experienced developers use AI to challenge domain assumptions and relevant failure cases. Keep private test evidence out of resumed implementer context. The pre-implementation test gate uses existing artifacts, not an extra skill or test-plan document. See [strict testing guidance and research sources](.agents/skills/comp-implement/references/testing.md).
 
@@ -71,9 +71,9 @@ flowchart LR
     B -->|Yes| A[Separate test author]
     A --> V{Independent test validation}
     V -->|PASS| F[Freeze validated suite]
-    F --> H{Read isolation verified?}
+    F --> H{Sanitized packet ready?}
     H -->|Yes| E[Implement and integrate]
-    H -->|No| X[BLOCKED until isolation available]
+    H -->|No| X[Prepare sanitized packet]
     B -->|No| E
     V -->|Test correction before freeze| A
     V -->|Agreed spec unclear| I
@@ -95,7 +95,7 @@ flowchart LR
 | [comp-plan](.agents/skills/comp-plan/SKILL.md) | Intent is clear enough to choose an approach | `plan.md`, verification/review gates, and task handoff |
 | [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | Breaking down work or updating coverage while preserving progress | `tasks.md`, dependencies, and write ownership |
 | [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | Checking requirements or consistency | Read-only report, READY/BLOCKED, and findings |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Behavior: validated frozen tests and enforced isolation; other work: ready tasks | Verified changes, progress, and walkthrough |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | Behavior: validated frozen tests and sanitized contexts; other work: ready tasks | Verified changes, progress, and walkthrough |
 | [comp-review](.agents/skills/comp-review/SKILL.md) | Reviewing compliance and change quality | Snapshot review, findings, and gate status |
 | [comp-ship](.agents/skills/comp-ship/SKILL.md) | Checking and handing off completed work | Delivery evidence, review/CI where applicable |
 | [comp-done](.agents/skills/comp-done/SKILL.md) | Confirmed delivery or accepted local completion | Archived artifacts without overwriting history |
@@ -195,13 +195,13 @@ Some similarly named tools focus on user-level roots or select a winner by versi
 
 Agents that support Agent Skills can receive all nine directories from `.agents/skills/` in their documented discovery path. Without discovery, ask the agent to read `comp-engineer/SKILL.md` from the checkout, then load relevant skills/references on demand. This is manual instruction use, not a claim that a native plugin was tested on that host.
 
-Each host uses its own APIs/tools, repository instructions, and permission model. Do not assume Codex tool names, `$` syntax, subagent APIs, or workspace isolation are identical. For behavior work, missing delegation or enforced test isolation blocks implementation; inline/serial fallback applies only to non-behavior work; without a required reviewer, the gate remains PENDING. See [Host Integration](.agents/skills/comp-engineer/references/hosts.md) for mappings.
+Each host uses its own APIs/tools, repository instructions, and permission model. Do not assume Codex tool names, `$` syntax, subagent APIs, or workspace isolation are identical. For behavior work, missing delegation blocks implementation; inline/serial fallback applies only to non-behavior work; without a required reviewer, the gate remains PENDING. See [Host Integration](.agents/skills/comp-engineer/references/hosts.md) for mappings.
 
 ### Updates and limits
 
 Update prompts/shortcuts that still use the old prefix; keep existing `dev/` artifacts, task IDs, and history. Plugin sessions read the canonical source; use `/reload-plugins` after changing the plugin in Claude. Upgrade copied skills deliberately after comparing customizations; they do not sync automatically between projects. [Claude reload](https://code.claude.com/docs/en/plugins/create).
 
-Compass does not require an MCP server, hooks, or a new application runtime. Python is only for the installer/checks; RTK, CodeGraph, Ponytail, and specific review/CI tools are optional. Behavior implementation requires fresh test-author, independent test-review, and implementation subagents plus enforceable test read isolation; a host lacking these capabilities can still plan/review or perform non-behavior work, but must block behavior implementation. Do not enable experimental agent teams or relax permissions to bypass the gate.
+Compass does not require an MCP server, hooks, or a new application runtime. Python is only for the installer/checks; RTK, CodeGraph, Ponytail, and specific review/CI tools are optional. Behavior implementation requires fresh test-author, independent test-review, and implementation subagents plus sanitized context and instructions not to inspect tests; a host lacking these capabilities can still plan/review or perform non-behavior work, but must block behavior implementation. Do not enable experimental agent teams or relax permissions to bypass the gate.
 
 ## Usage
 
@@ -275,7 +275,7 @@ Mode adjusts documentation volume; risk determines verification and reviewers. A
 
 ## Subagents and reviewers
 
-Behavior work follows the strict test-author → independent validation → freeze/isolation → implementer sequence above, overriding inline fallback. Native role prompts do not themselves create an access-restricted execution environment; verify actual host capabilities before dispatch.
+Behavior work follows the strict test-author → independent validation → freeze/context separation → implementer sequence above, overriding inline fallback. Use fresh sanitized contexts and instructions not to inspect tests; shared filesystems are supported without host access controls.
 
 The coordinator owns assignments, integration, `tasks.md`, `walkthrough.md`, progress, and DONE decisions. Standard work uses scoped implementers when tools and authorization allow; tightly coupled work or work too small to split runs inline/serially.
 
@@ -291,7 +291,7 @@ Before Ship, use an independent reviewer with fresh context when available and a
 
 - **Before Plan:** clear requirements, observable outcomes, scope/failure expectations, and explicit assumptions.
 - **Before Implement:** criteria → plan → tasks → verification coverage; consistent scope, constraints, and dependencies.
-- **Before behavior implementation:** independent test validation PASS for the agreed source/suite snapshot, frozen inventory/hashes, and verified implementer read isolation.
+- **Before behavior implementation:** independent test validation PASS for the agreed source/suite snapshot, frozen inventory/hashes, and documented test-read guidance and sanitized context.
 - **Before Ship:** current evidence, reviewed compliance/change quality, and passed mandatory gates.
 
 Standalone analysis/review/readiness is read-only. When executing an assigned stage, the coordinator records scope, findings, and gate status in artifacts. BLOCKERs, missing evidence, or missing required reviewers block the corresponding stage; they cannot be recorded as a pass. Low risk permits labeled self-review; medium risk needs caller/integration checks and policy-required reviewers; high risk needs independent or human review.
@@ -300,7 +300,7 @@ Agreed intent defines outcomes; mandatory project instructions/constitution cons
 
 ## Skill verification
 
-C11-C15 in [evaluation cases](evals/cases.md) cover acceptance/business-rule test generation, self-confirming tests, frozen-suite changes, enforced isolation, and independent validation against agreed rules. [Results](evals/results.md) distinguish isolated fixture checks from independent model evaluation.
+C11-C15 in [evaluation cases](evals/cases.md) cover acceptance/business-rule test generation, self-confirming tests, frozen-suite changes, test-read guidance, and independent validation against agreed rules. [Results](evals/results.md) distinguish isolated fixture checks from independent model evaluation.
 
 [Evaluation cases](evals/cases.md) describe eight behavioral scenarios and two integration/distribution cases: ambiguous requirements, conflicting artifacts, high-risk review, repository-rule conflicts, replanning with history preservation, bounded spikes, delegated implementation, unavailable-tool/reviewer fallback, host packaging/project isolation, and public skills.sh distribution. [Evaluation results](evals/results.md) record actual outcomes, corrections, and verification limits.
 

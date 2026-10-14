@@ -55,7 +55,7 @@ For behavior changes, apply [acceptance and business logic testing](../comp-impl
 
 ## Findings & Closure
 
-For behavior changes, also verify separate test authorship before implementation, freeze identities/inventory/hashes, enforced implementer read isolation, sanitized feedback, and coordinator-run evidence. Missing separation/isolation or a frozen-test edit without complete intent/plan revision and a newly reviewed/frozen suite blocks DONE/delivery. Review is not permission to repair frozen tests in place, including harness errors.
+For behavior changes, also verify separate test authorship before implementation, freeze identities/inventory/hashes, documented test-read guidance and sanitized context, sanitized feedback, and coordinator-run evidence. Missing required role/context separation or a frozen-test edit without complete intent/plan revision and a newly reviewed/frozen suite blocks DONE/delivery. Review is not permission to repair frozen tests in place, including harness errors.
 
 - Each finding contains severity, actual path/line or artifact section, evidence, impact, and suggested correction. Avoid speculative issues with no plausible affected scenario.
 - **BLOCKER**: correctness/security/data-loss issue, mandatory-rule violation, missing core behavior, or missing required verification/reviewer. Blocks DONE for the affected task and blocks delivery.

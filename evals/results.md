@@ -1,3 +1,5 @@
+> Policy update (2026-10-14): Test-read separation now uses fresh sanitized contexts and instructions not to inspect tests. Shared filesystems/host permissions are supported; host-enforced isolation is optional and its absence alone does not block implementation. Earlier isolation-related verdicts below describe the previous policy, not current readiness requirements. This documentation update has not been independently behavior-evaluated.
+
 # Compass Behavioral Evaluation Results
 
 ## Adaptive workflow update — 2026-10-14
