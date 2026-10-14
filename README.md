@@ -10,6 +10,16 @@ Compass is a Spec-Driven Development (SDD) workflow built from nine Agent Skills
 
 Skills use the `comp-` prefix. Start the full workflow with `$comp-engineer`, or invoke individual skills to resume existing artifacts.
 
+## Why Compass exists
+
+AI can generate code faster than a developer can understand what was built or verify that it solves the right problem. A newcomer may get a working result without understanding its behavior or limits. An experienced developer may still have to do all the analysis, split the work, anticipate edge cases, and tell AI every next step. Compass was created to address both gaps.
+
+**The guiding principle: help newcomers understand what they are building, and help experienced developers make full use of AI's reasoning.**
+
+For newcomers, Compass connects an idea to concrete behavior, explains meaningful decisions, and shows how the result is verified. For experienced developers, AI investigates the codebase, challenges assumptions, compares approaches, proposes a recommendation, and carries authorized work through verification. The user owns the goal and consequential product choices; AI takes responsibility for the engineering analysis and execution within that scope.
+
+The workflow should work even when someone only has a symptom, an unclear idea, or a milestone-sized goal. It adapts the amount of discussion and documentation to the situation, keeps the next step understandable, and uses evidence to decide whether the work is complete.
+
 ## Philosophy
 
 **Goals provide direction; evidence determines the next step.** Compass keeps responsibilities and quality gates consistent while adapting execution to the work's size, risk, and available tools.
@@ -22,7 +32,24 @@ Skills use the `comp-` prefix. Start the full workflow with `$comp-engineer`, or
 6. **Traceability survives change.** Preserve intent → plan → task → evidence → delivery links, stable IDs, decisions, notes, and history when resuming or replanning.
 7. **Autonomy follows authorization.** Continue safe work within the assigned scope. Merges, deployments, destructive data changes, and externally consequential actions follow existing authorization and project rules.
 
+## Start from the situation
+
+Describe the outcome or problem to `$comp-engineer`; you do not need to choose stages. AI investigates, recommends the next step with a concrete before/after example, and asks only about consequential choices it cannot infer. Newcomers see what they are building and how it is checked; experienced developers get evidence-backed recommendations and challenged assumptions without driving every step.
+
+| Request | Workflow |
+|---|---|
+| Start quickly | Smallest useful slice, project defaults, concise light artifacts; no interview if already clear |
+| Fix something | Diagnose/reproduce, establish expected behavior, smallest shared fix and regression evidence |
+| Not sure what to build | Ground the problem, propose an example and next step; bounded discovery before product commitment |
+| Deliver a milestone | Parent outcome map → dependency-ordered child intents → child delivery → milestone integration checks |
+| Resume or change direction | Preserve valid evidence and IDs; revisit only affected decisions and gates |
+| Review or plan only | Stop at the requested handoff |
+
+Low-risk non-behavior corrections can finish inline without feature folders. Behavior changes still require the strict testing/isolation gates below, even for quick fixes; unavailable isolation blocks implementation. Milestone planning details the next ready child, not every future task. Delivering children does not complete the parent until its integration and acceptance checks pass. See [adaptive routing and decomposition](.agents/skills/comp-engineer/references/adaptive-workflow.md).
+
 ## Testing philosophy
+
+**Hotfixes still need tests.** Urgency narrows the scope and ceremony; it does not justify a blind fix. A behavior-changing hotfix establishes the expected behavior and includes a regression test that detects the defect, with a failing baseline when reproducible and passing evidence after the repair. If reproduction is unavailable, record that limit and the evidence used; do not claim the original failure was reproduced. Tests must check the agreed behavior, not merely mirror the patch. The independent review, freeze, and isolation gates below still apply; missing prerequisites block behavior implementation, and missing verification prevents claiming the fix is complete.
 
 Before freeze, a mandatory fresh independent test reviewer derives expected results from the complete agreed intent/plan, maps rules to actual assertions in both directions, and inspects coordinator-run harness checks plus correct/defective controls for changed non-trivial business rules. Only `Test validation: PASS` for the exact source/suite snapshot permits freeze. Test author self-approval, hashes, or green runs alone are insufficient; missing reviewer or evidence blocks the gate.
 

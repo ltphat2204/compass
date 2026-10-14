@@ -1,6 +1,6 @@
 ---
 name: comp-engineer
-description: "Full end-to-end Spec-Driven Development (SDD) engineer skill: evidence-grounded intent, risk-appropriate planning/tasks, separate frozen tests before isolated subagent behavior implementation, inline fallback for other work, walkthrough logging, review and verified delivery."
+description: "Adaptive SDD workflow for quick starts, fixes, uncertain ideas, and milestone delivery: choose the next useful action, decompose outcomes, and coordinate verified execution."
 ---
 
 # Compass Master Engineer Skill (`comp-engineer`)
@@ -33,7 +33,13 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 ---
 
-## The 6-Stage Compass Engineering Lifecycle
+## Adaptive Entry Before Lifecycle Execution
+
+Read [adaptive workflow](references/adaptive-workflow.md) before selecting stages. Route by requested action, clarity, impact, and outcome count. Start with investigation when intent is unclear; decompose milestones into a parent outcome map and independently verifiable child intents. A low-risk non-behavior correction may complete inline without feature artifacts under that reference’s limits. Other work uses the existing modes and gates.
+
+AI proposes the next step and its rationale; users need not operate the stage machinery. Continue authorized work automatically, explain the concrete outcome and verification, and ask only for material decisions that evidence cannot resolve. Resume valid artifacts instead of restarting discovery.
+
+## The 6 Lifecycle Responsibilities per Intent
 
 ```mermaid
 graph TD
@@ -49,7 +55,7 @@ graph TD
 ## Lifecycle Execution Guide
 
 ### Stage 1: Intent Discovery & Scaffolding (`intent.md`)
-1. **Classify Intent Archetype**:
+1. **Route Before Classifying**: Apply adaptive entry first. For a milestone, coordinate the parent map and run the following steps on the next ready child, not the whole milestone. For uncertainty, establish an outcome or authorized learning question before scaffolding. **Classify Intent Archetype**:
    - `Feature (feat)`: New capability or observable behavior.
    - `Bug Fix (fix)`: Broken flow, unhandled error, data mismatch.
    - `Refactor (refactor)`: Performance optimization, cleanup, security upgrade.
@@ -114,4 +120,4 @@ For spikes, deliver the bounded learning evidence and stop/go recommendation; pr
 
 ## When to Invoke
 
-Use `comp-engineer` through the host's native selector for non-trivial work requiring the full SDD lifecycle. Use the individual stage skills when resuming an existing artifact handoff.
+Use `comp-engineer` through the host's native selector to route an engineering request from uncertainty, a quick start, a fix, or a milestone to the appropriate next action. Use the individual stage skills when resuming an existing artifact handoff.

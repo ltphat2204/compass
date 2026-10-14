@@ -29,6 +29,8 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 Transform ready intent into an actionable plan and companion tracker in the same feature folder. Use the repository's architecture and existing artifacts.
 
+If the input is a milestone parent, use the [decomposition rules](../comp-engineer/references/adaptive-workflow.md) to select a ready child before detailed planning. Keep parent constraints and criterion links in the child plan; do not expand all future children into speculative implementation tasks. A planning-only request remains planning-only.
+
 ## 1. Confirm Inputs & Requirements Readiness
 
 Read current intent, relevant project guidance, existing plan/tasks/walkthrough, and the evidence needed for affected components. Confirm Project Context against actual code, manifests, and CI; use targeted inspection when indexed tools are unavailable.
@@ -80,3 +82,5 @@ For a spike, the companion tracker is its embedded intent checklist. Preserve ex
 After updating tasks, use [comp-analyze](../comp-analyze/SKILL.md) in consistency mode when available; otherwise check criteria -> plan -> tasks -> verification coverage, scope/rule conflicts, terminology, and dependency order directly. Report findings with source references and severity. Missing core coverage, mandatory-rule violations, material contradictions, or unresolved consequential choices block implementation.
 
 Record reviewed scope and READY/BLOCKED in the plan (intent for a spike). Apply authorized corrections and re-check before announcing readiness. Report changed artifact paths, preserved progress, remaining blockers, and the next safe stage; do not announce implementation readiness solely because files were written.
+
+Distinguish artifact consistency from execution availability: a coherent plan can pass consistency while behavior implementation remains BLOCKED by unavailable delegation/read isolation or another prerequisite. Report both explicitly; never label execution READY until its applicable prerequisites have evidence.

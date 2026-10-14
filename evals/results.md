@@ -1,5 +1,15 @@
 # Compass Behavioral Evaluation Results
 
+## Adaptive workflow update — 2026-10-14
+
+- Added situational entry routes, evidence-led recommendations, and parent/child milestone coordination without changing strict behavior testing gates.
+- A fresh read-only evaluator received the revised skills and five raw scenarios without cases/results or grading expectations: tiny documentation correction, urgent checkout bug without isolation, uncertain support workflow, planning-only milestone, and resumed milestone with blocked/independent children and missing integration evidence. It selected the intended action/artifact boundaries and found no blocking contradiction.
+- Evaluator identified three practical ambiguities: standalone intent handoff phrasing, plan consistency versus execution capability, and ownership/status of parent integration checks. Instructions now explicitly distinguish these; the amended wording was locally reviewed, not independently rerun.
+- Verification: all seven installer tests passed, all nine skill frontmatters validated, 101 local Markdown references resolved, and Git whitespace checks passed.
+
+Limits: instruction-level simulated decisions, not execution of real feature or milestone delivery. No runtime isolation validation, production change, publication, or deployment was performed. C16/C17 preserve the scenario checks for future evaluation; no new automation engine or stage skill was added.
+
+
 ## Mandatory independent test validation update — 2026-10-14
 
 Pre-freeze validation now requires a fresh independent test-review subagent, bidirectional agreed-rule/actual-assertion mapping, actual runner evidence and spec-derived positive/negative controls for changed non-trivial business rules. Only PASS bound to the exact agreed source/suite/resource identities permits freeze; self-review and missing reviewer/evidence cannot pass this gate.
