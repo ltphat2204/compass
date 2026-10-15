@@ -1,6 +1,6 @@
 # Ví dụ thực hành Compass
 
-Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Project 1 đã có ứng dụng và kiểm chứng local; project 2–3 hiện có PRD và lịch sử gọi skill, chưa khởi tạo mã nguồn ứng dụng.
+Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Project 1–2 đã có ứng dụng và kiểm chứng local; project 3 hiện có PRD và lịch sử gọi skill, chưa khởi tạo mã nguồn ứng dụng.
 
 | Mức độ | Project / PRD | Công nghệ | Mục tiêu |
 | --- | --- | --- | --- |
@@ -30,6 +30,10 @@ Xem [cách chạy và tính năng](react-vite/README.md), [bằng chứng kiểm
 
 Mức này bổ sung luồng UI → server → cơ sở dữ liệu, xử lý lỗi và kiểm thử tích hợp. Chưa đưa đăng nhập hoặc phân quyền vào phạm vi thử nghiệm.
 
+**Kết quả local ngày 2026-10-15:** ứng dụng tiếng Việt Next.js 16.4.1, App Router/Route Handlers, TypeScript và SQLite tích hợp Node đã qua kiểm chứng. API 5/5, controls 31/31, Chromium 14/14 (11 luồng ứng dụng + 3 controls của harness); kiểm tra lỗi lưu trữ thật, schema lặp lại và restart giữ dữ liệu PASS. Install với lockfile, build, typecheck và lint PASS; bộ test được review/freeze v2 sau khi giữ lại và sửa harness v1 qua revision đầy đủ. Review bàn giao độc lập READY, 6/6 task DONE; chưa deploy production hoặc kiểm tra Safari/Firefox.
+
+Xem [cách chạy](nextjs-fullstack/README.md), [bằng chứng](nextjs-fullstack/dev/task-manager/walkthrough.md) và [skill/prompt history](nextjs-fullstack/skill-history.md).
+
 ## 3. pnpm workspace: Next.js + NestJS
 
 - Tổ chức `apps/web` cho Next.js và `apps/api` cho NestJS trong một pnpm workspace.
@@ -49,4 +53,4 @@ Mỗi project có một file `skill-history.md` riêng, ghi nối tiếp lịch 
 | Thời điểm (Asia/Ho_Chi_Minh) | Skill | Yêu cầu / đầu vào | Kết quả / artifacts | Kiểm chứng / blocker |
 | --- | --- | --- | --- | --- |
 
-Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Project 1 đã chạy plan, tasks, analyze, implement và review; kết quả kiểm chứng và bàn giao local nằm trong [react-vite/walkthrough.md](react-vite/dev/task-manager/walkthrough.md). Project 2–3 chưa chạy các bước này.
+Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Project 1–2 đã chạy các stage từ plan đến implement/review; kết quả thực tế nằm trong [React/Vite walkthrough](react-vite/dev/task-manager/walkthrough.md) và [Next.js walkthrough](nextjs-fullstack/dev/task-manager/walkthrough.md). Project 3 chưa chạy các bước này.

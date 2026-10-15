@@ -2,7 +2,8 @@
 
 - Độ khó: Trung bình.
 - Loại: Feature. Chế độ đặc tả: Standard.
-- Trạng thái: đã mô tả yêu cầu, chưa triển khai hoặc kiểm chứng runtime.
+- Revision: 2, 2026-10-15; revision 1 được giữ trong `test-suite-v1.tar.gz`.
+- Trạng thái: đã có implementation; API/controls và static checks đạt ở vòng đầu, browser acceptance đang được kiểm chứng lại sau sửa harness. Chưa bàn giao hoàn tất.
 - Cơ sở: [tổng quan example](../README.md) và yêu cầu tạo ba project của người dùng.
 - Tài liệu này đóng vai trò đầu vào intent cho Compass, dùng tên `PRD.md` theo yêu cầu; không tạo bản intent trùng nội dung.
 
@@ -97,3 +98,11 @@ Bàn giao UI, Route Handlers, schema và hướng dẫn khởi tạo database, t
 3. Triển khai, kiểm chứng các AC, review và bàn giao local với README chạy ứng dụng. Chỉ đánh dấu hoàn thành khi có bằng chứng thực tế.
 
 Ghi mỗi lần gọi skill vào [skill-history.md](skill-history.md), gồm đầu vào, kết quả, kiểm chứng và blocker. Không coi các bước dự kiến bên trên là lịch sử đã chạy.
+
+## Revision 2 — Rà soát đầy đủ trước replacement freeze
+
+Đã rà soát lại toàn bộ mục tiêu, người dùng/luồng, quy tắc dữ liệu, trải nghiệm, ngoài phạm vi, API/lưu trữ, lỗi mạng, ranh giới bàn giao, AC-01–AC-08, giả định/readiness và trình tự phát triển. Giữ nguyên mọi tiêu chí và chính sách sản phẩm; không giảm kiểm tra dữ liệu hay phục hồi lỗi.
+
+Lý do revision: frozen suite v1 có giả định harness vượt yêu cầu. Khi đang lưu, nhãn nút có thể thay đổi để thông báo tiến độ; test phải theo dõi cùng control qua trạng thái đó. Checkbox được xác nhận qua kết quả sau phản hồi server, không ép cập nhật tức thời. Sau lỗi, có thể tiếp tục khóa mutation để yêu cầu tải lại theo quy tắc phục hồi đã có; hoàn tất request được quan sát qua thông báo lỗi/kết quả phục hồi, không buộc nút luôn bật ngay. Đây là làm rõ cách kiểm chứng các hành vi đã cho phép, không thêm tính năng.
+
+Requirements gate revision 2: READY sau coordinator self-review tất cả các mục; không có thay đổi sản phẩm cần quyết định. Implementation/source hiện tại được giữ nguyên trong vòng sửa harness. Acceptance evidence bị ảnh hưởng không được dùng để đánh dấu DONE. Replacement tests phải do tác giả riêng sửa, được review độc lập và freeze mới; giữ nguyên suite/manifest/report v1.

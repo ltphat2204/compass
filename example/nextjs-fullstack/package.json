@@ -1,0 +1,33 @@
+{
+  "name": "nextjs-fullstack",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node tests/run.mjs",
+    "test:controls": "node --test tests/controls.test.mjs",
+    "db:init": "node scripts/init-db.ts"
+  },
+  "dependencies": {
+    "next": "16.4.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.1",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=26.9.0"
+  }
+}
