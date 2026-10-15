@@ -5,7 +5,7 @@ Ba project dưới đây dùng chung bài toán **quản lý công việc**, v�
 | Mức độ | Project / PRD | Công nghệ | Mục tiêu |
 | --- | --- | --- | --- |
 | 1 — Cơ bản | [react-vite](react-vite/dev/task-manager/PRD.md) | React, Vite, TypeScript | Giao diện chạy độc lập, không gọi API. |
-| 2 — Trung bình | [nextjs-fullstack](nextjs-fullstack/PRD.md) | Next.js, TypeScript | Ứng dụng full stack trong một project. |
+| 2 — Trung bình | [nextjs-fullstack](nextjs-fullstack/dev/_archived/20261015/task-manager/PRD.md) | Next.js, TypeScript | Ứng dụng full stack trong một project. |
 | 3 — Nâng cao | [nextjs-nestjs-monorepo](nextjs-nestjs-monorepo/PRD.md) | pnpm workspace, Next.js, NestJS, TypeScript | Monorepo với frontend và backend riêng. |
 
 ## 1. React + Vite: giao diện không API
@@ -32,7 +32,7 @@ Mức này bổ sung luồng UI → server → cơ sở dữ liệu, xử lý l�
 
 **Kết quả local ngày 2026-10-15:** ứng dụng tiếng Việt Next.js 16.4.1, App Router/Route Handlers, TypeScript và SQLite tích hợp Node đã qua kiểm chứng. API 5/5, controls 31/31, Chromium 14/14 (11 luồng ứng dụng + 3 controls của harness); kiểm tra lỗi lưu trữ thật, schema lặp lại và restart giữ dữ liệu PASS. Install với lockfile, build, typecheck và lint PASS; bộ test được review/freeze v2 sau khi giữ lại và sửa harness v1 qua revision đầy đủ. Review bàn giao độc lập READY, 6/6 task DONE; chưa deploy production hoặc kiểm tra Safari/Firefox.
 
-Xem [cách chạy](nextjs-fullstack/README.md), [bằng chứng](nextjs-fullstack/dev/task-manager/walkthrough.md) và [skill/prompt history](nextjs-fullstack/skill-history.md).
+Xem [cách chạy](nextjs-fullstack/README.md), [bằng chứng](nextjs-fullstack/dev/_archived/20261015/task-manager/walkthrough.md) và [skill/prompt history](nextjs-fullstack/skill-history.md).
 
 ## 3. pnpm workspace: Next.js + NestJS
 
@@ -53,4 +53,4 @@ Mỗi project có một file `skill-history.md` riêng, ghi nối tiếp lịch 
 | Thời điểm (Asia/Ho_Chi_Minh) | Skill | Yêu cầu / đầu vào | Kết quả / artifacts | Kiểm chứng / blocker |
 | --- | --- | --- | --- | --- |
 
-Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Project 1–2 đã chạy các stage từ plan đến implement/review; kết quả thực tế nằm trong [React/Vite walkthrough](react-vite/dev/task-manager/walkthrough.md) và [Next.js walkthrough](nextjs-fullstack/dev/task-manager/walkthrough.md). Project 3 chưa chạy các bước này.
+Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Project 1–2 đã chạy các stage từ plan đến implement/review; kết quả thực tế nằm trong [React/Vite walkthrough](react-vite/dev/task-manager/walkthrough.md) và [Next.js walkthrough](nextjs-fullstack/dev/_archived/20261015/task-manager/walkthrough.md). Project 3 chưa chạy các bước này.

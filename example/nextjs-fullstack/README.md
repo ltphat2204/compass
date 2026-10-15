@@ -61,16 +61,18 @@ pnpm test
 
 `pnpm test` chạy controls độc lập, HTTP/API, Chromium UI, lỗi SQLite thật và restart/khởi tạo schema lần hai. Runner dùng database tạm riêng, cổng 3102, tự dừng process và dọn database; không xóa dữ liệu trong `data/`. Build trước khi chạy test vì runner dùng production server. Nếu cổng bận: `TEST_PORT=3112 pnpm test`. Chỉ chạy controls: `pnpm test:controls`.
 
-Kết quả local ngày 2026-10-15: install với lockfile, build, typecheck và lint PASS; HTTP/API 5/5, controls 31/31, Chromium 14/14 (11 luồng ứng dụng + 3 controls của harness). Kiểm tra lỗi SQLite thật, chạy schema lần hai và restart giữ dữ liệu PASS; integrity của frozen suite v2 PASS trước/sau chạy. Kiểm tra và xem ảnh trực tiếp ở 360px/1280px, bàn phím/focus và console cũng đạt. Review bàn giao độc lập READY, 6/6 task DONE; [báo cáo cuối](dev/task-manager/final-review.md).
+Kết quả local ngày 2026-10-15: install với lockfile, build, typecheck và lint PASS; HTTP/API 5/5, controls 31/31, Chromium 14/14 (11 luồng ứng dụng + 3 controls của harness). Kiểm tra lỗi SQLite thật, chạy schema lần hai và restart giữ dữ liệu PASS; integrity của frozen suite v2 PASS trước/sau chạy. Kiểm tra và xem ảnh trực tiếp ở 360px/1280px, bàn phím/focus và console cũng đạt. Người dùng đã duyệt bàn giao local ngày 2026-10-15. Review độc lập READY, 6/6 task DONE; [báo cáo cuối](dev/_archived/20261015/task-manager/final-review.md).
 
-Runner có thể in cảnh báo Node về module type khi chạy script TypeScript và pnpm exit 143 khi cố ý dừng server giữa các lượt restart; lệnh `pnpm test` tổng thể kết thúc exit 0. Đây không phải lỗi ứng dụng. Chưa chạy Safari/Firefox, remote CI hoặc deploy production. Xem [walkthrough](dev/task-manager/walkthrough.md) để biết kết quả từng vòng; controls/harness regression được phân biệt với kiểm chứng ứng dụng.
+Runner có thể in cảnh báo Node về module type khi chạy script TypeScript và pnpm exit 143 khi cố ý dừng server giữa các lượt restart; lệnh `pnpm test` tổng thể kết thúc exit 0. Đây không phải lỗi ứng dụng. Chưa chạy Safari/Firefox, remote CI hoặc deploy production. Xem [walkthrough](dev/_archived/20261015/task-manager/walkthrough.md) để biết kết quả từng vòng; controls/harness regression được phân biệt với kiểm chứng ứng dụng.
 
 ## Compass và lịch sử
 
-- [PRD/intent](PRD.md), [plan](dev/task-manager/plan.md), [tasks](dev/task-manager/tasks.md), [walkthrough](dev/task-manager/walkthrough.md).
+- [PRD/intent](dev/_archived/20261015/task-manager/PRD.md), [plan](dev/_archived/20261015/task-manager/plan.md), [tasks](dev/_archived/20261015/task-manager/tasks.md), [walkthrough](dev/_archived/20261015/task-manager/walkthrough.md).
 - [Skill và lịch sử thực tế](skill-history.md); giữ cả lần review BLOCKED và vòng sửa harness.
 - [Freeze hiện tại v2](test-freeze.json), [suite v2](test-suite-v2.tar.gz), [freeze v1 được bảo tồn](test-freeze-v1.json), [suite v1](test-suite-v1.tar.gz).
 
 Scaffold bằng CLI chính thức `pnpm dlx create-next-app@16.4.1`, App Router/TypeScript/ESLint, CSS thuần, dependency riêng bằng pnpm. Đã merge main policy `93bfe64` vào branch `example` qua `37830cb`: cho phép filesystem chung, giữ context mới/test-read guidance, tác giả test riêng, review độc lập và freeze. Không cần ngoại lệ isolation.
 
 PRD và plan là các revision nguồn đã freeze; trạng thái trước nghiệm thu trong đó được giữ làm lịch sử. Kết quả bàn giao hiện tại nằm trong README, tasks và walkthrough.
+
+Spec đã hoàn tất được gom tại `dev/_archived/20261015/task-manager/`, bên trong example2: PRD (intent), plan, tasks, walkthrough và reports. Lịch sử/snapshot kiểm chứng giữ tại root project như example1; các bản freeze/archive gốc giữ nguyên và manifest hiện tại ghi relocation.

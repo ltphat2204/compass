@@ -1,7 +1,7 @@
 # Plan: Next.js full stack task manager
 
 - Revision: 3, 2026-10-15 (Asia/Ho_Chi_Minh).
-- Intent: [PRD.md](../../PRD.md) revision 2, existing AC-01–AC-08; no duplicate intent.
+- Intent: [PRD.md](PRD.md) revision 2, existing AC-01–AC-08; no duplicate intent.
 - Mode: Standard. Risk: medium (HTTP validation and durable user data).
 - Requirements: READY, based on the existing PRD and coordinator review of its rules, failure paths and observable criteria.
 - Artifact consistency: READY for preparation. Main policy update 93bfe64 is merged: shared filesystem is permitted with fresh sanitized contexts and explicit test-read guidance. Test validation/freeze v1 completed; delivery paused for full PRD r2/plan r3 revision and replacement suite validation/freeze v2.

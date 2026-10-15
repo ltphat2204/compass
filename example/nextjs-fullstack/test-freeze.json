@@ -5,11 +5,11 @@
   "author": "/root/example2_test_author",
   "reviewer": "/root/example2_replacement_review",
   "validation": "PASS",
-  "report": "dev/task-manager/test-validation-v2.md",
+  "report": "dev/_archived/20261015/task-manager/test-validation-v2.md",
   "reportSha256": "26283ad0d2b67ece206100f87332d7810fab9a588907223847e7a33579989c91",
   "files": {
-    "PRD.md": "f575b0a27ecfb87990d9e85885487f2851daef55157407e015fd73feee484a69",
-    "dev/task-manager/plan.md": "2577316025a749d7e90e4bdc8f1bf509f6b9bc69ccf02d8ca766cb06136c9869",
+    "dev/_archived/20261015/task-manager/PRD.md": "036cf1f6458b94875cc5ed43aef50e1943b6f324e86a68662c87cf99d6b75ddf",
+    "dev/_archived/20261015/task-manager/plan.md": "b43e591b60cd67697fcb1b62ac60eee7e15dbb83dc6c16a988594375e76dfc5f",
     "package.json": "2eaaea4fadfc09f4e49042e23e9e6ea5f7ea622122f1664d5c39322556cc706c",
     "pnpm-lock.yaml": "450162d6f22628f4ea4964283f61ff6473c2fa74b1246033a61681b16d57572b",
     "pnpm-workspace.yaml": "6f096f437a72ffe947829a23631ecb9992533a8b307f4978e4ebfa27b2318be6",
@@ -30,5 +30,67 @@
   },
   "replaces": 1,
   "revisionReason": "Full PRD r2 / plan r3 revision for observed browser harness assumptions; production behavior unchanged. V1 preserved.",
-  "readSeparation": "Current main 93bfe64 permits shared filesystem, fresh sanitized contexts/test-read guidance; no host-enforced secrecy claimed."
+  "readSeparation": "Current main 93bfe64 permits shared filesystem, fresh sanitized contexts/test-read guidance; no host-enforced secrecy claimed.",
+  "relocation": {
+    "date": "2026-10-15",
+    "reason": "User accepted local delivery and required specs inside example; colocate PRD with project-local archived dev artifacts, matching example1 organization. Only relative links changed.",
+    "original_snapshot": "test-suite-v2.tar.gz",
+    "original_manifest": "test-freeze-v2.json",
+    "original_spec_sha256": {
+      "PRD.md": "f575b0a27ecfb87990d9e85885487f2851daef55157407e015fd73feee484a69",
+      "dev/task-manager/plan.md": "2577316025a749d7e90e4bdc8f1bf509f6b9bc69ccf02d8ca766cb06136c9869"
+    },
+    "artifacts": {
+      "dev/task-manager/source-review.md": {
+        "path": "dev/_archived/20261015/task-manager/source-review.md",
+        "beforeSha256": "d8ddc6ed19902692867f406676cbd6d2ba843453ceed1907ec4da6098db8de67",
+        "afterRelocationSha256": "d8ddc6ed19902692867f406676cbd6d2ba843453ceed1907ec4da6098db8de67"
+      },
+      "dev/task-manager/test-validation-candidate1.md": {
+        "path": "dev/_archived/20261015/task-manager/test-validation-candidate1.md",
+        "beforeSha256": "09ab9a9108d3fdaaade6c4cca03ffbfa604a4a30ecccf252c9ff1c668b1cbce6",
+        "afterRelocationSha256": "09ab9a9108d3fdaaade6c4cca03ffbfa604a4a30ecccf252c9ff1c668b1cbce6"
+      },
+      "dev/task-manager/test-validation-v1.md": {
+        "path": "dev/_archived/20261015/task-manager/test-validation-v1.md",
+        "beforeSha256": "a810fc2398fa1b5e3e47cd6e017ec9bff7591efe9f7695daffd2590df6a04f25",
+        "afterRelocationSha256": "a810fc2398fa1b5e3e47cd6e017ec9bff7591efe9f7695daffd2590df6a04f25"
+      },
+      "dev/task-manager/test-validation-replacement-candidate.md": {
+        "path": "dev/_archived/20261015/task-manager/test-validation-replacement-candidate.md",
+        "beforeSha256": "260fe82f2332d66ec4ae462717366e58ebaa3ab9880bd61d8709ed532016bacf",
+        "afterRelocationSha256": "260fe82f2332d66ec4ae462717366e58ebaa3ab9880bd61d8709ed532016bacf"
+      },
+      "dev/task-manager/tasks.md": {
+        "path": "dev/_archived/20261015/task-manager/tasks.md",
+        "beforeSha256": "79685de75d58a9004e1a9560fea6711314e3552c421690b6ed835f5d22cb19be",
+        "afterRelocationSha256": "fe38a0b1129e3bab210a8d01d8feae149640ab3d0a399a99739eab9494023e45"
+      },
+      "dev/task-manager/final-review.md": {
+        "path": "dev/_archived/20261015/task-manager/final-review.md",
+        "beforeSha256": "1cc38dee008cfa31862fa75684823e2b26e0db2bb315e8d0df08373f82f3680b",
+        "afterRelocationSha256": "1cc38dee008cfa31862fa75684823e2b26e0db2bb315e8d0df08373f82f3680b"
+      },
+      "dev/task-manager/plan.md": {
+        "path": "dev/_archived/20261015/task-manager/plan.md",
+        "beforeSha256": "2577316025a749d7e90e4bdc8f1bf509f6b9bc69ccf02d8ca766cb06136c9869",
+        "afterRelocationSha256": "b43e591b60cd67697fcb1b62ac60eee7e15dbb83dc6c16a988594375e76dfc5f"
+      },
+      "dev/task-manager/walkthrough.md": {
+        "path": "dev/_archived/20261015/task-manager/walkthrough.md",
+        "beforeSha256": "5b3ca430f96616cc702d8573b18f87833d9abfc368c12e3146211dd1af27794b",
+        "afterRelocationSha256": "5b3ca430f96616cc702d8573b18f87833d9abfc368c12e3146211dd1af27794b"
+      },
+      "dev/task-manager/test-validation-v2.md": {
+        "path": "dev/_archived/20261015/task-manager/test-validation-v2.md",
+        "beforeSha256": "26283ad0d2b67ece206100f87332d7810fab9a588907223847e7a33579989c91",
+        "afterRelocationSha256": "26283ad0d2b67ece206100f87332d7810fab9a588907223847e7a33579989c91"
+      },
+      "PRD.md": {
+        "path": "dev/_archived/20261015/task-manager/PRD.md",
+        "beforeSha256": "f575b0a27ecfb87990d9e85885487f2851daef55157407e015fd73feee484a69",
+        "afterRelocationSha256": "036cf1f6458b94875cc5ed43aef50e1943b6f324e86a68662c87cf99d6b75ddf"
+      }
+    }
+  }
 }

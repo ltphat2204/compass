@@ -4,7 +4,7 @@
 - Loại: Feature. Chế độ đặc tả: Standard.
 - Revision: 2, 2026-10-15; revision 1 được giữ trong `test-suite-v1.tar.gz`.
 - Trạng thái: đã có implementation; API/controls và static checks đạt ở vòng đầu, browser acceptance đang được kiểm chứng lại sau sửa harness. Chưa bàn giao hoàn tất.
-- Cơ sở: [tổng quan example](../README.md) và yêu cầu tạo ba project của người dùng.
+- Cơ sở: [tổng quan example](../../../../../README.md) và yêu cầu tạo ba project của người dùng.
 - Tài liệu này đóng vai trò đầu vào intent cho Compass, dùng tên `PRD.md` theo yêu cầu; không tạo bản intent trùng nội dung.
 
 ## Mục tiêu
@@ -97,7 +97,7 @@ Bàn giao UI, Route Handlers, schema và hướng dẫn khởi tạo database, t
 2. Thực hiện gate test của Compass trước thay đổi hành vi: viết test riêng, review độc lập, freeze và xác minh isolation trước khi giao implementation.
 3. Triển khai, kiểm chứng các AC, review và bàn giao local với README chạy ứng dụng. Chỉ đánh dấu hoàn thành khi có bằng chứng thực tế.
 
-Ghi mỗi lần gọi skill vào [skill-history.md](skill-history.md), gồm đầu vào, kết quả, kiểm chứng và blocker. Không coi các bước dự kiến bên trên là lịch sử đã chạy.
+Ghi mỗi lần gọi skill vào [skill-history.md](../../../../skill-history.md), gồm đầu vào, kết quả, kiểm chứng và blocker. Không coi các bước dự kiến bên trên là lịch sử đã chạy.
 
 ## Revision 2 — Rà soát đầy đủ trước replacement freeze
 

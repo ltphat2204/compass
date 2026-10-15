@@ -47,7 +47,7 @@
   },
   "reviewer": "/root/example2_final_review",
   "verdict": "READY",
-  "report": "dev/task-manager/final-review.md",
+  "report": "dev/_archived/20261015/task-manager/final-review.md",
   "reportSha256": "1cc38dee008cfa31862fa75684823e2b26e0db2bb315e8d0df08373f82f3680b",
   "postReviewMetadata": {
     "example/nextjs-fullstack/README.md": "f38cf7ef26aca1a7b76cd008f35704df83ac2ce51a71daaaa61c346c65247110",
@@ -56,5 +56,21 @@
     "example/nextjs-fullstack/dev/task-manager/walkthrough.md": "5b3ca430f96616cc702d8573b18f87833d9abfc368c12e3146211dd1af27794b",
     "example/README.md": "6942be0389fa3871ad8102360ac0f76fb544555fcf3e4467f448ced5ef226e0f"
   },
-  "postReviewNote": "files records exact independent-reviewed snapshot; only coordinator result/status metadata changed afterward, listed separately. Production/frozen inputs unchanged."
+  "postReviewNote": "files records exact independent-reviewed snapshot; only coordinator result/status metadata changed afterward, listed separately. Production/frozen inputs unchanged.",
+  "relocation": {
+    "date": "2026-10-15",
+    "reason": "Accepted local handoff; project-local archive and PRD colocation; production and tests unchanged.",
+    "paths": {
+      "example/nextjs-fullstack/dev/task-manager/source-review.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/source-review.md",
+      "example/nextjs-fullstack/dev/task-manager/test-validation-candidate1.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/test-validation-candidate1.md",
+      "example/nextjs-fullstack/dev/task-manager/test-validation-v1.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/test-validation-v1.md",
+      "example/nextjs-fullstack/dev/task-manager/test-validation-replacement-candidate.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/test-validation-replacement-candidate.md",
+      "example/nextjs-fullstack/dev/task-manager/tasks.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/tasks.md",
+      "example/nextjs-fullstack/dev/task-manager/final-review.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/final-review.md",
+      "example/nextjs-fullstack/dev/task-manager/plan.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/plan.md",
+      "example/nextjs-fullstack/dev/task-manager/walkthrough.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/walkthrough.md",
+      "example/nextjs-fullstack/dev/task-manager/test-validation-v2.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/test-validation-v2.md",
+      "example/nextjs-fullstack/PRD.md": "example/nextjs-fullstack/dev/_archived/20261015/task-manager/PRD.md"
+    }
+  }
 }

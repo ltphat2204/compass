@@ -1,6 +1,6 @@
 # Tasks: Next.js full stack task manager
 
-Source: [PRD](../../PRD.md), [plan revision 3](plan.md).
+Source: [PRD](PRD.md), [plan revision 3](plan.md).
 
 | Group | DONE / active |
 | --- | --- |
