@@ -1,0 +1,15 @@
+{
+  "name": "nextjs-nestjs-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @example/contracts build && node scripts/dev.mjs",
+    "build": "pnpm --filter @example/contracts build && pnpm --filter @example/api build && pnpm --filter @example/web build",
+    "typecheck": "pnpm --filter @example/contracts build && pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm --dir tests/v3 install --frozen-lockfile && pnpm --dir tests/v3 test"
+  }
+}

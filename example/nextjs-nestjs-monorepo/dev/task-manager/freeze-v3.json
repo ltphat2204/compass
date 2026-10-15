@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "author": "/root/boundary_test_author",
+  "files": {
+    "tests/v3/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
+    "tests/v3/README.md": "5068f3caaf904bc47f712809626a3eb35df3d52340b0f4ce0daf89c18897c3ba",
+    "tests/v3/browser.spec.mjs": "11fa13a3e5a6ea93454f504cf9b87fe4f4cc1552bab85be961e58b612928a697",
+    "tests/v3/controls.config.mjs": "e579fca16d86675537e61a00bfe6ec4b35b6eea08b65ba125964baa32faaa63f",
+    "tests/v3/controls.mjs": "58722a62a0b59c88e1739f0664bd26a45dec8d81e5d52a5175b546caa4501829",
+    "tests/v3/harness.mjs": "cacd43e4de95e28e8816e292ad22bbe730ffeb2d5f50cf427ee8217776b10b37",
+    "tests/v3/http.test.mjs": "4acd337034f0594df0729381161de0f20d7820ee933c82e71581cd00cd7448a0",
+    "tests/v3/package.json": "5911294f50e97b91208fb725eec6c1447822e9d1a005481af8588e5eb6342a94",
+    "tests/v3/playwright.config.mjs": "b191a30b81eaa4d5bef20e7e7cdd031c532dcc1050f1f3dbea24527e1e1b05df",
+    "tests/v3/pnpm-lock.yaml": "51e5adef0356129f1415da50c4913064ea9435342f5de6b7988fe40b2e7c1264",
+    "tests/v3/pnpm-workspace.yaml": "b379483d4293500af8e9d3e8d83b4b5a2ad1e844911cd7be7f7e274e4bb80666",
+    "tests/v3/reference.mjs": "229ee3f0c1d45ecb3c352be8bec6876aa6b73c654b56a7d2fcfa1ffedd0be8ac",
+    "tests/v3/run.mjs": "34c60b347313c34d1e536de0b3926ba1806f61652fc045d60ebc6350942b9f4f",
+    "tests/v3/ui-assertions.mjs": "afc65a5f63b68f2a6398c1f6f85c75bd8c5be4bd870203ecb7f4563af3d402b9",
+    "tests/v3/ui-controls.spec.mjs": "f2db81a2aede95734dc91c77fee62470e8e2efb5d973aa3886daeeb47e211a67"
+  },
+  "sources": {
+    "dev/task-manager/PRD.md": "affb94e5e4a5e25a387c2b64bd7c156e33818abe3482c84f1c4bf2b791e6ca37",
+    "dev/task-manager/plan.md": "a6e7bf71f0d137d1f640e1af58080ae0ccf25a8148fec097edb0e1aa79afaf08"
+  },
+  "version": "v3",
+  "reviewer": "/root/test_reviewer",
+  "validation": "PASS",
+  "validation_report": "walkthrough.md#independent-test-validation-v3-pass",
+  "aggregate": "8cfb52a9f9c415db8024e9ac29cf77966fd76531e672c2a06abef4395c582820"
+}

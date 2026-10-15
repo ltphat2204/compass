@@ -2,8 +2,9 @@
 
 - Độ khó: Nâng cao.
 - Loại: Feature. Chế độ đặc tả: Standard.
-- Trạng thái: đã mô tả yêu cầu, chưa triển khai hoặc kiểm chứng runtime.
-- Cơ sở: [tổng quan example](../README.md) và yêu cầu tạo ba project của người dùng.
+- Trạng thái: requirements READY; đang lập kế hoạch và triển khai local.
+- Revision: v2, 2026-10-15; nội dung nghiệp vụ giữ nguyên khi chuyển vào feature folder.
+- Cơ sở: [tổng quan example](../../../README.md) và yêu cầu tạo ba project của người dùng.
 - Tài liệu này đóng vai trò đầu vào intent cho Compass, dùng tên `PRD.md` theo yêu cầu; không tạo bản intent trùng nội dung.
 
 ## Mục tiêu
@@ -33,6 +34,7 @@ Người dùng là một cá nhân muốn quản lý danh sách việc cần là
 ## Yêu cầu trải nghiệm
 
 - Một trang chính có tiêu đề, form thêm, bộ lọc và danh sách; form sửa có thể nằm ngay trong dòng công việc.
+- Quyết định UI trước freeze: dùng checkbox có nhãn để bật/tắt hoàn thành; các thao tác dùng nhãn tiếng Việt đã mô tả trong luồng chính.
 - Dùng được ở chiều rộng 360px và 1280px, không cuộn ngang toàn trang.
 - Ô nhập có nhãn; nút có tên rõ ràng; thao tác được bằng bàn phím với focus nhìn thấy. Lỗi gắn với trường nhập hoặc được thông báo ở vùng trạng thái.
 - Giữ nội dung đang nhập khi lưu thất bại. Không hiển thị thành công khi dữ liệu chưa được lưu.
@@ -114,4 +116,18 @@ Dùng môi trường local không có authentication. Docker, CI/CD, deployment,
 2. Thực hiện gate test của Compass trước thay đổi hành vi: viết test riêng, review độc lập, freeze và xác minh isolation trước khi giao implementation.
 3. Triển khai, kiểm chứng các AC, review và bàn giao local với README chạy ứng dụng. Chỉ đánh dấu hoàn thành khi có bằng chứng thực tế.
 
-Ghi mỗi lần gọi skill vào [skill-history.md](skill-history.md), gồm đầu vào, kết quả, kiểm chứng và blocker. Không coi các bước dự kiến bên trên là lịch sử đã chạy.
+Ghi mỗi lần gọi skill vào [skill-history.md](../../skill-history.md), gồm đầu vào, kết quả, kiểm chứng và blocker. Không coi các bước dự kiến bên trên là lịch sử đã chạy.
+
+## Repository grounding và quyết định thực thi v1
+
+- Project context: nhánh `example`, baseline `fb16e66`; project 3 chỉ có PRD/history, không có code/index CodeGraph/CI riêng. Hai example trước dùng feature artifacts trong `dev/task-manager/`, CLI scaffold, lockfile và kiểm chứng local.
+- Môi trường quan sát: Node 26.9.0, pnpm 10.22.0. Runtime hỗ trợ Node >=24.15; chọn SQLite tích hợp Node, không thêm ORM/driver native.
+- Public configuration contract: API `PORT` (default 3001), `WEB_ORIGIN` và `DATABASE_PATH` bắt buộc; web `NEXT_PUBLIC_API_URL` bắt buộc, là origin HTTP(S) của NestJS, không chứa `/api`. `.env.example` có giá trị local dùng ngay sau khi copy. Web mặc định 3000.
+- Public process contract: root `pnpm dev`, `pnpm build`, `pnpm typecheck`, `pnpm lint`, `pnpm test`; API `pnpm --filter @example/api start`, web `pnpm --filter @example/web start`. Tests truyền environment tường minh; không dùng database của người dùng.
+- Requirements review (`comp-analyze`, coordinator): READY; AC-01–09 quan sát được; API/error/config boundaries đã đủ; không có quyết định sản phẩm đang chặn. Chuyển vị trí PRD không đổi tiêu chí.
+
+## Complete source revision v2 — harness timing correction
+
+All sections reviewed again: goal/scenarios, title/data rules, UX, exclusions, ownership, API/status/error contract, local config/recovery, delivery, AC-01–09, assumptions and lifecycle remain valid. No business criterion changed. Checkbox completion remains response-confirmed: the UI may restore its previous controlled state while awaiting the API; only the committed outcome determines success. Browser interactions must wait for the public saved result rather than require immediate optimistic DOM state.
+
+Reason: v1 browser harness used Playwright `check()`/`uncheck()` whose immediate-state postcondition rejects a correct response-confirmed controlled input. Independent coordinator click + wait + HTTP read verified both completion directions and filter removal. Preserve original source snapshot under `revisions/v1/`, suite `tests/v1/` and freeze-v1 manifest. Replace active acceptance with separately authored/reviewed/frozen `tests/v2/`; v1 browser evidence is invalid for delivery. Requirements gate re-run across every section: READY, same scope and AC IDs, no new product decision.

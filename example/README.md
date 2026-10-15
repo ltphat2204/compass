@@ -1,12 +1,12 @@
 # Ví dụ thực hành Compass
 
-Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Project 1–2 đã có ứng dụng và kiểm chứng local; project 3 hiện có PRD và lịch sử gọi skill, chưa khởi tạo mã nguồn ứng dụng.
+Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Cả ba project đã có ứng dụng và kiểm chứng local; bằng chứng và lịch sử gọi skill nằm trong từng project.
 
 | Mức độ | Project / PRD | Công nghệ | Mục tiêu |
 | --- | --- | --- | --- |
 | 1 — Cơ bản | [react-vite](react-vite/dev/task-manager/PRD.md) | React, Vite, TypeScript | Giao diện chạy độc lập, không gọi API. |
 | 2 — Trung bình | [nextjs-fullstack](nextjs-fullstack/dev/_archived/20261015/task-manager/PRD.md) | Next.js, TypeScript | Ứng dụng full stack trong một project. |
-| 3 — Nâng cao | [nextjs-nestjs-monorepo](nextjs-nestjs-monorepo/PRD.md) | pnpm workspace, Next.js, NestJS, TypeScript | Monorepo với frontend và backend riêng. |
+| 3 — Nâng cao | [nextjs-nestjs-monorepo](nextjs-nestjs-monorepo/dev/task-manager/PRD.md) | pnpm workspace, Next.js, NestJS, TypeScript | Monorepo với frontend và backend riêng. |
 
 ## 1. React + Vite: giao diện không API
 
@@ -44,6 +44,10 @@ Xem [cách chạy](nextjs-fullstack/README.md), [bằng chứng](nextjs-fullstac
 
 Mức này bổ sung ranh giới giữa các ứng dụng, hợp đồng API, dependency nội bộ và xác minh tích hợp nhiều dịch vụ.
 
+**Kết quả local ngày 2026-10-15:** workspace dùng Next.js 16.4.1, NestJS 12.1.3 và SQLite tích hợp Node. API 9/9, Chromium 6/6; test reference 9/9 cùng 15 biến thể sai bị phát hiện, UI controls 15/15. Root install sạch từ lockfile, build theo dependency, typecheck, lint và kiểm tra contract sai kiểu đều đạt. SIGINT/SIGTERM theo process group của terminal dừng cả hai app và giải phóng cổng; giao diện được kiểm tra 360px/1280px, bàn phím và cấu hình thiếu. Bộ test v1/v2 được giữ nguyên; v3 đã review/freeze sau revision đầy đủ cho timing checkbox và phân loại lỗi parser. Chưa deploy production hoặc kiểm tra Safari/Firefox.
+
+Xem [cách chạy](nextjs-nestjs-monorepo/README.md), [bằng chứng kiểm chứng](nextjs-nestjs-monorepo/dev/task-manager/walkthrough.md) và [skill/prompt history](nextjs-nestjs-monorepo/skill-history.md).
+
 ## Sử dụng skill và ghi lịch sử
 
 Khi triển khai từng project, dùng `comp-engineer` cho vòng đời SDD hoặc gọi từng skill theo giai đoạn: `comp-intent` → `comp-plan` → `comp-tasks` → `comp-analyze` → `comp-implement` → `comp-review` → `comp-ship`. Dùng `comp-done` khi đã xác nhận hoàn tất và cần lưu trữ artifacts. Áp dụng các gate của skill, gồm xác minh test, review/freeze và phân tách context trước khi triển khai thay đổi hành vi.
@@ -53,4 +57,4 @@ Mỗi project có một file `skill-history.md` riêng, ghi nối tiếp lịch 
 | Thời điểm (Asia/Ho_Chi_Minh) | Skill | Yêu cầu / đầu vào | Kết quả / artifacts | Kiểm chứng / blocker |
 | --- | --- | --- | --- | --- |
 
-Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Project 1–2 đã chạy các stage từ plan đến implement/review; kết quả thực tế nằm trong [React/Vite walkthrough](react-vite/dev/task-manager/walkthrough.md) và [Next.js walkthrough](nextjs-fullstack/dev/_archived/20261015/task-manager/walkthrough.md). Project 3 chưa chạy các bước này.
+Liên kết đến intent, plan, tasks và bằng chứng kiểm chứng trong từng bản ghi khi có. Đã dùng `comp-intent` để soạn PRD cho từng project; lịch sử thực tế nằm trong `skill-history.md` của từng thư mục. Cả ba project đã thực hiện các stage plan, test author/review/freeze và implementation; kết quả thực tế nằm trong [React/Vite walkthrough](react-vite/dev/task-manager/walkthrough.md), [Next.js walkthrough](nextjs-fullstack/dev/_archived/20261015/task-manager/walkthrough.md) và [monorepo walkthrough](nextjs-nestjs-monorepo/dev/task-manager/walkthrough.md).

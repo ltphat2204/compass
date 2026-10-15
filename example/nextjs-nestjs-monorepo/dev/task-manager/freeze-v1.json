@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "author": "/root/test_author",
+  "files": {
+    "tests/v1/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
+    "tests/v1/README.md": "b3c6d7797da76bd1e100141c184ff0c6f487b5938ae2393152d695f775b92e39",
+    "tests/v1/browser.spec.mjs": "ee059dbbe64d484924b0ba40efa66894b72167d1b9d6e00c1ef92230616b2dfb",
+    "tests/v1/controls.config.mjs": "e579fca16d86675537e61a00bfe6ec4b35b6eea08b65ba125964baa32faaa63f",
+    "tests/v1/controls.mjs": "33c658e86d5bca438d4f0fe155efb03944fb7d3e3e7a97a0d4bf34f6ab639891",
+    "tests/v1/harness.mjs": "cacd43e4de95e28e8816e292ad22bbe730ffeb2d5f50cf427ee8217776b10b37",
+    "tests/v1/http.test.mjs": "ffc1ad18d1997553423b766b6f3c3fa99ecd94da3d86dfb9cb1354ceaeacfad0",
+    "tests/v1/package.json": "4598e889175bc96667ff159b72f362d2dd5725ae3aa7fda438bdbb1450817282",
+    "tests/v1/playwright.config.mjs": "b191a30b81eaa4d5bef20e7e7cdd031c532dcc1050f1f3dbea24527e1e1b05df",
+    "tests/v1/pnpm-lock.yaml": "51e5adef0356129f1415da50c4913064ea9435342f5de6b7988fe40b2e7c1264",
+    "tests/v1/pnpm-workspace.yaml": "b379483d4293500af8e9d3e8d83b4b5a2ad1e844911cd7be7f7e274e4bb80666",
+    "tests/v1/reference.mjs": "2eb4647eda96bf43b9c941fc4459b3f23ae01a8675ee76d4e1d590a1d83cf764",
+    "tests/v1/run.mjs": "34c60b347313c34d1e536de0b3926ba1806f61652fc045d60ebc6350942b9f4f",
+    "tests/v1/ui-assertions.mjs": "ecb241898adce3162c73931b0b9d605c704a63f86dbab01608cb5620b69b4ad8",
+    "tests/v1/ui-controls.spec.mjs": "dd3a113c4366ff942d2ef4c9e1e11575d001d8569015241f2dc26465f1dd7d4e"
+  },
+  "sources": {
+    "dev/task-manager/PRD.md": "0a73d2784c1912344d0cd73089ceaf6113e940ef7008b7403cca8ff4a253519b",
+    "dev/task-manager/plan.md": "56dc7c1c246bb36ba63e840a6e5ea462ad258348b21a3d5602f97d7ebfc8966b"
+  },
+  "version": "v1",
+  "reviewer": "/root/test_reviewer",
+  "validation": "PASS",
+  "validation_report": "walkthrough.md#independent-test-validation-pass",
+  "aggregate": "f37b2034b58fd5500b95eeaff5379a81c8973559519882a9a2fd7b55c7fe2278"
+}
