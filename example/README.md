@@ -2,11 +2,13 @@
 
 Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Cả ba project đã có ứng dụng và kiểm chứng local; bằng chứng và lịch sử gọi skill nằm trong từng project.
 
-| Mức độ | Project / PRD | Công nghệ | Mục tiêu |
-| --- | --- | --- | --- |
-| 1 — Cơ bản | [react-vite](react-vite/dev/task-manager/PRD.md) | React, Vite, TypeScript | Giao diện chạy độc lập, không gọi API. |
-| 2 — Trung bình | [nextjs-fullstack](nextjs-fullstack/dev/_archived/20261015/task-manager/PRD.md) | Next.js, TypeScript | Ứng dụng full stack trong một project. |
-| 3 — Nâng cao | [nextjs-nestjs-monorepo](nextjs-nestjs-monorepo/dev/task-manager/PRD.md) | pnpm workspace, Next.js, NestJS, TypeScript | Monorepo với frontend và backend riêng. |
+| Mức độ | Project / cách chạy | PRD | Công nghệ | Mục tiêu |
+| --- | --- | --- | --- | --- |
+| 1 — Cơ bản | [react-vite](react-vite/README.md) | [Yêu cầu](react-vite/dev/task-manager/PRD.md) | React, Vite, TypeScript | Giao diện chạy độc lập, không gọi API. |
+| 2 — Trung bình | [nextjs-fullstack](nextjs-fullstack/README.md) | [Yêu cầu](nextjs-fullstack/dev/_archived/20261015/task-manager/PRD.md) | Next.js, TypeScript | Ứng dụng full stack trong một project. |
+| 3 — Nâng cao | [nextjs-nestjs-monorepo](nextjs-nestjs-monorepo/README.md) | [Yêu cầu](nextjs-nestjs-monorepo/dev/task-manager/PRD.md) | pnpm workspace, Next.js, NestJS, TypeScript | Monorepo với frontend và backend riêng. |
+
+Mỗi project cài dependency từ thư mục riêng; repository Compass không có lệnh chạy chung cho cả ba. Chọn README của project để xem yêu cầu môi trường, cấu hình và lệnh kiểm thử. README, tasks và walkthrough ghi trạng thái bàn giao; PRD/plan đã freeze được giữ như snapshot lịch sử.
 
 ## 1. React + Vite: giao diện không API
 

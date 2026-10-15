@@ -253,6 +253,18 @@ $comp-engineer 用 30 分钟的 spike 评估解析器能否处理目标输入。
 说明测量限制，不进行生产实施。
 ```
 
+## 实践示例
+
+三个任务管理应用展示 Compass，集成复杂度逐步增加。每个项目均提供越南语界面、本地运行说明、验证证据，以及实际的技能调用和提示历史。
+
+| 示例 | 技术栈与范围 |
+|---|---|
+| [React + Vite](example/react-vite/README.md) | 浏览器内 CRUD、筛选及 localStorage 持久化 |
+| [Next.js 全栈](example/nextjs-fullstack/README.md) | App Router、Route Handlers 和服务端 SQLite |
+| [Next.js + NestJS monorepo](example/nextjs-nestjs-monorepo/README.md) | pnpm workspace、独立 web/API 应用、共享 TypeScript 类型和 SQLite |
+
+参见[示例指南](example/README.md)（越南语），了解需求、工作流历史及已记录的验证结果。三个项目均已通过本地验证；尚未部署生产环境或检查 Safari/Firefox。
+
 ## 工作文档与模式
 
 默认目录为 `dev/{feature-slug}/`；已有目录或用户选择的根目录会在整个工作流中保留。

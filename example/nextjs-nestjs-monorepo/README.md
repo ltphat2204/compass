@@ -65,3 +65,23 @@ POST/PATCH cần `Content-Type: application/json`. Shape sai/trường lạ/JSON
 Nếu tải lỗi, bật API lại rồi bấm **Thử lại**. Nếu mất phản hồi khi ghi, nội dung nhập được giữ và phải **Thử lại** để đọc lại dữ liệu trước mutation tiếp theo; không tự gửi lại mutation vì lần ghi trước có thể đã thành công. Kiểm tra danh sách đã tải lại trước khi thêm lại để tránh bản sao.
 
 Giới hạn: ứng dụng local một người dùng, không authentication, deployment, ORM hoặc đồng bộ với example khác.
+
+## Kết quả kiểm chứng
+
+Kết quả local ngày 2026-10-15 được ghi trong [walkthrough](dev/task-manager/walkthrough.md):
+
+- HTTP/API 9/9; Chromium 6/6. Controls: reference 9/9, phát hiện 15 biến thể sai; UI controls 15/15.
+- Cài sạch từ lockfile, build theo dependency, typecheck và lint từ root PASS; kiểm tra consumer dùng sai kiểu contracts bị từ chối.
+- Đã kiểm tra cấu hình thiếu, CORS, lỗi SQLite thật, restart giữ dữ liệu, phục hồi khi mất phản hồi và giao diện 360px/1280px với bàn phím.
+- Ctrl+C/SIGTERM gửi đến process group của terminal dừng cả hai app và giải phóng cổng. Gửi SIGINT riêng đến PID pnpm ngoài cùng không phải cách dừng đã hỗ trợ.
+- Review độc lập và kiểm tra nhất quán bàn giao READY; 6/6 task DONE. Chưa chạy Safari/Firefox, remote CI hoặc deploy production.
+
+Đây là kết quả đã ghi nhận của phiên triển khai, không phải kiểm chứng lại ở mỗi lần cập nhật tài liệu.
+
+## Compass và lịch sử
+
+- [PRD/intent](dev/task-manager/PRD.md), [plan](dev/task-manager/plan.md), [tasks](dev/task-manager/tasks.md) và [walkthrough](dev/task-manager/walkthrough.md).
+- [Lịch sử skill/prompt thực tế](skill-history.md), gồm các vòng sửa test và review.
+- [Freeze hiện tại v3](dev/task-manager/freeze-v3.json) và [hướng dẫn bộ acceptance v3](tests/v3/README.md). Root `pnpm test` chọn v3; v1/v2 và các revision nguồn được giữ làm lịch sử.
+
+PRD/plan là snapshot nguồn đã freeze; trạng thái bàn giao nằm trong tasks và walkthrough. Artifacts hiện ở `dev/task-manager/`, chờ xác nhận hoàn tất trước khi archive bằng `comp-done`.
