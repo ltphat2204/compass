@@ -41,7 +41,7 @@ Before editing, require a current consistency gate: use [comp-analyze](../comp-a
 
 ## Coordinator & Delegated Roles
 
-For behavior changes, read [strict testing](references/testing.md) first: a separate test-author subagent, reviewed frozen suite, verified read isolation, and fresh implementation subagents are mandatory before behavior edits. Missing delegation/isolation blocks implementation; generic inline fallbacks do not apply. For other work, use bounded implementers for standard work when authorized and available, with inline fallback otherwise. Read [Delegated Implementation](references/delegation.md) before dispatch.
+For behavior changes, read [strict testing](references/testing.md) first: a separate test-author subagent, reviewed frozen suite, sanitized context and test-read guidance, and fresh implementation subagents are mandatory before behavior edits. Missing delegation blocks implementation; generic inline fallbacks do not apply. For other work, use bounded implementers for standard work when authorized and available, with inline fallback otherwise. Read [Delegated Implementation](references/delegation.md) before dispatch.
 
 If acting as a delegated implementer, execute only the assigned packet and return results. Do not run the whole lifecycle, delegate further, or update tasks/walkthrough/progress. The coordinator owns those artifacts and all DONE decisions; the logging rules below apply to the coordinator. Report missing context or needed write-scope expansion before acting outside the packet.
 
@@ -51,7 +51,7 @@ If acting as a delegated implementer, execute only the assigned packet and retur
 - **Rule**: Never edit files blind. Before touching any component, inspect it using available discovery tools to identify:
   - All dependent callers and references.
   - Existing interfaces, types, or utilities that can be reused.
-  - Existing characterization coverage (coordinator/test reviewer only); implementers inspect production contracts/callers without test access.
+  - Existing characterization coverage (coordinator/test reviewer only); implementers inspect production contracts/callers without inspecting tests.
 
 ### 2. Ponytail Principle & Decision Making
 - **Rule**: Always select the simplest, shortest solution that works (Ponytail Ladder: stdlib/native/minimal diff).
@@ -71,7 +71,7 @@ If acting as a delegated implementer, execute only the assigned packet and retur
   3. Update the Progress Overview Table in `tasks.md`.
 
 ### 4. Project-Appropriate Verification & CLI
-- For behavior changes, apply [strict testing](references/testing.md): coordinator dispatches the independent test author before implementation, reviews/freezes the suite, verifies read isolation, then dispatches fresh implementers without test access. Coordinator alone runs the frozen checks and provides sanitized criterion-level feedback. Any frozen-test/resource change requires complete intent/plan revision and a new suite freeze; no percentage coverage target is added.
+- For behavior changes, apply [strict testing](references/testing.md): coordinator dispatches the independent test author before implementation, reviews/freezes the suite, prepares sanitized packets and test-read guidance, then dispatches fresh implementers instructed not to inspect tests. Coordinator alone runs the frozen checks and provides sanitized criterion-level feedback. Any frozen-test/resource change requires complete intent/plan revision and a new suite freeze; no percentage coverage target is added.
 - Run the verification procedures recorded in `plan.md` for the affected task, using their actual working directories. Start narrow and include broader required gates before delivery.
 - Log criterion-to-test references, observed results, and a brief explanation of the business rule proved and remaining limits. Passing existing checks is insufficient when they do not exercise the changed rule.
 - Prefer RTK when available and compatible with repository instructions; otherwise run the native commands.
@@ -119,7 +119,7 @@ Every completed task must produce an entry in `walkthrough.md` matching this tem
                                │
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. Behavior: author tests, review/freeze, verify isolation   │
+│ 2. Behavior: author tests, review/freeze, prepare context     │
 │    Other work: inspect affected scope and specs             │
 └──────────────────────────────┬──────────────────────────────┘
                                │

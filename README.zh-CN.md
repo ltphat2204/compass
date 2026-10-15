@@ -45,7 +45,7 @@ AI 生成代码的速度，可能超过开发者理解产物或验证它是否�
 | 继续或调整方向 | 保留有效证据和稳定 ID，仅重开受影响的决策与关卡 |
 | 仅审查或规划 | 在请求的交接点停止 |
 
-低风险且不改变行为的小修正可直接完成，无需功能文档目录。行为变更即使是快速修复，也必须满足下述测试和读取隔离关卡；缺少隔离则阻止实施。里程碑仅详细规划下一个就绪子项。所有子项完成后，还须通过父级集成与验收检查。参见[自适应路由与成果分解](.agents/skills/comp-engineer/references/adaptive-workflow.md)。
+低风险且不改变行为的小修正可直接完成，无需功能文档目录。行为变更即使是快速修复，也必须满足下述测试和读取隔离关卡；共享文件系统不阻止实施。里程碑仅详细规划下一个就绪子项。所有子项完成后，还须通过父级集成与验收检查。参见[自适应路由与成果分解](.agents/skills/comp-engineer/references/adaptive-workflow.md)。
 
 ## 测试理念
 
@@ -55,7 +55,7 @@ AI 生成代码的速度，可能超过开发者理解产物或验证它是否�
 
 Compass 按验收标准和业务规则选择测试。Intent → Plan → Tasks 就绪后，独立测试子代理仅根据已确定的规范/契约最小上下文编写测试。测试审查并冻结后，实施子代理才以全新上下文开始工作。不增加覆盖率百分比目标；仓库已有质量关卡仍须满足。
 
-实施者不得读取测试、断言、样例、测试历史或暴露私有案例的报告，不得修改或运行冻结测试。协调者验证宿主实际强制的读取隔离，记录绑定 intent/plan 版本的文件清单和哈希，私下运行测试并仅反馈标准层面的偏差。独立目录/worktree 或提示词不能保证隔离；缺少委派/隔离时，包括 light 模式在内的行为实施都 BLOCKED。冻结后任何测试或影响预期结果的资源变更，都必须全面修订并重新确认 intent/plan，协调任务及证据，创建新测试版本后重新审查冻结；保留旧版本和历史。
+实施者应遵循不读取测试、断言、样例、测试历史或私有案例报告的指导，不得修改或运行冻结测试。协调者提供经过筛选的上下文及避免读取测试的指导，记录绑定 intent/plan 的文件清单和哈希，私下运行测试并反馈标准层面的偏差。子代理可以共享文件系统和宿主权限；不要求用户分离机器、容器或访问权限。宿主强制隔离是可选措施，缺少它本身不阻止实施。独立委派、测试验证、冻结及冻结测试变更的修订流程仍然适用。
 
 业务逻辑在足以证明规则的最低层测试，变更边界用集成检查，关键旅程按需使用 E2E；视觉/主观结果可使用有理由的手动检查。实施结束后，walkthrough 向新手解释代表性证据；经验开发者用 AI 挑战领域假设和失败场景。恢复实施者时不暴露私有测试证据。实施前测试关卡沿用现有文档，不增加技能或独立测试计划。参见[严格测试指南和研究来源](.agents/skills/comp-implement/references/testing.md)。
 
@@ -71,9 +71,9 @@ flowchart LR
     B -->|Yes| A[Separate test author]
     A --> V{Independent test validation}
     V -->|PASS| F[Freeze validated suite]
-    F --> H{Read isolation verified?}
+    F --> H{Sanitized packet ready?}
     H -->|Yes| E[Implement and integrate]
-    H -->|No| X[BLOCKED until isolation available]
+    H -->|No| X[Prepare sanitized packet]
     B -->|No| E
     V -->|Test correction before freeze| A
     V -->|Agreed spec unclear| I
@@ -95,7 +95,7 @@ flowchart LR
 | [comp-plan](.agents/skills/comp-plan/SKILL.md) | 意图已足够明确，可以选择实施方案 | `plan.md`、验证/审查关卡与任务交接 |
 | [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | 拆分工作，或在保留进度的同时更新覆盖范围 | `tasks.md`、依赖与写入归属 |
 | [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | 检查需求或一致性 | 只读报告、READY/BLOCKED 与发现的问题 |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | 行为：测试已验证/冻结且读取隔离已确认；其他工作：任务就绪 | 已验证的改动、进度与实施记录 |
+| [comp-implement](.agents/skills/comp-implement/SKILL.md) | 行为：测试已验证/冻结且上下文已筛选；其他工作：任务就绪 | 已验证的改动、进度与实施记录 |
 | [comp-review](.agents/skills/comp-review/SKILL.md) | 审查合规性和改动质量 | 针对快照的审查、问题与关卡状态 |
 | [comp-ship](.agents/skills/comp-ship/SKILL.md) | 检查并交接已完成的工作 | 交付证据，以及适用时的审查/CI |
 | [comp-done](.agents/skills/comp-done/SKILL.md) | 交付已确认，或本地完成已被接受 | 归档工作文档，不覆盖历史 |
@@ -195,13 +195,13 @@ skill-sync preview -C . -f integrations/skill-sync.conf.example
 
 支持 Agent Skills 的代理，可以将 `.agents/skills/` 中全部九个目录放入其文档规定的技能发现路径。如果没有发现机制，可要求代理从仓库副本读取 `comp-engineer/SKILL.md`，再按需加载相关技能和参考资料。这是手动使用指令的方式，并不表示该宿主上的原生插件已经测试。
 
-各宿主使用自己的 API/工具、仓库指令和权限模型。不要假设 Codex 工具名、`$` 语法、子代理 API 或工作区隔离机制完全相同。行为变更缺少委派或测试读取隔离时须 BLOCKED；仅非行为工作可直接或串行执行；缺少必须的审查者时，关卡仍保持 PENDING。映射说明见[宿主集成](.agents/skills/comp-engineer/references/hosts.md)。
+各宿主使用自己的 API/工具、仓库指令和权限模型。不要假设 Codex 工具名、`$` 语法、子代理 API 或工作区隔离机制完全相同。行为变更缺少委派时须 BLOCKED；仅非行为工作可直接或串行执行；缺少必须的审查者时，关卡仍保持 PENDING。映射说明见[宿主集成](.agents/skills/comp-engineer/references/hosts.md)。
 
 ### 更新与限制
 
 更新仍使用旧前缀的提示词或快捷方式；已有 `dev/` 工作文档、任务 ID 和历史继续保留。插件会话读取唯一源目录；在 Claude 中修改插件后，使用 `/reload-plugins`。复制的技能应在比较自定义内容后主动升级，不会在项目间自动同步。[Claude 重新加载](https://code.claude.com/docs/en/plugins/create)。
 
-Compass 不要求 MCP server、hooks 或新的应用运行时。Python 仅用于安装器和检查；RTK、CodeGraph、Ponytail 及具体审查/CI 工具可选。行为实施必须具备全新测试作者、独立测试审查和实施子代理，以及实际强制的测试读取隔离。缺少这些能力的宿主仍可规划/审查或执行非行为工作，但必须阻止行为实施。不要通过实验性 agent teams 或放宽权限绕过关卡。
+Compass 不要求 MCP server、hooks 或新的应用运行时。Python 仅用于安装器和检查；RTK、CodeGraph、Ponytail 及具体审查/CI 工具可选。行为实施必须具备全新测试作者、独立测试审查和实施子代理，以及经过筛选的上下文和不读取测试的指导。缺少这些能力的宿主仍可规划/审查或执行非行为工作，但必须阻止行为实施。不要通过实验性 agent teams 或放宽权限绕过关卡。
 
 ## 使用方法
 
@@ -275,7 +275,7 @@ dev/{feature-slug}/
 
 ## 子代理与审查者
 
-行为工作必须按测试作者 → 独立验证 → 冻结/隔离 → 实施者顺序执行，优先于 inline 回退。原生角色提示词本身不会建立访问受限的环境；分派前必须验证宿主实际能力。
+行为工作必须按测试作者 → 独立验证 → 冻结/上下文分离 → 实施者顺序执行，优先于 inline 回退。使用全新的筛选上下文及不读取测试的指导；支持共享文件系统，无需宿主访问控制。
 
 协调者负责分配、整合、`tasks.md`、`walkthrough.md`、进度和 DONE 决策。Standard 工作在工具可用且已获授权时使用限定范围的实施者；紧密耦合或不值得拆分的工作直接或串行执行。
 
@@ -291,7 +291,7 @@ Ship 前，在可用且已获授权时，使用具有全新上下文的独立审
 
 - **Plan 前：** 需求明确，结果可观察，范围/失败预期和假设清楚。
 - **Implement 前：** criteria → plan → tasks → verification 有覆盖关系；范围、约束和依赖一致。
-- **行为实施前：** 已定源文档/测试快照的独立验证 PASS，清单/哈希已冻结，实施者测试读取隔离已实际确认。
+- **行为实施前：** 已定源文档/测试快照的独立验证 PASS，清单/哈希已冻结，实施者上下文已筛选并提供不读取测试的指导。
 - **Ship 前：** 证据仍有效，合规性/改动质量已审查，必需关卡已通过。
 
 独立的分析、审查和就绪检查均为只读。执行已分配阶段时，协调者在工作文档中记录范围、发现和关卡状态。BLOCKER、缺少证据或缺少必需审查者，会阻止对应阶段，不能记为通过。低风险允许明确标注的自审；中风险需要调用方/集成检查和策略要求的审查者；高风险需要独立或人工审查。
@@ -300,7 +300,7 @@ Ship 前，在可用且已获授权时，使用具有全新上下文的独立审
 
 ## 技能验证
 
-[评估案例](evals/cases.md) 的 C11-C15 覆盖验收/业务规则测试生成、自证式测试、冻结测试变更、实际读取隔离和对照已定规则的独立验证。[结果](evals/results.md) 区分隔离样例检查和独立模型行为评估。
+[评估案例](evals/cases.md) 的 C11-C15 覆盖验收/业务规则测试生成、自证式测试、冻结测试变更、不读取测试的指导和对照已定规则的独立验证。[结果](evals/results.md) 区分隔离样例检查和独立模型行为评估。
 
 [评估案例](evals/cases.md) 描述八个行为场景和两个集成/分发案例：模糊需求、工作文档冲突、高风险审查、仓库规则冲突、保留历史的重新规划、有边界的 spike、委派实施、工具/审查者不可用时的回退、宿主打包/项目隔离，以及公开 skills.sh 分发。[评估结果](evals/results.md) 记录实际结果、修正和验证限制。
 

@@ -13,7 +13,7 @@ Read when coordinating subagent implementation or executing an assigned task pac
 
 ## Before dispatch
 
-Before freezing behavior tests, dispatch a fresh independent test reviewer with complete agreed intent/plan, public contracts, actual suite/resources, source/snapshot identities and coordinator-run controls. Require the [independent validation gate](testing.md#independent-test-validation--required-before-freeze); author reports and self-review cannot earn PASS. Native reviewer tools remain read-only; coordinator executes controls and supplies evidence. Dispatch implementers only after the exact PASS snapshot is frozen and isolation verified.
+Before freezing behavior tests, dispatch a fresh independent test reviewer with complete agreed intent/plan, public contracts, actual suite/resources, source/snapshot identities and coordinator-run controls. Require the [independent validation gate](testing.md#independent-test-validation--required-before-freeze); author reports and self-review cannot earn PASS. Native reviewer tools remain read-only; coordinator executes controls and supplies evidence. Dispatch implementers only after the exact PASS snapshot is frozen and sanitized context prepared.
 
 1. Check that dependencies have current accepted implementation and required review. Decompose tightly coupled work serially or assign it to one implementer.
 2. Inspect the complete expected write sets: implementation, tests, fixtures, config, exports, generated outputs, and shared resources touched by commands. Tasks are parallel-safe only if write sets/resources are disjoint and their contracts are settled. Separate files alone do not prove independence.
@@ -29,7 +29,7 @@ Read context: agreed intent, sanitized plan, repository instructions, production
 Write scope: exact files/resources; explicitly excluded shared artifacts
 Deliverable and relevant edge/failure behavior:
 Agreed public examples/expected results (no private executable cases):
-Isolation: enforced read boundary, forbidden resources, evidence verified by coordinator
+Test-read guidance: paths to avoid, scoped production searches, sanitized context; shared filesystems are allowed
 Frozen-test gate: opaque version/status only, no test contents
 Verification: permitted non-test checks and working directory; coordinator runs frozen suite privately
 Required task review and stop/report conditions:
