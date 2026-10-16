@@ -1,0 +1,25 @@
+{
+  "status": "CANDIDATE",
+  "author": "/root/test_author",
+  "files": {
+    "tests/v1/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
+    "tests/v1/README.md": "22a842d8e1e14d3a45335dd8138089df890ce4b95ee79c30bf2d8c9453704960",
+    "tests/v1/browser.spec.mjs": "731067d2a7240c3c939fb0de27531035a21636afbc757326725559614461e4e0",
+    "tests/v1/controls.config.mjs": "e579fca16d86675537e61a00bfe6ec4b35b6eea08b65ba125964baa32faaa63f",
+    "tests/v1/controls.mjs": "2208d78f27344035ca11052d8f5600a26044f036c48e35d71375ea4c446bc0fb",
+    "tests/v1/harness.mjs": "cacd43e4de95e28e8816e292ad22bbe730ffeb2d5f50cf427ee8217776b10b37",
+    "tests/v1/http.test.mjs": "589d15639b2c74649594ca7ee4b5be46ff818b4e19c4aeb529f1e676e9366f0a",
+    "tests/v1/package.json": "4598e889175bc96667ff159b72f362d2dd5725ae3aa7fda438bdbb1450817282",
+    "tests/v1/playwright.config.mjs": "b191a30b81eaa4d5bef20e7e7cdd031c532dcc1050f1f3dbea24527e1e1b05df",
+    "tests/v1/pnpm-lock.yaml": "51e5adef0356129f1415da50c4913064ea9435342f5de6b7988fe40b2e7c1264",
+    "tests/v1/pnpm-workspace.yaml": "b379483d4293500af8e9d3e8d83b4b5a2ad1e844911cd7be7f7e274e4bb80666",
+    "tests/v1/reference.mjs": "fbcd1bbdf3ead67b4b84b27f6dc3bb5b3c6304d88e3401b1b0d7eae8fffdffd8",
+    "tests/v1/run.mjs": "34c60b347313c34d1e536de0b3926ba1806f61652fc045d60ebc6350942b9f4f",
+    "tests/v1/ui-assertions.mjs": "ea2d5a54263bc4c8b583f63b8795d2d68afa147bdd75ccab8d61aff6064b7643",
+    "tests/v1/ui-controls.spec.mjs": "72df8d21716e5add43faed028c2b1bb97b5376fa3a83c9650e029d597a744cbc"
+  },
+  "sources": {
+    "dev/task-manager/PRD.md": "d1360301c8da3ad6f428bc82579bd0a5bffc936fc2f13e30fe97e47c40b604aa",
+    "dev/task-manager/plan.md": "814f5420877f0d38a4cdf897a06bd64b7aaea6d9d205a99a86f1c75f6dbb74fc"
+  }
+}

@@ -1,0 +1,13 @@
+:root { font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #292534; background: #f7f5f0; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; line-height: 1.5; color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled, input:disabled { cursor: not-allowed; opacity: .5; }
+button, input { border: 1px solid #ded9e7; border-radius: 8px; }
+button { padding: 8px 13px; background: #fff; color: #51465f; font-weight: 600; }
+button:hover:not(:disabled) { background: #f0ecf9; }
+input:not([type="checkbox"]) { width: 100%; padding: 11px 13px; background: #fff; color: #292534; }
+:focus-visible { outline: 3px solid #8060cc; outline-offset: 3px; }
+input[aria-invalid="true"] { border-color: #b53742; }
+h1, h2, p { margin: 0; }

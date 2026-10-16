@@ -253,6 +253,18 @@ $comp-engineer Dùng spike mode trong 30 phút để đánh giá parser có xử
 ghi rõ giới hạn đo và không triển khai production.
 ```
 
+## Ví dụ thực hành
+
+Ba ứng dụng quản lý công việc minh họa Compass với độ phức tạp tích hợp tăng dần. Mỗi project có giao diện tiếng Việt, hướng dẫn chạy local, bằng chứng kiểm chứng và lịch sử gọi skill/prompt thực tế.
+
+| Ví dụ | Công nghệ và phạm vi |
+|---|---|
+| [React + Vite](example/react-vite/README.md) | CRUD và bộ lọc trong trình duyệt, lưu bằng localStorage |
+| [Next.js full stack](example/nextjs-fullstack/README.md) | App Router, Route Handlers và SQLite phía server |
+| [Monorepo Next.js + NestJS](example/nextjs-nestjs-monorepo/README.md) | pnpm workspace, web/API riêng, kiểu TypeScript chung và SQLite |
+
+Xem [hướng dẫn example](example/README.md) để đọc yêu cầu, lịch sử workflow và kết quả đã ghi nhận. Cả ba đã được kiểm chứng local; chưa deploy production hoặc kiểm tra Safari/Firefox.
+
 ## Artifacts và modes
 
 Folder mặc định là `dev/{feature-slug}/`; root có sẵn hoặc do người dùng chọn được giữ xuyên suốt workflow.

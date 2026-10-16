@@ -1,0 +1,19 @@
+{
+  "name": "@private/task-manager-acceptance-v3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:http": "node --test --test-concurrency=1 http.test.mjs",
+    "test:browser": "playwright test",
+    "controls": "node controls.mjs",
+    "controls:browser": "playwright test --config=controls.config.mjs",
+    "test": "node run.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  },
+  "engines": {
+    "node": ">=24.15"
+  },
+  "packageManager": "pnpm@10.22.0"
+}

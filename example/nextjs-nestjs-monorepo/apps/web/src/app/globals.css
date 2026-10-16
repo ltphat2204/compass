@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+:root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #193d33; background: #f4f7f4; }
+body { margin: 0; }
+main { max-width: 780px; margin: 64px auto; padding: 0 24px 48px; }
+header { margin-bottom: 32px; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -.04em; margin: 12px 0; }
+p { line-height: 1.6; }
+.eyebrow { font-size: .75rem; letter-spacing: .14em; font-weight: 700; color: #4c6c60; }
+form > label { display: block; margin-bottom: 8px; font-weight: 600; }
+input, button { font: inherit; }
+input[type=text], input:not([type]) { width: 100%; min-width: 0; padding: 12px; border: 1px solid #90a59b; border-radius: 8px; background: white; color: #193d33; }
+button { padding: 11px 16px; border: 1px solid #507c69; border-radius: 8px; color: #193d33; background: white; cursor: pointer; }
+button[type=submit], .add-form button { background: #205d46; color: white; }
+button:hover:not(:disabled) { border-color: #163f30; background: #e0ece3; color: #163f30; }
+button:disabled, input:disabled { opacity: .55; cursor: not-allowed; }
+:focus-visible { outline: 3px solid #b25c08; outline-offset: 3px; }
+.input-row { display: flex; gap: 10px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 20px; }
+.filters button { padding: 9px 12px; }
+.filters [aria-pressed=true] { background: #d2e6d7; border-color: #205d46; font-weight: bold; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid #d5e0d8; border-radius: 12px; background: white; }
+.completion { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 120px; overflow-wrap: anywhere; }
+.completion input { width: 20px; height: 20px; flex-shrink: 0; accent-color: #205d46; }
+.done { text-decoration: line-through; color: #65756c; }
+.actions { display: flex; gap: 8px; }
+.delete { color: #a42929; border-color: #d9b6b6; }
+.edit-form { width: 100%; }
+.edit-form .actions { margin-top: 12px; }
+.error { color: #a42525; overflow-wrap: anywhere; }
+.empty { padding: 30px 20px; text-align: center; border: 1px dashed #a0b6a8; border-radius: 12px; color: #52685b; }
+@media (max-width: 480px) { main { margin-top: 32px; padding-inline: 16px; } li { padding: 14px; } .completion { flex-basis: 100%; } .actions { margin-left: auto; } }

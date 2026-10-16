@@ -253,6 +253,18 @@ the target input. Provide evidence and a stop/go recommendation only;
 state measurement limits and do not implement for production.
 ```
 
+## Working examples
+
+Three task managers demonstrate Compass with increasing integration complexity. Each has a Vietnamese UI, local setup instructions, verification evidence, and an actual skill/prompt history.
+
+| Example | Stack and scope |
+|---|---|
+| [React + Vite](example/react-vite/README.md) | Browser-only CRUD, filters, and localStorage persistence |
+| [Next.js full stack](example/nextjs-fullstack/README.md) | App Router, Route Handlers, and server-side SQLite |
+| [Next.js + NestJS monorepo](example/nextjs-nestjs-monorepo/README.md) | pnpm workspace, separate web/API apps, shared TypeScript contracts, and SQLite |
+
+See the [example guide](example/README.md) (Vietnamese) for requirements, workflow history, and recorded results. All three were verified locally; production deployment and Safari/Firefox checks are outside the recorded verification.
+
 ## Artifacts and modes
 
 The default folder is `dev/{feature-slug}/`; an existing or user-selected root is preserved throughout the workflow.

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "FROZEN",
+  "date": "2026-10-15",
+  "author": "/root/example2_test_author",
+  "reviewer": "/root/example2_test_review2",
+  "validation": "PASS",
+  "report": "dev/task-manager/test-validation-v1.md",
+  "reportSha256": "a810fc2398fa1b5e3e47cd6e017ec9bff7591efe9f7695daffd2590df6a04f25",
+  "files": {
+    "PRD.md": "3150e7d4c1f143f22d0090299370fd588c7ae47cdca0ce815120701eca2db8bc",
+    "dev/task-manager/plan.md": "e7354692aff3e58e616f5bc2ffe255c79a822a6aee8797e9afc76ec7e9b174fc",
+    "package.json": "2eaaea4fadfc09f4e49042e23e9e6ea5f7ea622122f1664d5c39322556cc706c",
+    "pnpm-lock.yaml": "450162d6f22628f4ea4964283f61ff6473c2fa74b1246033a61681b16d57572b",
+    "pnpm-workspace.yaml": "6f096f437a72ffe947829a23631ecb9992533a8b307f4978e4ebfa27b2318be6",
+    "tsconfig.json": "8725c2e3b4cc0b08998cc052744d2ccd490d08a4705e68ae52bf1315d0ad5c41",
+    "tests/api.test.mjs": "f09ff3abc2d7a0b80d0a92b0bd70e71ca6ccf71d00d2ac16a8b3dba5bbf483d5",
+    "tests/contract.mjs": "e517080d005b41aeed1b771938c3d0c02a5d06fd95e18d3838a477425f0ef7ab",
+    "tests/controls.test.mjs": "5d2bd281ed569f064fc7a9992ecb6976c3d433ad58da2f6a296d9a931c903266",
+    "tests/outcomes.mjs": "adcc475ac7de5268dde94c8b8207a22ed546cbd3b58ca3d8b6414ff982c80dad",
+    "tests/playwright.config.mjs": "9617836cb866fbe0038f509ed6d8109664b8e9d73adf638f7699f6d30efca688",
+    "tests/run.mjs": "5cdae5bd63f3ad10f1d9c049c008d5ddaac789798d3caec5d99960424e3c6942",
+    "tests/ui.spec.mjs": "c0b1c8646069dcfa942d8fdf9adf084a7aabc4c5d8bfd487397c9d19267d9992"
+  },
+  "runtime": {
+    "node": "26.9.0",
+    "pnpm": "10.22.0",
+    "next": "16.4.1",
+    "playwright": "1.64.1"
+  },
+  "readSeparation": "Current main policy 93bfe64 permits shared filesystem; fresh sanitized implementation context with explicit no-test-read guidance. No host-enforced secrecy claimed."
+}
