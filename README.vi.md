@@ -4,6 +4,8 @@
 
 [![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
 
+Được cấp phép theo [Apache License 2.0](LICENSE).
+
 **Từ ý tưởng hoặc báo lỗi đến yêu cầu rõ ràng, code hoạt động và kết quả đã kiểm chứng.**
 
 Compass gồm chín skill cho coding agent. Bắt đầu bằng `comp-engineer`; agent chọn bước tiếp theo, dùng quy ước của repository và điều chỉnh mức độ lập kế hoạch theo công việc.

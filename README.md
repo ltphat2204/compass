@@ -4,6 +4,8 @@
 
 [![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
 
+Licensed under the [Apache License 2.0](LICENSE).
+
 **Turn an idea or bug report into clear requirements, working code, and verification evidence.**
 
 Compass is a set of nine skills for your coding agent. Start with `comp-engineer`; it chooses the next useful step, uses your repository's conventions, and scales the planning to the task.

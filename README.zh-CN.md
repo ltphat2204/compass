@@ -4,6 +4,8 @@
 
 [![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
 
+本项目采用 [Apache License 2.0](LICENSE) 许可。
+
 **把想法或错误报告变成明确需求、可用代码和验证证据。**
 
 Compass 为编程代理提供九个技能。从 `comp-engineer` 开始：它会选择下一步，遵循仓库惯例，并按任务规模调整规划深度。

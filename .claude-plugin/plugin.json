@@ -5,6 +5,7 @@
   "author": {
     "name": "ltphat2204"
   },
+  "license": "Apache-2.0",
   "skills": "./.agents/skills/",
   "repository": "https://github.com/ltphat2204/compass"
 }
