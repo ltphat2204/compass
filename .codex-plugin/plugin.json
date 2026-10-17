@@ -1,6 +1,6 @@
 {
   "name": "compass",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Adaptive spec-driven development for quick starts, fixes, uncertain ideas, and milestone delivery with independently validated tests and verified outcomes.",
   "author": {
     "name": "ltphat2204"
@@ -9,8 +9,21 @@
   "repository": "https://github.com/ltphat2204/compass",
   "interface": {
     "displayName": "Compass",
-    "shortDescription": "Spec-driven development from intent to verified delivery",
+    "shortDescription": "Plan, build, verify software",
     "developerName": "ltphat2204",
-    "category": "Developer Tools"
+    "category": "Developer Tools",
+    "longDescription": "Compass helps developers turn an idea or bug report into clear requirements, an implementation plan, scoped changes, and verification evidence. Start with comp-engineer or choose one of nine skills for planning, analysis, implementation, review, delivery, and archiving. It uses the tools and conventions of your coding agent and repository. Behavior-changing implementation requires fresh subagents and independent test validation; agents without these capabilities can still plan and review. Compass does not provide an MCP server or hosted execution service.",
+    "capabilities": [
+      "Instructions"
+    ],
+    "websiteURL": "https://github.com/ltphat2204/compass",
+    "supportURL": "https://github.com/ltphat2204/compass/issues",
+    "composerIcon": "./assets/compass.svg",
+    "logo": "./assets/compass.svg",
+    "defaultPrompt": [
+      "Plan and implement a small feature in this repository.",
+      "Investigate this bug and verify the fix.",
+      "Review these changes against the agreed requirements."
+    ]
   }
 }

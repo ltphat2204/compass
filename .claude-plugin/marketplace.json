@@ -1,0 +1,14 @@
+{
+  "name": "compass",
+  "description": "Compass skills for spec-driven development and verified delivery.",
+  "owner": {
+    "name": "ltphat2204"
+  },
+  "plugins": [
+    {
+      "name": "compass",
+      "source": "./",
+      "description": "Spec-driven development from intent to verified delivery."
+    }
+  ]
+}
