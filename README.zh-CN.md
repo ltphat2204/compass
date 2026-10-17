@@ -122,6 +122,27 @@ GitHub 仓库是分发来源。skills.sh 通过带遥测的安装记录发现技
 
 唯一源目录是 `.agents/skills/`；各宿主使用同一套指令和资源。Claude Code 另有[插件清单](.claude-plugin/plugin.json)，以及 [agents/](agents/comp-implementer.md) 中的三个原生角色。扩展宿主支持不会改变工作流的生命周期或权限。
 
+### Codex：从 GitHub 安装全局插件
+
+使用支持 `codex plugin` 的 Codex CLI，在任意目录运行：
+
+```sh
+codex plugin marketplace add ltphat2204/compass
+codex plugin add compass@compass
+```
+
+[市场目录](.agents/plugins/marketplace.json) 以 `compass` 为市场名称提供 Compass。[Codex 清单](.codex-plugin/plugin.json) 直接引用全部九个源技能及其资源。插件会安装并在用户级启用；无需克隆项目或运行 Python 安装器。重启桌面应用或打开新的 Codex 会话后，在技能选择器中选择 `compass:comp-engineer`；CLI 中使用 `$compass:comp-engineer`。
+
+要从 GitHub 刷新源并重新安装当前包：
+
+```sh
+codex plugin marketplace upgrade compass
+codex plugin add compass@compass
+codex plugin list --marketplace compass
+```
+
+对于同一个 Codex 项目，请选择插件或项目安装器，以免重复加载技能。插件包含技能及资源；项目安装器还会创建 Codex 原生角色。通过 GitHub 分发与进入 OpenAI 的公共插件目录是独立步骤。[OpenAI 插件打包与市场文档](https://developers.openai.com/plugins/build/plugins)。
+
 ### 准备仓库副本
 
 使用现有副本，或克隆公开仓库：

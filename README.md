@@ -122,6 +122,27 @@ The GitHub repository is the distribution source. skills.sh discovers skills thr
 
 The canonical source is `.agents/skills/`; hosts share the same instructions and resources. Claude Code also has a [plugin manifest](.claude-plugin/plugin.json) and three native roles in [agents/](agents/comp-implementer.md). Adding hosts does not change the workflow's lifecycle or authority.
 
+### Codex: install the global plugin from GitHub
+
+With a Codex CLI that supports `codex plugin`, run from any directory:
+
+```sh
+codex plugin marketplace add ltphat2204/compass
+codex plugin add compass@compass
+```
+
+The [marketplace catalog](.agents/plugins/marketplace.json) exposes Compass under the marketplace name `compass`. The [Codex manifest](.codex-plugin/plugin.json) points to all nine canonical skills and their resources. This installs an enabled user-level plugin; no project checkout or Python installer is needed. Restart the desktop app or open a new Codex session, then select `compass:comp-engineer` in the skill picker; in the CLI, invoke `$compass:comp-engineer`.
+
+To refresh the GitHub source and reinstall the current package:
+
+```sh
+codex plugin marketplace upgrade compass
+codex plugin add compass@compass
+codex plugin list --marketplace compass
+```
+
+Choose this plugin route or the project installer for a given Codex project to avoid duplicate skills. The plugin bundles skills/resources; the project installer also creates native Codex roles. GitHub distribution is separate from listing in OpenAI's public Plugin Directory. [OpenAI plugin packaging and marketplaces](https://developers.openai.com/plugins/build/plugins).
+
 ### Prepare a checkout
 
 Use an existing checkout or clone the public repository:

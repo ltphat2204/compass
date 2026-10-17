@@ -1,0 +1,16 @@
+{
+  "name": "compass",
+  "version": "0.3.0",
+  "description": "Adaptive spec-driven development for quick starts, fixes, uncertain ideas, and milestone delivery with independently validated tests and verified outcomes.",
+  "author": {
+    "name": "ltphat2204"
+  },
+  "skills": "./.agents/skills/",
+  "repository": "https://github.com/ltphat2204/compass",
+  "interface": {
+    "displayName": "Compass",
+    "shortDescription": "Spec-driven development from intent to verified delivery",
+    "developerName": "ltphat2204",
+    "category": "Developer Tools"
+  }
+}
