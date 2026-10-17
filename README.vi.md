@@ -122,6 +122,27 @@ Repo GitHub là nguồn phân phối; skills.sh ghi nhận skill qua lượt cà
 
 Canonical source là `.agents/skills/`; các host dùng cùng instructions và resources. Claude Code có thêm [plugin manifest](.claude-plugin/plugin.json) và ba native role trong [agents/](agents/comp-implementer.md). Mở rộng host không thay lifecycle hoặc quyền hạn của workflow.
 
+### Codex: cài plugin toàn cục từ GitHub
+
+Với Codex CLI có hỗ trợ `codex plugin`, chạy từ thư mục bất kỳ:
+
+```sh
+codex plugin marketplace add ltphat2204/compass
+codex plugin add compass@compass
+```
+
+[Marketplace catalog](.agents/plugins/marketplace.json) cung cấp Compass dưới tên marketplace `compass`. [Codex manifest](.codex-plugin/plugin.json) trỏ tới đủ chín skill nguồn cùng resources. Plugin được cài và bật ở cấp người dùng; không cần clone project hoặc chạy Python installer. Khởi động lại desktop app hoặc mở session Codex mới, rồi chọn `compass:comp-engineer` trong skill picker; với CLI, gọi `$compass:comp-engineer`.
+
+Để lấy nguồn mới từ GitHub và cài lại gói hiện tại:
+
+```sh
+codex plugin marketplace upgrade compass
+codex plugin add compass@compass
+codex plugin list --marketplace compass
+```
+
+Chọn plugin hoặc project installer cho một project Codex để tránh trùng skill. Plugin đóng gói skills/resources; project installer còn tạo native Codex roles. Phân phối qua GitHub là một bước riêng với việc được liệt kê trong Plugin Directory công khai của OpenAI. [Hướng dẫn đóng gói và marketplace của OpenAI](https://developers.openai.com/plugins/build/plugins).
+
 ### Chuẩn bị checkout
 
 Dùng checkout hiện có hoặc clone repository public:
