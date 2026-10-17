@@ -29,6 +29,8 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 Transform ready intent into an actionable plan and companion tracker in the same feature folder. Use the repository's architecture and existing artifacts.
 
+During approach selection, read the [design principles](../comp-engineer/rules/design-principles.md), [compatibility rules](../comp-engineer/rules/compatibility.md), and [dependency rule](../comp-engineer/rules/dependency-use.md). Apply only relevant principles, prefer backward-compatible changes, and record rationale, compatibility impact, and trade-offs in the plan; do not add an acronym checklist.
+
 If the input is a milestone parent, use the [decomposition rules](../comp-engineer/references/adaptive-workflow.md) to select a ready child before detailed planning. Keep parent constraints and criterion links in the child plan; do not expand all future children into speculative implementation tasks. A planning-only request remains planning-only.
 
 ## 1. Confirm Inputs & Requirements Readiness
@@ -51,7 +53,7 @@ When delegation is available and authorized, plan scoped implementers for standa
 
 The standard layout has metadata followed by five sections:
 
-1. **Strategy & Principles**: intended outcome, scope references, applicable constraints, and rationale for the smallest correct change.
+1. **Strategy & Principles**: intended outcome, scope references, applicable constraints, relevant design principles, backward-compatibility status, and rationale for the smallest correct change.
 2. **Deliverables & Architecture**: actual affected files/components/interfaces, existing patterns reused, and data/compatibility implications. Include only work the intent requires.
 3. **Ordered Roadmap & Verification**: baseline/preparation, implementation, and acceptance/integration verification where applicable. Group phases by actual dependencies, not a mandatory three-phase count.
 4. **Agent/Human Protocol & Review**: risk, required reviewer, review timing, blocking conditions, and how unresolved decisions or approved exceptions are handled.

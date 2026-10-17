@@ -49,6 +49,8 @@ If acting as a delegated implementer, execute only the assigned packet and retur
 
 ## Core Operational Rules
 
+Before implementation, apply the [code quality rules](../comp-engineer/rules/code-quality.md) to the changed code and its affected callers. Also follow the [dependency rule](../comp-engineer/rules/dependency-use.md).
+
 ### 1. Evidence First Before Editing
 - **Rule**: Never edit files blind. Before touching any component, inspect it using available discovery tools to identify:
   - All dependent callers and references.
