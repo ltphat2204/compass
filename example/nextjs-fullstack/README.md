@@ -1,5 +1,7 @@
 # Example 2: Quản lý công việc full stack
 
+[English](README.en.md) | [简体中文](README.zh-CN.md) | **Tiếng Việt**
+
 Ứng dụng tiếng Việt độc lập dùng Next.js App Router, TypeScript, Route Handlers và SQLite. Có thêm/sửa/xóa/xác nhận, Hủy, đánh dấu hoàn thành và ba bộ lọc. Dữ liệu đi qua HTTP API cùng origin, được lưu ở server; không dùng localStorage để lưu công việc.
 
 ## Chạy local

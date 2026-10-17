@@ -1,5 +1,7 @@
 # Ví dụ thực hành Compass
 
+[English](README.en.md) | [简体中文](README.zh-CN.md) | **Tiếng Việt**
+
 Ba project dưới đây dùng chung bài toán **quản lý công việc**, với độ khó tăng dần để thử bộ skill Compass. Cả ba project đã có ứng dụng và kiểm chứng local; bằng chứng và lịch sử gọi skill nằm trong từng project.
 
 | Mức độ | Project / cách chạy | PRD | Công nghệ | Mục tiêu |

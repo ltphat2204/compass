@@ -1,5 +1,7 @@
 # Quản lý công việc — Next.js và NestJS
 
+[English](README.en.md) | [简体中文](README.zh-CN.md) | **Tiếng Việt**
+
 Ứng dụng độc lập trong pnpm workspace: `apps/web` (Next.js App Router), `apps/api` (NestJS + SQLite tích hợp Node), `packages/contracts` (kiểu TypeScript chung). Trình duyệt gọi trực tiếp API; Next.js không đọc database.
 
 ## Chạy local

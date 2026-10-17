@@ -1,5 +1,7 @@
 # Quản lý công việc — React + Vite
 
+[English](README.en.md) | [简体中文](README.zh-CN.md) | **Tiếng Việt**
+
 Project 1 của ví dụ Compass. Stack: React, TypeScript, Vite; pnpm quản lý dependency riêng. Yêu cầu sản phẩm nằm trong [PRD.md](dev/task-manager/PRD.md). Người dùng đã xác nhận kết quả bàn giao local ngày 2026-10-14; 5/5 task hoàn tất.
 
 ## Thành quả example 1
