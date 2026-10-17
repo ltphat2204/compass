@@ -21,7 +21,7 @@ Use this read-only gate for requirements quality or consistency between intent, 
 
 ## Inputs & Scope
 
-- Resolve the requested feature folder and existing repository guidance. Default: `dev/{feature-slug}/`. Use actual paths and available discovery tools; no specific stack, specs folder, or CodeGraph dependency is required.
+- Resolve the requested feature folder and existing repository guidance. Default: `dev/{feature-slug}/`. Use actual paths and available discovery tools; no specific stack, specs folder, or discovery tool is required.
 - Read only relevant artifact sections and the repository evidence needed to validate their claims. Standard/light work uses `intent.md`, `plan.md`, and `tasks.md`; spikes may embed the plan and checklist in `intent.md`, with results in `walkthrough.md`.
 - Select the requested gate: **requirements** before planning, **consistency** after task generation/before implementation, or **delivery** after implementation. Missing required inputs block that gate; an intentionally omitted spike artifact does not.
 - Treat explicit user decisions as intent, project constitution/repository instructions as constraints, and the plan as a proposal. Do not silently change any of them. Report material conflicts for the authorized owner to resolve; an implementation preference cannot waive a mandatory rule.

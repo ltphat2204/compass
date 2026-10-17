@@ -68,6 +68,19 @@ Chọn coding agent khi được hỏi. Lệnh cài đủ chín skill cùng reso
 
 [Cập nhật, gỡ cài, native role và xử lý lỗi →](docs/installation.md)
 
+## Công cụ khuyến nghị cho workflow
+
+Là tác giả Compass, tôi khuyến nghị các công cụ tùy chọn sau:
+
+| Công cụ | Dùng để |
+|---|---|
+| [CodeGraph](https://github.com/andysom25/codegraph) | Truy vết symbol, caller và phạm vi ảnh hưởng. |
+| [Understand Anything (UA)](https://github.com/Egonex-AI/Understand-Anything) hoặc [Graphify](https://github.com/Graphify-Labs/graphify) | Khám phá kiến trúc và quan hệ domain để làm rõ intent với người dùng. |
+| [Ponytail](https://github.com/DietrichGebert/ponytail) | Chọn giải pháp đơn giản, tái sử dụng code và giữ thay đổi nhỏ. |
+| [RTK](https://github.com/rtk-ai/rtk) (CLI) | Giảm output shell và lượng token. |
+
+Agent tự chọn công cụ có sẵn theo codebase, công việc và sở thích của bạn; tái sử dụng index/graph và chỉ đọc source liên quan khi đã đủ. Không bắt buộc cài thêm công cụ nào.
+
 ## Bắt đầu làm việc
 
 Với plugin Codex:

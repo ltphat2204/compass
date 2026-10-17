@@ -68,6 +68,19 @@ npx skills add ltphat2204/compass --skill '*' --copy
 
 [更新、卸载、原生角色与故障排查 →](docs/installation.md)
 
+## 推荐的工作流工具
+
+作为 Compass 的作者，我推荐以下可选工具：
+
+| 工具 | 用途 |
+|---|---|
+| [CodeGraph](https://github.com/andysom25/codegraph) | 追踪符号、调用方和变更影响。 |
+| [Understand Anything（UA）](https://github.com/Egonex-AI/Understand-Anything)或 [Graphify](https://github.com/Graphify-Labs/graphify) | 探索架构和领域关系，与用户澄清需求。 |
+| [Ponytail](https://github.com/DietrichGebert/ponytail) | 简化方案、复用代码并保持最小变更。 |
+| [RTK](https://github.com/rtk-ai/rtk)（CLI） | 减少 shell 输出和 token 消耗。 |
+
+代理根据代码库、任务和你的偏好选择可用工具，复用已有索引或图谱；定向阅读源码足够时直接使用。无需额外安装工具。
+
 ## 开始工作
 
 使用 Codex 插件：

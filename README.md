@@ -68,6 +68,19 @@ Select your coding agent when prompted. This installs all nine skills and their 
 
 [Update, uninstall, project roles, and troubleshooting →](docs/installation.md)
 
+## Recommended workflow tools
+
+As Compass's author, I recommend these optional tools:
+
+| Tool | Use it for |
+|---|---|
+| [CodeGraph](https://github.com/andysom25/codegraph) | Tracing symbols, callers, and change impact. |
+| [Understand Anything (UA)](https://github.com/Egonex-AI/Understand-Anything) or [Graphify](https://github.com/Graphify-Labs/graphify) | Exploring architecture and domain relationships to clarify intent with the user. |
+| [Ponytail](https://github.com/DietrichGebert/ponytail) | Simple solutions, code reuse, and minimal changes. |
+| [RTK](https://github.com/rtk-ai/rtk) (CLI) | Less shell output and token usage. |
+
+The agent chooses available tools based on the codebase, task, and your preferences. It reuses existing indexes/graphs and uses targeted source inspection when sufficient. No additional tool is required.
+
 ## Start working
 
 For the Codex plugin:
