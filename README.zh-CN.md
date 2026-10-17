@@ -4,368 +4,87 @@
 
 [![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
 
-**明确意图。分工执行。验证成果。**
+**把想法或错误报告变成明确需求、可用代码和验证证据。**
 
-Compass 是一个规范驱动开发（Spec-Driven Development，SDD）工作流，由九个 Agent Skills 组成，提供 Codex、Claude Code、Cursor、GitHub Copilot 和 OpenCode 的项目安装目标：明确目标、制定计划、在指定范围内实施，并验证结果。各宿主的执行能力与验证证据单独记录。工作流在不同语言、框架和交付环境中保持同一方向，技术选择以仓库中的证据为依据。
+Compass 为编程代理提供九个技能。从 `comp-engineer` 开始：它会选择下一步，遵循仓库惯例，并按任务规模调整规划深度。
 
-技能使用 `comp-` 前缀。通过 `$comp-engineer` 启动完整工作流，也可以调用单个技能，从已有工作文档继续。
+## 安装
 
-## 为什么创建 Compass
+每个编程代理选择一种安装方式。
 
-AI 生成代码的速度，可能超过开发者理解产物或验证它是否解决正确问题的速度。新手可能得到能运行的结果，却不了解其行为与局限。有经验的开发者则可能仍需独自分析、拆分任务、考虑边界情况，并逐步指挥 AI。Compass 希望解决这两种困境。
+### Codex
 
-**指导原则：帮助新手理解自己正在构建什么，帮助有经验的开发者充分利用 AI 的推理能力。**
-
-对新手，Compass 将想法与具体行为联系起来，解释重要决策，并展示结果如何得到验证。对有经验的开发者，AI 主动调查代码库、审视假设、比较方案、提出建议，并将授权工作推进到验证。用户掌握目标与重要产品选择；AI 负责该范围内的工程分析与执行。
-
-即使用户只有一个故障症状、尚不清晰的想法，或里程碑规模的目标，工作流也应适用。讨论与文档的详细程度应随情境调整，让下一步清晰可懂，并以证据判断工作是否完成。
-
-## 理念
-
-**目标指引方向，证据决定下一步。** Compass 保持职责和质量关卡一致，执行方式则适应任务规模、风险和实际可用的工具。
-
-1. **先明确意图，再实施。** 定义问题、范围、约束和可观察的成功标准。先检查仓库；无法从现有信息推断重要决策时再提问。
-2. **先收集证据，再选择方案。** 使用已有架构、约定、工具链和 CI。任务不需要时，不强加技术栈、架构层或依赖。
-3. **用最小改动完整解决任务。** 复用已有模式。根据行为和数据受到的影响设置保障措施，而非根据 diff 行数。
-4. **分工执行，责任明确。** 协调者分配工作、整合改动并决定 DONE。实施者在分配的范围内自主工作；审查者独立检查。
-5. **验证必须证明结果。** 每项标准都应有检查和实际证据。执行者的报告、缺失的工具或跳过的检查，不能自动算作通过。
-6. **变更后仍可追溯。** 保留 intent → plan → task → evidence → delivery 的关联；继续任务或重新规划时，保留稳定 ID、决策、备注和历史。
-7. **自主行动以授权为界。** 在已分配的范围内持续推进安全的工作。合并、部署、破坏性数据变更以及对外部产生后果的操作，遵循已有授权和项目规则。
-
-## 从实际场景开始
-
-向 `$comp-engineer` 描述目标或问题，无需选择阶段。AI 调查证据，用具体的前后对比提出建议，只询问无法推断的重要选择。新手理解自己在构建什么、如何验证；有经验的开发者获得有依据的建议和假设审视，无需逐步指挥。
-
-| 请求 | 处理方式 |
-|---|---|
-| 快速开始 | 最小有用切片、仓库默认方案和简短 light 文档；目标明确时不必访谈 |
-| 修复问题 | 诊断或复现、明确正确行为、修复共同根因并验证回归 |
-| 不确定要做什么 | 通过具体例子和建议明确问题；先开展有界探索 |
-| 交付里程碑 | 父级成果图 → 按依赖排序的子意图 → 子项交付 → 里程碑集成验证 |
-| 继续或调整方向 | 保留有效证据和稳定 ID，仅重开受影响的决策与关卡 |
-| 仅审查或规划 | 在请求的交接点停止 |
-
-低风险且不改变行为的小修正可直接完成，无需功能文档目录。行为变更即使是快速修复，也必须满足下述测试和读取隔离关卡；共享文件系统不阻止实施。里程碑仅详细规划下一个就绪子项。所有子项完成后，还须通过父级集成与验收检查。参见[自适应路由与成果分解](.agents/skills/comp-engineer/references/adaptive-workflow.md)。
-
-## 测试理念
-
-**热修复仍然必须有测试。** 紧迫性可以缩小范围、精简流程，但不能成为盲目修复的理由。改变行为的热修复必须明确预期行为，并包含能够检测缺陷的回归测试；可复现时，应记录修复前失败、修复后通过的证据。无法复现时，应说明限制及采用的证据，不得声称已复现原始故障。测试应验证约定行为，而不是照搬补丁逻辑。下述独立审查、冻结和隔离关卡仍然适用；缺少前提条件时阻止行为实施，缺少验证时不能宣称修复完成。
-
-冻结前必须由全新上下文的独立测试审查子代理，从完整且已确定的 intent/plan 推导预期结果，双向关联规则与实际断言，并检查运行器证据及变更业务规则的正确/错误控制。仅针对确切源文档/测试快照的 `Test validation: PASS` 可允许冻结。测试作者自审、哈希或绿色运行结果都不足够；缺少审查者或必要证据时须 BLOCKED。
-
-Compass 按验收标准和业务规则选择测试。Intent → Plan → Tasks 就绪后，独立测试子代理仅根据已确定的规范/契约最小上下文编写测试。测试审查并冻结后，实施子代理才以全新上下文开始工作。不增加覆盖率百分比目标；仓库已有质量关卡仍须满足。
-
-实施者应遵循不读取测试、断言、样例、测试历史或私有案例报告的指导，不得修改或运行冻结测试。协调者提供经过筛选的上下文及避免读取测试的指导，记录绑定 intent/plan 的文件清单和哈希，私下运行测试并反馈标准层面的偏差。子代理可以共享文件系统和宿主权限；不要求用户分离机器、容器或访问权限。宿主强制隔离是可选措施，缺少它本身不阻止实施。独立委派、测试验证、冻结及冻结测试变更的修订流程仍然适用。
-
-业务逻辑在足以证明规则的最低层测试，变更边界用集成检查，关键旅程按需使用 E2E；视觉/主观结果可使用有理由的手动检查。实施结束后，walkthrough 向新手解释代表性证据；经验开发者用 AI 挑战领域假设和失败场景。恢复实施者时不暴露私有测试证据。实施前测试关卡沿用现有文档，不增加技能或独立测试计划。参见[严格测试指南和研究来源](.agents/skills/comp-implement/references/testing.md)。
-
-## 工作流与技能
-
-```mermaid
-flowchart LR
-    I[Intent] --> G1{Requirements ready?}
-    G1 -->|READY| P[Plan]
-    P --> T[Tasks]
-    T --> G2{Artifacts consistent?}
-    G2 -->|READY| B{Behavior change?}
-    B -->|Yes| A[Separate test author]
-    A --> V{Independent test validation}
-    V -->|PASS| F[Freeze validated suite]
-    F --> H{Sanitized packet ready?}
-    H -->|Yes| E[Implement and integrate]
-    H -->|No| X[Prepare sanitized packet]
-    B -->|No| E
-    V -->|Test correction before freeze| A
-    V -->|Agreed spec unclear| I
-    E --> R[Review current snapshot]
-    R -->|Accepted| S[Ship]
-    S -->|Delivered or accepted locally| D[Done and archive]
-    G1 -->|BLOCKED| I
-    G2 -->|BLOCKED| P
-    R -->|Code changes required| E
-    R -->|Frozen test change: revise full intent and plan| I
-```
-
-`comp-engineer` 协调六个阶段：`Intent → Plan → Tasks → Implement → Ship → Done`。Analyze 和 Review 是交接时的质量关卡，可以单独运行，无须启动实施或交付。
-
-| 技能 | 使用时机 | 主要结果 |
-|---|---|---|
-| [comp-engineer](.agents/skills/comp-engineer/SKILL.md) | 完整生命周期，或从已有工作文档继续 | 协调阶段、关卡与交接 |
-| [comp-intent](.agents/skills/comp-intent/SKILL.md) | 想法不明确，或需求需要仓库证据支持 | `intent.md`、标准与决策 |
-| [comp-plan](.agents/skills/comp-plan/SKILL.md) | 意图已足够明确，可以选择实施方案 | `plan.md`、验证/审查关卡与任务交接 |
-| [comp-tasks](.agents/skills/comp-tasks/SKILL.md) | 拆分工作，或在保留进度的同时更新覆盖范围 | `tasks.md`、依赖与写入归属 |
-| [comp-analyze](.agents/skills/comp-analyze/SKILL.md) | 检查需求或一致性 | 只读报告、READY/BLOCKED 与发现的问题 |
-| [comp-implement](.agents/skills/comp-implement/SKILL.md) | 行为：测试已验证/冻结且上下文已筛选；其他工作：任务就绪 | 已验证的改动、进度与实施记录 |
-| [comp-review](.agents/skills/comp-review/SKILL.md) | 审查合规性和改动质量 | 针对快照的审查、问题与关卡状态 |
-| [comp-ship](.agents/skills/comp-ship/SKILL.md) | 检查并交接已完成的工作 | 交付证据，以及适用时的审查/CI |
-| [comp-done](.agents/skills/comp-done/SKILL.md) | 交付已确认，或本地完成已被接受 | 归档工作文档，不覆盖历史 |
-
-## 通过 skills.sh 安装
-
-在**目标项目**中选择代理，安装全部九个技能，以保留技能之间的引用：
-
-```sh
-npx skills add ltphat2204/compass --skill '*' --agent claude-code --copy
-```
-
-将 `claude-code` 替换为 `codex`、`cursor`、`github-copilot` 或 CLI 支持的其他代理。默认安装范围是项目；如果只希望 Compass 用于当前项目，请勿添加 `--global`。skills CLI 只安装技能和资源；需要支持的原生角色时，使用下文的项目安装器或 Claude 插件。每个宿主/项目选择一种安装方式，避免重复及所有权冲突。
-
-只查看列表，不安装：
-
-```sh
-npx skills add ltphat2204/compass --list
-```
-
-GitHub 仓库是分发来源。skills.sh 通过带遥测的安装记录发现技能，无须另外上传软件包。技能出现在目录中的时间取决于索引系统。[skills CLI](https://github.com/vercel-labs/skills)、[skills.sh FAQ](https://www.skills.sh/docs/faq)。
-
-## 安装与代理集成
-
-唯一源目录是 `.agents/skills/`；各宿主使用同一套指令和资源。Claude Code 另有[插件清单](.claude-plugin/plugin.json)，以及 [agents/](agents/comp-implementer.md) 中的三个原生角色。扩展宿主支持不会改变工作流的生命周期或权限。
-
-### Codex：从 GitHub 安装全局插件
-
-使用支持 `codex plugin` 的 Codex CLI，在任意目录运行：
+在终端运行：
 
 ```sh
 codex plugin marketplace add ltphat2204/compass
 codex plugin add compass@compass
 ```
 
-[市场目录](.agents/plugins/marketplace.json) 以 `compass` 为市场名称提供 Compass。[Codex 清单](.codex-plugin/plugin.json) 直接引用全部九个源技能及其资源。插件会安装并在用户级启用；无需克隆项目或运行 Python 安装器。重启桌面应用或打开新的 Codex 会话后，在技能选择器中选择 `compass:comp-engineer`；CLI 中使用 `$compass:comp-engineer`。
+打开新的 Codex 会话，选择 `compass:comp-engineer`，或在 CLI 中输入 `$compass:comp-engineer`。需要支持 `codex plugin` 的 Codex 版本。
 
-要从 GitHub 刷新源并重新安装当前包：
+### Claude Code
 
-```sh
-codex plugin marketplace upgrade compass
-codex plugin add compass@compass
-codex plugin list --marketplace compass
-```
-
-对于同一个 Codex 项目，请选择插件或项目安装器，以免重复加载技能。插件包含技能及资源；项目安装器还会创建 Codex 原生角色。通过 GitHub 分发与进入 OpenAI 的公共插件目录是独立步骤。[OpenAI 插件打包与市场文档](https://developers.openai.com/plugins/build/plugins)。
-
-### 准备仓库副本
-
-使用现有副本，或克隆公开仓库：
-
-```sh
-git clone https://github.com/ltphat2204/compass.git
-cd compass
-```
-
-### Claude Code：为当前会话加载插件
-
-从需要工作的项目目录运行，并提供 Compass 仓库副本的绝对路径：
-
-```sh
-claude --plugin-dir /absolute/path/to/compass
-```
-
-在该会话中：
+在 Claude Code 内运行：
 
 ```text
-/compass:comp-engineer 明确意图，制定 plan/tasks，实施并验证。
-允许限定范围的实施者和独立审查者；在本地交接。
+/plugin marketplace add ltphat2204/compass
+/plugin install compass@compass
 ```
 
-Claude 可以为对应的任务包使用 `compass:comp-test-author`、`compass:comp-implementer` 和 `compass:comp-reviewer`。审查者只有 Read/Glob/Grep；协调者执行检查并提供审查证据。这些角色不能自行获得 commit/push/deploy 权限，也不能超出写入范围。通过参数加载只作用于当前会话，不会全局安装或注册插件市场。[Claude 插件加载](https://code.claude.com/docs/en/plugins/create)、[子代理工具](https://code.claude.com/docs/en/sub-agents)。
+使用 `/compass:comp-engineer` 开始。
 
-清单直接指向唯一技能源目录，无须维护另一套指令副本。默认的 `agents/` 布局供 Claude 发现原生角色。[清单路径](https://code.claude.com/docs/en/plugins-reference)。
+### Cursor、GitHub Copilot、OpenCode 及其他代理
 
-### 将技能安装到指定项目
-
-在 Compass 仓库副本中，使用 Python 3.9+，选择宿主和已经存在的目标项目：
+在需要使用 Compass 的项目目录中运行：
 
 ```sh
-python3 scripts/install.py --agent codex --project /absolute/path/to/project
-python3 scripts/install.py --agent claude --project /absolute/path/to/project
-python3 scripts/install.py --agent cursor --project /absolute/path/to/project
-python3 scripts/install.py --agent copilot --project /absolute/path/to/project
-python3 scripts/install.py --agent opencode --project /absolute/path/to/project
+npx skills add ltphat2204/compass --skill '*' --copy
 ```
 
-按宿主选择其中一行。脚本安装全部九个技能及资源，并为 Codex、Claude、OpenCode 安装原生角色。必须指定已存在的 `--project`；不支持全局安装，不修改宿主配置，拒绝冲突及重定向路径。`agents/` 是角色职责的唯一来源，适配器只转换元数据。Cursor/Copilot 使用共享任务包，不生成未经验证的原生角色。
+按提示选择编程代理。这会将全部九个技能及其资源安装到该项目。选择 `comp-engineer` 开始。
 
-先预览，再明确选择检查、更新或卸载当前项目中受管理的文件：
+[更新、卸载、原生角色与故障排查 →](docs/installation.md)
 
-```sh
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --dry-run
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --check
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --update --dry-run
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --update
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall --dry-run
-python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall
-python3 scripts/check_portability.py
-```
+## 开始工作
 
-`.compass/install-<host>.json` 记录源版本和文件哈希。更新/卸载先检查整个操作；已修改或缺失的文件、新文件冲突、不安全的所有权记录或符号链接会阻止操作，其他文件保留。`--dry-run` 执行同样的检查而不写入。旧版无清单的复制安装不会被自动接管，请先比较并备份自定义内容；没有 `--force`。可通过 `--root` 检查项目或已安装的技能目录。
-
-| 宿主 | 安装器创建的项目路径 | 调用工作流 |
-|---|---|---|
-| Codex | `.agents/skills/` | 技能选择器；CLI/IDE：`$comp-engineer` |
-| Claude Code，复制技能 | `.claude/skills/` | `/comp-engineer` |
-| Claude Code，插件会话 | 无须复制；使用 `--plugin-dir` | `/compass:comp-engineer` |
-| Cursor | `.cursor/skills/` | `/comp-engineer`，或通过 `@` 选择技能 |
-| GitHub Copilot | `.github/skills/` | 请求使用 `comp-engineer`；CLI：`/comp-engineer` |
-| OpenCode | `.opencode/skills/` | 原生技能工具/选择器；请求使用 `comp-engineer` |
-
-Codex 使用项目中的 `.agents/skills`。Cursor 也会发现 `.agents/skills`；Copilot 在其文档说明的使用环境中支持该目录。直接在 Compass 仓库副本中工作时，这些宿主可以使用唯一源目录，无须复制。请检查当前宿主中的技能选择器。[Codex 技能发现](https://learn.chatgpt.com/docs/build-skills)、[Cursor 技能](https://prod.cursor.com/help/customization/skills)、[Copilot 技能](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)、[Copilot CLI 调用](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)。
-
-项目原生角色位于 `.codex/agents/`（TOML）、`.claude/agents/` 或 `.opencode/agents/`（Markdown）。Claude 插件仍使用原始角色。Codex 继承父会话权限，只读审查指令不会创建独立沙箱；OpenCode 使用 v1 权限映射。不要叠加插件与复制的技能/角色。参见[能力矩阵、角色映射及阶段预检](.agents/skills/comp-engineer/references/hosts.md)和[共享任务包与跨宿主续接](.agents/skills/comp-implement/references/packets.md)。
-
-安装、宿主发现、完整模型工作流和跨宿主续接是不同的证据层级。[评估结果](evals/results.md)记录实际版本、执行与阻塞情况。可以读取技能的宿主仍可能缺少行为实施所需的独立子代理与测试验证；规划、分析及其他已获授权且不受阻塞的工作可以继续。
-
-完整工作流已在 **Codex、OpenCode 和 Claude Code** 上验证，具体限制见[评估结果](evals/results.md#harness-portability--scoped-delivery-2026-10-18)。**Cursor 和 GitHub Copilot 已支持，但尚未完成运行时验证**：提供项目安装及资源/生命周期检查，尚未验证原生发现、委派和完整工作流。两者的运行时检查仍为 pending。
-
-### SkCC 与 skill-sync（可选）
-
-保持 `.agents/skills/` 为唯一源目录。[SkCC](https://github.com/Nexa-Language/Skill-Compiler) 是面向 Claude/Codex/Gemini/Kimi 的编译器；仅在宿主需要独立输出时使用。它包含优化和约束注入步骤，因此替换 Compass 指令之前，必须审查输出的语义、技能间链接和资源。编译成功本身不能证明工作流行为等价。
-
-有多个项目叫作 `skill-sync`。[joeharris76/skill-sync](https://github.com/joeharris76/skill-sync) 适合按项目分发：选择本地 Git 技能目录、技能和版本，应用前先预览，再审查 diff 并验证已提交的内容。同步全部九个关联技能包，固定具体 commit，只声明所选项目的目标路径。源仓库必须有包含技能的提交；Git archive 不会分发尚未提交的文件。
-
-[示例配置](integrations/skill-sync.conf.example) 专用于 `joeharris76/skill-sync`，固定了已验证的源版本。在 Compass 仓库副本中先预览，再应用：
-
-```sh
-skill-sync preview -C . -f integrations/skill-sync.conf.example
-```
-
-用于其他项目时，将 `source` 改为 Compass 仓库副本的路径，并确认三个目标路径适合该项目。该配置尚未通过上游工具执行；它不会自动启用同步或替换现有配置。
-
-一些同名工具主要面向用户级目录，或在同步网络中按 version/mtime 选择优先版本。它们不是 Compass 的默认方案。上述两个工具尚未在本项目中安装或运行；本地安装器和 skills CLI 仍是已验证的分发方式。不要仅为启用可选集成而增加依赖或全局监听器。
-
-### 其他代理
-
-支持 Agent Skills 的代理，可以将 `.agents/skills/` 中全部九个目录放入其文档规定的技能发现路径。如果没有发现机制，可要求代理从仓库副本读取 `comp-engineer/SKILL.md`，再按需加载相关技能和参考资料。这是手动使用指令的方式，并不表示该宿主上的原生插件已经测试。
-
-各宿主使用自己的 API/工具、仓库指令和权限模型。不要假设 Codex 工具名、`$` 语法、子代理 API 或工作区隔离机制完全相同。行为变更缺少委派时须 BLOCKED；仅非行为工作可直接或串行执行；缺少必须的审查者时，关卡仍保持 PENDING。映射说明见[宿主集成](.agents/skills/comp-engineer/references/hosts.md)。
-
-### 更新与限制
-
-更新仍使用旧前缀的提示词或快捷方式；已有 `dev/` 工作文档、任务 ID 和历史继续保留。插件会话读取唯一源目录；在 Claude 中修改插件后，使用 `/reload-plugins`。复制的技能应在比较自定义内容后主动升级，不会在项目间自动同步。[Claude 重新加载](https://code.claude.com/docs/en/plugins/create)。
-
-Compass 不要求 MCP server、hooks 或新的应用运行时。Python 仅用于安装器和检查；RTK、CodeGraph、Ponytail 及具体审查/CI 工具可选。行为实施必须具备全新测试作者、独立测试审查和实施子代理，以及经过筛选的上下文和不读取测试的指导。缺少这些能力的宿主仍可规划/审查或执行非行为工作，但必须阻止行为实施。不要通过实验性 agent teams 或放宽权限绕过关卡。
-
-## 使用方法
-
-以下 `$comp-*` 示例使用 Codex 语法。Claude 插件使用 `/compass:comp-*`；复制到 Claude 的技能或 Cursor 使用 `/comp-*`。其他宿主使用技能选择器，或要求代理读取对应技能。
-
-### 分配完整工作流
+使用 Codex 插件：
 
 ```text
-$comp-engineer 为这个 CLI 添加数据导出功能。根据仓库明确意图，
-按风险选择模式，制定 plan/tasks，然后实施并验证。
-允许限定范围的子代理和独立审查者；完成后在本地交接。
+$compass:comp-engineer 为任务列表添加 CSV 导出。允许限定范围的子代理和
+独立审查。完成实现与验证后在本地交接。
 ```
 
-协调者收集实际上下文，询问尚未确定的决策，并根据工作文档选择下一步。Ship 可以是本地交接；该提示词不授予部署或远程合并权限。
+Claude Code 中使用 `/compass:comp-engineer`。复制安装的技能可通过选择器或宿主的技能语法调用 `comp-engineer`。
 
-### 调用单个阶段或继续任务
+描述一个功能、错误或尚不明确的想法。Compass 会检查仓库，明确关键决策，并推进已获授权的规划、实现与验证。只要求规划或审查时，工作会在相应阶段停止。
+
+## 工作方式
 
 ```text
-$comp-intent 明确 CLI 重试需求；将意图写入 dev/cli-retry/。
-$comp-plan 根据 dev/cli-retry/intent.md 在同一目录中制定计划。
-$comp-tasks 根据 dev/cli-retry/ 的 intent/plan 更新任务；保留 ID 和进度。
-$comp-analyze 在实施前检查 dev/cli-retry/ 的一致性；只报告。
-$comp-implement 执行 dev/cli-retry/ 中已就绪的任务。
-$comp-review 根据 dev/cli-retry/ 审查当前快照的改动；只报告。
-$comp-ship 使用已有证据，检查并在本地交接 dev/cli-retry/。
+Intent → Plan → Tasks → Implement → Ship → Done
 ```
 
-交付已确认，或本地完成已被接受后，再调用 `$comp-done`。选择与请求相符的阶段；审查请求不会自动启动整个生命周期。
+Analyze 和 Review 检查各阶段交接。小任务使用更简短的文档；行为变更仍要求独立编写测试、独立验证并在实现前冻结测试。缺少所需子代理的宿主可以规划和审查，但不能通过实现门槛。
 
-## 使用场景
+需求、任务和证据保存在 `dev/{feature}/`。Compass 使用现有技术栈和工具。部署、合并与破坏性操作遵循项目授权和规则。
 
-| 场景 | 使用方式 | 预期结果 |
-|---|---|---|
-| 涉及多个组件的功能 | `comp-engineer`，standard；授权使用子代理 | 按依赖组织任务，明确归属，整体验证和独立审查 |
-| 有明确复现步骤的小 bug | `comp-engineer`，light；已有任务时也可用 `comp-implement` | 小范围改动，验证复现步骤和受影响范围 |
-| 尚不明确的想法 | `comp-intent`、`comp-analyze` requirements | 可观察的标准；规划前明确重要决策 |
-| 可行性评估 | `comp-engineer`，限时 spike | intent 中记录学习计划/清单，提供证据和 stop/go；不默认产出生产代码 |
-| 库或 CLI 重构 | Plan → Tasks → Implement → Review | 保持契约，检查调用方，通过已有工具链验证前后行为 |
-| 安全或数据变更 | Standard，按影响设置关卡 | 失败/恢复证据、任务审查和策略要求的审查者；缺少审查时保持 PENDING |
-| 只审查代码或工作文档 | `comp-review` 或 `comp-analyze` | 有依据的发现，只读；不修改任务记录或交付 |
-| 范围变更后继续任务 | 对已有工作文档使用 `comp-plan`、`comp-tasks` | 保留仍有效的 DONE 工作；重新打开受影响工作及依赖检查，保留历史 |
-| 文档，或没有 CI/远程仓库的项目 | 按规模选择模式、适当检查、本地交接 | 内容/链接验证或手动证据；不额外搭建技术栈 |
-
-Spike 示例：
-
-```text
-$comp-engineer 用 30 分钟的 spike 评估解析器能否处理目标输入。
-只提供证据和 stop/go 建议；
-说明测量限制，不进行生产实施。
-```
-
-## 实践示例
-
-三个任务管理应用展示 Compass，集成复杂度逐步增加。每个项目均提供越南语界面、本地运行说明、验证证据，以及实际的技能调用和提示历史。
-
-| 示例 | 技术栈与范围 |
+| 技能 | 用途 |
 |---|---|
-| [React + Vite](example/react-vite/README.md) | 浏览器内 CRUD、筛选及 localStorage 持久化 |
-| [Next.js 全栈](example/nextjs-fullstack/README.md) | App Router、Route Handlers 和服务端 SQLite |
-| [Next.js + NestJS monorepo](example/nextjs-nestjs-monorepo/README.md) | pnpm workspace、独立 web/API 应用、共享 TypeScript 类型和 SQLite |
+| `comp-engineer` | 协调整个流程或继续已有工作 |
+| `comp-intent` | 明确问题和成功标准 |
+| `comp-plan` | 选择实现方案 |
+| `comp-tasks` | 跟踪任务及依赖 |
+| `comp-analyze` | 检查需求和文档一致性 |
+| `comp-implement` | 实现已就绪任务并验证结果 |
+| `comp-review` | 按需求审查变更 |
+| `comp-ship` | 检查并交付结果 |
+| `comp-done` | 归档已接受的工作 |
 
-参见[示例指南](example/README.md)（越南语），了解需求、工作流历史及已记录的验证结果。三个项目均已通过本地验证；尚未部署生产环境或检查 Safari/Firefox。
+## 更多信息
 
-## 工作文档与模式
-
-默认目录为 `dev/{feature-slug}/`；已有目录或用户选择的根目录会在整个工作流中保留。
-
-```text
-dev/{feature-slug}/
-├── intent.md       # Problem, scope, criteria, project context, decisions
-├── plan.md         # Approach, dependencies, verification, review gates
-├── tasks.md        # Stable IDs, owners, write scope, status, progress
-└── walkthrough.md  # Actual changes, attempts, checks, review, limitations
-```
-
-| 模式 | 工作文档 | 适用情况 |
-|---|---|---|
-| Standard | Intent、包含五个实质内容部分的 plan、tasks、walkthrough | 较大或有风险的工作 |
-| Light | 精简的 intent/plan/tasks/walkthrough；合并适当部分，省略空阶段 | 范围明确的改动，保留相同的必需关卡 |
-| Spike | Intent 包含学习计划/清单；walkthrough 记录结果 | 有边界的学习；生产实施前需要定义新范围 |
-
-模式调整文档量；风险决定验证方式和审查者。小 diff 也可能有高风险。`comp-done` 归档到 `_archived/YYYYMMDD/{feature-slug}/`，避免覆盖已有工作。
-
-## 子代理与审查者
-
-行为工作必须按测试作者 → 独立验证 → 冻结/上下文分离 → 实施者顺序执行，优先于 inline 回退。使用全新的筛选上下文及不读取测试的指导；支持共享文件系统，无需宿主访问控制。
-
-协调者负责分配、整合、`tasks.md`、`walkthrough.md`、进度和 DONE 决策。Standard 工作在工具可用且已获授权时使用限定范围的实施者；紧密耦合或不值得拆分的工作直接或串行执行。
-
-执行者收到最小任务包：标准、基线、必读上下文、写入范围、依赖、交付物、验证命令和报告阻塞的条件。执行者返回实际 diff 和结果；不得自行修改共享工作文档、重新启动生命周期，或在授权任务之外 commit/push。
-
-只有依赖就绪、契约稳定、写入范围和资源相互独立的任务才可并行，包括测试、配置和生成文件。每个文件或资源只能有一个活跃写入者。执行者数量遵循环境的并发上限，并计入协调者。
-
-协调者核对实际改动，并运行整体集成检查。安全、数据、公共契约或前置任务，在标记 DONE 或解除依赖阻塞之前必须审查；其他任务可按里程碑审查。
-
-Ship 前，在可用且已获授权时，使用具有全新上下文的独立审查者。审查者针对稳定快照检查合规性和改动质量。输入发生变化时，相关批准失效。只有风险和策略允许时才能退回自审；子代理不能替代明确要求的人工审查者。参见[委派协议](.agents/skills/comp-implement/references/delegation.md)。
-
-## 质量关卡与冲突
-
-- **Plan 前：** 需求明确，结果可观察，范围/失败预期和假设清楚。
-- **Implement 前：** criteria → plan → tasks → verification 有覆盖关系；范围、约束和依赖一致。
-- **行为实施前：** 已定源文档/测试快照的独立验证 PASS，清单/哈希已冻结，实施者上下文已筛选并提供不读取测试的指导。
-- **Ship 前：** 证据仍有效，合规性/改动质量已审查，必需关卡已通过。
-
-独立的分析、审查和就绪检查均为只读。执行已分配阶段时，协调者在工作文档中记录范围、发现和关卡状态。BLOCKER、缺少证据或缺少必需审查者，会阻止对应阶段，不能记为通过。低风险允许明确标注的自审；中风险需要调用方/集成检查和策略要求的审查者；高风险需要独立或人工审查。
-
-已确认的意图定义结果；项目必需指令或章程约束方案；计划和任务落实意图；现有代码提供证据。重要冲突需要有权限的负责人作出决策，并记录理由和限定范围的例外，不能暗中丢弃规则。平台指令和授权仍具有更高优先级。
-
-## 技能验证
-
-[评估案例](evals/cases.md) 的 C11-C15 覆盖验收/业务规则测试生成、自证式测试、冻结测试变更、不读取测试的指导和对照已定规则的独立验证。[结果](evals/results.md) 区分隔离样例检查和独立模型行为评估。
-
-[评估案例](evals/cases.md) 描述八个行为场景和两个集成/分发案例：模糊需求、工作文档冲突、高风险审查、仓库规则冲突、保留历史的重新规划、有边界的 spike、委派实施、工具/审查者不可用时的回退、宿主打包/项目隔离，以及公开 skills.sh 分发。[评估结果](evals/results.md) 记录实际结果、修正和验证限制。
-
-验证器检查打包和 frontmatter；行为评估检查决策、改动和证据。C7 在一个小型 Python 测试项目上使用了三个实施者和一个独立审查者；这不能证明任意仓库上的正确性，也不能证明并行执行不存在竞争问题。技能改名不意味着已重新运行行为案例。
-
-本地集成检查：
-
-```sh
-claude plugin validate --strict .
-claude plugin validate --strict agents
-claude --plugin-dir . plugin details compass
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s evals -p 'test_*.py' -v
-```
-
-Claude CLI 检查不会调用模型。请查看[集成结果](evals/results.md)，区分已检查的清单/技能发现行为与尚未运行的宿主行为执行。
+- [工作流程、测试门槛与示例](docs/workflow.md)
+- [安装与更新](docs/installation.md)
+- [示例应用：React、Next.js 和 Next.js + NestJS](example/README.md)
+- [验证结果与各宿主的限制](evals/results.md)
+- [维护者检查与插件提交](docs/publishing.md)
