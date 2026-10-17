@@ -193,7 +193,7 @@ Native project roles are installed under `.codex/agents/` (TOML), `.claude/agent
 
 Installation, native discovery, full model workflow and cross-host resume are separate evidence levels. Check [evaluation results](evals/results.md) for actual versions, runs and blockers. A host that can read skills may still lack the fresh delegation or independent validation required for behavior implementation; plan/analyze and other unblocked authorized work can continue.
 
-Current full-workflow verification covers **Codex and OpenCode**. Claude Code, Cursor and Copilot runtime acceptance remains pending; their installation entries are not workflow guarantees.
+Full-workflow verification covers **Codex, OpenCode and Claude Code**, with the limits recorded in [evaluation results](evals/results.md#harness-portability--scoped-delivery-2026-10-18). **Cursor and GitHub Copilot are supported but runtime-unverified**: project installation and resource/lifecycle checks are available; native discovery, delegation and full workflows have not been verified. Their runtime checks remain pending.
 
 ### SkCC and skill-sync (optional)
 

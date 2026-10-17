@@ -193,7 +193,7 @@ Native roles nằm tại `.codex/agents/` (TOML), `.claude/agents/` hoặc `.ope
 
 Cài đặt, host nhận diện, workflow chạy với model và resume giữa host là các mức bằng chứng riêng. [Kết quả đánh giá](evals/results.md) ghi phiên bản, lần chạy và blocker thực tế. Host đọc được skill vẫn có thể thiếu fresh delegation hoặc independent validation để implement hành vi; plan/analyze và phần việc độc lập được phép vẫn tiếp tục.
 
-Kiểm chứng full workflow hiện gồm **Codex và OpenCode**. Claude Code, Cursor và Copilot còn chờ kiểm chứng runtime; có target cài đặt không đồng nghĩa workflow đã được xác minh.
+Full workflow đã được kiểm chứng trên **Codex, OpenCode và Claude Code**, với các giới hạn ghi trong [kết quả đánh giá](evals/results.md#harness-portability--scoped-delivery-2026-10-18). **Cursor và GitHub Copilot đã được hỗ trợ nhưng chưa kiểm chứng runtime**: đã có cài đặt theo project và kiểm tra resource/lifecycle; chưa xác minh native discovery, delegation và full workflow. Các bước kiểm chứng runtime của hai harness này vẫn pending.
 
 ### SkCC và skill-sync (tùy chọn)
 

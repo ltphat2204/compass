@@ -193,7 +193,7 @@ Codex 使用项目中的 `.agents/skills`。Cursor 也会发现 `.agents/skills`
 
 安装、宿主发现、完整模型工作流和跨宿主续接是不同的证据层级。[评估结果](evals/results.md)记录实际版本、执行与阻塞情况。可以读取技能的宿主仍可能缺少行为实施所需的独立子代理与测试验证；规划、分析及其他已获授权且不受阻塞的工作可以继续。
 
-目前完整工作流验证覆盖 **Codex 和 OpenCode**。Claude Code、Cursor 和 Copilot 的运行时验收仍待完成；安装目标不代表工作流已验证。
+完整工作流已在 **Codex、OpenCode 和 Claude Code** 上验证，具体限制见[评估结果](evals/results.md#harness-portability--scoped-delivery-2026-10-18)。**Cursor 和 GitHub Copilot 已支持，但尚未完成运行时验证**：提供项目安装及资源/生命周期检查，尚未验证原生发现、委派和完整工作流。两者的运行时检查仍为 pending。
 
 ### SkCC 与 skill-sync（可选）
 
