@@ -26,7 +26,7 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 - Use the user's instructions, repository guidance, existing code, manifests, and CI to establish architecture, relevant paths, verification commands, and delivery conventions. Do not infer a stack from these templates.
 - Use `dev/{feature-slug}/` by default; honor an established or user-selected artifact root and carry it consistently through all stages, including archiving.
-- Prefer CodeGraph when an existing index and tool are available; otherwise use targeted search and source inspection. RTK and Ponytail are optional tools; evidence-first discovery and the smallest correct change remain required without them.
+- Choose available discovery tools by codebase, task scope, and user preference: CodeGraph for symbol/caller tracing; Understand Anything (UA) or Graphify for broader architecture/domain exploration and intent clarification. Reuse existing indexes/graphs, verify relevant findings against current source, and use targeted search when sufficient. RTK can reduce shell output; Ponytail reinforces simplicity. All these tools are optional; evidence-first discovery and minimal correct changes remain required.
 - Read existing specs where they live. Missing tools, specs, or checks are not reasons to invent scaffolding; record the fallback, limitation, or applicable alternative.
 
 ---
@@ -92,7 +92,7 @@ Apply [adaptive workflow](../comp-engineer/references/adaptive-workflow.md) befo
 Investigate and propose until the intent is clear enough to plan; interview only for unresolved material choices. There is no fixed question count: ask only about consequential gaps, and stop when the readiness check below passes.
 
 - Ask one focused question, wait for the answer, then choose the next question based on it.
-- First answer anything the repository, CodeGraph, or specs can establish; ask the user only for product intent, trade-offs, or facts the code cannot reveal.
+- First answer anything the repository, available discovery tools, or specs can establish; ask the user only for product intent, trade-offs, or facts the code cannot reveal.
 - Do not repeat information the user already gave. If an answer opens a new material branch, follow it; if it resolves the issue, move on.
 - Offer a recommended option and a small number of alternatives when a real choice exists. Keep the user free to propose another answer.
 - Let the user defer a decision. Record it as an open question and state whether planning can proceed safely without it.
