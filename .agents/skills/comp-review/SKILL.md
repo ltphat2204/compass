@@ -46,6 +46,9 @@ A single reviewer may cover both dimensions; split reviewers only when expertise
 
 ## Two Review Dimensions
 
+Apply the [code quality rules](../comp-engineer/rules/code-quality.md) when reviewing implementation quality.
+Apply the [debug artifact rule](../comp-engineer/rules/no-debug-artifacts.md) during review. Report task-introduced temporary diagnostics as findings for the implementer to remove; rerun affected checks and review the updated snapshot. Apply the [dependency rule](../comp-engineer/rules/dependency-use.md) when dependencies changed and [compatibility rules](../comp-engineer/rules/compatibility.md) to changed public contracts and persisted formats.
+
 For a pre-freeze test-validation assignment, use the [required independent test gate](../comp-implement/references/testing.md#independent-test-validation--required-before-freeze) instead of waiting for implementation. A fresh reviewer that authored neither suite/resources nor proposed implementation must compare agreed intent/plan to assertions in both directions, inspect coordinator-run harness and spec-derived correct/defective controls, and return `Test validation: PASS/BLOCKED` bound to input/suite identities. Low-risk self-review fallback does not apply to this gate; missing reviewer/evidence blocks freeze. Ordinary implementation review still follows the dimensions below.
 
 1. **Spec compliance**: Does behavior meet each applicable criterion, scope boundary, failure expectation, and mandatory project rule? Identify missing behavior and extra features even when tests pass. Use the coverage mapping from artifact analysis.
