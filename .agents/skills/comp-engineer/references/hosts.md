@@ -18,6 +18,16 @@ Keep all nine sibling folders and their resources together. Resolve cross-skill 
 
 Sources: [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills), [Claude skill locations](https://code.claude.com/docs/en/skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [OpenCode skills](https://opencode.ai/docs/skills/).
 
+## Native lifecycle hooks
+
+Repository marketplace plugins bundle four command hooks in the native default `hooks/hooks.json`: UserPromptSubmit (goal intake), PreToolUse (frozen resources), PostToolUse (stale evidence), and Stop (explicit completion attempt). Codex and Claude Code share the command protocol used here; Codex supplies `CLAUDE_PLUGIN_ROOT` for compatibility. Python 3.9+ and enabled/trusted native hooks are required. Confirm the actual event/tool coverage before relying on a guard.
+
+Use the [coordinator hook contract](hooks.md) when the runtime is present. Copied skills, project installer payloads, and the skills-only submission ZIP have no runtime hooks and retain manual gates. Hooks are workflow guardrails, not filesystem isolation or proof of independent review.
+
+OpenCode 2 has a separate project adapter: configure the checkout's `integrations/opencode` directory, whose `index.js` forwards to the shared Python checks. The installed 2.0.32 rejects configured file paths. Its completion check uses bounded post-success continuation, not a synchronous Stop veto; plugin reload resets in-memory tracking. Native checks passed all four hooks on Codex CLI 0.162.1, Claude Code 2.1.302 and OpenCode 2.0.32. These hook checks are separate from the historical full-workflow and role evidence below.
+
+Sources: [Codex hooks](https://learn.chatgpt.com/docs/hooks), [plugin discovery](https://developers.openai.com/plugins/build/plugins#configure-lifecycle-hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
+
 ## Stage capability preflight
 
 Check capabilities when entering the stage that needs them, and again after changing host/session or relevant tools. The coordinator records actual tool names, observed behavior, authorization, limits and missing evidence in the existing plan/walkthrough; do not create a second task system or inject every host's configuration. A CLI version, role file or previous host's report cannot prove current capabilities. Skills do not grant permission to use tools.

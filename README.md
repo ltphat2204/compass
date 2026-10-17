@@ -104,6 +104,8 @@ Analysis and review check the handoffs. Small tasks use shorter documents; behav
 
 Compass keeps requirements, tasks, and evidence in `dev/{feature}/`. It uses your existing stack and tools. Deployments, merges, and destructive operations follow the authorization and rules of your project.
 
+Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/installation.md#lifecycle-hooks): goal intake, frozen-test protection, stale-evidence detection, and completion checks. They require Python 3.9+ and native hook support/trust. OpenCode 2 uses a separate project adapter; copied skills and the public submission ZIP retain manual gates unless an adapter is registered.
+
 | Skill | Use it to |
 |---|---|
 | `comp-engineer` | Coordinate the full workflow or resume work |

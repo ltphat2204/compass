@@ -1,0 +1,13 @@
+# Plan
+
+1. Independently author and validate/freeze adapter subprocess tests using Node's built-in runtime and Python stdlib; spec-derived controls exercise mapping, content preservation, scoped continuation/loop prevention and cleanup. Do not expose tests to implementation author.
+2. Fresh implementer writes only `integrations/opencode/compass.js`, using the documented V2 surface and existing shared dispatcher. Coordinator integrates documentation after native results.
+3. Run frozen adapter/core checks and actual installed-host native sessions. Only all three PASS permits final documentation/version changes, independent final review, PR/CI, draft release, authorized merge main and publish a tag matching merged code.
+
+## Public adapter interface
+
+ESM default object `{id: 'compass', async setup(ctx)}`. ctx.location.directory is the plugin instance cwd. `ctx.session.hook('prompt', callback)` receives `{sessionID, prompt:{text}, ...}`; preserve text while appending conditional shared intake context. `ctx.tool.hook('execute.before', callback)` receives `{tool,sessionID,input,...}`; map write/edit `{path,...}` and patch `{patchText}` to the shared JSON event, throw Error with denial reason before execution. `execute.after` receives status completed/result or error; append shared PostToolUse context to result.content (string or array of typed text blocks), retaining all other fields and error state.
+
+`ctx.event.subscribe({signal})` is an async iterable. `session.execution.succeeded` has `data.sessionID`; unknown sessions ignored. Call shared Stop with the current loop-guard flag. `ctx.session.prompt({sessionID,text: reason,metadata})` requests a bounded continuation; the locally installed OpenAPI schema confirms optional metadata, surfaced as `event.metadata` in prompt admission. Track internal prompt admission (for example a namespaced metadata flag) so it does not reset the one-continuation guard; genuine new external prompts reset it. Set guard before enqueueing; never process an unlimited self-triggered loop. A repeated invalid completion can emit a visible diagnostic without another prompt. `setup` returns cleanup function that aborts subscription and disposes hook registrations. No native atomic completion veto exists; actual CLI/service behavior is a required native check, not inferred from mocks.
+
+Verification: Python unittest harness runs a Node ESM mock of the public V2 API and real child-process dispatcher; correct/defective controls before freeze; native OpenCode private fixture with installed CLI2.0.32. Existing frozen core tests unchanged. Coordinator owns native evidence and final release decisions. Required independent test validation and final review; missing native events/access remain blocked.
