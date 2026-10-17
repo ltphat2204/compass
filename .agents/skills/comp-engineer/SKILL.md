@@ -41,6 +41,8 @@ Read [adaptive workflow](references/adaptive-workflow.md) before selecting stage
 
 AI proposes the next step and its rationale; users need not operate the stage machinery. Continue authorized work automatically, explain the concrete outcome and verification, and ask only for material decisions that evidence cannot resolve. Resume valid artifacts instead of restarting discovery.
 
+When native Compass hooks are available, follow the coordinator contract in [Lifecycle hooks](references/hooks.md): route goals semantically, activate safeguards for the current feature before implementation, preserve frozen resources, and bind verification/review to the current snapshot before claiming DONE. Brainstorming alone does not authorize code changes. Hosts without the runtime keep the same manual gates.
+
 ## The 6 Lifecycle Responsibilities per Intent
 
 ```mermaid

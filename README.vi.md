@@ -104,6 +104,8 @@ Analyze và Review kiểm tra các bước bàn giao. Việc nhỏ dùng tài li
 
 Yêu cầu, task và bằng chứng được lưu trong `dev/{feature}/`. Compass dùng stack và công cụ sẵn có. Deploy, merge và thao tác phá hủy tuân theo quyền được cấp và quy tắc của project.
 
+Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hooks) tùy chọn: nhận goal, bảo vệ frozen test, phát hiện bằng chứng cũ và kiểm tra hoàn thành. Hook cần Python 3.9+ và được host bật/tin cậy. OpenCode 2 dùng adapter riêng ở project; bản chỉ sao chép skill và ZIP submission vẫn dùng gate thủ công nếu chưa đăng ký adapter.
+
 | Skill | Dùng để |
 |---|---|
 | `comp-engineer` | Điều phối toàn bộ workflow hoặc tiếp tục công việc |

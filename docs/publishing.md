@@ -15,6 +15,8 @@ claude plugin validate --strict .claude-plugin/marketplace.json
 
 For changes to installers or host adapters, also run the relevant tests in `evals/`. Package/discovery checks do not replace model workflow verification; record the checks actually performed in the pull request. Existing behavioral evidence and its limits are in [evaluation results](../evals/results.md).
 
+For lifecycle hook changes, also run `python3 -m unittest evals.test_hooks evals.test_opencode_hooks -v` and verify actual native loading/events on the supported hosts before claiming runtime support. OpenCode 2 uses the `integrations/opencode` directory entry. Repository marketplace plugins include root `hooks/hooks.json` and its runtime; the submission ZIP below deliberately stays skills-only and does not include or enable these hooks.
+
 ## Release a GitHub marketplace update
 
 1. Keep the version in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json` aligned.

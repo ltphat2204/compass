@@ -1,0 +1,21 @@
+{
+  "status": "FROZEN",
+  "validation": "PASS",
+  "author": "/root/hook_test_author",
+  "reviewer": "/root/hook_test_review",
+  "report": "dev/lifecycle-hooks/test-validation.md",
+  "files": {
+    "evals/test_hooks.py": "4457b92ca6a70315184ab7abdd2bfa92f3e5e42fb7f28bc6080894110a06ebc6",
+    "dev/lifecycle-hooks/intent.md": "98d7432ae9411c07354bac0ed6614dbf3dc8cf581daf1dc9de23b8d1882f679a",
+    "dev/lifecycle-hooks/plan.md": "377befd332281e09820a2b957b291bc7156d0b44033923bc2cf04b9374767e7d",
+    "dev/lifecycle-hooks/test-validation.md": "3b413ec964ac91084d557f2b18ebbb7ba0eb42b8c37754f71b65cea0c6f8d6d8",
+    "dev/lifecycle-hooks/test-controls.md": "41802525a4aba27f5d0846410a7deaa4d9e31181bd89eb37593e6c56dac08fac"
+  },
+  "controls": {
+    "/tmp/compass-hook-controls/runner.py": "a54b584d30d6eda3caad526aa6f39a525c2245996e2660689ad39ba14febddff"
+  },
+  "runtime": {
+    "python": "3.14.6",
+    "dependencies": "stdlib unittest; no third-party dependencies"
+  }
+}

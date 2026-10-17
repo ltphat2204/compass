@@ -104,6 +104,8 @@ Analyze 和 Review 检查各阶段交接。小任务使用更简短的文档；�
 
 需求、任务和证据保存在 `dev/{feature}/`。Compass 使用现有技术栈和工具。部署、合并与破坏性操作遵循项目授权和规则。
 
+Marketplace 插件还提供四个可选的[生命周期 hook](docs/installation.md#lifecycle-hooks)：目标接入、冻结测试保护、过期证据检测和完成检查。需要 Python 3.9+ 以及宿主启用和信任 hook。OpenCode 2 使用单独的项目适配器；仅复制技能和 submission ZIP 的安装方式在未注册适配器时继续使用手动门槛。
+
 | 技能 | 用途 |
 |---|---|
 | `comp-engineer` | 协调整个流程或继续已有工作 |

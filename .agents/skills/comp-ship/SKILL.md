@@ -57,6 +57,8 @@ A standalone request to review delivery readiness uses read-only analysis/review
 
 For behavior delivery, first verify the [strict test gate](../comp-implement/references/testing.md): pre-implementation authorship/freeze, sanitized implementer context and test-read guidance, current suite inventory/hashes, and coordinator-run results. Frozen test changes require complete intent/plan revision and a replacement reviewed freeze; missing evidence blocks delivery.
 
+When native hooks are active, finish the [hook completion contract](../comp-engineer/references/hooks.md) against the current snapshot before claiming DONE. A missing, failed or stale record is not a pass; report BLOCKED when the required evidence cannot be obtained. Hook acceptance does not itself authorize release, merge or deployment.
+
 1. Inspect working-tree changes, current branch, remote configuration, and target branch. Preserve unrelated user changes and reuse a suitable existing feature branch.
 2. Follow repository naming conventions; otherwise use `feat/<slug>`, `fix/<slug>`, `refactor/<slug>`, `docs/<slug>`, or `test/<slug>`.
 3. Use the actual review target from repository configuration or the user's request. If it cannot be determined and would change the delivery, ask before pushing or opening review.
