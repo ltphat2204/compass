@@ -13,6 +13,8 @@ Read when coordinating subagent implementation or executing an assigned task pac
 
 ## Before dispatch
 
+Use the shared [role packet and cross-host handoff contract](packets.md) and current [stage capability preflight](../../comp-engineer/references/hosts.md#stage-capability-preflight). Preserve IDs, artifact root, suite/source identities and pending gates when switching hosts; prepare a new sanitized implementer context rather than forwarding full coordinator artifacts.
+
 Before freezing behavior tests, dispatch a fresh independent test reviewer with complete agreed intent/plan, public contracts, actual suite/resources, source/snapshot identities and coordinator-run controls. Require the [independent validation gate](testing.md#independent-test-validation--required-before-freeze); author reports and self-review cannot earn PASS. Native reviewer tools remain read-only; coordinator executes controls and supplies evidence. Dispatch implementers only after the exact PASS snapshot is frozen and sanitized context prepared.
 
 1. Check that dependencies have current accepted implementation and required review. Decompose tightly coupled work serially or assign it to one implementer.
@@ -37,7 +39,7 @@ Required task review and stop/report conditions:
 
 ## During execution
 
-For behavior work, dispatch a test author first with only criteria/domain examples, public interfaces/input contracts, applicable instructions, runner conventions and sanitized fixture patterns. Its packet includes private test write scope, criterion-to-test deliverables, pre-freeze validation, and stop conditions; no proposed implementation/source internals. After review/freeze, verify access restrictions before dispatching an implementer with the packet above in a fresh context. Shared checkouts and inherited histories are unsuitable for this strict boundary. Only coordinator/test reviewers see test evidence; return criterion-level feedback without hidden inputs or assertions. Any frozen-suite change invokes the complete intent/plan revision procedure in [strict testing](testing.md), not a worker repair loop.
+For behavior work, dispatch a test author first with only criteria/domain examples, public interfaces/input contracts, applicable instructions, runner conventions and sanitized fixture patterns. Its packet includes private test write scope, criterion-to-test deliverables, pre-freeze validation, and stop conditions; no proposed implementation/source internals. After review/freeze, verify fresh sanitized context and test-read guidance before dispatching an implementer with the packet above. Shared checkouts are allowed; inherited private conversation/test history is unsuitable for this boundary. Only coordinator/test reviewers see test evidence; return criterion-level feedback without hidden inputs or assertions. Any frozen-suite change invokes the complete intent/plan revision procedure in [strict testing](testing.md), not a worker repair loop.
 
 - Shared workspaces expose edits immediately. Workers stay inside their write scope and do not revert others' changes. If another file/resource is needed, report the smallest scope expansion to the coordinator before editing it; the coordinator resolves ownership and updates the packet.
 - Use existing isolated checkouts only when needed for overlapping work or conflicting commands. Do not create worktrees routinely. The coordinator integrates returned changes deliberately, preserving validation and error handling.

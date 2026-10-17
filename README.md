@@ -6,7 +6,7 @@
 
 **Clear intent. Distributed execution. Verified outcomes.**
 
-Compass is a Spec-Driven Development (SDD) workflow built from nine Agent Skills for Codex, Claude Code, Cursor, and GitHub Copilot: clarify goals, plan the work, implement within scope, and verify outcomes. It keeps the same direction across languages, frameworks, and delivery environments, with technical choices grounded in repository evidence.
+Compass is a Spec-Driven Development (SDD) workflow built from nine Agent Skills, with project installation targets for Codex, Claude Code, Cursor, GitHub Copilot and OpenCode: clarify goals, plan the work, implement within scope, and verify outcomes. Each host's execution capabilities and evidence are documented separately. It keeps the same direction across languages, frameworks, and delivery environments, with technical choices grounded in repository evidence.
 
 Skills use the `comp-` prefix. Start the full workflow with `$comp-engineer`, or invoke individual skills to resume existing artifacts.
 
@@ -108,7 +108,7 @@ From the **target project**, choose an agent and install all nine skills to pres
 npx skills add ltphat2204/compass --skill '*' --agent claude-code --copy
 ```
 
-Replace `claude-code` with `codex`, `cursor`, `github-copilot`, or another agent supported by the CLI. The default scope is the project; omit `--global` when Compass should stay in the current project. The skills CLI installs skills/resources only; native Claude roles require the plugin route below.
+Replace `claude-code` with `codex`, `cursor`, `github-copilot`, or another agent supported by the CLI. The default scope is the project; omit `--global` when Compass should stay in the current project. The skills CLI installs skills/resources only; use the project installer below for supported native roles, or the Claude plugin route. Choose one installation route per host/project to avoid duplicates and ownership collisions.
 
 Preview the list without installing:
 
@@ -159,9 +159,24 @@ python3 scripts/install.py --agent codex --project /absolute/path/to/project
 python3 scripts/install.py --agent claude --project /absolute/path/to/project
 python3 scripts/install.py --agent cursor --project /absolute/path/to/project
 python3 scripts/install.py --agent copilot --project /absolute/path/to/project
+python3 scripts/install.py --agent opencode --project /absolute/path/to/project
 ```
 
-Choose one line for your host. The script copies all nine skills and resources, checks name collisions before writing, rejects destinations redirected outside the project, and cleans up skills it just created if copying fails. It requires `--project`, has no global mode, and does not change host configuration. If a skill with the same name exists, compare/back up customizations before replacing it yourself; there is no `--force`.
+Choose one line for your host. The script installs all nine skills/resources and native roles for Codex, Claude and OpenCode. It requires an existing `--project`, has no global mode, does not change host configuration, and refuses collisions or redirected paths. Source role responsibilities remain in `agents/`; adapters change metadata only. Cursor and Copilot use shared role packets without an unverified native wrapper.
+
+Preview first, then explicitly check, update or uninstall the selected project's managed payload:
+
+```sh
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --check
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall
+python3 scripts/check_portability.py
+```
+
+Ownership records in `.compass/install-<host>.json` contain source revision and payload hashes. Update/uninstall preflight the whole operation and refuse modified/missing tracked files, conflicting new files, unsafe ownership or symlinks; unrelated files remain. `--dry-run` performs the same checks without writes. Existing copied installations without ownership metadata are not adopted automatically: compare/back up customizations first. There is no `--force`. The portability check also accepts `--root` with a project or installed skill directory.
 
 | Host | Project path created by the installer | Invoke the workflow |
 |---|---|---|
@@ -170,10 +185,15 @@ Choose one line for your host. The script copies all nine skills and resources, 
 | Claude Code, plugin session | No copying; use `--plugin-dir` | `/compass:comp-engineer` |
 | Cursor | `.cursor/skills/` | `/comp-engineer` or select a skill with `@` |
 | GitHub Copilot | `.github/skills/` | Ask for `comp-engineer`; CLI: `/comp-engineer` |
+| OpenCode | `.opencode/skills/` | Native skill tool/selector; ask for `comp-engineer` |
 
 Codex uses project `.agents/skills`. Cursor also discovers `.agents/skills`; Copilot supports that directory on the surfaces described in its documentation. When working directly in the Compass checkout, these hosts can use the canonical source without copying. Check the skill selector in your host. [Codex discovery](https://learn.chatgpt.com/docs/build-skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Copilot CLI invocation](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
 
-The script copies skills only, not native Claude roles. Use a plugin session for those three roles. Avoid loading the plugin and copying the same skill set in one session so invocation stays clear.
+Native project roles are installed under `.codex/agents/` (TOML), `.claude/agents/` or `.opencode/agents/` (Markdown). Claude plugin sessions continue to discover the original roles. Codex roles inherit parent permissions; the read-only reviewer instruction does not create a separate sandbox. OpenCode uses its v1 permission mapping. Avoid loading plugin and copied skills/roles together. [Role mappings, capability matrix and stage preflight](.agents/skills/comp-engineer/references/hosts.md), [portable packets and cross-host resume](.agents/skills/comp-implement/references/packets.md).
+
+Installation, native discovery, full model workflow and cross-host resume are separate evidence levels. Check [evaluation results](evals/results.md) for actual versions, runs and blockers. A host that can read skills may still lack the fresh delegation or independent validation required for behavior implementation; plan/analyze and other unblocked authorized work can continue.
+
+Current full-workflow verification covers **Codex and OpenCode**. Claude Code, Cursor and Copilot runtime acceptance remains pending; their installation entries are not workflow guarantees.
 
 ### SkCC and skill-sync (optional)
 

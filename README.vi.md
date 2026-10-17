@@ -6,7 +6,7 @@
 
 **Clear intent. Distributed execution. Verified outcomes.**
 
-Compass là workflow Spec-Driven Development (SDD) gồm chín Agent Skills dùng trên Codex, Claude Code, Cursor và GitHub Copilot: làm rõ mục tiêu, lập kế hoạch, triển khai theo phạm vi và kiểm chứng kết quả. Workflow giữ cùng định hướng trên nhiều ngôn ngữ, framework và môi trường delivery; lựa chọn kỹ thuật dựa trên bằng chứng từ repository.
+Compass là workflow Spec-Driven Development (SDD) gồm chín Agent Skills, với target cài đặt theo project cho Codex, Claude Code, Cursor, GitHub Copilot và OpenCode: làm rõ mục tiêu, lập kế hoạch, triển khai theo phạm vi và kiểm chứng kết quả. Khả năng thực thi và bằng chứng của từng host được ghi riêng. Workflow giữ cùng định hướng trên nhiều ngôn ngữ, framework và môi trường delivery; lựa chọn kỹ thuật dựa trên bằng chứng từ repository.
 
 Tiền tố skill là `comp-`. Bắt đầu công việc xuyên suốt bằng `$comp-engineer`, hoặc gọi từng skill để tiếp tục artifacts hiện có.
 
@@ -108,7 +108,7 @@ Từ **project đích**, chọn agent và cài đủ chín skill để giữ sib
 npx skills add ltphat2204/compass --skill '*' --agent claude-code --copy
 ```
 
-Thay `claude-code` bằng `codex`, `cursor`, `github-copilot` hoặc agent mà CLI hỗ trợ. Scope mặc định là project; không thêm `--global` khi chỉ muốn Compass ở project hiện tại. Cài qua skills CLI chỉ mang skills/resources; native Claude roles cần plugin route bên dưới.
+Thay `claude-code` bằng `codex`, `cursor`, `github-copilot` hoặc agent mà CLI hỗ trợ. Scope mặc định là project; không thêm `--global` khi chỉ muốn Compass ở project hiện tại. Skills CLI chỉ cài skills/resources; dùng project installer bên dưới để có native roles được hỗ trợ, hoặc dùng Claude plugin. Chọn một đường cài cho mỗi host/project để tránh trùng skill và collision ownership.
 
 Xem trước danh sách mà không cài:
 
@@ -159,9 +159,24 @@ python3 scripts/install.py --agent codex --project /absolute/path/to/project
 python3 scripts/install.py --agent claude --project /absolute/path/to/project
 python3 scripts/install.py --agent cursor --project /absolute/path/to/project
 python3 scripts/install.py --agent copilot --project /absolute/path/to/project
+python3 scripts/install.py --agent opencode --project /absolute/path/to/project
 ```
 
-Chọn một dòng cho host cần dùng. Script copy đủ chín skill và resources, kiểm tra trùng tên trước khi ghi, từ chối đích redirect ra ngoài project và dọn những skill nó vừa tạo nếu copy lỗi. Script yêu cầu `--project`, không có chế độ global và không sửa cấu hình host. Nếu đã có skill cùng tên, so sánh/sao lưu bản tùy chỉnh trước khi tự thay thế; không có `--force`.
+Chọn một dòng cho host cần dùng. Script cài đủ chín skill/resources và native roles cho Codex, Claude, OpenCode. Script yêu cầu `--project` đã tồn tại, không có chế độ global, không sửa cấu hình host và từ chối collision hoặc đường dẫn redirect. Trách nhiệm role giữ một nguồn tại `agents/`; adapter chỉ chuyển metadata. Cursor/Copilot dùng packet chung, chưa có native wrapper chưa được xác minh.
+
+Preview trước; sau đó chọn kiểm tra, cập nhật hoặc gỡ bản cài do Compass quản lý trong project:
+
+```sh
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --check
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall
+python3 scripts/check_portability.py
+```
+
+Manifest `.compass/install-<host>.json` lưu revision nguồn và hash payload. Update/uninstall kiểm tra toàn bộ trước khi ghi; file đã sửa/bị thiếu, file mới trùng tên, ownership không an toàn hoặc symlink đều chặn thao tác. File ngoài payload được giữ nguyên. `--dry-run` chạy cùng preflight và không ghi. Bản copy cũ chưa có manifest không được tự nhận ownership: cần so sánh/sao lưu tùy chỉnh trước; không có `--force`. Lint nhận thêm `--root` là project hoặc thư mục skill đã cài.
 
 | Host | Đường dẫn project do installer tạo | Gọi workflow |
 |---|---|---|
@@ -170,10 +185,15 @@ Chọn một dòng cho host cần dùng. Script copy đủ chín skill và resou
 | Claude Code, plugin session | Không copy; dùng `--plugin-dir` | `/compass:comp-engineer` |
 | Cursor | `.cursor/skills/` | `/comp-engineer` hoặc chọn skill bằng `@` |
 | GitHub Copilot | `.github/skills/` | Yêu cầu dùng `comp-engineer`; CLI: `/comp-engineer` |
+| OpenCode | `.opencode/skills/` | Native skill tool/selector; yêu cầu dùng `comp-engineer` |
 
 Codex dùng project `.agents/skills`. Cursor cũng khám phá `.agents/skills`; Copilot hỗ trợ thư mục này trên các surface được tài liệu mô tả. Khi làm việc ngay trong checkout Compass, các host đó có thể dùng canonical source mà không copy. Kiểm tra skill selector trên host đang dùng. [Codex discovery](https://learn.chatgpt.com/docs/build-skills), [Cursor skills](https://prod.cursor.com/help/customization/skills), [Copilot skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Copilot CLI invocation](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
 
-Cài bằng script chỉ copy skills, không copy native Claude roles. Muốn ba role đó, dùng plugin session. Tránh vừa load plugin vừa copy cùng bộ skill cho một session để giữ cách gọi rõ ràng.
+Native roles nằm tại `.codex/agents/` (TOML), `.claude/agents/` hoặc `.opencode/agents/` (Markdown). Claude plugin vẫn dùng roles gốc. Codex kế thừa permissions của parent; chỉ dẫn reviewer read-only không tạo sandbox riêng. OpenCode dùng permission mapping v1. Tránh load plugin cùng bản copy skills/roles. Xem [role mappings, capability matrix và preflight từng bước](.agents/skills/comp-engineer/references/hosts.md), [packet và resume giữa host](.agents/skills/comp-implement/references/packets.md).
+
+Cài đặt, host nhận diện, workflow chạy với model và resume giữa host là các mức bằng chứng riêng. [Kết quả đánh giá](evals/results.md) ghi phiên bản, lần chạy và blocker thực tế. Host đọc được skill vẫn có thể thiếu fresh delegation hoặc independent validation để implement hành vi; plan/analyze và phần việc độc lập được phép vẫn tiếp tục.
+
+Kiểm chứng full workflow hiện gồm **Codex và OpenCode**. Claude Code, Cursor và Copilot còn chờ kiểm chứng runtime; có target cài đặt không đồng nghĩa workflow đã được xác minh.
 
 ### SkCC và skill-sync (tùy chọn)
 

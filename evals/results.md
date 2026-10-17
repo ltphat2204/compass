@@ -2,6 +2,26 @@
 
 # Compass Behavioral Evaluation Results
 
+## Harness portability — scoped delivery, 2026-10-18
+
+This delivery includes the shared installer, portability checks, role packets and capability preflight, with observed runtime acceptance for **Codex and OpenCode only**. Claude Code, Cursor and Copilot workflow acceptance is deferred; existing project installation paths remain available. Installation, discovery, full workflow and different-host resume are separate evidence levels.
+
+- Project-local install supports dry-run, installed check, conservative update/uninstall and revision/SHA256 ownership. Preflight refuses customized or missing managed files, untracked collisions, invalid manifests and redirected paths. Staged replacement preserves hardlinks and rolls back ordinary I/O failures; unrecoverable originals are retained and reported. Crash/power-loss and arbitrary concurrent mutation are outside these guarantees.
+- Native roles derive from the canonical `agents/` responsibilities. Codex TOML and OpenCode Markdown adapters change metadata, not responsibilities; Claude copies its existing canonical role definitions. Cursor/Copilot do not receive invented native wrappers. Packaging checks do not establish runtime readiness.
+- Separate test authors, independent pre-freeze validation, a replacement recovery-suite freeze and sanitized implementation contexts were used. The coordinator's integration suite passed **49 tests**. See the [scoped handoff and reviewed identities](../dev/harness-portability/pr-handoff.md) for delivery checks and remaining gates.
+
+| Harness / case | Observed runtime | Accepted evidence | Limits |
+|---|---|---|---|
+| Codex C19 | CLI 0.162.1 | Separate native author and reviewers; sterile public-only implementation dispatcher; independent prefreeze PASS; 3 production test methods PASS in coordinator and parent reruns; 49 immutable files unchanged; final READY and reconciled 4/4 tracker | Assignment plaintext encrypted; delivery ciphertext matches. Separation follows actual public dispatcher inputs and read history. Generic native children explicitly loaded role instructions; custom-role selector and OS-enforced secrecy are not claimed. Reviewer inspected supplied execution/hash evidence. Ambient loader and two unprefixed read commands recorded. |
+| OpenCode C19 | Temporary CLI 1.18.0, user-selected free DeepSeek | Four distinct native role contexts; independent validation/freeze; 7 production tests PASS in coordinator and parent reruns; final READY and reconciled 4/4 tracker | Source binding reconstructed from complete prefreeze reads, not originally embedded source hashes. Directory-listing/bytecode deviations recorded; bytecode removed. Frozen baseline-control runner retains its original assumption; separate production suite passes. |
+| Codex → OpenCode C20 | OpenCode 1.18.0, free DeepSeek | Actual native implementation and distinct read-only reviewer; preserved root, IDs, state and frozen identities; 4 tests PASS; independently accepted qualified handoff | Extra public hashes/top-level listing exceeded narrow packet wording, with no observed private-content read. Original source-checkpoint native provenance is limited. This handoff alone does not prove full C19 on either host. |
+| Claude Code | Packaging/native discovery partially observed | **Full workflow PENDING — outside this delivery's verified runtime scope** | No workflow/resume PASS claimed. |
+| Cursor / Copilot | Project payload/lifecycle tests only | **Native workflow PENDING — outside this delivery's verified runtime scope** | No CLI/IDE model workflow run or native role wrapper claimed. |
+
+C21 also observed unavailable sender-local storage correctly blocking review, followed by readable delivery and substantive independent validation. Receipt alone was never approval. Earlier interrupted, failed or invalid-context attempts remain excluded from accepted results.
+
+These are bounded manual runtime observations, not a statistical benchmark, universal model guarantee or permission-enforcement proof. Raw native transcripts, account diagnostics and machine-specific temporary logs are excluded from the PR; this publication is a summary, not a self-contained runtime audit bundle. The original all-harness milestone remains incomplete.
+
 ## Adaptive workflow update — 2026-10-14
 
 - Added situational entry routes, evidence-led recommendations, and parent/child milestone coordination without changing strict behavior testing gates.

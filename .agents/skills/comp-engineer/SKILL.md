@@ -24,6 +24,8 @@ This skill orchestrates the complete, end-to-end Spec-Driven Development (SDD) e
 
 For a new agent host, read [Host Integration](references/hosts.md) to map discovery, invocation, tools and delegated roles without changing the lifecycle.
 
+Before entering a stage, apply [stage capability preflight](references/hosts.md#stage-capability-preflight) against actual exposed tools, context controls and authorization. Repeat on a host/session change. Record the affected blocked gate while continuing useful independent authorized stages; installation or host version alone does not prove workflow readiness. Use [portable role packets](../comp-implement/references/packets.md) for dispatch and cross-host resume.
+
 Keep the Compass lifecycle and artifact handoffs; adapt implementation to repository evidence.
 
 - Use the user's instructions, repository guidance, existing code, manifests, and CI to establish architecture, relevant paths, verification commands, and delivery conventions. Do not infer a stack from these templates.
