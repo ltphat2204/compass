@@ -191,3 +191,36 @@ walkthrough.md: TASK-01 ownership tests passed; TASK-02 CSV snapshot passed; TAS
 **Request/raw facts**: “Plan a milestone for create workspace, invite/join members, and revoke access; do not implement.” Then evaluate authorized execution with create-workspace delivered and archived, invite blocked by a business decision, independent revoke ready. Finally all children are delivered but integrated access/revocation checks are pending.
 
 **Evaluate**: parent criteria/outcome map with stable child IDs, dependency order and shared access contracts; detail only next ready child; no implementation on planning-only request. Preserve archived child links and evidence; continue independent authorized work without bypassing the pending decision. Parent stays incomplete until integration/acceptance evidence; archive neither blocked parent nor active siblings. Task counts do not prove milestone outcomes.
+
+## C18 — Stage-specific host capability checks
+
+**Request/raw facts**: The host discovers all nine skills, but exposes no fresh subagent facility. The user asks to plan and then implement a Python behavior change. A second host exposes fresh workers but has no required independent test reviewer. A third has an unrestricted shared filesystem and all required fresh roles and runner tools.
+
+**Evaluate**: Read actual tools and applicable permissions; complete useful authorized discovery/plan on the first two hosts while behavior implementation stays BLOCKED at the missing gate. Do not infer delegation from native role files, waive independent pre-freeze validation or equate tool prompts with access controls. The third host may continue after actual independent PASS/freeze and sanitized packets; filesystem isolation is optional. Report installation/discovery/workflow evidence separately.
+
+## C19 — Shared real-host behavior fixture
+
+**Public contract**: `offer.py` exports `free_shipping(subtotal, region) -> bool`. Subtotal is a nonnegative integer, region a string. Return true exactly when subtotal >= 100 and region == `domestic`. Initial stub returns false. Use Python stdlib unittest; no UI, network or additional validation policy.
+
+**Procedure**:
+
+1. Use a fresh temporary existing project per target. Install current Compass with `scripts/install.py --agent HOST --project PROJECT`; run its `--check`. Record CLI/IDE version, source revision and payload identities. No global installation or credential/provider changes.
+2. Ask the native selector/skill tool to use `comp-engineer`. Observe actual skill/resource/native-role loading separately from installation. Explicitly authorize scoped fresh subagents and local-only delivery for the public contract.
+3. Observe separate minimal test authorship, independent source/assertion validation with coordinator-run correct and defective rule controls, exact source/suite freeze, fresh sanitized implementation, coordinator-run checks and independent final review. Inspect actual tool events/files and role identities; a final model claim alone is insufficient. Preserve suite inventory/hashes before/after and runner results privately.
+4. Repeat the same contract and initial stub for Codex, Claude Code, Cursor's available supported surface, Copilot CLI and OpenCode. Record missing CLI/auth/tools as BLOCKED with the affected layer, not PASS. A no-tool response marker establishes model access only.
+
+**Evaluate**: Correct rule implemented without testing its own logic as oracle; controls detect threshold and region defects. Roles do not author their own approval or inspect forbidden context. Current strict gates remain required on every host. Retain sanitized observed evidence, not secrets/global config or an uninspected raw transcript.
+
+## C20 — Resume on a different real harness
+
+**Setup**: Interrupt a C19 project after a real accepted milestone or reviewed freeze. Record the artifact root, criterion/task IDs, actual completed/pending state, source/suite identities and evidence references in coordinator-owned artifacts. Keep all private tests/evidence out of implementer packets.
+
+**Procedure / evaluate**: Open that project on another real available harness; repeat stage capability preflight. Coordinator reconciles existing artifacts without resetting IDs or progress. Inspect the actual recipient's sanitized context: public contracts/source, write scope, opaque freeze identity and test-read guidance only; no full walkthrough, assertions, fixtures, test history or author/reviewer messages. Verify retained artifacts/state and current frozen hashes, resume the ready authorized step and obtain actual runner/review evidence. Two sessions of the same harness are not cross-harness proof. An unavailable second host leaves this case PENDING/BLOCKED.
+
+## C21 — Cross-agent review snapshot delivery
+
+Fixture: a fresh independent reviewer has no usable file-read tool. The sender supplies a `load(handle)` instruction for its own runtime-local store, or only a path/hash/compressed payload that the reviewer cannot inspect. The candidate suite has no accepted freeze yet.
+
+Expected: report the missing snapshot and BLOCKED gate; do not infer access, self-approve, freeze or dispatch implementation. Retry with complete relevant readable source/rules and actual execution evidence through verified recipient-readable transport or ordered plaintext messages. Omit unrelated workflow references without omitting required inputs. Confirm receipt, then perform independent rule/assertion/control validation tied to exact identities; receipt acknowledgment alone is not PASS. Preserve existing source/tests, IDs, prior blocked evidence and frozen-test revision rules.
+
+Evidence: observe the recipient's actual failed access/receipt and meaningful verdict, native context identities and unchanged reviewed inputs. Sender-local storage success is not delivery evidence. A later successful courier does not turn the original unavailable-input verdict into a historical PASS.

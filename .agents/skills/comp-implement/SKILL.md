@@ -41,6 +41,8 @@ Before editing, require a current consistency gate: use [comp-analyze](../comp-a
 
 ## Coordinator & Delegated Roles
 
+Apply [stage capability preflight](../comp-engineer/references/hosts.md#stage-capability-preflight) before test authorship, independent validation and implementation. Use [portable role packets](references/packets.md), including on cross-host resume; capability checks never waive strict testing or authorize tools.
+
 For behavior changes, read [strict testing](references/testing.md) first: a separate test-author subagent, reviewed frozen suite, sanitized context and test-read guidance, and fresh implementation subagents are mandatory before behavior edits. Missing delegation blocks implementation; generic inline fallbacks do not apply. For other work, use bounded implementers for standard work when authorized and available, with inline fallback otherwise. Read [Delegated Implementation](references/delegation.md) before dispatch.
 
 If acting as a delegated implementer, execute only the assigned packet and return results. Do not run the whole lifecycle, delegate further, or update tasks/walkthrough/progress. The coordinator owns those artifacts and all DONE decisions; the logging rules below apply to the coordinator. Report missing context or needed write-scope expansion before acting outside the packet.

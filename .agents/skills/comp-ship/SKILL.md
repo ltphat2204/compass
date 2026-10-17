@@ -41,6 +41,8 @@ Keep these delivery responsibilities; adapt host, commands, and applicable gates
 
 ## Step 1: Pre-flight Verification
 
+Apply [stage capability preflight](../comp-engineer/references/hosts.md#stage-capability-preflight) for verification, review and delivery using actual exposed tools/access and action-specific authorization. Record installation, discovery, workflow and resume evidence separately; missing runtime or required review evidence remains pending across hosts.
+
 A standalone request to review delivery readiness uses read-only analysis/review and returns findings. Do not log, stage, commit, push, or open review until the user requests execution of delivery.
 
 1. Read the current artifacts, including embedded spike sections when applicable. Confirm task completion and acceptance evidence. A spike delivers a learning result; do not publish or integrate experimental code as production work without a new authorized scope.

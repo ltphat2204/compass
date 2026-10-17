@@ -6,7 +6,7 @@
 
 **明确意图。分工执行。验证成果。**
 
-Compass 是一个规范驱动开发（Spec-Driven Development，SDD）工作流，由九个 Agent Skills 组成，适用于 Codex、Claude Code、Cursor 和 GitHub Copilot：明确目标、制定计划、在指定范围内实施，并验证结果。工作流在不同语言、框架和交付环境中保持同一方向，技术选择以仓库中的证据为依据。
+Compass 是一个规范驱动开发（Spec-Driven Development，SDD）工作流，由九个 Agent Skills 组成，提供 Codex、Claude Code、Cursor、GitHub Copilot 和 OpenCode 的项目安装目标：明确目标、制定计划、在指定范围内实施，并验证结果。各宿主的执行能力与验证证据单独记录。工作流在不同语言、框架和交付环境中保持同一方向，技术选择以仓库中的证据为依据。
 
 技能使用 `comp-` 前缀。通过 `$comp-engineer` 启动完整工作流，也可以调用单个技能，从已有工作文档继续。
 
@@ -108,7 +108,7 @@ flowchart LR
 npx skills add ltphat2204/compass --skill '*' --agent claude-code --copy
 ```
 
-将 `claude-code` 替换为 `codex`、`cursor`、`github-copilot` 或 CLI 支持的其他代理。默认安装范围是项目；如果只希望 Compass 用于当前项目，请勿添加 `--global`。skills CLI 只安装技能和资源；Claude 原生角色需要使用下文的插件方式。
+将 `claude-code` 替换为 `codex`、`cursor`、`github-copilot` 或 CLI 支持的其他代理。默认安装范围是项目；如果只希望 Compass 用于当前项目，请勿添加 `--global`。skills CLI 只安装技能和资源；需要支持的原生角色时，使用下文的项目安装器或 Claude 插件。每个宿主/项目选择一种安装方式，避免重复及所有权冲突。
 
 只查看列表，不安装：
 
@@ -159,9 +159,24 @@ python3 scripts/install.py --agent codex --project /absolute/path/to/project
 python3 scripts/install.py --agent claude --project /absolute/path/to/project
 python3 scripts/install.py --agent cursor --project /absolute/path/to/project
 python3 scripts/install.py --agent copilot --project /absolute/path/to/project
+python3 scripts/install.py --agent opencode --project /absolute/path/to/project
 ```
 
-按宿主选择其中一行。脚本复制全部九个技能及资源，写入前检查名称冲突，拒绝重定向到项目之外的目标；若复制失败，会清理本次刚创建的技能。脚本必须指定 `--project`，没有全局模式，也不修改宿主配置。如果已有同名技能，应先比较或备份自定义内容，再自行替换；没有 `--force` 选项。
+按宿主选择其中一行。脚本安装全部九个技能及资源，并为 Codex、Claude、OpenCode 安装原生角色。必须指定已存在的 `--project`；不支持全局安装，不修改宿主配置，拒绝冲突及重定向路径。`agents/` 是角色职责的唯一来源，适配器只转换元数据。Cursor/Copilot 使用共享任务包，不生成未经验证的原生角色。
+
+先预览，再明确选择检查、更新或卸载当前项目中受管理的文件：
+
+```sh
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --check
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --update
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall --dry-run
+python3 scripts/install.py --agent codex --project /absolute/path/to/project --uninstall
+python3 scripts/check_portability.py
+```
+
+`.compass/install-<host>.json` 记录源版本和文件哈希。更新/卸载先检查整个操作；已修改或缺失的文件、新文件冲突、不安全的所有权记录或符号链接会阻止操作，其他文件保留。`--dry-run` 执行同样的检查而不写入。旧版无清单的复制安装不会被自动接管，请先比较并备份自定义内容；没有 `--force`。可通过 `--root` 检查项目或已安装的技能目录。
 
 | 宿主 | 安装器创建的项目路径 | 调用工作流 |
 |---|---|---|
@@ -170,10 +185,15 @@ python3 scripts/install.py --agent copilot --project /absolute/path/to/project
 | Claude Code，插件会话 | 无须复制；使用 `--plugin-dir` | `/compass:comp-engineer` |
 | Cursor | `.cursor/skills/` | `/comp-engineer`，或通过 `@` 选择技能 |
 | GitHub Copilot | `.github/skills/` | 请求使用 `comp-engineer`；CLI：`/comp-engineer` |
+| OpenCode | `.opencode/skills/` | 原生技能工具/选择器；请求使用 `comp-engineer` |
 
 Codex 使用项目中的 `.agents/skills`。Cursor 也会发现 `.agents/skills`；Copilot 在其文档说明的使用环境中支持该目录。直接在 Compass 仓库副本中工作时，这些宿主可以使用唯一源目录，无须复制。请检查当前宿主中的技能选择器。[Codex 技能发现](https://learn.chatgpt.com/docs/build-skills)、[Cursor 技能](https://prod.cursor.com/help/customization/skills)、[Copilot 技能](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)、[Copilot CLI 调用](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)。
 
-脚本只复制技能，不复制 Claude 原生角色。需要这三个角色时，使用插件会话。避免在同一会话中既加载插件又复制同一套技能，以保持调用方式明确。
+项目原生角色位于 `.codex/agents/`（TOML）、`.claude/agents/` 或 `.opencode/agents/`（Markdown）。Claude 插件仍使用原始角色。Codex 继承父会话权限，只读审查指令不会创建独立沙箱；OpenCode 使用 v1 权限映射。不要叠加插件与复制的技能/角色。参见[能力矩阵、角色映射及阶段预检](.agents/skills/comp-engineer/references/hosts.md)和[共享任务包与跨宿主续接](.agents/skills/comp-implement/references/packets.md)。
+
+安装、宿主发现、完整模型工作流和跨宿主续接是不同的证据层级。[评估结果](evals/results.md)记录实际版本、执行与阻塞情况。可以读取技能的宿主仍可能缺少行为实施所需的独立子代理与测试验证；规划、分析及其他已获授权且不受阻塞的工作可以继续。
+
+完整工作流已在 **Codex、OpenCode 和 Claude Code** 上验证，具体限制见[评估结果](evals/results.md#harness-portability--scoped-delivery-2026-10-18)。**Cursor 和 GitHub Copilot 已支持，但尚未完成运行时验证**：提供项目安装及资源/生命周期检查，尚未验证原生发现、委派和完整工作流。两者的运行时检查仍为 pending。
 
 ### SkCC 与 skill-sync（可选）
 

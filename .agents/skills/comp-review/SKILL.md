@@ -21,6 +21,8 @@ Review the actual change against current intent, plan, tasks, repository constra
 
 ## Review Timing & Independence
 
+Apply [stage capability preflight](../comp-engineer/references/hosts.md#stage-capability-preflight) to the actual reviewer/session and use the reviewer envelope in [portable role packets](../comp-implement/references/packets.md). A rendered native role, different host name or new directory does not prove fresh context, independence or enforced read-only permissions.
+
 - Before implementation, the plan records risk, required reviewer, and blocking gates. Reassess risk when scope changes; small diffs can still be high risk.
 - Review a changed task before DONE when it touches security, persistent data, public contracts, or a prerequisite other tasks rely on. Review the full final change before ship. Low-risk work may combine these into one final review; use independent review when available and authorized, with labeled self-review as a fallback when permitted.
 
