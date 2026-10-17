@@ -8,6 +8,26 @@
 
 Compass gồm chín skill cho coding agent. Bắt đầu bằng `comp-engineer`; agent chọn bước tiếp theo, dùng quy ước của repository và điều chỉnh mức độ lập kế hoạch theo công việc.
 
+## Vì sao có Compass
+
+AI có thể tạo code nhanh hơn tốc độ người dùng hiểu điều vừa được xây dựng hoặc kiểm chứng nó có giải quyết đúng vấn đề không. Người mới có thể nhận được kết quả chạy được nhưng chưa hiểu hành vi và giới hạn. Experienced dev vẫn có thể phải tự phân tích, chia việc, nghĩ edge case và dẫn AI từng bước. Compass được tạo ra để thu hẹp cả hai khoảng trống.
+
+Với người mới, Compass nối ý tưởng với hành vi cụ thể, giải thích các quyết định đáng hiểu và cho thấy kết quả được kiểm chứng ra sao. Với experienced dev, agent khảo sát codebase, phản biện giả định, so sánh phương án và thực hiện công việc đã được cho phép đến bước kiểm chứng. Người dùng sở hữu mục tiêu và các lựa chọn sản phẩm quan trọng; agent đảm nhận phân tích kỹ thuật và thực thi trong phạm vi đó.
+
+Compass thích nghi với yêu cầu, từ một triệu chứng, ý tưởng chưa rõ đến milestone. Workflow giúp bước tiếp theo dễ hiểu và dùng bằng chứng để xác định công việc đã hoàn tất hay chưa.
+
+## Triết lý
+
+**Mục tiêu định hướng; bằng chứng quyết định bước tiếp theo.** Trách nhiệm và quality gate được giữ ổn định, còn cách thực hiện thích nghi theo quy mô, rủi ro và công cụ sẵn có.
+
+1. **Làm rõ intent trước implementation.** Xác định vấn đề, phạm vi, ràng buộc và tiêu chí thành công quan sát được. Khảo sát repository trước; hỏi khi không thể suy ra quyết định quan trọng.
+2. **Dựa vào bằng chứng trước khi áp đặt giải pháp.** Dùng kiến trúc, quy ước, toolchain và CI hiện có. Không áp đặt stack, tầng kiến trúc hay dependency không cần thiết.
+3. **Thay đổi nhỏ nhất giải quyết đủ yêu cầu.** Tái sử dụng pattern hiện có; safeguards theo tác động đến hành vi và dữ liệu.
+4. **Phân tán thực thi, giữ trách nhiệm rõ ràng.** Coordinator giao và tích hợp việc, quyết định DONE; implementer làm trong phạm vi; reviewer kiểm tra độc lập.
+5. **Kiểm chứng phải chứng minh kết quả.** Mỗi tiêu chí có cách kiểm tra và bằng chứng thực tế. Báo cáo, thiếu công cụ hay bỏ qua kiểm tra không được tính là pass.
+6. **Giữ khả năng truy vết khi thay đổi.** Bảo toàn liên kết intent → plan → task → evidence → delivery, ID ổn định, quyết định, ghi chú và lịch sử khi tiếp tục hoặc lập kế hoạch lại.
+7. **Quyền tự chủ đi theo phạm vi được cho phép.** Tiếp tục công việc an toàn trong scope; merge, deploy, thay đổi dữ liệu phá hủy và hành động bên ngoài tuân theo quyền hạn và quy tắc của project.
+
 ## Cài đặt
 
 Chọn một cách cài cho mỗi coding agent.
