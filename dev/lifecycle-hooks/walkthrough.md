@@ -31,3 +31,5 @@
 - User then authorized three-host validation and conditional PR/release/main delivery. Additional OpenCode V2 adapter and release acceptance are tracked in sibling `../lifecycle-hooks-opencode/`; original core test source contract is unchanged. Release remains blocked until all three hosts pass.
 
 - OpenCode2.0.32 subsequently passed all four native adapter checks on the production directory entry, including a bounded real same-session completion continuation; see sibling walkthrough for its post-success limitation and initially rejected configured-file installation. All69 repository tests PASS. Final review and publication are tracked in the sibling release task; no frozen source/suite/resource identity changed.
+
+- Extended delivery completed: PR #11 merged into main, release v0.4.0 published, and its remote tag resolves to the merged commit `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`. Sibling release walkthrough records authoritative GitHub state and completion. No runtime or frozen resource changed during closeout.

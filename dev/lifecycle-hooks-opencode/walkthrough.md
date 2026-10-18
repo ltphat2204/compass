@@ -27,3 +27,9 @@
 
 - Independent final scoped review READY, no actionable findings; see `final-review.md`. Both manifests0.4.0; final package/portability-lint9 PASS, portability checker and native strict manifest checks PASS. Test freezes unchanged; no new code after native acceptance except the verified one-line directory forwarder.
 - User explicitly authorized PR, release and main merge after allthree host checks. Proceed with a reviewable PR and draft release; publish only after confirmed main merge, binding tag to merged commit. This source snapshot intentionally precedes those external outcomes; do not fabricate a published/merged claim in advance.
+
+## OC-TASK-03 — DONE
+
+- [PR #11](https://github.com/ltphat2204/compass/pull/11) created and attached to the chat, then GitHub confirmed MERGED into main at commit `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`. Head identity matched the reviewed branch; merge state was CLEAN/MERGEABLE. No CI checks were reported/configured, which is absence of CI rather than a CI pass.
+- Draft release was created before merge; after confirmed merge its target was updated to that full merged SHA and [v0.4.0](https://github.com/ltphat2204/compass/releases/tag/v0.4.0) published. GitHub confirmed not draft/not prerelease, publication `2026-10-18T02:01:21Z`; remote tag SHA exactly matches the merged commit. An initial short-SHA draft target was rejected by GitHub422 before creation; retry with the full SHA succeeded.
+- Allthree native hosts passed before publication. Final69-test run and scoped package/portability/native validation are recorded above. This closeout changes task/evidence metadata only; runtime, adapter, registration, frozen suites and release-tag source remain unchanged. Original local handoff and extended release tasks are all complete.
