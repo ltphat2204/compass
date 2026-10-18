@@ -9,7 +9,7 @@ codex plugin marketplace add ltphat2204/compass
 codex plugin add compass@compass
 ```
 
-Open a new session and use `$compass:comp-engineer` or the skill picker. The plugin is enabled for your user and reads all nine skills/resources from its installed cache. It needs no clone, Python, MCP server, or hooks.
+Open a new session and use `$compass:comp-engineer` or the skill picker. The plugin is enabled for your user and reads all nine skills/resources from its installed cache. The repository marketplace plugin also bundles four optional lifecycle hooks, requiring Python 3.9+ and a host with native hook support. Review and trust them through Codex's `/hooks` before relying on them. Skills remain usable without hooks, a clone, Python, or an MCP server.
 
 Update:
 
@@ -36,9 +36,33 @@ Run inside Claude Code:
 /plugin install compass@compass
 ```
 
-Use `/compass:comp-engineer`. This includes the nine skills and Claude's native test-author, implementer, and reviewer roles.
+Use `/compass:comp-engineer`. This includes the nine skills, Claude's native test-author, implementer, and reviewer roles, and four lifecycle hooks. Hook commands require Python 3.9+; inspect or manage them using `/hooks`.
 
 Update or uninstall through Claude Code's `/plugin` manager. For development only, load a checkout with `claude --plugin-dir /absolute/path/to/compass` and use `/reload-plugins` after edits.
+
+## Lifecycle hooks
+
+The repository marketplace plugins discover `hooks/hooks.json` automatically. The four hooks provide goal intake, frozen-test protection, stale-evidence detection, and a completion gate. Goal intake supplies conditional guidance to `comp-engineer`; it does not classify prompts with keywords, run all nine skills, or grant implementation authorization.
+
+The execution safeguards use coordinator-owned `.compass/hooks.json` in the target project. Without that state, only intake adds context. See [the state, snapshot, and completion contract](../.agents/skills/comp-engineer/references/hooks.md) for activation and limitations. Hooks never install themselves into host settings or execute the project's test commands.
+
+Copied skills and the project installer do not install runtime hooks. The public submission ZIP also remains skills-only. On those routes, follow the same workflow gates manually unless you separately register a supported adapter. Native hook availability and trust depend on the current host.
+
+### OpenCode 2
+
+Keep a checkout of Compass, install its skills using one of the routes below, and add its adapter directory to the target project's `opencode.json` or `opencode.jsonc`, preserving existing configuration:
+
+```json
+{
+  "plugins": ["/absolute/path/to/compass/integrations/opencode"]
+}
+```
+
+Use the directory, which contains `index.js`. OpenCode 2.0.32 skips a configured file path such as `compass.js`. Keep the checkout in place: the adapter resolves the shared Python runtime from it. No additional npm package or global settings change is required. This adapter targets OpenCode 2, not the earlier OpenCode 1 role integration.
+
+OpenCode maps prompt/tool events to the same four checks. Its completion check runs after `session.execution.succeeded` and can queue one same-session continuation per external prompt; it is not a synchronous Stop veto. A repeated invalid attempt stays unverified without another automatic prompt. The model may report a blocker without changing the state marker, so `status: complete` alone never means verification passed.
+
+Native checks on this machine passed all four hooks on Codex CLI 0.162.1, Claude Code 2.1.302, and OpenCode 2.0.32. See [observations and limits](../evals/results.md#lifecycle-hooks--native-verification-2026-10-18); these bounded checks do not guarantee other versions, models, or desktop surfaces.
 
 ## Copied skills
 
@@ -48,7 +72,7 @@ From your target project:
 npx skills add ltphat2204/compass --skill '*' --copy
 ```
 
-Choose the agent when prompted. To skip the agent prompt, append `--agent cursor`, `--agent github-copilot`, or `--agent opencode`. Keep all nine skills together because their references cross skill directories. This route installs skills/resources, not native agent roles.
+Choose the agent when prompted. To skip the agent prompt, append `--agent cursor`, `--agent github-copilot`, or `--agent opencode`. Keep all nine skills together because their references cross skill directories. This route installs skills/resources, not native agent roles or runtime hooks.
 
 For updates, run `npx skills update` from the target project. Use `npx skills remove` to select and remove a copied installation. Review local customizations before updating.
 

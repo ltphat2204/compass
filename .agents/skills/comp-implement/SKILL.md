@@ -39,6 +39,8 @@ The coordinator reads current intent, plan, tasks, and walkthrough before select
 
 Before editing, require a current consistency gate: use [comp-analyze](../comp-analyze/SKILL.md) if available, otherwise map criteria to plan/tasks/checks and check scope, contradictions, dependencies, and mandatory rules directly. Record the reviewed scope and READY/BLOCKED result in walkthrough. Fix authorized artifact defects before implementation; ask for unresolved material decisions. A prior gate for changed inputs does not apply automatically.
 
+If the native hook runtime is present, the coordinator maintains [hook state](../comp-engineer/references/hooks.md) before implementation, synchronizes the independently validated frozen inventory, and records current verification/review evidence before attempting completion. Workers do not modify this state. Hook diagnostics supplement the strict test gate; they cannot certify independent authorship or replace actual checks.
+
 ## Coordinator & Delegated Roles
 
 Apply [stage capability preflight](../comp-engineer/references/hosts.md#stage-capability-preflight) before test authorship, independent validation and implementation. Use [portable role packets](references/packets.md), including on cross-host resume; capability checks never waive strict testing or authorize tools.

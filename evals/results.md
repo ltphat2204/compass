@@ -2,6 +2,20 @@
 
 # Compass Behavioral Evaluation Results
 
+## Lifecycle hooks — native verification, 2026-10-18
+
+Compass 0.4.0 adds goal intake, frozen-resource protection, stale-evidence detection and explicit completion checks. Both independently authored suites were reviewed and frozen before their implementation; spec-derived correct controls passed and deliberately defective protection/snapshot/content/session/guard rules failed relevant assertions. The coordinator ran all **69 existing and new unittest methods: PASS**. Portability checks and Claude plugin/marketplace strict validation passed.
+
+| Installed host | Actual native observations | Result and limits |
+|---|---|---|
+| Codex CLI 0.162.1 | Isolated local marketplace/plugin install; implicit brainstorm loaded comp-engineer; frozen apply_patch denied with sentinel unchanged; allowed source edit made both prior PASS records STALE; Stop rejected complete, continued, then allowed blocked-state finish | Four hooks PASS, two actual model runs exit0. Production Python/registration matched their tested copies. Existing model/auth retained; unrelated MCP startup authentication errors were not used as evidence. CLI surface only. |
+| Claude Code 2.1.302 | Session-local plugin load; implicit brainstorm invoked Skill compass:comp-engineer; frozen Write denied; allowed source Write emitted STALE; complete-state Stop blocked and the model continued to blocked-state finish | Four hooks PASS, two actual model runs exit0. Original runtime/registration unchanged; strict empty MCP configuration, existing global customizations and configured model retained. |
+| OpenCode 2.0.32 | Production directory `integrations/opencode/index.js` loaded active; implicit brainstorm invoked comp-engineer; frozen native write failed with sentinel preserved; allowed source write returned STALE; succeeded event queued one real same-session continuation | Four hooks PASS with **post-success continuation**, not an atomic Stop veto. Stable final guard scenario had exactly two user messages and two successful executions: Stop(false) blocked, Stop(true) gave unverified feedback, and no third prompt appeared during the quiet interval. The model refused fabricated evidence; the synthetic marker stayed complete but remained unverified. |
+
+Native OpenCode testing caught a distribution mismatch before release: 2.0.32 skips configured file paths even though newer documentation describes them. The verified configuration points to the directory with its `index.js` forwarder; no extra dependency or global configuration rewrite was added. Six test sessions were removed and the private OpenCode server stopped after evidence capture.
+
+These are bounded real-host observations with synthetic temporary projects and the existing configured models, not a guarantee of model compliance, other versions, desktop surfaces or the entire nine-skill lifecycle. Hooks supplement coordinator-owned gates: state/evidence metadata are trusted inputs, opaque writes are detected after drift, one feature is selected per project, and missing/stale evidence never becomes PASS. Raw transcripts and server/account credentials stay outside the repository. Core and adapter acceptance details remain in [core evidence](../dev/lifecycle-hooks/walkthrough.md) and [adapter evidence](../dev/lifecycle-hooks-opencode/walkthrough.md).
+
 ## Harness portability — scoped delivery, 2026-10-18
 
 This delivery includes the shared installer, portability checks, role packets and capability preflight, with observed runtime acceptance for **Codex, OpenCode and Claude Code**. **Cursor and GitHub Copilot are supported but runtime-unverified**: project installation/resource/lifecycle support is present, while native discovery, delegation and full workflow checks remain pending by user decision. Installation, discovery, full workflow and different-host resume are separate evidence levels.

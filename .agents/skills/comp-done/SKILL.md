@@ -76,6 +76,8 @@ For a milestone parent or child, apply [milestone completion and archive rules](
 
 ### Step 3: Execute Archive Move
 
+If [native hook state](../comp-engineer/references/hooks.md) selects this feature, first preserve its current `.compass/hooks.json` as a uniquely named artifact inside the feature folder without overwriting anything. After the archive move is verified, remove only that still-matching active state file; retain the archived copy as historical evidence. Do not deactivate another feature or leave a completed selector pointing to a directory that has moved.
+
 1. Check that the source exists and the exact destination does not. If the destination already exists, stop and ask how to resolve the collision; never merge, nest, or overwrite artifacts silently.
 2. Ensure the parent archive directory exists (examples below use the default root and RTK; substitute the resolved root and native commands when RTK is unavailable):
    ```bash

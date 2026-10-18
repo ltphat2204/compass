@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "validation": "PASS",
+  "author": "/root/opencode_adapter_tests",
+  "reviewer": "/root/opencode_test_review",
+  "report": "dev/lifecycle-hooks-opencode/test-validation.md",
+  "files": {
+    "dev/lifecycle-hooks-opencode/intent.md": "81dfe84cdfc84962c1ac7fb421d1e8d77aae76cc787cd5c41efaaa4472164c62",
+    "dev/lifecycle-hooks-opencode/plan.md": "b8c2f9aff4733bac796d8f5d952b6f161bb576f16a6b02caf8a229eaee235406",
+    "dev/lifecycle-hooks-opencode/test-validation.md": "02929a4c3eb5f41ce545fc2799e0411d7cac6dd22182f1fbf23a6b1a66fb0dd3",
+    "dev/lifecycle-hooks-opencode/test-controls.md": "e41ac89b05a2e53aaecb66a7e04a6a18cf69651686b7dacec52fff9b2620e61f",
+    "evals/test_opencode_hooks.py": "e0606d230a71c53d44d509135d6a3a56c2e3c70078233362bf1302d096e87f07",
+    "evals/fixtures/opencode-hooks/harness.mjs": "8c8b6b0bbd78061de4c33613a6ac58406305b4734439d2a7d032e10379bf1a9c"
+  },
+  "controls": {
+    "/tmp/compass-opencode-controls/content.mjs": "3e4a2b83218ccf304d9c164cb972e19496c91d69cdc5d01abe8dd57083507de4",
+    "/tmp/compass-opencode-controls/good.mjs": "d570b24e4a280d32402f49675372d38523ebdc4748f887121689ac7a18730d52",
+    "/tmp/compass-opencode-controls/guard.mjs": "c66bd4539740ea27fbe742da39062512b775e2c6e471c666597bb2fd442a80e9",
+    "/tmp/compass-opencode-controls/malformed.mjs": "a90a5aa3f24c7acd31120bc2be31208994e061f1933d8b143f3e58a72558ef3d",
+    "/tmp/compass-opencode-controls/mapping.mjs": "056097722347becbeee6819a4368868c0fc00f7965337a33928749567c785420",
+    "/tmp/compass-opencode-controls/prompt-only.mjs": "3f1e516521f5533f861131692370e203b721274794a176f7c208ed4eb8a80701",
+    "/tmp/compass-opencode-controls/scoping.mjs": "dac39559761d01a92102bc18bc21d8cd70e050c3d5f5a8e424f4b7bb90ef3a8b",
+    "/tmp/compass-opencode-controls/shell.mjs": "d86d68c821077afe55f2ddb3283b056a61f6ac1116fea7ed49fcdff0353731de"
+  },
+  "runtime": {
+    "python": "3.14.6",
+    "node": "v26.9.0",
+    "dependencies": "stdlib only"
+  }
+}
