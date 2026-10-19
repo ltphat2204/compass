@@ -5,6 +5,10 @@
 <h1 align="center">Compass</h1>
 
 <p align="center">
+  <img src="assets/compass-banner.png" alt="Compass banner" width="100%">
+</p>
+
+<p align="center">
   <strong>English</strong> | <a href="README.vi.md">Tiếng Việt</a> | <a href="README.zh-CN.md">简体中文</a>
 </p>
 
