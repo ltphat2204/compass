@@ -1,6 +1,6 @@
 {
   "name": "compass",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Adaptive spec-driven development for quick starts, fixes, uncertain ideas, and milestone delivery with independently validated tests and verified outcomes.",
   "author": {
     "name": "ltphat2204"
