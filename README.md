@@ -5,7 +5,7 @@
 <h1 align="center">Compass</h1>
 
 <p align="center">
-  <img src="assets/compass-banner.png" alt="Compass banner" width="100%">
+  <img src="assets/compass-banner-v2.png" alt="Compass banner" width="100%">
 </p>
 
 <p align="center">
