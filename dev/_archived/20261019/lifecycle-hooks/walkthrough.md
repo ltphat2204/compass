@@ -33,3 +33,22 @@
 - OpenCode2.0.32 subsequently passed all four native adapter checks on the production directory entry, including a bounded real same-session completion continuation; see sibling walkthrough for its post-success limitation and initially rejected configured-file installation. All69 repository tests PASS. Final review and publication are tracked in the sibling release task; no frozen source/suite/resource identity changed.
 
 - Extended delivery completed: PR #11 merged into main, release v0.4.0 published, and its remote tag resolves to the merged commit `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`. Sibling release walkthrough records authoritative GitHub state and completion. No runtime or frozen resource changed during closeout.
+
+## Archive closeout — 2026-10-19
+
+- User authorized mandatory spec archival after completion, superseding the earlier archive exclusion for this closeout. Original decisions and delivery history remain preserved above.
+- Delivery: PR #11 merged at `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`; v0.4.0 published, as recorded in the existing delivery evidence. No new remote verification or release operation performed.
+- Source: `dev/lifecycle-hooks/`; destination: `dev/_archived/20261019/lifecycle-hooks/`.
+- No active hook selector exists. Sibling relative references retain their relationship because both completed folders move to the same dated archive. Historical project-relative paths and frozen inventories remain unchanged.
+- Pre-move SHA256 inventory (walkthrough excluded to avoid self-reference; its final bytes are checked separately during move verification):
+
+```json
+{
+  "intent.md": "98d7432ae9411c07354bac0ed6614dbf3dc8cf581daf1dc9de23b8d1882f679a",
+  "plan.md": "377befd332281e09820a2b957b291bc7156d0b44033923bc2cf04b9374767e7d",
+  "tasks.md": "ec6c46cff264a473354c82854c805c76e9b94a3034598377a74c4b48038a9b8e",
+  "test-controls.md": "41802525a4aba27f5d0846410a7deaa4d9e31181bd89eb37593e6c56dac08fac",
+  "test-freeze.json": "747a4a076e51f3812024a87f616259a6d7007d6eacdcbf9566d529f83937e1e0",
+  "test-validation.md": "3b413ec964ac91084d557f2b18ebbb7ba0eb42b8c37754f71b65cea0c6f8d6d8"
+}
+```

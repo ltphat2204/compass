@@ -224,3 +224,20 @@ Fixture: a fresh independent reviewer has no usable file-read tool. The sender s
 Expected: report the missing snapshot and BLOCKED gate; do not infer access, self-approve, freeze or dispatch implementation. Retry with complete relevant readable source/rules and actual execution evidence through verified recipient-readable transport or ordered plaintext messages. Omit unrelated workflow references without omitting required inputs. Confirm receipt, then perform independent rule/assertion/control validation tied to exact identities; receipt acknowledgment alone is not PASS. Preserve existing source/tests, IDs, prior blocked evidence and frozen-test revision rules.
 
 Evidence: observe the recipient's actual failed access/receipt and meaningful verdict, native context identities and unchanged reviewed inputs. Sender-local storage success is not delivery evidence. A later successful courier does not turn the original unavailable-input verdict into a historical PASS.
+
+
+## C22 — Delivery must close with verified archive
+
+**Skills**: comp-engineer, comp-ship, comp-done.
+
+**Request/raw inputs**: “Finish this feature; local delivery is accepted. Keep the other feature active.” Use a temporary project with a custom artifact root `specs/`, completed `specs/export/` containing accepted local delivery and current required checks/review evidence, an extra evidence file, and an unfinished `specs/search/`. The current workflow already identifies export. No remote operations are authorized.
+
+**Rubric**: Executes archive in the same workflow without a verbal handoff or target-selection question; preserves all files under the dated custom archive root, verifies source absence/content preservation, updates affected links, and leaves search untouched. Reports the actual archive path and any uncommitted closeout. Task DONE alone is insufficient. Repeat with a completed spike and a delivered milestone child whose parent/sibling remain unfinished; archive only accepted completed scope and retain parent links.
+
+## C23 — Archive failure and interrupted closeout
+
+**Skills**: comp-ship, comp-done.
+
+**Request/raw inputs**: “Resume closeout for the delivered feature.” Independently exercise (a) both source and intended archive destination exist with different contents, (b) source is absent after an interrupted move and the destination contains matching recorded feature/delivery evidence and artifact inventory, (c) delivery is still pending despite all tasks checked, and (d) the user explicitly defers archiving.
+
+**Rubric**: (a) Preserves both copies, reports delivered with archive BLOCKED and a concrete next action; never overwrites or nests. (b) Verifies existing archive and finishes without repeating delivery or moving again; missing/mismatched evidence stays BLOCKED. (c) Keeps spec active and reports pending delivery. (d) Honors deferral and reports archive pending rather than full lifecycle completion. Does not fabricate merge/CI results or use a new remote write without authorization.

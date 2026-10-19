@@ -33,3 +33,23 @@
 - [PR #11](https://github.com/ltphat2204/compass/pull/11) created and attached to the chat, then GitHub confirmed MERGED into main at commit `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`. Head identity matched the reviewed branch; merge state was CLEAN/MERGEABLE. No CI checks were reported/configured, which is absence of CI rather than a CI pass.
 - Draft release was created before merge; after confirmed merge its target was updated to that full merged SHA and [v0.4.0](https://github.com/ltphat2204/compass/releases/tag/v0.4.0) published. GitHub confirmed not draft/not prerelease, publication `2026-10-18T02:01:21Z`; remote tag SHA exactly matches the merged commit. An initial short-SHA draft target was rejected by GitHub422 before creation; retry with the full SHA succeeded.
 - Allthree native hosts passed before publication. Final69-test run and scoped package/portability/native validation are recorded above. This closeout changes task/evidence metadata only; runtime, adapter, registration, frozen suites and release-tag source remain unchanged. Original local handoff and extended release tasks are all complete.
+
+## Archive closeout — 2026-10-19
+
+- User authorized mandatory spec archival after completion, superseding the earlier archive exclusion for this closeout. Original decisions and delivery history remain preserved above.
+- Delivery: PR #11 merged at `4d9ec698ecdbef7ba533164e0f44ecdec71f728e`; v0.4.0 published, as recorded in the existing delivery evidence. No new remote verification or release operation performed.
+- Source: `dev/lifecycle-hooks-opencode/`; destination: `dev/_archived/20261019/lifecycle-hooks-opencode/`.
+- No active hook selector exists. Sibling relative references retain their relationship because both completed folders move to the same dated archive. Historical project-relative paths and frozen inventories remain unchanged.
+- Pre-move SHA256 inventory (walkthrough excluded to avoid self-reference; its final bytes are checked separately during move verification):
+
+```json
+{
+  "final-review.md": "656b40e2b1ad864b0117516fea4b9443e0775a435512d129bf74d11f9ea81163",
+  "intent.md": "81dfe84cdfc84962c1ac7fb421d1e8d77aae76cc787cd5c41efaaa4472164c62",
+  "plan.md": "b8c2f9aff4733bac796d8f5d952b6f161bb576f16a6b02caf8a229eaee235406",
+  "tasks.md": "8d06b6ac578d6d4f4ee44d5d6c918aefa083a3f6baee4e2fc2dca1e4835bef44",
+  "test-controls.md": "e41ac89b05a2e53aaecb66a7e04a6a18cf69651686b7dacec52fff9b2620e61f",
+  "test-freeze.json": "6609d88641e675578ba08097a8deb474aec5b6b6b2f491366ab0ed359a0ae9e9",
+  "test-validation.md": "02929a4c3eb5f41ce545fc2799e0411d7cac6dd22182f1fbf23a6b1a66fb0dd3"
+}
+```
