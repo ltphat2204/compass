@@ -1,8 +1,16 @@
-# Compass
+<p align="center">
+  <img src="assets/compass.svg" alt="Logo Compass" width="96" height="96">
+</p>
 
-[English](README.md) | **Tiếng Việt** | [简体中文](README.zh-CN.md)
+<h1 align="center">Compass</h1>
 
-[![skills.sh](https://skills.sh/b/ltphat2204/compass)](https://skills.sh/ltphat2204/compass)
+<p align="center">
+  <a href="README.md">English</a> | <strong>Tiếng Việt</strong> | <a href="README.zh-CN.md">简体中文</a>
+</p>
+
+<p align="center">
+  <a href="https://skills.sh/ltphat2204/compass"><img src="https://skills.sh/b/ltphat2204/compass" alt="skills.sh"></a>
+</p>
 
 Được cấp phép theo [Apache License 2.0](LICENSE).
 

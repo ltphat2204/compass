@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "feature": "dev/compass-agent-logo",
+  "status": "complete",
+  "behavior_change": false,
+  "scope": [
+    "assets/compass-agent",
+    "assets/compass.svg",
+    "README.md",
+    "README.vi.md",
+    "README.zh-CN.md"
+  ],
+  "frozen": {},
+  "blockers": [],
+  "verification": {
+    "status": "PASS",
+    "snapshot": "6383e5d374e26e75f413634881d9f27779769a3d2ca8314cb434f2d3ed90e595",
+    "report": "dev/compass-agent-logo/verification.md",
+    "report_sha256": "3b44d4b5db6a138f7b8261b7233ab1ea54c962d40dd1840bed4f89fe9014eac9"
+  },
+  "review": {
+    "status": "PASS",
+    "snapshot": "6383e5d374e26e75f413634881d9f27779769a3d2ca8314cb434f2d3ed90e595",
+    "report": "dev/compass-agent-logo/review.md",
+    "report_sha256": "57f9fb7f11d27dade83d4157213dc54d2e542957439ca8126807de10f43c55f0"
+  }
+}
