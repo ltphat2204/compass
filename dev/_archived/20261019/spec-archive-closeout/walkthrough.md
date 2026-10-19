@@ -21,3 +21,17 @@ Required now: current portability/document checks, repository regression suite, 
 - GitHub API reports zero Actions workflows configured; this is not a CI pass.
 - Fresh independent reviewer `archive_delivery_review` used comp-analyze/comp-review and returned consistency READY for authorized shipping and quality READY, no actionable findings. Reviewed base `f0527d4868816d139b7512940ccabb1d00284d48`, staged tree `636e5530cc2f4f16dd1ec7149040f9c19dc7904c`. Reviewer independently checked 106 original artifacts, 104 inventory hashes, archive links and scope; it did not execute the coordinator's tests or observe the temporary behavioral run.
 - Runtime/frozen suites were not modified. Historical evidence and explicitly untested C22/C23 variants remain qualified. Independent review grants no merge/release authorization.
+
+## Review handoff and accepted local archive
+
+Commit `f2cc764` pushed to `docs/mandatory-spec-archive`; GitHub created draft PR #13 at https://github.com/ltphat2204/compass/pull/13 against main. Local completion was accepted by the user before the shipping request; AC-04 requires a reviewed commit/push/PR, not a merged release. All local criteria are satisfied. The PR remains a separate pending remote review/merge, with no merge or release authorization assumed.
+
+Archive the completed local spec in the same workflow: source `dev/spec-archive-closeout/`, destination `dev/_archived/20261019/spec-archive-closeout/`. No active project hook selector exists. These files have no relative Markdown links needing adjustment. Preserve the following SHA256 inventory, excluding this walkthrough to avoid self-reference; verify its final bytes separately during the move. Final archive metadata/path-only delta receives independent review before readiness.
+
+```json
+{
+  "intent.md": "a304023c5a5cae25999c22b92ca01c9624c38f2932843cfb93f4014e64693308",
+  "plan.md": "2aec4d3b7356e5636900b4e257dd19c4a08cb3c98d9b2845be7bbcbd33eff4ce",
+  "tasks.md": "a8f03e141c9e0ee327a1057dd46693245bacc487108f9000848064834623af19"
+}
+```
