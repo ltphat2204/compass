@@ -1,9 +1,13 @@
 {
+  "archive-inventory.pre-ship.json": "600f026315cdd239569d9ea0b0f8d32af70f477006d422a8c856ca25abd138a2",
+  "delivery-review.md": "bc03dd325b7858fdcb1e5c8992f8f959b554bfae0b689a6e28cb3dee878dac83",
+  "delivery-verification.md": "513bd9168cf1f9fc7739a765d5bb7b802b8ac724cbba9cfa8bd12118e1c4c0ed",
   "hooks-complete.json": "1d6b096117bcb5866592f2d0273db74206629f2d85ca819eaf50ed2e2418218a",
-  "tasks.md": "b54d3c635c49fd3962ad06c83b450edd50ea3853efd53dda2ade6c6d29a2af03",
+  "hooks-ship-complete.json": "7a71bd1c6e1a3ad60363eb16d66ed372e1e44899439ec7aee46b9ec9435cf1d3",
+  "intent.md": "3bfc8d082e701dfd10d74253ebf26b1c7c1fef2c531ff5013c1af46bffff5848",
+  "plan.md": "d03955817018d4821a2e3b6e2f8e4c4bc38fe9ea73e3870f6847c1e5607d6832",
+  "review.md": "57f9fb7f11d27dade83d4157213dc54d2e542957439ca8126807de10f43c55f0",
+  "tasks.md": "6491fe725f00a6c2cafa513c0ead605b4b3d62227f12ebfdcecf3f217ec9afed",
   "verification.md": "3b44d4b5db6a138f7b8261b7233ab1ea54c962d40dd1840bed4f89fe9014eac9",
-  "intent.md": "56526837569f3e320d4da39c1cb6f28ace7c9119ba0299b2ccc7c7f73ed0a573",
-  "plan.md": "a20a312498ec14d304e081a98dd9b34c381e2c368e2e1f5ce32acf10bffc4b75",
-  "walkthrough.md": "d12b588c7524c70a02db5669652e7edf466e73d0e86ed050e5533284b024abbb",
-  "review.md": "57f9fb7f11d27dade83d4157213dc54d2e542957439ca8126807de10f43c55f0"
+  "walkthrough.md": "f5606756a3976e61e70aba4228b5b4b61c86f33460d7cefe767120ddee842824"
 }
