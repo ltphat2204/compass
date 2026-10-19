@@ -1,6 +1,6 @@
 ---
 name: comp-ship
-description: Verify and deliver completed SDD work using repository checks, branch and commit conventions, review tooling, and CI; handle failure loops and authorized merges.
+description: Verify and deliver completed SDD work through repository checks, review, CI, and authorized merges, then archive accepted specs before lifecycle closeout.
 ---
 
 # Compass Shipping & Delivery Skill (`comp-ship`)
@@ -34,7 +34,7 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 ## Standard Shipping Pipeline
 
 ```text
-Pre-flight verification -> Branch -> Atomic commits -> Review handoff -> CI/feedback -> Authorized merge
+Pre-flight verification -> Branch -> Atomic commits -> Review handoff -> CI/feedback -> Confirmed delivery -> Verified archive
 ```
 
 Keep these delivery responsibilities; adapt host, commands, and applicable gates to the project. For local-only work, record remote operations as not applicable and provide an accepted handoff rather than inventing a remote workflow.
@@ -82,4 +82,11 @@ When native hooks are active, finish the [hook completion contract](../comp-engi
 2. On failure, inspect logs and explain the cause. Fix issues caused by this change within authorized scope, update artifacts where necessary, verify locally, commit/push to the same review branch, and re-check.
 3. Ask only when the next action requires a product decision, unavailable credentials, changed scope, or authorization for a consequential action. Stop repeating an unchanged failure when no new evidence or safe correction exists; report the blocker.
 4. When required checks pass, report readiness and request merge authorization unless already explicitly given. Follow the repository's merge strategy and target branch. Deployment is a separate action requiring authorization.
-5. After confirmed merge or accepted local completion, hand off to `comp-done`. Do not archive pending delivery as completed.
+5. After confirmed merge or accepted local/task completion, execute Step 6 in the same workflow. Do not archive pending delivery as completed.
+
+## Step 6: Archive & Closeout
+
+1. Execute [comp-done](../comp-done/SKILL.md), or its archive procedure directly if skill invocation is unavailable. Pass the exact feature directory, resolved artifact root, and confirmed delivery/acceptance evidence; do not leave a verbal handoff or ask the user to invoke another skill.
+2. Every spec folder created for this work must reach verified archive once its own completion gates pass, including light/spike work and milestone children. Task `DONE` and merged delivery alone do not complete the lifecycle. Preserve unfinished parents/siblings and explicit user requests to defer archive; report those exceptions as archive pending, never completed and archived.
+3. Verify the archive result before reporting lifecycle completion. On collision, permission failure, or interrupted archival, preserve artifacts and report delivery status separately from archive PENDING/BLOCKED, with source, intended destination, reason, and next action. Resume the archive step without repeating completed delivery.
+4. Where artifacts are version-controlled, include archive moves and link updates in the authorized commit/review workflow. If delivery already merged, use a follow-up commit/review within existing authorization; never rewrite the delivered tag or assume permission to push/merge. Report any uncommitted or unmerged closeout explicitly.

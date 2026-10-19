@@ -53,10 +53,9 @@ For a milestone parent or child, apply [milestone completion and archive rules](
 
 ### Step 1: Identify Target Feature Directory
 
-1. Detect the active feature directory under `dev/` (excluding `_archived`).
-2. If arguments are provided (e.g. `/done example-feature` or `/done dev/example-feature`), target that specific folder.
-3. If multiple active feature folders exist in `dev/` and none was specified:
-   - List the active folders and ask the user which one to archive.
+1. Use the exact feature directory and artifact root carried from the current workflow or explicit arguments (e.g. `/done example-feature` or `/done dev/example-feature`). Do not rediscover a different feature when ship already identifies the target.
+2. For standalone invocation without a known target, inspect active feature directories under the resolved artifact root (excluding `_archived`). If multiple plausible targets remain, ask which to archive; never sweep unrelated folders based on checked task counts alone.
+3. On resume, inspect any recorded archive destination first. If the source is absent and the destination matches the recorded feature, delivery evidence, and preserved artifact inventory, verify it and finish closeout without moving again. Missing or ambiguous artifacts are BLOCKED, not an assumed successful archive.
 
 ---
 
@@ -83,7 +82,7 @@ If [native hook state](../comp-engineer/references/hooks.md) selects this featur
    ```bash
    rtk proxy mkdir -p dev/_archived/<YYYYMMDD>
    ```
-3. Preserve artifact links when moving: update relative links to files outside the feature folder for the new location, or use an existing stable project-link convention. Do not change historical decisions or evidence.
+3. Preserve artifact links when moving: update relative links to files outside the feature folder for the new location, or use an existing stable project-link convention. Do not change historical decisions or evidence. Before moving, record the source, exact destination, delivery evidence, and file inventory with content hashes in the feature's walkthrough (create a concise walkthrough if absent). Hash the other files after required link/state adjustments; verify the walkthrough's final bytes separately so it does not hash itself. This record supports recovery if the workflow stops after the move.
 4. Move the feature directory into the dated archive:
    ```bash
    rtk proxy mv dev/<feature-slug> dev/_archived/<YYYYMMDD>/<feature-slug>
@@ -93,8 +92,9 @@ If [native hook state](../comp-engineer/references/hooks.md) selects this featur
 
 ### Step 4: Verification & Summary Report
 
-1. Verify that the source is absent and every original artifact is preserved at the destination. Report only artifacts actually present, including any additional files; do not assume all four standard artifacts exist.
-2. Output a clean summary report:
+1. Verify that the source is absent and every original artifact is preserved at the destination against the recorded inventory/hashes, including additional files and the walkthrough's final bytes. Verify adjusted external and parent links and any matching hook-selector cleanup. Do not assume all four standard artifacts exist.
+2. Record the verified archive path in the final report and any active parent/handoff references. Full lifecycle completion requires confirmed delivery plus verified archive for every completed spec folder in scope. A user-deferred or failed archive remains PENDING/BLOCKED; task DONE alone does not satisfy this gate.
+3. Output a clean summary report:
    - **Archived Directory**: `dev/_archived/<YYYYMMDD>/<feature-slug>/`
    - **Contained Artifacts**: [Actual preserved files]
    - **Status**: Completed & Archived.
