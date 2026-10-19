@@ -56,7 +56,7 @@ Run inside Claude Code:
 
 Start with `/compass:comp-engineer`.
 
-### Cursor, GitHub Copilot, OpenCode, and other agents
+### Cursor, GitHub Copilot, OpenCode, Pi, and other agents
 
 Run from the project where you want Compass:
 
@@ -104,7 +104,7 @@ Analysis and review check the handoffs. Small tasks use shorter documents; behav
 
 Compass keeps requirements, tasks, and evidence in `dev/{feature}/`. It uses your existing stack and tools. Deployments, merges, and destructive operations follow the authorization and rules of your project.
 
-Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/installation.md#lifecycle-hooks): goal intake, frozen-test protection, stale-evidence detection, and completion checks. They require Python 3.9+ and native hook support/trust. OpenCode 2 uses a separate project adapter; copied skills and the public submission ZIP retain manual gates unless an adapter is registered.
+Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/installation.md#lifecycle-hooks): goal intake, frozen-test protection, stale-evidence detection, and completion checks. They require Python 3.9+ and native hook support/trust. OpenCode 2 and Pi use separate project adapters; copied skills and the public submission ZIP retain manual gates unless an adapter is registered.
 
 | Skill | Use it to |
 |---|---|
@@ -122,6 +122,7 @@ Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/
 
 - [Workflow, testing gates, and examples](docs/workflow.md)
 - [Installation and updates](docs/installation.md)
+- [Pi Agent setup and required extensions](docs/pi-agent.md)
 - [Working apps: React, Next.js, and Next.js + NestJS](example/README.md)
 - [Verification results and host limits](evals/results.md)
 - [Maintainer checks and plugin submission](docs/publishing.md)

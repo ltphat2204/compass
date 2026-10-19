@@ -1,0 +1,41 @@
+{
+  "gate": "FROZEN",
+  "timestamp": "2026-03-30T00:50:00.000Z",
+  "node_version": "v26.9.0",
+  "runner_command": "node --test tests/*.test.mjs",
+  "test_author": {
+    "role": "comp-test-author",
+    "job_id": "job_mve4dw89_1",
+    "tools": ["write"]
+  },
+  "test_reviewer": {
+    "role": "comp-reviewer",
+    "job_id": "job_mve4gah1_2",
+    "tools": ["read", "grep", "find", "ls"],
+    "verdict": "Test validation: PASS"
+  },
+  "inventory": {
+    "TASK.md": {
+      "path": "TASK.md",
+      "sha256": "8a8c74f639ad10f35a344e434d36e5f8a2d4d1764ab67fb4a1ab09ee4cb01e22"
+    },
+    "package.json": {
+      "path": "package.json",
+      "sha256": "5d865f174046a7316bbc77b55168d72ade74541792e1970ce9fec2c5246771bf"
+    },
+    "tests/task-title.test.mjs": {
+      "path": "tests/task-title.test.mjs",
+      "sha256": "239b3a4134425935a2d98cd214367e618ea5e244803857c94bd5ad615355fc02"
+    },
+    "dev/task-title-v2/coordinator-controls.mjs": {
+      "path": "dev/task-title-v2/coordinator-controls.mjs",
+      "sha256": "304979b93ce01bf0fa6ffb7de1252490afc11877a54f143b84726ac40a16120e"
+    }
+  },
+  "pre_implementation_production_baseline": {
+    "src/task-title.mjs": {
+      "path": "src/task-title.mjs",
+      "sha256": "e538f0b57d2e0d7ae842ce62f8b79605890a0be566e955897b177ef72ea5c31f"
+    }
+  }
+}
