@@ -5,7 +5,7 @@ The JSON-native registrations for Codex and Claude discover the default
 Python 3.9+ and an enabled, trusted plugin are required. Codex supplies the
 compatibility root variable to the hook runtime; it is not promised in Bash tools
 or interactive shells. Hooks never install or modify native global settings.
-OpenCode 2 uses the directory adapter below; other hosts need their own adapters.
+OpenCode 2 and Pi use the adapters below; other hosts need their own adapters.
 The public submission ZIP contains skills only: copied skills work without hooks,
 but copying a skill does not install the runtime or enable native enforcement.
 
@@ -45,8 +45,26 @@ A response may remain unverified even if the state marker still says `complete`;
 only current evidence establishes completion. Reloading the plugin resets its
 in-memory session/continuation tracking.
 
+## Pi adapter
+
+Keep a Compass checkout and load `integrations/pi/compass.ts` explicitly:
+
+```sh
+pi --extension /absolute/path/to/compass/integrations/pi/compass.ts
+```
+
+It maps `before_agent_start` to intake, `tool_call` to frozen-resource checks,
+`tool_result` to stale-evidence feedback, and `agent_before_settle` to the
+completion gate. Pi can continue once with the gate's diagnostic; a second
+invalid attempt leaves a visible warning rather than looping. This is not an
+atomic stop veto. The adapter calls the shared `hooks/compass.py` dispatcher,
+so Python 3.9+ and an active `.compass/hooks.json` are required for execution
+safeguards. Pi must load and trust the extension, which runs with the Pi
+process's operating-system permissions.
+
 Native hooks were observed on Codex CLI 0.162.1, Claude Code 2.1.302 and OpenCode
-2.0.32; this does not establish other versions, models, or desktop surfaces.
+2.0.32. Pi's extension hooks were observed on Pi CLI 1.3.0; these bounded checks
+do not establish other versions, models, or desktop surfaces.
 
 ## Activate execution safeguards
 

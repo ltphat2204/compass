@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "host": "pi",
+  "source_revision": "f8416377588ba9011869cdca99b618a50563c5c0",
+  "files": {
+    ".pi/skills/comp-analyze/SKILL.md": "7b11111a200e0ea5d74baf269dd17e70e358c09615cd5a44d31863c6c3981f22",
+    ".pi/skills/comp-done/SKILL.md": "05ec95f9c8074681b2f5644def6208e96564c64cf594e9f0744bb8ec794317d8",
+    ".pi/skills/comp-engineer/SKILL.md": "799849c4ac921f3438580d774aeaa69115f4a042256d8e73cfe0cd19b5f83c4e",
+    ".pi/skills/comp-engineer/references/adaptive-workflow.md": "aec9f2422760108a4bcfa69d484c3b096e9d13d14d3d7e3eb2e3af02306f3cbf",
+    ".pi/skills/comp-engineer/references/hooks.md": "9bb75965a91d8bee4c2bb4f92856b725a0ede3beb73d1cf825eba3a1bb387ae5",
+    ".pi/skills/comp-engineer/references/hosts.md": "b9609fb89a40461a5c26e72208ed1fa59ec80b5d44fb30ca24ac24b6e2b9cf1e",
+    ".pi/skills/comp-engineer/rules/README.md": "4fa2ec3b96fb29cd0f8790c0cba0671a4631e0ccd074259d6ad64ac2756e6626",
+    ".pi/skills/comp-engineer/rules/code-quality.md": "1d346d4fac819e6252aa59135a0480e0d4367c1bf5988984de55018ce5d8926a",
+    ".pi/skills/comp-engineer/rules/compatibility.md": "9c72b75b913fad77e32a664509a550b31a46c3184547c9613a346aaf8a1b0d71",
+    ".pi/skills/comp-engineer/rules/dependency-use.md": "825012e7e243f3723a04c455682ddf13021360ac69698c70bbeac4cc79a5aae7",
+    ".pi/skills/comp-engineer/rules/design-principles.md": "1c643b00f9c0b25cf34fe606c547eab07259ae18b873f47421294b7f7a51ee90",
+    ".pi/skills/comp-engineer/rules/no-debug-artifacts.md": "1a0d1de4d9243a47fd30a27904f7d7646c87a30c8c4e71cdc7ec24654f26800e",
+    ".pi/skills/comp-implement/SKILL.md": "9a09f1ce3a123bb65517dd604c85357b5d7cd3f80197fea8e7d054e079ca9760",
+    ".pi/skills/comp-implement/references/delegation.md": "a20e56ce3f99b70b608f2b782bcaac00e942ecc6e8a4c9ae77b0d08b4c102125",
+    ".pi/skills/comp-implement/references/packets.md": "c9482fcb86b394dc43f20601cb87f3acd58fbb374acbb7ab89bed9a3dc89b263",
+    ".pi/skills/comp-implement/references/testing.md": "390ec93e026ad97a8bc5c8692914ed57d81584bab9eab5ac2a5590d9fddf0c41",
+    ".pi/skills/comp-intent/SKILL.md": "0398f26cab0d743de019082fe449da5a399771ae35068af5d61da0fb5983468d",
+    ".pi/skills/comp-plan/SKILL.md": "d40926cd99fe305294d72e58dce56ee7db54e6e157e7c635966366f4ec8a143e",
+    ".pi/skills/comp-review/SKILL.md": "1b1ba51eda34f180fd0dfcd3c6c5f5099d476db9eb51cd7603631d239fbeea01",
+    ".pi/skills/comp-ship/SKILL.md": "dc2878be2f4af655166387632274899661ec100824910ae57d9dc54e7a203465",
+    ".pi/skills/comp-tasks/SKILL.md": "bdfc92f4d5429974b6e45f13ea71043101895cbf7b68ffb34af595edd64635a0"
+  }
+}

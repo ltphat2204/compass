@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "feature": "dev/compass-hooks",
+  "status": "complete",
+  "behavior_change": true,
+  "scope": ["src"],
+  "frozen": {
+    "tests/frozen.test.mjs": "33976666f362ff820b371f720f54e95386cc29a71d9d5371ccb8b240b194979f"
+  },
+  "blockers": []
+}

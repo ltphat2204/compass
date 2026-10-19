@@ -62,7 +62,19 @@ Use the directory, which contains `index.js`. OpenCode 2.0.32 skips a configured
 
 OpenCode maps prompt/tool events to the same four checks. Its completion check runs after `session.execution.succeeded` and can queue one same-session continuation per external prompt; it is not a synchronous Stop veto. A repeated invalid attempt stays unverified without another automatic prompt. The model may report a blocker without changing the state marker, so `status: complete` alone never means verification passed.
 
-Native checks on this machine passed all four hooks on Codex CLI 0.162.1, Claude Code 2.1.302, and OpenCode 2.0.32. See [observations and limits](../evals/results.md#lifecycle-hooks--native-verification-2026-10-18); these bounded checks do not guarantee other versions, models, or desktop surfaces.
+Native checks on this machine passed all four hooks on Codex CLI 0.162.1, Claude Code 2.1.302, and OpenCode 2.0.32. Pi's separate extension adapter was exercised on Pi CLI 1.3.0 alongside a full Compass skills workflow. See [runtime observations and limits](../evals/results.md); these bounded checks do not guarantee other versions, models, or desktop surfaces.
+
+### Pi extension
+
+See the [Pi Agent setup guide](pi-agent.md) for required capabilities and a Pi preflight checklist.
+
+Keep a Compass checkout and load its Pi extension explicitly for each session:
+
+```sh
+pi --extension /absolute/path/to/compass/integrations/pi/compass.ts
+```
+
+Install the skills separately with `python3 scripts/install.py --agent pi --project /absolute/path/to/project`. The extension uses Pi's `before_agent_start`, `tool_call`, `tool_result` and `agent_before_settle` events to run the shared Compass checks. Its completion gate can request one final continuation and then leaves an explicit unverified warning; it is not an atomic stop veto. The checkout must remain available, and Pi must trust and load the extension. Pi extensions run with the operating-system permissions of the Pi process.
 
 ## Copied skills
 
@@ -86,7 +98,7 @@ cd compass
 python3 scripts/install.py --agent codex --project /absolute/path/to/project
 ```
 
-Replace `codex` with `claude`, `cursor`, `copilot`, or `opencode` as needed. The target project must already exist. The installer has no global mode and does not change host configuration.
+Replace `codex` with `claude`, `cursor`, `copilot`, `opencode`, or `pi` as needed. The target project must already exist. The installer has no global mode and does not change host configuration. Pi receives skills in its native `.pi/skills/` project directory; its lifecycle extension is loaded separately as described above.
 
 | Host | Skills | Native roles |
 |---|---|---|
@@ -95,6 +107,7 @@ Replace `codex` with `claude`, `cursor`, `copilot`, or `opencode` as needed. The
 | Cursor | `.cursor/skills/` | Shared packets |
 | GitHub Copilot | `.github/skills/` | Shared packets |
 | OpenCode | `.opencode/skills/` | `.opencode/agents/` |
+| Pi | `.pi/skills/` | Shared role packets |
 
 Use the same `--agent` and `--project` with one operation:
 
@@ -113,7 +126,7 @@ Append `--dry-run` to update or uninstall to preview it. Ownership records live 
 - **Skills do not appear:** open a new session; restart the desktop app if needed. In Codex, check `codex plugin list --marketplace compass`.
 - **Duplicate skills:** keep either the plugin or copied/project installation for that host. Remove the extra route using the tool that installed it; preserve customizations first.
 - **Implementation is blocked:** behavior changes require fresh test-author, test-review, and implementation subagents. Installation alone does not provide these host capabilities. Planning and review remain available.
-- **Host support:** Codex, Claude Code, and OpenCode have recorded workflow checks. Cursor and Copilot project packages are supported, but their runtime workflows remain unverified. See [verification results](../evals/results.md).
+- **Host support:** Codex, Claude Code, OpenCode, and Pi have recorded workflow and hook checks. Cursor and Copilot project packages are supported, but their runtime workflows remain unverified. See [verification results](../evals/results.md).
 
 For detailed host mappings, see [Host Integration](../.agents/skills/comp-engineer/references/hosts.md). Optional SkCC/skill-sync integrations are not required for installation; the example configuration remains in [integrations/](../integrations/skill-sync.conf.example).
 

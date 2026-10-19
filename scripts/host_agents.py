@@ -52,7 +52,7 @@ def _read_role(path: Path, name: str) -> tuple[bytes, str, str]:
 
 def render_agents(source: Path, target: str) -> dict[str, bytes]:
     """Return relative native-role paths and bytes for a canonical skills root."""
-    if target not in {"claude", "codex", "opencode", "cursor", "copilot"}:
+    if target not in {"claude", "codex", "opencode", "cursor", "copilot", "pi"}:
         raise ValueError(f"Unknown host target: {target}")
     agents = Path(source).parent.parent / "agents"
     if agents.is_symlink():

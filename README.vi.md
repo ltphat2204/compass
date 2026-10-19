@@ -56,7 +56,7 @@ Chạy bên trong Claude Code:
 
 Bắt đầu bằng `/compass:comp-engineer`.
 
-### Cursor, GitHub Copilot, OpenCode và agent khác
+### Cursor, GitHub Copilot, OpenCode, Pi và agent khác
 
 Chạy từ project bạn muốn dùng Compass:
 
@@ -104,7 +104,7 @@ Analyze và Review kiểm tra các bước bàn giao. Việc nhỏ dùng tài li
 
 Yêu cầu, task và bằng chứng được lưu trong `dev/{feature}/`. Compass dùng stack và công cụ sẵn có. Deploy, merge và thao tác phá hủy tuân theo quyền được cấp và quy tắc của project.
 
-Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hooks) tùy chọn: nhận goal, bảo vệ frozen test, phát hiện bằng chứng cũ và kiểm tra hoàn thành. Hook cần Python 3.9+ và được host bật/tin cậy. OpenCode 2 dùng adapter riêng ở project; bản chỉ sao chép skill và ZIP submission vẫn dùng gate thủ công nếu chưa đăng ký adapter.
+Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hooks) tùy chọn: nhận goal, bảo vệ frozen test, phát hiện bằng chứng cũ và kiểm tra hoàn thành. Hook cần Python 3.9+ và được host bật/tin cậy. OpenCode 2 và Pi dùng adapter riêng ở project; bản chỉ sao chép skill và ZIP submission vẫn dùng gate thủ công nếu chưa đăng ký adapter.
 
 | Skill | Dùng để |
 |---|---|
@@ -122,6 +122,7 @@ Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hoo
 
 - [Workflow, cổng kiểm định test và ví dụ](docs/workflow.md)
 - [Cài đặt và cập nhật](docs/installation.md)
+- [Thiết lập Pi Agent và extension cần thiết](docs/pi-agent.md)
 - [Ứng dụng mẫu: React, Next.js và Next.js + NestJS](example/README.md)
 - [Kết quả kiểm chứng và giới hạn của từng host](evals/results.md)
 - [Kiểm tra dành cho maintainer và gửi duyệt plugin](docs/publishing.md)

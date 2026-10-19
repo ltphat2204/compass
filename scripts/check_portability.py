@@ -8,7 +8,7 @@ from urllib.parse import unquote, urlsplit
 
 HOST_PATHS = {"codex": ".agents/skills", "claude": ".claude/skills",
               "cursor": ".cursor/skills", "copilot": ".github/skills",
-              "opencode": ".opencode/skills"}
+              "opencode": ".opencode/skills", "pi": ".pi/skills"}
 SKILL_NAMES = tuple("comp-" + name for name in (
     "analyze", "done", "engineer", "implement", "intent", "plan", "review", "ship", "tasks"))
 
