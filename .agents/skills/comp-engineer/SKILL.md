@@ -117,8 +117,9 @@ Execute tasks with strict engineering discipline:
 For spikes, deliver the bounded learning evidence and stop/go recommendation; production integration requires a revised authorized scope and gates.
 
 ### Stage 6: Done & Workspace Archiving (`comp-done`)
-1. Once delivery is confirmed (merged review or accepted local/task completion), execute `comp-done` in the same authorized workflow with the exact feature directory and artifact root. Archive under `<artifact-root>/_archived/<YYYYMMDD>/{feature-slug}/`; do not stop at a verbal handoff.
+1. Once delivery is confirmed (merged review or accepted local/task completion), execute `comp-done` in the same authorized workflow with the exact feature directory and artifact root. Standalone specs archive under `<artifact-root>/_archived/<YYYYMMDD>/{feature-slug}/`; milestone specs share the recorded group with `parent/` and `children/<child-slug>/` destinations from [adaptive workflow](references/adaptive-workflow.md). Do not stop at a verbal handoff.
 2. Every spec folder created for the work requires verified archive when its own completion gates pass, including light/spike work and milestone children. Task `DONE` is implementation progress; report the lifecycle complete only after delivery and archive are verified. Preserve unfinished specs and explicit user deferrals; report archive pending with the reason and resume action.
+   Before marking a milestone parent COMPLETE/DONE, verify every active in-scope child is COMPLETE, including confirmed delivery, passed gates, and verified archive in the shared group, plus milestone integration/acceptance evidence. Archive the parent last and verify the grouped inventory and links before lifecycle closeout.
 3. Preserve all artifacts, avoid overwriting an existing destination, and verify the move using `comp-done`. Default artifact root: `dev/`. Carry archive moves/link updates through the authorized Git workflow and disclose any pending persistence.
 
 ---

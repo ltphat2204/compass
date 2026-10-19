@@ -7,7 +7,7 @@ description: Archive completed SDD feature folders into a dated archive after co
 
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
-This skill archives completed Spec-Driven Development working directories from `dev/{feature-slug}/` into a dated archive directory under `dev/_archived/YYYYMMDD/{feature-slug}/` to keep the active `dev/` workspace clean and uncluttered.
+This skill archives completed Spec-Driven Development working directories into dated archives. Standalone specs use `dev/_archived/YYYYMMDD/{feature-slug}/`; milestone parent and child specs share one group directory.
 
 ---
 
@@ -37,17 +37,23 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 dev/
 ├── _archived/
 │   └── 20260913/                     # Format: YYYYMMDD (digits only)
-│       └── example-feature/          # Moved completed feature folder
-│           ├── intent.md
-│           ├── plan.md
-│           ├── tasks.md
-│           └── walkthrough.md
+│       ├── example-feature/          # Standalone completed spec
+│       │   ├── intent.md
+│       │   ├── plan.md
+│       │   ├── tasks.md
+│       │   └── walkthrough.md
+│       └── example-milestone/        # Shared milestone archive group
+│           ├── parent/               # Parent spec, archived last
+│           │   └── intent.md
+│           └── children/
+│               ├── example-milestone-create/  # Complete child spec folder
+│               └── example-milestone-invite/  # Complete child spec folder
 └── <active-feature-folder>/          # Ongoing active features
 ```
 
 ---
 
-For a milestone parent or child, apply [milestone completion and archive rules](../comp-engineer/references/adaptive-workflow.md). Verify child delivery plus parent integration/acceptance before archiving a parent. After a child move, update the parent link and preserve pending siblings; a completed child never implies a completed milestone.
+For a milestone parent or child, apply [milestone completion and archive rules](../comp-engineer/references/adaptive-workflow.md). Before marking the parent COMPLETE/DONE or archiving it, verify every active in-scope child is COMPLETE with delivery/gate evidence and verified archive in the shared group, and verify current parent integration/acceptance evidence. A pending, failed, or deferred child archive blocks parent completion. After a child move, update the parent link and preserve pending siblings; a completed child never implies a completed milestone.
 
 ## Workflow Steps
 
@@ -66,10 +72,11 @@ For a milestone parent or child, apply [milestone completion and archive rules](
 - Use the user's timezone for the archive date when available.
 
 1. Determine the current date formatted as continuous digits: `YYYYMMDD` (e.g., `20260913`).
-2. Construct the destination path:
+2. Construct the standalone destination path:
    ```
    dev/_archived/<YYYYMMDD>/<feature-slug>/
    ```
+3. For milestones, record one group path in the parent intent before the first archive: `dev/_archived/<YYYYMMDD>/<milestone-slug>/`. Use the date of that first archive and reuse the recorded path even if later children or the parent finish on another date. Resolve each child's destination as `<group>/children/<child-slug>/` and the parent's as `<group>/parent/`. Do not choose a new group on resume. If an ongoing milestone already has separately archived specs, consolidate only its recorded members using the same inventory, collision, and link checks before parent completion; leave unrelated historical archives untouched.
 
 ---
 
@@ -78,14 +85,14 @@ For a milestone parent or child, apply [milestone completion and archive rules](
 If [native hook state](../comp-engineer/references/hooks.md) selects this feature, first preserve its current `.compass/hooks.json` as a uniquely named artifact inside the feature folder without overwriting anything. After the archive move is verified, remove only that still-matching active state file; retain the archived copy as historical evidence. Do not deactivate another feature or leave a completed selector pointing to a directory that has moved.
 
 1. Check that the source exists and the exact destination does not. If the destination already exists, stop and ask how to resolve the collision; never merge, nest, or overwrite artifacts silently.
-2. Ensure the parent archive directory exists (examples below use the default root and RTK; substitute the resolved root and native commands when RTK is unavailable):
+2. Ensure the exact destination's parent directory exists (examples below use RTK; substitute native commands when unavailable). An existing milestone group is expected when adding siblings, but the exact spec destination must be absent:
    ```bash
-   rtk proxy mkdir -p dev/_archived/<YYYYMMDD>
+   rtk proxy mkdir -p <destination-parent>
    ```
-3. Preserve artifact links when moving: update relative links to files outside the feature folder for the new location, or use an existing stable project-link convention. Do not change historical decisions or evidence. Before moving, record the source, exact destination, delivery evidence, and file inventory with content hashes in the feature's walkthrough (create a concise walkthrough if absent). Hash the other files after required link/state adjustments; verify the walkthrough's final bytes separately so it does not hash itself. This record supports recovery if the workflow stops after the move.
-4. Move the feature directory into the dated archive:
+3. Preserve artifact links when moving: update relative links to files outside the feature folder for the new location, or use an existing stable project-link convention. For milestones, also update links from already archived members to the moving spec and refresh their archive inventories for those link edits, preserving prior records. Do not change historical decisions or evidence. Before moving, record the source, exact destination, delivery evidence, and file inventory with content hashes in the feature's walkthrough (create a concise walkthrough if absent). Hash the other files after required link/state adjustments; verify the walkthrough's final bytes separately so it does not hash itself. This record supports recovery if the workflow stops after the move.
+4. Move the selected feature directory to its computed exact destination; archive a milestone parent only after checking every in-scope child's completion and grouped archive evidence:
    ```bash
-   rtk proxy mv dev/<feature-slug> dev/_archived/<YYYYMMDD>/<feature-slug>
+   rtk proxy mv <feature-directory> <destination>
    ```
 
 ---
@@ -94,7 +101,8 @@ If [native hook state](../comp-engineer/references/hooks.md) selects this featur
 
 1. Verify that the source is absent and every original artifact is preserved at the destination against the recorded inventory/hashes, including additional files and the walkthrough's final bytes. Verify adjusted external and parent links and any matching hook-selector cleanup. Do not assume all four standard artifacts exist.
 2. Record the verified archive path in the final report and any active parent/handoff references. Full lifecycle completion requires confirmed delivery plus verified archive for every completed spec folder in scope. A user-deferred or failed archive remains PENDING/BLOCKED; task DONE alone does not satisfy this gate.
+   For a child, update its parent row to COMPLETE only after verification. For parent closeout, verify the group contains the parent and every in-scope child at the recorded paths, all preserved inventories match, and links resolve from their final locations. Missing or unverified members block milestone lifecycle completion.
 3. Output a clean summary report:
-   - **Archived Directory**: `dev/_archived/<YYYYMMDD>/<feature-slug>/`
+   - **Archived Directory**: Actual verified spec destination; include the shared group path for milestone work.
    - **Contained Artifacts**: [Actual preserved files]
    - **Status**: Completed & Archived.
