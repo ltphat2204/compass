@@ -221,6 +221,9 @@ class HookTests(unittest.TestCase):
         self.assertRegex(context.lower(), r"resum|existing|continu")
         self.assertRegex(context.lower(), r"explan|status")
         self.assertRegex(context.lower(), r"authoriz|implement")
+        self.assertIn("stop for user approval of both", context)
+        self.assertIn("confirmed active automation goal covering this work", context)
+        self.assertIn("material revisions require renewed approval", context)
 
 if __name__ == "__main__":
     unittest.main()

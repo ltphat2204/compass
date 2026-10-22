@@ -18,7 +18,7 @@ marketplace plugin. This reference is portable and does not require a runtime li
 UserPromptSubmit provides compact semantic guidance: route a new engineering goal
 or brainstorm through comp-engineer, resume ongoing work, and leave simple
 explanation/status requests alone. Exploration does not authorize implementation.
-It neither classifies keywords nor starts an automatic nine-stage pipeline.
+It neither classifies keywords nor starts an automatic nine-stage pipeline. Intake guidance reminds the coordinator to stop for approval of current intent/plan before implementation, except under a confirmed active automation goal covering the work. This is a coordinator gate under the [approval rules](adaptive-workflow.md#approval-before-implementation); the runtime does not verify user approval or active goal status.
 
 ## OpenCode 2 adapter
 
