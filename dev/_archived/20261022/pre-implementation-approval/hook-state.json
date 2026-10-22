@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "feature": "dev/pre-implementation-approval",
+  "status": "complete",
+  "behavior_change": false,
+  "scope": [
+    ".agents/skills/comp-engineer",
+    ".agents/skills/comp-intent/SKILL.md",
+    ".agents/skills/comp-plan/SKILL.md",
+    ".agents/skills/comp-implement/SKILL.md",
+    "hooks/compass.py",
+    "evals/test_hooks.py",
+    "evals/cases.md"
+  ],
+  "frozen": {},
+  "blockers": [],
+  "verification": {
+    "status": "PASS",
+    "snapshot": "3c9694b10b18af894dd94e3b6c40aed70d0811ddf4964b8183934b991f1adc6b",
+    "report": "dev/pre-implementation-approval/verification.md",
+    "report_sha256": "d31064c20d40f013fe1fbdacad0ba552f3570ec8bc626be6c973798857d91fb8"
+  },
+  "review": {
+    "status": "PASS",
+    "snapshot": "3c9694b10b18af894dd94e3b6c40aed70d0811ddf4964b8183934b991f1adc6b",
+    "report": "dev/pre-implementation-approval/review.md",
+    "report_sha256": "9e6b9e8e37aff50a6bcdd4979a139bde5038c83eb78d33985e5d3fa172104da0"
+  }
+}

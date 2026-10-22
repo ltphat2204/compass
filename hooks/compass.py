@@ -140,7 +140,7 @@ def main(event):
     cli = sys.argv[1:] == ['snapshot']
     name = event.get('hook_event_name', '')
     if name == 'UserPromptSubmit':
-        return context(name, 'Compass: for a new engineering goal or brainstorm, use comp-engineer to clarify intent and choose the next useful step. Resume existing feature work. Simple explanations/status questions need no workflow. Exploration does not authorize implementation; do not automatically execute every stage. Before claiming DONE, the coordinator must set active hook state status to complete so Stop can check evidence.')
+        return context(name, 'Compass: for a new engineering goal or brainstorm, use comp-engineer to clarify intent and choose the next useful step. Resume existing feature work. Simple explanations/status questions need no workflow. Exploration does not authorize implementation; do not automatically execute every stage. Before implementation, present current intent and plan, then stop for user approval of both; only a confirmed active automation goal covering this work skips that pause. Preserve valid approval on resume; material revisions require renewed approval. Before claiming DONE, the coordinator must set active hook state status to complete so Stop can check evidence.')
     root, state_path = project(event.get('cwd', os.getcwd()))
     if root is None:
         if cli:
