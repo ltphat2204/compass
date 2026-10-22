@@ -5,6 +5,9 @@ description: Archive completed SDD feature folders into a dated archive after co
 
 # Compass Done & Archive Skill (`comp-done`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 This skill archives completed Spec-Driven Development working directories into dated archives. Standalone specs use `dev/_archived/YYYYMMDD/{feature-slug}/`; milestone parent and child specs share one group directory.

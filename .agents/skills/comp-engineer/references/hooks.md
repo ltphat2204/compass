@@ -1,5 +1,8 @@
 # Native lifecycle hooks
 
+Apply the [shared verification policy](verification.md) for scoped replacement-suite revisions. Strict role separation and immutable freezes remain mandatory.
+
+
 The JSON-native registrations for Codex and Claude discover the default
 `hooks/hooks.json` and run `python3 "${CLAUDE_PLUGIN_ROOT}/hooks/compass.py"`.
 Python 3.9+ and an enabled, trusted plugin are required. Codex supplies the
@@ -96,7 +99,7 @@ Before implementation of behavior changes, populate `frozen` with every file in
 the agreed full frozen suite revision, mapping each relative path to its lowercase
 SHA256 digest. Do not freeze a convenient subset or silently replace the revision.
 An empty map is valid during intake, but cannot pass behavior-change completion.
-Any frozen-suite/resource change requires the complete intent/plan revision and
+Any frozen-suite/resource change requires the scoped intent/plan impact assessment and any required revision and
 independent replacement validation/freeze in [strict testing](../../comp-implement/references/testing.md),
 preserving prior versions and obtaining fresh evidence; a hook warning is not a waiver.
 

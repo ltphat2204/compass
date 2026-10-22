@@ -5,6 +5,9 @@ description: Review SDD implementation compliance and change quality on stable s
 
 # Compass Implementation Review (`comp-review`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 Review the actual change against current intent, plan, tasks, repository constraints, and walkthrough evidence. This review is separate from requirements analysis and does not authorize merge or deployment. Use actual project paths and checks; no particular stack or review service is required.
@@ -32,7 +35,7 @@ Apply [stage capability preflight](../comp-engineer/references/hosts.md#stage-ca
 | Medium | Shared behavior, integration or public interface changes | Both dimensions and affected caller/contract checks; independent review preferred, required if project policy/plan says so |
 | High | Authorization, sensitive data, destructive migration, irreversible effects | Independent reviewer or human review of both dimensions; required reviewer unavailable means review remains PENDING and delivery is blocked |
 
-For the final pre-Ship gate, request a fresh-context independent reviewer when available and authorized, including when implementation was inline. An explicitly requested self-review or unavailable delegation can use labeled self-review for low/medium risk only if the plan/policy permits it; record the reason. High-risk and other mandatory independent/human gates stay PENDING when the required reviewer is unavailable. Subagent review does not replace a specifically required human or specialist approval.
+For the final gate, use one fresh-context independent reviewer when available and authorized to assess requirements, code and test quality together. Reuse a current combined review at Ship; dispatch again only for missing or invalidated scope. An explicitly requested self-review or unavailable delegation can use labeled self-review for low/medium risk only if the plan/policy permits it; record the reason. High-risk and other mandatory independent/human gates stay PENDING when the required reviewer is unavailable. Subagent review does not replace a specifically required human or specialist approval.
 
 A reviewer must have authored none of the changes it reviews. If this skill is invoked as the reviewer subagent, perform the assigned review and return findings; do not spawn another reviewer or edit project artifacts. The coordinator records the result during authorized execution. A standalone review remains read-only.
 
@@ -60,7 +63,7 @@ For behavior changes, apply [acceptance and business logic testing](../comp-impl
 
 ## Findings & Closure
 
-For behavior changes, also verify separate test authorship before implementation, freeze identities/inventory/hashes, documented test-read guidance and sanitized context, sanitized feedback, and coordinator-run evidence. Missing required role/context separation or a frozen-test edit without complete intent/plan revision and a newly reviewed/frozen suite blocks DONE/delivery. Review is not permission to repair frozen tests in place, including harness errors.
+For behavior changes, also verify separate test authorship before implementation, freeze identities/inventory/hashes, documented test-read guidance and sanitized context, sanitized feedback, and coordinator-run evidence. Missing required role/context separation or a frozen-test edit without scoped intent/plan impact assessment and any required revision and a newly reviewed/frozen suite blocks DONE/delivery. Review is not permission to repair frozen tests in place, including harness errors.
 
 - Each finding contains severity, actual path/line or artifact section, evidence, impact, and suggested correction. Avoid speculative issues with no plausible affected scenario.
 - **BLOCKER**: correctness/security/data-loss issue, mandatory-rule violation, missing core behavior, or missing required verification/reviewer. Blocks DONE for the affected task and blocks delivery.

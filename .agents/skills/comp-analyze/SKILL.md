@@ -5,6 +5,9 @@ description: Review SDD requirements quality and cross-artifact consistency befo
 
 # Compass Artifact Analysis (`comp-analyze`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 Use this read-only gate for requirements quality or consistency between intent, plan, tasks, and evidence. It does not test implementation correctness or grant delivery permission.
@@ -50,7 +53,7 @@ Build a compact coverage table:
 - Validate verification procedures against actual configuration when available. Unavailable checks remain unavailable; absence of CI is not a pass.
 - For behavior changes, use [acceptance and business logic testing](../comp-implement/references/testing.md) to check agreed examples/expected results, existing or planned executable tests for changed rules, relevant boundary/failure and integration checks, and test-task ownership. A command alone is not behavioral coverage. During planning, tests may be planned paths; at delivery, require actual tests and current results. Justified manual checks remain valid for suitable outcomes.
 - At delivery, compare completed tasks and walkthrough evidence with the current criteria and changed files. A checked box alone is not completion evidence. Changed requirements invalidate affected previous results.
-- For behavior implementation readiness, require separate test authorship, reviewed freeze with inventory/hashes bound to intent/plan, documented test-read guidance and sanitized context, and sanitized packets. At delivery verify frozen-suite integrity and coordinator-run results. A frozen-test change without complete intent/plan revision and replacement freeze blocks readiness; generic inline fallback cannot waive this gate.
+- For behavior implementation readiness, require separate test authorship, reviewed freeze with inventory/hashes bound to intent/plan, documented test-read guidance and sanitized context, and sanitized packets. At delivery verify frozen-suite integrity and coordinator-run results. A frozen-test change without scoped intent/plan impact assessment and any required revision and replacement freeze blocks readiness; generic inline fallback cannot waive this gate.
 - Compare mandatory repository rules with all artifacts. Distinguish a proposed exception from an explicitly authorized amendment; do not weaken a rule to make the report pass.
 
 ## 3. Findings & Gate Decision

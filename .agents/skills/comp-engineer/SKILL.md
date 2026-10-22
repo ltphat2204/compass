@@ -5,6 +5,9 @@ description: "Adaptive SDD workflow for quick starts, fixes, uncertain ideas, an
 
 # Compass Master Engineer Skill (`comp-engineer`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 This skill orchestrates the complete, end-to-end Spec-Driven Development (SDD) engineering lifecycle across technology stacks: from initial idea exploration to verified delivery and archiving.
@@ -74,7 +77,7 @@ graph TD
 
 ### Stage 2: Technical Planning (`plan.md`)
 1. Use `comp-plan` when available; otherwise build an outcome-linked plan with actual deliverables, dependency order, verification matrix, risk/reviewer gates, and task handoff.
-   For behavior changes, apply [strict testing](../comp-implement/references/testing.md) even when stage skills are unavailable: Plan/Tasks → separate fresh test-author subagent → review/freeze → sanitized context and test-read guidance → fresh implementation subagent → coordinator-run tests. No behavior implementation fallback is allowed without delegation. Implementers must not read or modify tests or receive private case details. Any frozen-test change requires complete intent/plan revision and a new suite freeze, preserving history. Explain evidence to the user after implementation closes; no new coverage target is imposed. This gate overrides generic inline/serial fallbacks throughout the lifecycle.
+   For behavior changes, apply [strict testing](../comp-implement/references/testing.md) even when stage skills are unavailable: Plan/Tasks → separate fresh test-author subagent → review/freeze → sanitized context and test-read guidance → fresh implementation subagent → coordinator-run tests. No behavior implementation fallback is allowed without delegation. Implementers must not read or modify tests or receive private case details. Any frozen-test change requires scoped intent/plan impact assessment and any required revision and a new suite freeze, preserving history. Explain evidence to the user after implementation closes; no new coverage target is imposed. This gate overrides generic inline/serial fallbacks throughout the lifecycle.
 2. Standard work uses the five-section layout; light work combines sections/omits empty phases; spikes embed a bounded learning plan/checklist in intent and record results in walkthrough. Preserve existing artifact locations on resume.
 3. Plan scoped implementers and a fresh independent final reviewer when delegation is available and authorized; record ownership, dependencies, parallel eligibility, and integrated checks. Inline/serial execution is the fallback for tightly coupled work or unavailable delegation.
 4. Plan review by impact: low risk permits labeled self-review, medium requires affected caller/integration checks plus policy gates, high requires independent or human review. Required reviewer unavailable blocks delivery.
@@ -108,8 +111,8 @@ Execute tasks with strict engineering discipline:
 ---
 
 ### Stage 5: Pre-flight Verification & Shipping (`comp-ship`)
-1. Require current delivery consistency analysis and final review of spec compliance plus actual change quality. Request a fresh independent reviewer when available and authorized; reviewer must not have authored reviewed code. Freeze its snapshot and re-review changed portions. Resolve blockers and obtain required independent/human review; record input scope and results.
-2. Run the verification matrix and required delivery gates from `plan.md`, confirming commands against repository configuration and CI. Record results in `walkthrough.md`.
+1. Reuse current consistency evidence and one combined final review of requirements, code and test quality. Request a fresh independent reviewer only for missing or invalidated scope when available and authorized; reviewer must not have authored reviewed code. Freeze its snapshot and re-review changed portions. Resolve blockers and obtain required independent/human review; record input scope and results.
+2. Reuse current verification-matrix results from `plan.md`; run only missing or invalidated checks and mandatory delivery gates, confirming commands against repository configuration and CI. Record results in `walkthrough.md`.
 3. Follow established branch, commit, review, and CI conventions; use semantic branches and Conventional Commits when no convention exists. Do not add agent attribution.
 4. Deliver through the configured host and review tool. For GitHub, `gh` is one option; for local-only work, provide a verified handoff and mark remote review/CI as not applicable.
 5. Diagnose and fix failures within authorized scope, update artifacts, and re-check. Stop for unavailable access, product decisions, or consequential actions requiring approval.
