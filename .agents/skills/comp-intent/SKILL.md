@@ -5,6 +5,9 @@ description: Discover user intent through an adaptive interview grounded in repo
 
 # Compass Intent Discovery Skill (`comp-intent`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 This skill discovers intent through evidence, concrete proposals, and questions only where a material decision remains. It grounds the discussion in real code and specifications using repository evidence and available specifications, follows up on consequential gaps one question at a time, and generates `dev/{feature-slug}/intent.md` only when the intent is clear enough to plan.

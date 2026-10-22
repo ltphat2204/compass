@@ -5,6 +5,9 @@ description: Transform SDD intent into a risk-appropriate implementation plan an
 
 # Compass Technical Planning (`comp-plan`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 ## Decisions, Modes & Existing Work
@@ -65,7 +68,7 @@ Include a verification matrix in the roadmap (or embedded spike plan):
 |---|---|---|---|---|
 | Existing ID or new AC-XX | Agreed observable outcome | Actual or planned check | Actual procedure / path | Acceptance/review/delivery |
 
-For behavior changes, read [acceptance and business logic testing](../comp-implement/references/testing.md). Order separate test-author work, test review/freeze, sanitized packet preparation and test-read guidance, then fresh implementation subagents. Plan executable tests for changed rules and relevant boundary/failure/integration cases; retain adequate existing tests. Record test workspace/ownership, frozen-suite manifest and intent/plan identities, coordinator execution, and sanitized implementation packets. Light mode keeps these gates. Any frozen-test change requires complete intent and plan revision before a replacement suite is authored/frozen. No new coverage percentage is imposed; mandatory repository gates remain required. This strict behavior gate overrides ordinary inline/delegation fallbacks.
+For behavior changes, read [acceptance and business logic testing](../comp-implement/references/testing.md). Order separate test-author work, test review/freeze, sanitized packet preparation and test-read guidance, then fresh implementation subagents. Plan executable tests for changed rules and relevant boundary/failure/integration cases; retain adequate existing tests. Record test workspace/ownership, frozen-suite manifest and intent/plan identities, coordinator execution, and sanitized implementation packets. Light mode keeps these gates. Any frozen-test change requires scoped intent/plan impact assessment and any required revision before a replacement suite is authored/frozen. No new coverage percentage is imposed; mandatory repository gates remain required. This strict behavior gate overrides ordinary inline/delegation fallbacks.
 
 Keep user/business outcomes separate from implementation choices. Confirm commands from the repo; manual checks are valid when suitable, unavailable checks are not passes. For bugs, include original-failure reproduction or equivalent evidence and a regression check proportional to risk. For spikes, map checks to the learning question and stop/go criterion.
 

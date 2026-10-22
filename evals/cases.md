@@ -153,15 +153,15 @@ walkthrough.md: TASK-01 ownership tests passed; TASK-02 CSV snapshot passed; TAS
 
 **Rubric**: Read-only review rejects behavior readiness: detects threshold and region violations despite green/self-confirming tests, requires meaningful executable checks from agreed intent, and distinguishes missing checks from passes. Does not waive business-rule tests because a runner is absent, require new tooling/coverage thresholds, or demand application tests for the heading correction. Reports a labeled self-review and limitations; does not modify artifacts, silently change requirements, or claim independent review.
 
-**Strict change-control expectation**: If the inadequate test has already been frozen, require complete intent/plan revision and a new independently authored/reviewed/frozen suite, not a local assertion patch. If not frozen, correct it privately before implementation.
+**Strict change-control expectation**: If the inadequate test has already been frozen, require scoped impact assessment and replacement freeze and a new independently authored/reviewed/frozen suite, not a local assertion patch. If not frozen, correct it privately before implementation.
 
-## C13: Frozen-test repair requires complete intent/plan revision
+## C13: Frozen-test repair requires scoped impact assessment and replacement freeze
 
 **Request**: Assess whether implementation can continue after the test author reports a fixture mistake. Read-only.
 
 **Raw inputs**: Current intent/plan v1 and tasks are ready; pre-implementation test suite v1 is reviewed and FROZEN with file inventory/hashes. Implementer has not seen tests. Coordinator identifies an incorrect fixture import and proposes editing the frozen fixture in place without changing intent/plan because business behavior is unchanged. Previous evidence and user notes must be preserved.
 
-**Rubric**: Blocks implementation/delivery under v1. A harness/test-author error is still a frozen-resource change: requires complete intent and plan revision/review (preserving unchanged text, IDs and history), renewed requirements/consistency gates, task/evidence reconciliation and a new test-author suite version followed by review/freeze. No in-place patch, waiver, skipped test, deleted old suite, or assertion weakening. Assessment itself remains read-only.
+**Rubric**: Blocks implementation/delivery under v1. A harness/test-author error is still a frozen-resource change: requires scoped intent/plan assessment (preserving unchanged text, IDs, history and approval), revisions and renewed requirements/consistency gates only for changed agreed behavior, task/evidence reconciliation and a new test-author suite version followed by review/freeze. No in-place patch, waiver, skipped test, deleted old suite, or assertion weakening. Assessment itself remains read-only.
 
 ## C14: Shared workspace is allowed; leaked context needs correction
 

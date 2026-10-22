@@ -5,6 +5,9 @@ description: Execute SDD tasks with separate frozen tests and isolated implement
 
 # Compass Implementation Skill (`comp-implement`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 This skill drives the step-by-step execution of tasks defined in `dev/{feature-slug}/tasks.md`, ensuring transparent logging in `dev/{feature-slug}/walkthrough.md`, evidence-based impact checks, minimal correct changes, and project-appropriate verification.
@@ -79,7 +82,7 @@ Before implementation, apply the [code quality rules](../comp-engineer/rules/cod
   3. Update the Progress Overview Table in `tasks.md`.
 
 ### 4. Project-Appropriate Verification & CLI
-- For behavior changes, apply [strict testing](references/testing.md): coordinator dispatches the independent test author before implementation, reviews/freezes the suite, prepares sanitized packets and test-read guidance, then dispatches fresh implementers instructed not to inspect tests. Coordinator alone runs the frozen checks and provides sanitized criterion-level feedback. Any frozen-test/resource change requires complete intent/plan revision and a new suite freeze; no percentage coverage target is added.
+- For behavior changes, apply [strict testing](references/testing.md): coordinator dispatches the independent test author before implementation, reviews/freezes the suite, prepares sanitized packets and test-read guidance, then dispatches fresh implementers instructed not to inspect tests. Coordinator alone runs the frozen checks and provides sanitized criterion-level feedback. Any frozen-test/resource change requires scoped intent/plan impact assessment and any required revision and a new suite freeze; no percentage coverage target is added.
 - Run the verification procedures recorded in `plan.md` for the affected task, using their actual working directories. Start narrow and include broader required gates before delivery.
 - Log criterion-to-test references, observed results, and a brief explanation of the business rule proved and remaining limits. Passing existing checks is insufficient when they do not exercise the changed rule.
 - Prefer RTK when available and compatible with repository instructions; otherwise run the native commands.
@@ -87,7 +90,7 @@ Before implementation, apply the [code quality rules](../comp-engineer/rules/cod
 
 ### 5. Risk-Based Review & Fresh Evidence
 
-Use [comp-review](../comp-review/SKILL.md) when available. Otherwise review both spec compliance and actual change quality: request a fresh independent final reviewer when available and authorized; low-risk work permits labeled self-review when unavailable or explicitly requested; medium risk needs caller/integration checks and any reviewer required by policy/plan; high risk requires an independent or human reviewer. Review security, persistent-data, public-contract, and prerequisite tasks before DONE; review the complete change before ship. Required reviewer unavailable means PENDING, not pass.
+Use [comp-review](../comp-review/SKILL.md) when available. Otherwise obtain one combined requirements/code/test-quality review for missing or invalidated scope, reusing a current result: request an independent reviewer when available and authorized; low-risk work permits labeled self-review when unavailable or explicitly requested; medium risk needs caller/integration checks and any reviewer required by policy/plan; high risk requires an independent or human reviewer. Review security, persistent-data, public-contract, and prerequisite tasks before DONE; review the complete change before ship. Required reviewer unavailable means PENDING, not pass.
 
 Review a stable snapshot; pause writes to reviewed files/dependencies and identify the exact revision or relevant hashes. Record reviewer, independence, risk, reviewed scope, findings, and closure in walkthrough. Correct in-scope issues, run affected checks, and re-review changed portions. Current completion claims require evidence for the current code and criteria; BLOCKER findings prevent DONE and delivery. Keep failed/blocked task attempts in walkthrough, with the next safe action.
 

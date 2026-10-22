@@ -69,7 +69,7 @@ Behavior changes, including hotfixes, follow this sequence:
 
 A shared filesystem is supported; host-enforced isolation is optional. Separate authorship, independent validation, freeze, and sanitized context remain mandatory, including light mode. Missing prerequisites block behavior implementation; hashes and green runs alone do not approve tests.
 
-Changes to frozen tests or expectation-affecting resources require complete intent/plan revision, task/evidence reconciliation, and a newly reviewed/frozen suite. Preserve prior versions and history.
+Changes to frozen tests or expectation-affecting resources require scoped intent/plan impact assessment, revision only where agreed behavior changes, affected task/evidence reconciliation, and a newly independently reviewed/frozen replacement suite. Preserve prior versions and history.
 
 Reproduce a bug when practical and establish a failing baseline before the fix. If reproduction is unavailable, record the limit and evidence used. Test business rules at the lowest useful layer, integration boundaries when changed, and critical journeys when needed. Visual outcomes may use justified manual checks. There is no new percentage-coverage target.
 
@@ -98,3 +98,5 @@ Provide findings and a stop/go recommendation; do not implement for production.
 ```
 
 Three [working examples](../example/README.md) cover React + Vite, full-stack Next.js, and Next.js + NestJS. Their recorded checks are local, with production deployment and Safari/Firefox outside the recorded verification. [Evaluation cases](../evals/cases.md) and [results](../evals/results.md) distinguish package checks, native discovery, model workflows, and cross-host resume; passing one does not establish the others.
+
+Verification runs on stable inputs before one combined requirements/code/test-quality review. Ship reuses current evidence; stage transitions do not trigger duplicate checks or reviews. After edits, rerun affected checks and scoped review; expand scope when impact is uncertain. Strict test independence and frozen-suite integrity remain required.

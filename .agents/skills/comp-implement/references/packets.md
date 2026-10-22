@@ -19,7 +19,7 @@ The coordinator owns intent/plan/tasks/walkthrough, shared integration, dispatch
 | Test reviewer | Fresh complete agreed intent/plan with identities, actual suite/resources/contracts and coordinator-run spec-derived correct/defective controls | Read-only source-to-assertion and assertion-to-source mapping; PASS/BLOCKED tied to exact identities | Author conflict, unsupported expectations, missing rule coverage, meaningful runner/control evidence or unstable inputs |
 | Final reviewer | Fresh stable code/artifact snapshot, criteria, affected callers/tests and coordinator evidence | Read-only compliance and quality findings, reviewed identities, READY/CHANGES REQUIRED/PENDING REVIEW | Author conflict, missing required evidence/review, changed snapshot or gate violation |
 
-The [strict testing contract](testing.md) defines the mandatory validation/freeze and full revision rules. Neither a role prompt nor separate directories enforce secrecy. Shared filesystems are supported; host-enforced restrictions are additional protection, not a prerequisite. Use new minimal contexts; inheriting the coordinator's full conversation does not satisfy the implementer boundary.
+The [strict testing contract](testing.md) defines the mandatory validation/freeze and scoped replacement-freeze rules. Neither a role prompt nor separate directories enforce secrecy. Shared filesystems are supported; host-enforced restrictions are additional protection, not a prerequisite. Use new minimal contexts; inheriting the coordinator's full conversation does not satisfy the implementer boundary.
 
 ## Cross-host resume
 

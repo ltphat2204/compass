@@ -5,6 +5,9 @@ description: Create or update SDD task coverage from intent and plan while prese
 
 # Compass Task Breakdown (`comp-tasks`)
 
+Apply the shared [verification and review policy](../comp-engineer/references/verification.md) for evidence reuse, combined final review and scoped frozen-suite repairs. Reuse recorded readiness/check/review evidence when relevant criteria, source, tests, configuration, dependencies and environment are unchanged. A stage transition does not trigger another validation. Run only missing or invalidated checks and scoped review; expand scope if impact is uncertain. One current combined requirements/code/test-quality review satisfies the final gate across stages; mandatory CI, human and independent pre-freeze test validation remain separate.
+
+
 Use the current host's native skill invocation and exposed tools; bare `comp-*` names identify capabilities, not a fixed command syntax. Honor applicable host/repository instructions (including `AGENTS.md` or `CLAUDE.md`) and permissions; missing delegation never waives mandatory review.
 
 ## Decisions, Modes & Existing Work
@@ -57,7 +60,7 @@ Every active task has:
 
 - For delegated implementation, the coordinator is the sole writer of tasks/walkthrough/progress. Record disjoint write/resource scopes and settled dependencies before scheduling in parallel; shared config/fixtures/generated outputs also count. Workers return evidence, not DONE status.
 - New trackers start with TODO; existing trackers keep matching IDs, status, user notes, and completion evidence.
-- For behavior changes, apply [acceptance and business logic testing](../comp-implement/references/testing.md). Allocate a separate test-author task and review/freeze/context-separation gate before implementation; behavior tasks depend on that gate. Test authors and implementers have disjoint scopes and fresh sanitized packets. Only coordinator/reviewer artifacts include test details; implementers receive production work and public criteria only. Existing sufficient tests may be retained but still need review/freeze. Frozen-test changes require complete intent/plan revision, tracker reconciliation, and a new frozen suite before resuming.
+- For behavior changes, apply [acceptance and business logic testing](../comp-implement/references/testing.md). Allocate a separate test-author task and review/freeze/context-separation gate before implementation; behavior tasks depend on that gate. Test authors and implementers have disjoint scopes and fresh sanitized packets. Only coordinator/reviewer artifacts include test details; implementers receive production work and public criteria only. Existing sufficient tests may be retained but still need review/freeze. Frozen-test changes require scoped intent/plan impact assessment and any required revision, tracker reconciliation, and a new frozen suite before resuming.
 - Match tasks by intended behavior/deliverable, not line position. Allocate unused IDs for new work; never recycle old IDs.
 - If a change invalidates a DONE task, reopen only affected work and add the reason and invalidated evidence/review reference to walkthrough. Changed dependencies also invalidate affected downstream checks.
 - Retain removed work as SUPERSEDED with rationale/history. Exclude it from active progress; do not silently delete it or count it DONE.
