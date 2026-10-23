@@ -104,7 +104,7 @@ and independent review. Implement, verify, and hand off locally.
 
 In Claude Code, use `/compass:comp-engineer`. With copied skills, select `comp-engineer` or use your host's skill syntax.
 
-Describe a feature, a bug, or an uncertain idea. Compass inspects the repository, clarifies consequential decisions, and carries the authorized work through planning, implementation, and verification. A request to plan or review stops at that stage.
+Describe a feature, a bug, or an uncertain idea. Compass inspects the repository, clarifies consequential decisions, and carries the authorized work through planning, implementation, and verification. For work with intent and plan artifacts, it presents both and waits for your approval before implementation; only a pre-existing, host-confirmed active automation goal covering the work skips that pause. Compass never creates a Codex Goal for an ordinary request or to bypass approval. A request to plan or review stops at that stage.
 
 ## How it works
 
@@ -116,7 +116,7 @@ Analysis and review check the handoffs. Small tasks use shorter documents; behav
 
 Compass keeps requirements, tasks, and evidence in `dev/{feature}/`. It uses your existing stack and tools. Deployments, merges, and destructive operations follow the authorization and rules of your project.
 
-Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/installation.md#lifecycle-hooks): goal intake, frozen-test protection, stale-evidence detection, and completion checks. They require Python 3.9+ and native hook support/trust. OpenCode 2 and Pi use separate project adapters; copied skills and the public submission ZIP retain manual gates unless an adapter is registered.
+Repository marketplace plugins also bundle four optional [lifecycle hooks](docs/installation.md#lifecycle-hooks): request routing, frozen-test protection, stale-evidence detection, and completion checks. They require Python 3.9+ and native hook support/trust. OpenCode 2 and Pi use separate project adapters; copied skills and the public submission ZIP retain manual gates unless an adapter is registered.
 
 | Skill | Use it to |
 |---|---|

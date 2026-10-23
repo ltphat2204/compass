@@ -42,7 +42,7 @@ Update or uninstall through Claude Code's `/plugin` manager. For development onl
 
 ## Lifecycle hooks
 
-The repository marketplace plugins discover `hooks/hooks.json` automatically. The four hooks provide goal intake, frozen-test protection, stale-evidence detection, and a completion gate. Goal intake supplies conditional guidance to `comp-engineer`; it does not classify prompts with keywords, run all nine skills, or grant implementation authorization.
+The repository marketplace plugins discover `hooks/hooks.json` automatically. The four hooks provide request routing, frozen-test protection, stale-evidence detection, and a completion gate. Request routing supplies conditional guidance to `comp-engineer`; it does not classify prompts with keywords, run all nine skills, create a Codex Goal, or grant implementation authorization.
 
 The execution safeguards use coordinator-owned `.compass/hooks.json` in the target project. Without that state, only intake adds context. See [the state, snapshot, and completion contract](../.agents/skills/comp-engineer/references/hooks.md) for activation and limitations. Hooks never install themselves into host settings or execute the project's test commands.
 

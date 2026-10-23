@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/compass.py\"", "statusMessage": "Compass: Intake new goal"}]}],
+    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/compass.py\"", "statusMessage": "Compass: Route engineering request"}]}],
     "PreToolUse": [{"matcher": ".*", "hooks": [{"type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/compass.py\"", "statusMessage": "Compass: Protect frozen tests"}]}],
     "PostToolUse": [{"matcher": ".*", "hooks": [{"type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/compass.py\"", "statusMessage": "Compass: Check evidence freshness"}]}],
     "Stop": [{"hooks": [{"type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/compass.py\"", "statusMessage": "Compass: Verify completion"}]}]

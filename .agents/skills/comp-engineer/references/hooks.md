@@ -18,10 +18,16 @@ assuming the project is the plugin checkout. Confirm that root contains
 coordinator workflow without claiming hook enforcement, or install the repository
 marketplace plugin. This reference is portable and does not require a runtime link.
 
-UserPromptSubmit provides compact semantic guidance: route a new engineering goal
-or brainstorm through comp-engineer, resume ongoing work, and leave simple
+UserPromptSubmit provides compact routing guidance: send a new engineering request
+or brainstorm to comp-engineer, resume ongoing work, and leave simple
 explanation/status requests alone. Exploration does not authorize implementation.
-It neither classifies keywords nor starts an automatic nine-stage pipeline. Intake guidance reminds the coordinator to stop for approval of current intent/plan before implementation, except under a confirmed active automation goal covering the work. This is a coordinator gate under the [approval rules](adaptive-workflow.md#approval-before-implementation); the runtime does not verify user approval or active goal status.
+It neither classifies keywords nor starts an automatic nine-stage pipeline, and it
+never asks the agent to create a Codex Goal. Intake guidance reminds the coordinator
+to stop for approval of current intent/plan before implementation. Only a
+pre-existing, host-confirmed active automation goal covering the work skips that
+pause; never create one for an ordinary request or to bypass approval. This is a
+coordinator gate under the [approval rules](adaptive-workflow.md#approval-before-implementation);
+the runtime does not verify user approval or active goal status.
 
 ## OpenCode 2 adapter
 

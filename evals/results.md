@@ -4,7 +4,7 @@
 
 ## Lifecycle hooks — native verification, 2026-10-18
 
-Compass 0.4.0 adds goal intake, frozen-resource protection, stale-evidence detection and explicit completion checks. Both independently authored suites were reviewed and frozen before their implementation; spec-derived correct controls passed and deliberately defective protection/snapshot/content/session/guard rules failed relevant assertions. The coordinator ran all **69 existing and new unittest methods: PASS**. Portability checks and Claude plugin/marketplace strict validation passed.
+Compass 0.4.0 adds request routing, frozen-resource protection, stale-evidence detection and explicit completion checks. Both independently authored suites were reviewed and frozen before their implementation; spec-derived correct controls passed and deliberately defective protection/snapshot/content/session/guard rules failed relevant assertions. The coordinator ran all **69 existing and new unittest methods: PASS**. Portability checks and Claude plugin/marketplace strict validation passed.
 
 | Installed host | Actual native observations | Result and limits |
 |---|---|---|

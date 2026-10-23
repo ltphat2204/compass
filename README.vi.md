@@ -100,7 +100,7 @@ trong phạm vi và review độc lập. Triển khai, kiểm chứng rồi bàn
 
 Với Claude Code, dùng `/compass:comp-engineer`. Với skill được copy, chọn `comp-engineer` hoặc dùng cú pháp skill của host.
 
-Mô tả tính năng, lỗi hoặc ý tưởng chưa rõ. Compass đọc repository, làm rõ quyết định quan trọng rồi thực hiện công việc đã được cho phép qua các bước lập kế hoạch, triển khai và kiểm chứng. Yêu cầu chỉ lập kế hoạch hoặc review sẽ dừng ở bước tương ứng.
+Mô tả tính năng, lỗi hoặc ý tưởng chưa rõ. Compass đọc repository, làm rõ quyết định quan trọng rồi thực hiện công việc đã được cho phép qua các bước lập kế hoạch, triển khai và kiểm chứng. Với công việc có intent và plan, Compass trình bày cả hai rồi chờ bạn duyệt trước khi triển khai; chỉ automation goal đã tồn tại trước yêu cầu, được host xác nhận đang hoạt động và bao quát công việc này mới bỏ qua bước chờ. Compass không tạo Codex Goal cho yêu cầu thông thường hoặc để né bước duyệt. Yêu cầu chỉ lập kế hoạch hoặc review sẽ dừng ở bước tương ứng.
 
 ## Cách hoạt động
 
@@ -112,7 +112,7 @@ Analyze và Review kiểm tra các bước bàn giao. Việc nhỏ dùng tài li
 
 Yêu cầu, task và bằng chứng được lưu trong `dev/{feature}/`. Compass dùng stack và công cụ sẵn có. Deploy, merge và thao tác phá hủy tuân theo quyền được cấp và quy tắc của project.
 
-Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hooks) tùy chọn: nhận goal, bảo vệ frozen test, phát hiện bằng chứng cũ và kiểm tra hoàn thành. Hook cần Python 3.9+ và được host bật/tin cậy. OpenCode 2 và Pi dùng adapter riêng ở project; bản chỉ sao chép skill và ZIP submission vẫn dùng gate thủ công nếu chưa đăng ký adapter.
+Plugin marketplace có bốn [lifecycle hook](docs/installation.md#lifecycle-hooks) tùy chọn: định tuyến yêu cầu, bảo vệ frozen test, phát hiện bằng chứng cũ và kiểm tra hoàn thành. Hook cần Python 3.9+ và được host bật/tin cậy. OpenCode 2 và Pi dùng adapter riêng ở project; bản chỉ sao chép skill và ZIP submission vẫn dùng gate thủ công nếu chưa đăng ký adapter.
 
 | Skill | Dùng để |
 |---|---|
