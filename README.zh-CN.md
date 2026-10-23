@@ -100,7 +100,7 @@ $compass:comp-engineer 为任务列表添加 CSV 导出。允许限定范围的�
 
 Claude Code 中使用 `/compass:comp-engineer`。复制安装的技能可通过选择器或宿主的技能语法调用 `comp-engineer`。
 
-描述一个功能、错误或尚不明确的想法。Compass 会检查仓库，明确关键决策，并推进已获授权的规划、实现与验证。只要求规划或审查时，工作会在相应阶段停止。
+描述一个功能、错误或尚不明确的想法。Compass 会检查仓库，明确关键决策，并推进已获授权的规划、实现与验证。对于包含 intent 和 plan 文档的工作，Compass 会先展示两者并等待用户批准后再实现；只有事先已存在、经宿主确认处于活动状态且涵盖当前工作的 automation goal 才可跳过此暂停。Compass 不会为普通请求或绕过批准而创建 Codex Goal。只要求规划或审查时，工作会在相应阶段停止。
 
 ## 工作方式
 
@@ -112,7 +112,7 @@ Analyze 和 Review 检查各阶段交接。小任务使用更简短的文档；�
 
 需求、任务和证据保存在 `dev/{feature}/`。Compass 使用现有技术栈和工具。部署、合并与破坏性操作遵循项目授权和规则。
 
-Marketplace 插件还提供四个可选的[生命周期 hook](docs/installation.md#lifecycle-hooks)：目标接入、冻结测试保护、过期证据检测和完成检查。需要 Python 3.9+ 以及宿主启用和信任 hook。OpenCode 2 使用单独的项目适配器；仅复制技能和 submission ZIP 的安装方式在未注册适配器时继续使用手动门槛。
+Marketplace 插件还提供四个可选的[生命周期 hook](docs/installation.md#lifecycle-hooks)：请求路由、冻结测试保护、过期证据检测和完成检查。需要 Python 3.9+ 以及宿主启用和信任 hook。OpenCode 2 使用单独的项目适配器；仅复制技能和 submission ZIP 的安装方式在未注册适配器时继续使用手动门槛。
 
 | 技能 | 用途 |
 |---|---|

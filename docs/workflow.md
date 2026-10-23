@@ -29,6 +29,8 @@ Compass is intended to help newcomers understand what they are building and expe
 
 A planning or review request does not authorize implementation or shipping. Standalone analysis/review is read-only. Shipping can mean local handoff; it does not imply deployment or remote merging.
 
+Before implementation, present the current intent and plan (or the embedded learning plan for a spike) and wait for the user to approve both. This applies to light work and milestone children too. An initial implementation request, readiness, or silence does not approve artifacts the user has not seen. Only a pre-existing, host-confirmed active automation goal covering this work skips the pause. Never create a Codex Goal for an ordinary request or to bypass approval. Preserve valid approval on resume; material changes to scope, acceptance criteria, or approach require renewed approval. Tiny non-behavior direct corrections are exempt because they have no intent/plan handoff. See the [approval gate](../.agents/skills/comp-engineer/references/adaptive-workflow.md#approval-before-implementation).
+
 ## Choose the amount of work
 
 | Situation | Approach |

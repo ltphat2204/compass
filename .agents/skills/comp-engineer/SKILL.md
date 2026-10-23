@@ -42,9 +42,9 @@ Keep the Compass lifecycle and artifact handoffs; adapt implementation to reposi
 
 Read [adaptive workflow](references/adaptive-workflow.md) before selecting stages. Route by requested action, clarity, impact, and outcome count. Start with investigation when intent is unclear; decompose milestones into a parent outcome map and independently verifiable child intents. A low-risk non-behavior correction may complete inline without feature artifacts under that reference’s limits. Other work uses the existing modes and gates.
 
-AI proposes the next step and its rationale; users need not operate the stage machinery. Continue authorized preparation automatically and explain the concrete outcome and verification. Before implementation, present the current intent and plan and end the turn to await user approval under the [approval gate](references/adaptive-workflow.md#approval-before-implementation); only a confirmed active automation goal covering this work skips that pause. Preserve valid approval on resume and seek it again for material revisions. Resume valid artifacts instead of restarting discovery.
+AI proposes the next step and its rationale; users need not operate the stage machinery. Continue authorized preparation automatically and explain the concrete outcome and verification. Before implementation, present the current intent and plan and end the turn to await user approval under the [approval gate](references/adaptive-workflow.md#approval-before-implementation); only a pre-existing, host-confirmed active automation goal covering this work skips that pause. Never create a Codex Goal for a routine request or to bypass approval. Preserve valid approval on resume and seek it again for material revisions. Resume valid artifacts instead of restarting discovery.
 
-When native Compass hooks are available, follow the coordinator contract in [Lifecycle hooks](references/hooks.md): route goals semantically, activate safeguards for the current feature before implementation, preserve frozen resources, and bind verification/review to the current snapshot before claiming DONE. Brainstorming alone does not authorize code changes. Hosts without the runtime keep the same manual gates.
+When native Compass hooks are available, follow the coordinator contract in [Lifecycle hooks](references/hooks.md): route requests semantically, activate safeguards for the current feature before implementation, preserve frozen resources, and bind verification/review to the current snapshot before claiming DONE. Brainstorming alone does not authorize code changes. Hosts without the runtime keep the same manual gates.
 
 ## The 6 Lifecycle Responsibilities per Intent
 
@@ -94,7 +94,7 @@ graph TD
 ---
 
 ### Stage 4: Implementation & Live Walkthrough (`walkthrough.md`)
-Before entry, require recorded user approval of the current intent/plan or the confirmed active automation goal exception under the [approval gate](references/adaptive-workflow.md#approval-before-implementation). Readiness alone is not approval.
+Before entry, require recorded user approval of the current intent/plan or the pre-existing, host-confirmed active automation goal exception under the [approval gate](references/adaptive-workflow.md#approval-before-implementation). Readiness alone is not approval.
 The coordinator owns tasks/walkthrough/progress, integration, and DONE decisions. Use `comp-implement` and its delegation reference when available; otherwise dispatch minimal packets with criteria, read context, exact write scopes, dependencies, checks, and stop conditions. Workers implement only assigned scope and return evidence, without lifecycle recursion or shared-artifact edits. Run only disjoint, dependency-ready tasks concurrently; respect available slots and use serial execution for coupling. Inspect combined changes and run integration checks before accepting worker results.
 
 Execute tasks with strict engineering discipline:

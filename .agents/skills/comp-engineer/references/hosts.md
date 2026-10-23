@@ -21,7 +21,7 @@ Sources: [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills), [
 
 ## Native lifecycle hooks
 
-Repository marketplace plugins bundle four command hooks in the native default `hooks/hooks.json`: UserPromptSubmit (goal intake), PreToolUse (frozen resources), PostToolUse (stale evidence), and Stop (explicit completion attempt). Codex and Claude Code share the command protocol used here; Codex supplies `CLAUDE_PLUGIN_ROOT` for compatibility. Python 3.9+ and enabled/trusted native hooks are required. Confirm the actual event/tool coverage before relying on a guard.
+Repository marketplace plugins bundle four command hooks in the native default `hooks/hooks.json`: UserPromptSubmit (request routing), PreToolUse (frozen resources), PostToolUse (stale evidence), and Stop (explicit completion attempt). Codex and Claude Code share the command protocol used here; Codex supplies `CLAUDE_PLUGIN_ROOT` for compatibility. Python 3.9+ and enabled/trusted native hooks are required. Confirm the actual event/tool coverage before relying on a guard.
 
 Use the [coordinator hook contract](hooks.md) when the runtime is present. Copied skills, project installer payloads, and the skills-only submission ZIP do not register runtime hooks; Pi and OpenCode adapters must be loaded separately. Hooks are workflow guardrails, not filesystem isolation or proof of independent review.
 
